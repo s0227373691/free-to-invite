@@ -36,6 +36,7 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "prettier": "^2.1.2",
+    "url-loader": "^4.1.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

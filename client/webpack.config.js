@@ -7,7 +7,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.svg', '.jpg', '.png', '.json'],
     },
     module: {
         rules: [
@@ -22,9 +22,12 @@ module.exports = {
                 },
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|svg)$/,
                 use: {
-                    loader: 'url-loader?limit=8192',
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192,
+                    },
                 },
             },
         ],

@@ -1,13 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { Router } from 'react-router-dom';
 
 const Main = () => {
-    return (
-        <div>
-
-        </div>
-    )
-}
-
+    return <div></div>;
+};
 
 export default Main;

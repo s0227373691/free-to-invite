@@ -1,96 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const a = () => {
-    this.setState({
-        open: !this.state.open,
-    });
-};
+import hanbuger from '../assets/svg/hanbuger.svg';
+import searchIcon from '../assets/svg/searchIcon.svg';
 const NavBar = () => {
+    let [open, setOpen] = useState({
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '0px',
+        textAlign: 'center',
+        height: '300px',
+        maxHeight: '288px',
+    });
+
     return (
         <Header>
-            <H1>
+            <Logo>
                 <Link className="logoLink" to="/">
                     股票
                 </Link>
-                <button className="hanbuger">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
-                    </svg>
-                </button>
-            </H1>
-            <NavbarMenu>
-                <li>
+                <LogoIcon
+                    src={hanbuger}
+                    onClick={() => {
+                        setOpen((open = !open));
+                        console.log(open);
+                    }}
+                ></LogoIcon>
+            </Logo>
+            <NavbarMenu style={open ? {} : { maxHeight: '288px' }}>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
-                <li>
+                </NavbarItem>
+                <NavbarItem>
                     <Link className="navLink" to="/">
                         股票
                     </Link>
-                </li>
+                </NavbarItem>
             </NavbarMenu>
             <SearchBar>
-                <input type="search" />
-                <button className="searchBtn">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M23.809 21.646l-6.205-6.205c1.167-1.605 1.857-3.579 1.857-5.711 0-5.365-4.365-9.73-9.731-9.73-5.365 0-9.73 4.365-9.73 9.73 0 5.366 4.365 9.73 9.73 9.73 2.034 0 3.923-.627 5.487-1.698l6.238 6.238 2.354-2.354zm-20.955-11.916c0-3.792 3.085-6.877 6.877-6.877s6.877 3.085 6.877 6.877-3.085 6.877-6.877 6.877c-3.793 0-6.877-3.085-6.877-6.877z" />
-                    </svg>
-                </button>
+                <SearchInput type="search" />
+                <SearchBtn className="searchBtn">
+                    <img src={searchIcon} />
+                </SearchBtn>
             </SearchBar>
             <UserMenu>
-                <li>
+                <UserMenuItem>
                     <Link className="userLink" to="/">
                         登入
                     </Link>
-                </li>
-                <li>
+                </UserMenuItem>
+                <UserMenuItem>
                     <Link className="userLink" to="/">
                         註冊
                     </Link>
-                </li>
+                </UserMenuItem>
             </UserMenu>
         </Header>
     );
@@ -99,25 +94,22 @@ const NavBar = () => {
 export default NavBar;
 
 const Header = styled.header`
+    max-width: 1280px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: 0 auto;
-    max-width: 1280px;
     padding: 10px 15px;
-    background: #fff;
+    @media (max-width: 767px) {
+        padding: 10px 7.5px;
+    }
 `;
 
-const H1 = styled.h1`
-    display: flex;
+const Logo = styled.h1`
     .logoLink {
         display: block;
         width: 36px;
         height: 36px;
-        text-indent: 101%;
+        text-indent: 100%;
         white-space: nowrap;
         overflow: hidden;
         background: url(http://fakeimg.pl/36x36);
@@ -125,26 +117,37 @@ const H1 = styled.h1`
             display: none;
         }
     }
-    .hanbuger {
-        width: 36px;
-        height: 36px;
-        background: inherit;
-        border: none;
-        &:focus {
-            outline: none;
-        }
-        @media (min-width: 767px) {
-            display: none;
-        }
+`;
+
+const LogoIcon = styled.img`
+    padding: 6px;
+    @media (min-width: 767px) {
+        display: none;
     }
 `;
+
 const NavbarMenu = styled.ul`
     display: flex;
     flex-shrink: 0;
     padding: 0 7.5px;
+    transition: 0.5s;
     @media (max-width: 767px) {
-        display: none;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        padding: 0px;
+        text-align: center;
     }
+`;
+
+const NavbarItem = styled.li`
     .navLink {
         display: block;
         height: 36px;
@@ -155,47 +158,50 @@ const NavbarMenu = styled.ul`
         font-weight: 900;
         font-size: 15px;
         border-radius: 5px;
-        transition: 0.1s;
+        transition: 0.3s;
         &:hover {
             color: #fff;
             background: #1b9cfc;
-            transition: 0.1s;
+        }
+        @media (max-width: 767px) {
+            width: 100%;
+            border-bottom: 1px solid black;
         }
     }
 `;
 
 const SearchBar = styled.div`
+    display: flex;
+    flex-grow: 1;
     max-width: 430px;
     height: 36px;
-    flex-grow: 1;
-    display: flex;
     border: 2px solid #dfdfdf;
     background: #fafafa;
     border-radius: 5px;
-    input[type='search'] {
-        width: 100%;
-        height: 100%;
-        border: none;
-        padding-left: 10px;
-        font-weight: 600;
-        font-size: 14px;
-        background: #fafafa;
-        &:focus {
-            outline: none;
-        }
+`;
+
+const SearchInput = styled.input`
+    width: 100%;
+    border: none;
+    padding-left: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    background: #fafafa;
+    &:focus {
+        outline: none;
     }
-    .searchBtn {
-        width: 36px;
-        border: none;
-        background: inherit;
-        display: flex;
-        align-items: center;
-        &:focus {
-            outline: none;
-        }
-        &:hover {
-            cursor: pointer;
-        }
+`;
+const SearchBtn = styled.button`
+    width: 36px;
+    border: none;
+    background: inherit;
+    display: flex;
+    align-items: center;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        cursor: pointer;
     }
 `;
 const UserMenu = styled.ul`
@@ -210,12 +216,13 @@ const UserMenu = styled.ul`
         text-decoration: none;
         color: #434343;
         font-weight: 900;
-        transition: 0.1s;
+        transition: 0.3s;
         &:hover {
             background: #1b9cfc;
             color: #fff;
             border-radius: 5px;
-            transition: 0.2s;
         }
     }
 `;
+
+const UserMenuItem = styled.li``;

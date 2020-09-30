@@ -1,8 +1,13 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
 
+import styled from 'styled-components';
 const Main = () => {
-    return <div></div>;
+    return <Mai></Mai>;
 };
 
+const Mai = styled.div`
+    width: 100%;
+    height: 100px;
+    background: green;
+`;
 export default Main;

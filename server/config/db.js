@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const URI =
-    'mongodb+srv://test123:test123@cluster0.bgroy.mongodb.net/stocksInfo?retryWrites=true&w=majority';
+    'mongodb+srv://test123:test123@cluster0.oxdz0.mongodb.net/goodstock?retryWrites=true&w=majority';
 
 const connectDB = async () => {
     try {

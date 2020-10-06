@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
 
+const users = require('./routes/users');
+
 connectDB();
 app.use(express.json());
 
@@ -14,9 +16,8 @@ app.get('/', (req, res) => {
     // });
     res.send('hellow world');
 });
-app.get('/api/user', (req, res) => {
-    res.send({ id: 0, name: 'Jhon' });
-});
+
+app.use('/api/users', users);
 
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));

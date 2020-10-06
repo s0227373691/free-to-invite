@@ -1,11 +1,11 @@
-const express = require('express');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 
+const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
-
-const users = require('./routes/users');
-
 connectDB();
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 const port = process.env.port || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));

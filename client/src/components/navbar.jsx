@@ -2,20 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavBar = () => {
-    return (
-        <Header>
-            <Navbar></Navbar>
-        </Header>
-    );
+    return <Navbar></Navbar>;
 };
 
 export default NavBar;
 
-const Header = styled.header`
-    background: #2ecc71;
-`;
-const Navbar = styled.div`
-    max-width: 1280px;
+const Navbar = styled.nav`
+    background: red;
     height: 100px;
     margin: 0 auto;
 `;

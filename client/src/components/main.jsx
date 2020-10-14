@@ -1,16 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Aside from '../components/aside';
-import Article from '../components/article';
-
 const Main = () => {
-    return (
-        <Container>
-            <Aside></Aside>
-            <Article></Article>
-        </Container>
-    );
+    return <Container></Container>;
 };
 
 const Container = styled.div`

@@ -128,9 +128,10 @@ table {
     border-spacing: 0;
 }
 
-/***/
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+/**/
+body {
     box-sizing: border-box;
+}
+a {
+    text-decoration: none;
 }

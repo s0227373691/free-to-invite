@@ -6,12 +6,12 @@ import Main from './components/main';
 
 const App = () => {
     return (
-        <Router>
-            <div>
-                <Navbar />
+        <div>
+            <Navbar />
+            <Router>
                 <Main />
-            </div>
-        </Router>
+            </Router>
+        </div>
     );
 };
 

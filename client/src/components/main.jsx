@@ -1,13 +1,21 @@
 import React from 'react';
-
 import styled from 'styled-components';
+
+import Aside from '../components/aside';
+import Article from '../components/article';
+
 const Main = () => {
-    return <Mai></Mai>;
+    return (
+        <Container>
+            <Aside></Aside>
+            <Article></Article>
+        </Container>
+    );
 };
 
-const Mai = styled.div`
-    width: 100%;
-    height: 100px;
-    background: green;
+const Container = styled.div`
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
 `;
 export default Main;

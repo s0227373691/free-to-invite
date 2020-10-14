@@ -8,6 +8,7 @@ const NavBar = () => {
 export default NavBar;
 
 const Navbar = styled.nav`
+    width: 100%;
     background: red;
     height: 100px;
     margin: 0 auto;

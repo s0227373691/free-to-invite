@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Menu from './components/menu';
 import Navbar from './components/navbar';
@@ -8,14 +8,14 @@ import Login from './components/login';
 
 const App = () => {
     return (
-        <div>
+        <Router>
             <Menu />
-            <Router>
+            <Switch>
                 <Navbar />
                 <Main />
                 <Route path="/login" component={Login} />
-            </Router>
-        </div>
+            </Switch>
+        </Router>
     );
 };
 

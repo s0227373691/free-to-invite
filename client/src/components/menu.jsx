@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 const Menu = () => {
-    return <Aside></Aside>;
+    return (
+        <Aside>
+            <Title>
+                <Link className="logoLink" to="/" />
+            </Title>
+        </Aside>
+    );
 };
 
 const Aside = styled.aside`
@@ -10,4 +16,5 @@ const Aside = styled.aside`
     height: 100vh;
     background: #74b9ff;
 `;
+const Title = styled.h1``;
 export default Menu;

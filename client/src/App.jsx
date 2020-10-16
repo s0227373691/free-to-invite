@@ -1,9 +1,36 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Menu from './components/menu';
+import Navbar from './components/navbar';
+// import Main from './components/main';
+import Login from './components/login';
+import Member from './components/member';
 
 const App = () => {
     return (
-        <div>App</div>
-    )
-}
+        <Router>
+            <Container>
+                <Menu />
+                <Main>
+                    <Switch>
+                        <Navbar />
+                        <Route path="/login" component={Login} />
+                    </Switch>
+                    <Member />
+                </Main>
+            </Container>
+        </Router>
+    );
+};
 
-export default App
+export default App;
+
+const Container = styled.div`
+    display: flex;
+    width: 100%;
+`;
+const Main = styled.div`
+    flex: auto;
+`;

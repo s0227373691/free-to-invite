@@ -6,6 +6,7 @@ import Menu from './components/menu';
 import Navbar from './components/navbar';
 // import Main from './components/main';
 import Login from './components/login';
+import Member from './components/member';
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                         <Navbar />
                         <Route path="/login" component={Login} />
                     </Switch>
+                    <Member />
                 </Main>
             </Container>
         </Router>

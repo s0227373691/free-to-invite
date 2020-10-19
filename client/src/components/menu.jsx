@@ -12,7 +12,7 @@ const Menu = () => {
             <NavMeun>
                 <NavItem className="">
                     <Link className="navLink">休閒</Link>
-                    <ClassMenu className="aa">
+                    <ClassMenu className="classMenu">
                         <ClassItem>
                             <a href="#">休閒分類</a>
                         </ClassItem>
@@ -26,7 +26,7 @@ const Menu = () => {
                 </NavItem>
                 <NavItem>
                     <Link className="navLink">運動</Link>
-                    <ClassMenu className="aa">
+                    <ClassMenu className="classMenu">
                         <ClassItem>
                             <a href="#">運動分類</a>
                         </ClassItem>
@@ -40,7 +40,7 @@ const Menu = () => {
                 </NavItem>
                 <NavItem>
                     <Link className="navLink">旅遊</Link>
-                    <ClassMenu className="aa">
+                    <ClassMenu className="classMenu">
                         <ClassItem>
                             <a href="#">旅遊分類</a>
                         </ClassItem>
@@ -86,14 +86,14 @@ const NavMeun = styled.ul`
     position: relative;
 `;
 const NavItem = styled.li`
-    &:hover .aa {
+    &:hover .classMenu {
         display: block;
     }
     .navLink {
         display: block;
         color: #ffffff;
     }
-    .aa {
+    .classMenu {
         display: none;
         border: 1px solid black;
         position: absolute;

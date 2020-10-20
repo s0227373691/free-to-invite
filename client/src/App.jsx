@@ -7,7 +7,7 @@ import Navbar from './components/navbar';
 // import Main from './components/main';
 import Login from './components/login';
 import Member from './components/member';
-import Main from './components/main';
+import Mainn from './components/main';
 const App = () => {
     return (
         <Router>
@@ -18,7 +18,7 @@ const App = () => {
                         <Navbar />
                         <Route path="/login" component={Login} />
                         <Route path="/member" component={Member} />
-                        <Route path="/main" component={Main} />
+                        <Route path="/main" component={Mainn} />
                     </Switch>
                 </Main>
             </Container>
@@ -33,3 +33,6 @@ const Container = styled.div`
     width: 100%;
 `;
 
+const Main = styled.div`
+    flex: auto;
+`;

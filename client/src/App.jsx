@@ -17,8 +17,8 @@ const App = () => {
                     <Switch>
                         <Navbar />
                         <Route path="/login" component={Login} />
+                        <Route path="/member" component={Member} />
                     </Switch>
-                    <Member />
                 </Main>
             </Container>
         </Router>

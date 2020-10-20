@@ -5,9 +5,5 @@ const Main = () => {
     return <Container></Container>;
 };
 
-const Container = styled.div`
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-`;
+const Container = styled.div``;
 export default Main;

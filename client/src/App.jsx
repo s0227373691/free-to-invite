@@ -32,6 +32,4 @@ const Container = styled.div`
     display: flex;
     width: 100%;
 `;
-const Main = styled.div`
-    flex: auto;
-`;
+

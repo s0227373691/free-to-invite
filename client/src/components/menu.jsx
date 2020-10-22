@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 const Menu = () => {
     return (
         <Aside>
-            <Title>
-                <Link className="logoLink" to="/">
-                    標題
-                </Link>
-            </Title>
             <NavMeun>
                 <NavItem className="">
                     <Link className="navLink">休閒</Link>
@@ -60,23 +55,10 @@ const Menu = () => {
 const Aside = styled.aside`
     width: 300px;
     height: 100vh;
-    background: #74b9ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 25px 0;
-`;
-const Title = styled.h1`
-    margin-bottom: 100px;
-    .logoLink {
-        display: block;
-        width: 100px;
-        height: 36px;
-        text-indent: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        background: url('http://fakeimg.pl/100x36');
-    }
 `;
 
 const NavMeun = styled.ul`
@@ -91,7 +73,7 @@ const NavItem = styled.li`
     }
     .navLink {
         display: block;
-        color: #ffffff;
+        color: black;
     }
     .classMenu {
         display: none;

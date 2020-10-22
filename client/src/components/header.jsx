@@ -1,24 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NavBar = () => {
+const Header = () => {
     return (
-        <Navbar>
+        <Head>
             <Btn>登入</Btn>
             <Btn>註冊</Btn>
-        </Navbar>
+        </Head>
     );
 };
 
-export default NavBar;
+export default Header;
 
-const Navbar = styled.nav`
+const Head = styled.head`
     width: 100%;
     height: 80px;
+    padding: 8px;
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
 `;
 
 const Btn = styled.button`

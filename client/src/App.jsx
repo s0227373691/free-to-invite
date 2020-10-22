@@ -27,5 +27,9 @@ const App = () => {
 export default App;
 
 const Main = styled.div`
-    flex: auto;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 64;
+    /* height: calc(100%-64px); */
 `;

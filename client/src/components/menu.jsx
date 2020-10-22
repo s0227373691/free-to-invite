@@ -55,8 +55,6 @@ const Menu = () => {
 const Aside = styled.aside`
     width: 280px;
     height: 100%;
-    position: absolute;
-    top: 64px; //往下64px,為了保留header高度
     display: flex;
     flex-direction: column;
     align-items: center;

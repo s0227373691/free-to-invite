@@ -17,7 +17,6 @@ const Head = styled.head`
     height: 64px;
     padding: 8px;
     margin: 0 auto;
-    position: fixed;
     display: flex;
     justify-content: flex-end;
     align-items: center;

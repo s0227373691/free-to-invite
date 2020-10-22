@@ -14,9 +14,10 @@ export default Header;
 
 const Head = styled.head`
     width: 100%;
-    height: 80px;
+    height: 64px;
     padding: 8px;
     margin: 0 auto;
+    position: fixed;
     display: flex;
     justify-content: flex-end;
     align-items: center;

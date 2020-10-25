@@ -6,6 +6,7 @@ const Menu = () => {
         <Aside>
             <NavMeun>
                 <NavItem className="">
+                    <Link className="navLink">新增文章</Link>
                     <Link className="navLink">休閒</Link>
                     <ClassMenu className="classMenu">
                         <ClassItem>
@@ -59,6 +60,7 @@ const Aside = styled.aside`
     flex-direction: column;
     align-items: center;
     padding: 25px 0;
+    background: #74b9ff;
 `;
 
 const NavMeun = styled.ul`

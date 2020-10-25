@@ -8,6 +8,7 @@ import Header from './components/header';
 import Login from './components/login';
 import Member from './components/member';
 import Article from './components/article';
+import NewArticle from './components/newArticle';
 const App = () => {
     return (
         <Router>
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/member" component={Member} />
                     <Route path="/article" component={Article} />
+                    <Route path="/newarticle" component={NewArticle} />
                 </Switch>
             </Main>
         </Router>
@@ -28,8 +30,6 @@ export default App;
 
 const Main = styled.div`
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 64;
-    /* height: calc(100%-64px); */
+    height: 100vh;
+    display: flex;
 `;

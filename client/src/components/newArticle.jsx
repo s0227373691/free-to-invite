@@ -17,7 +17,7 @@ const NewArticle = () => {
             <input id="date" type="date"></input>
             <input type="text" placeholder="人數" />
             <input type="text" placeholder="標題" />
-            <textarea name="" id="" cols="60" rows="20"></textarea>
+            <textarea name="" id="" cols="50" rows="20"></textarea>
         </Container>
     );
 };

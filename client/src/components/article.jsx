@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const Main = () => {
+const Article = () => {
     return <Container></Container>;
 };
 
@@ -10,4 +10,4 @@ const Container = styled.div`
     margin: 0 auto;
     display: flex;
 `;
-export default Main;
+export default Article;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import setInputValue from '../lib/setInputValue';
+import React, { useState } from "react";
+import styled from "styled-components";
+import setInputValue from "../lib/setInputValue";
 
-import Button from './commom/baseTag/button';
+import Button from "./commom/baseTag/button";
 
 const Header = () => {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState("");
 
     return (
         <Head>

@@ -6,6 +6,9 @@ const Menu = () => {
         <Aside>
             <NavMeun>
                 <NavItem className="">
+                    <Link to="/" className="navLink">
+                        首頁
+                    </Link>
                     <Link to="newarticle" className="navLink">
                         新增文章
                     </Link>

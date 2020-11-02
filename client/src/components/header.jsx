@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import setInputValue from "../lib/setInputValue";
 
 import Button from "./commom/baseTag/button";
+import Login from "./login";
+import Register from "./register";
 
 const Header = () => {
     const [search, setSearch] = useState("");
+    const [login, setLogin] = useState(false);
+    const [register, setRegister] = useState(false);
 
     return (
-        <Head>
-            <MenuBtn>三</MenuBtn>
-            <Search
-                value={search}
-                onChange={(e) => setInputValue(e, setSearch)}
-            />
-            <BtnLogin>登入</BtnLogin>
-            <BtnLogin>註冊</BtnLogin>
-        </Head>
+        <>
+            <Head>
+                <MenuBtn>三</MenuBtn>
+                <Search onChange={(e) => setSearch(e.target.value)} />
+                <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
+                <BtnLogin onClick={() => setRegister(true)}>註冊</BtnLogin>
+            </Head>
+            <Login login={login} setLogin={setLogin} />
+            <Register register={register} setRegister={setRegister} />
+        </>
     );
 };
 
 export default Header;
 
-const Head = styled.head`
+const Head = styled.header`
     width: 100%;
     padding: 8px;
     display: flex;

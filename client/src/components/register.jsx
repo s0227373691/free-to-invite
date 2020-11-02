@@ -1,68 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Axios from "axios";
 
 import BackDrop from "./commom/backDrop";
 
-Axios.defaults.withCredentials = true;
-const Login = ({ login, setLogin }) => {
+const Register = ({ register, setRegister }) => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loginStatus, setLoginStatus] = useState(false);
-
-    useEffect(() => {
-        Axios.get("http://localhost:3000/api/auth")
-            .then((res) => {
-                if (res.data.loggedIn) setLoginStatus(true);
-            })
-            .catch((err) => console.error(err.message));
-    }, []);
+    const [password2, setPassword2] = useState("");
 
     const handleSubmit = (e) => {
         //TODO 前端未寫表單驗證
-        Axios.post("http://localhost:3000/api/auth", {
+        Axios.post("http://localhost:3000/api/users", {
+            name: "tester1",
             email: "tester1@gmail.com",
             password: "tester1",
         })
             .then((res) => {
-                const { auth, token } = res.data;
-
-                if (!auth) {
-                    setLoginStatus(false);
-                } else {
-                    alert("登入成功");
-                    localStorage.setItem("token", token);
-                    setLoginStatus(true);
-                }
+                alert("註冊成功!!");
+                console.log(res.data);
             })
             .catch((err) => {
-                alert("登入失敗");
-                setLoginStatus(false);
+                alert("註冊失敗!!");
                 console.error(err.message);
             });
         e.preventDefault();
     };
 
-    const visitAPITest = () => {
-        Axios.get("http://localhost:3000/api/test", {
-            headers: {
-                "x-access-token": localStorage.getItem("token"),
-            },
-        }).then((res) => {
-            console.log(res);
-        });
-    };
-
-    return login ? (
+    return register ? (
         <div>
             <Modal>
-                <h2>login</h2>
+                <h2>register</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>
-                            <p>電子郵件</p>
+                            <p>使用者名稱</p>
                             <input
                                 type="text"
+                                minLength="3"
+                                onChange={(e) => setName(e.target.value)}
+                                value="tester1"
+                                required
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <p>電子信箱</p>
+                            <input
+                                type="email"
                                 onChange={(e) => setEmail(e.target.value)}
                                 value="tester1@gmail.com"
                                 required
@@ -81,18 +68,27 @@ const Login = ({ login, setLogin }) => {
                             />
                         </label>
                     </div>
+                    <div>
+                        <label>
+                            <p>確認密碼</p>
+                            <input
+                                type="password"
+                                minLength="5"
+                                onChange={(e) => setPassword2(e.target.value)}
+                                value="tester1"
+                                required
+                            />
+                        </label>
+                    </div>
                     <button type="submit">submit</button>
                 </form>
-                {loginStatus && (
-                    <button onClick={visitAPITest}>JsonWebToken</button>
-                )}
             </Modal>
-            <BackDrop setFunction={setLogin} />
+            <BackDrop setFunction={setRegister} />
         </div>
     ) : null;
 };
 
-export default Login;
+export default Register;
 
 const Modal = styled.section`
     width: 500px;

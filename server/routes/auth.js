@@ -1,29 +1,46 @@
-const _ = require('lodash');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const Joi = require('joi');
-const { User } = require('../modules/user');
+const _ = require("lodash");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const Joi = require("joi");
+const { User } = require("../modules/user");
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.get("/", (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.send({ loggedIn: false });
+    }
+});
+
+router.post("/", async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     let user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(400).send('Invalid email or password.');
+    if (!user) return res.status(400).send("Invalid email or password.");
 
     const validPassword = await bcrypt.compare(
         req.body.password,
         user.password
     );
-    if (!validPassword)
-        return res.status(400).send('Invalid email or password.');
+    if (!validPassword) {
+        return res.status(400).send("Invalid email or password.");
+    } else {
+        //TODO 私鑰應改至環境變量
+        const token = jwt.sign({ _id: user._id }, "jwt");
 
-    //TODO 私鑰應改至環境變量
-    const token = jwt.sign({ _id: user._id }, 'jwt');
-    res.send(token);
+        user = {
+            name: user.name,
+            email: user.email,
+        };
+
+        req.session.user = user;
+
+        res.json({ auth: true, token, user });
+    }
 });
 
 function validate(req) {

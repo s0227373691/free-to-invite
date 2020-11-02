@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const BackDrop = (props) => (props.show ? <BackDropStyle /> : null);
-// props.show ? <BackDropStyle onClick={props.clicked} /> : null;
+const BackDrop = ({ setFunction }) => (
+    <BackDropStyle onClick={() => setFunction(false)} />
+);
 
 export default BackDrop;
 

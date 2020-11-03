@@ -81,39 +81,60 @@ const Menu = () => {
     );
 };
 
-export default NewArticle;
-
-const Container = styled.div``;
-const Form = styled.form``;
-const Upperlock = styled.div`
-    input[type='date'] {
-        width: 200px;
-    }
-    input[type='text'] {
-    }
-`;
-
-const Select = styled.select`
-    margin: 20px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    &:focus {
-        outline: none;
-    }
-    option {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        padding: 0;
-        margin: 0 auto;
-    }
-    input[type='text'] {
-    }
-`;
-const LowerBlock = styled.div`
+const Aside = styled.aside`
+    width: 280px;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 25px 0;
+    background: #74b9ff;
 `;
 
-const SendBtn = styled.button``;
+const UserItem = styled.li``;
+const NavMeun = styled.ul`
+    font-size: 20px;
+`;
+
+const NavItem = styled.li`
+    position: relative;
+    &:hover .classMenu {
+        display: block;
+    }
+    .navLink {
+        color: black;
+    }
+    .classMenu {
+        display: none;
+    }
+`;
+
+const ClassMenu = styled.ul`
+    padding: 10px;
+    position: absolute;
+    background: #fff;
+    filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
+    top: calc(-50% - 25px);
+    border-radius: 10px;
+    width: 150px;
+    white-space: nowrap;
+    left: 54px;
+    right: 0;
+`;
+
+const Diamond = styled.div`
+    background: #fff;
+    position: absolute;
+    top: 45px;
+    left: -5px;
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+`;
+
+const ClassItem = styled.li`
+    padding: 0 10px;
+`;
+
+export default Menu;

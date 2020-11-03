@@ -1,31 +1,83 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const NewArticle = () => {
+const Menu = () => {
     return (
-        <Container>
-            <Form action="">
-                <Upperlock>
-                    <Select required>
-                        <option value="" hidden>
-                            請選擇分類
-                        </option>
-                        <option value="1">休閒</option>
-                        <option value="2">運動</option>
-                        <option value="3">旅遊</option>
-                    </Select>
-                    <label htmlFor="date">活動日期</label>
-                    <input id="date" type="text"></input>
-                    <label htmlFor="people">人數</label>
-                    <input id="people" type="number" placeholder="人數" />
-                </Upperlock>
-                <LowerBlock>
-                    <input type="text" placeholder="標題" />
-                    <textarea name="" id="" cols="50" rows="20"></textarea>
-                </LowerBlock>
-                <SendBtn>送出</SendBtn>
-            </Form>
-        </Container>
+        <Aside>
+            <NavMeun>
+                <UserItem>
+                    <Link to="/" className="navLink">
+                        首頁
+                    </Link>
+                </UserItem>
+                <UserItem>
+                    <Link to="newarticle" className="navLink">
+                        新增文章
+                    </Link>
+                </UserItem>
+                <NavItem>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        休閒
+                    </Link>
+                    <ClassMenu className="classMenu">
+                        <Diamond></Diamond>
+                        <ClassItem>
+                            <a href="#">休閒分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">休閒分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">休閒分類</a>
+                        </ClassItem>
+                    </ClassMenu>
+                </NavItem>
+                <NavItem>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        運動
+                    </Link>
+                    <ClassMenu className="classMenu">
+                        <Diamond></Diamond>
+                        <ClassItem>
+                            <a href="#">運動分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">運動分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">運動分類</a>
+                        </ClassItem>
+                    </ClassMenu>
+                </NavItem>
+                <NavItem>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        旅遊
+                    </Link>
+                    <ClassMenu className="classMenu">
+                        <Diamond></Diamond>
+                        <ClassItem>
+                            <a href="#">旅遊分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">旅遊分類</a>
+                        </ClassItem>
+                        <ClassItem>
+                            <a href="#">旅遊分類</a>
+                        </ClassItem>
+                    </ClassMenu>
+                </NavItem>
+            </NavMeun>
+        </Aside>
     );
 };
 

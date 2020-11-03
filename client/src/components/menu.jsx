@@ -17,7 +17,12 @@ const Menu = () => {
                     </Link>
                 </UserItem>
                 <NavItem>
-                    <Link className="navLink">休閒</Link>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        休閒
+                    </Link>
                     <ClassMenu className="classMenu">
                         <Diamond></Diamond>
                         <ClassItem>
@@ -32,7 +37,12 @@ const Menu = () => {
                     </ClassMenu>
                 </NavItem>
                 <NavItem>
-                    <Link className="navLink">運動</Link>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        運動
+                    </Link>
                     <ClassMenu className="classMenu">
                         <Diamond></Diamond>
                         <ClassItem>
@@ -47,7 +57,12 @@ const Menu = () => {
                     </ClassMenu>
                 </NavItem>
                 <NavItem>
-                    <Link className="navLink">旅遊</Link>
+                    <Link
+                        className="navLink"
+                        to={(location) => `${location.pathname}`}
+                    >
+                        旅遊
+                    </Link>
                     <ClassMenu className="classMenu">
                         <Diamond></Diamond>
                         <ClassItem>

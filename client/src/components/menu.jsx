@@ -16,6 +16,11 @@ const Menu = () => {
                         新增文章
                     </Link>
                 </UserItem>
+                <UserItem>
+                    <Link to="/member" className="navLink">
+                        個人檔案
+                    </Link>
+                </UserItem>
                 <NavItem>
                     <Link
                         className="navLink"

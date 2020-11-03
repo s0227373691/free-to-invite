@@ -1,26 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Axios from 'axios';
 
 const NewArticle = () => {
+    const [board, setBoard] = useState('');
+    const [date, setDate] = useState('');
+    const [people, setPeople] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const handleSubmit = (e) => {
+        Axios.post('http://localhost:3000/api/newarticle', {
+            board: 'testboard',
+            date: 'testdate',
+            people: 5,
+            title: 'testtitle',
+            content: 'tsetcontent',
+        })
+            .then((res) => {
+                alert('上傳成功');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
     return (
         <Container>
-            <Form action="">
+            <Form onSubmit={handleSubmit}>
                 <Upperlock>
-                    <Select required>
+                    <Select required onChange={(e) => setBoard(e.target.value)}>
                         <option value="" hidden>
                             請選擇分類
                         </option>
-                        <option value="1">休閒</option>
-                        <option value="2">運動</option>
-                        <option value="3">旅遊</option>
+                        <option value="休閒">休閒</option>
+                        <option value="運動">運動</option>
+                        <option value="旅遊">旅遊</option>
                     </Select>
-                    <input id="date" type="date"></input>
-                    <input type="text" placeholder="人數" />
+                    <label htmlFor="date"></label>
+                    <input
+                        id="date"
+                        type="text"
+                        onChange={(e) => setDate(e.target.value)}
+                    ></input>
+                    <label htmlFor="people"></label>
+                    <input
+                        id="people"
+                        type="number"
+                        placeholder="人數"
+                        onChange={(e) => setPeople(e.target.value)}
+                    />
                 </Upperlock>
                 <LowerBlock>
-                    <input type="text" placeholder="標題" />
-                    <textarea name="" id="" cols="50" rows="20"></textarea>
+                    <input
+                        type="text"
+                        placeholder="標題"
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <textarea
+                        name=""
+                        id=""
+                        cols="50"
+                        rows="20"
+                        onChange={(e) => setContent(e.target.value)}
+                    ></textarea>
                 </LowerBlock>
+                <SendBtn type="submit">送出</SendBtn>
             </Form>
         </Container>
     );
@@ -60,3 +103,5 @@ const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+const SendBtn = styled.button``;

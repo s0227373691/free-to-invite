@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import Button from "./commom/baseTag/button";
-import Login from "./login";
-import Register from "./register";
+import Button from './commom/baseTag/button';
+import Login from './login';
+import Register from './register';
 
 const Header = () => {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('');
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 

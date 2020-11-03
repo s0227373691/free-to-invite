@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Axios from "axios";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Axios from 'axios';
 
-import BackDrop from "./commom/backDrop";
+import BackDrop from './commom/backDrop';
 
 const Register = ({ register, setRegister }) => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [password2, setPassword2] = useState("");
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
 
     const handleSubmit = (e) => {
         //TODO 前端未寫表單驗證
-        Axios.post("http://localhost:3000/api/users", {
-            name: "tester1",
-            email: "tester1@gmail.com",
-            password: "tester1",
+        Axios.post('http://localhost:3000/api/users', {
+            name: 'tester1',
+            email: 'tester1@gmail.com',
+            password: 'tester1',
         })
             .then((res) => {
-                alert("註冊成功!!");
+                alert('註冊成功!!');
                 console.log(res.data);
             })
             .catch((err) => {
-                alert("註冊失敗!!");
+                alert('註冊失敗!!');
                 console.error(err.message);
             });
         e.preventDefault();

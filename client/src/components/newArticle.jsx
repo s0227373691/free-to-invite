@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const NewArticle = () => {
     return (
@@ -31,10 +31,10 @@ export default NewArticle;
 const Container = styled.div``;
 const Form = styled.form``;
 const Upperlock = styled.div`
-    input[type="date"] {
+    input[type='date'] {
         width: 200px;
     }
-    input[type="text"] {
+    input[type='text'] {
     }
 `;
 
@@ -53,7 +53,7 @@ const Select = styled.select`
         padding: 0;
         margin: 0 auto;
     }
-    input[type="text"] {
+    input[type='text'] {
     }
 `;
 const LowerBlock = styled.div`

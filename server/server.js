@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', users);
-app.use('/api/auth', auth);
+// app.use('/api/auth', auth);
 app.use('/api/newarticle', newArticle);
 
 app.get('/api/test', verifyJWT, (req, res) => {

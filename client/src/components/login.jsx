@@ -4,43 +4,34 @@ import Axios from 'axios';
 
 import BackDrop from './commom/backDrop';
 
-Axios.defaults.withCredentials = true;
+import { getUserAuth, postUserAuth } from '../api/auth';
+
 const Login = ({ login, setLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginStatus, setLoginStatus] = useState(false);
 
     useEffect(() => {
-        Axios.get('http://localhost:3000/api/auth')
-            .then((res) => {
-                if (res.data.loggedIn) setLoginStatus(true);
-            })
-            .catch((err) => console.error(err.message));
+        async function fetchLoginStatus() {
+            const { loggedIn } = await getUserAuth();
+            if (loggedIn) setLoginStatus(true);
+        }
+        fetchLoginStatus();
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         //TODO 前端未寫表單驗證
-        Axios.post('http://localhost:3000/api/auth', {
-            email: 'tester1@gmail.com',
-            password: 'tester1',
-        })
-            .then((res) => {
-                const { auth, token } = res.data;
-
-                if (!auth) {
-                    setLoginStatus(false);
-                } else {
-                    alert('登入成功');
-                    localStorage.setItem('token', token);
-                    setLoginStatus(true);
-                }
-            })
-            .catch((err) => {
-                alert('登入失敗');
-                setLoginStatus(false);
-                console.error(err.message);
-            });
         e.preventDefault();
+
+        const { auth, token } = await postUserAuth({ email, password });
+        if (!auth) {
+            alert('登入失敗');
+            setLoginStatus(false);
+        } else {
+            alert('登入成功');
+            setLoginStatus(true);
+            localStorage.setItem('token', token);
+        }
     };
 
     const visitAPITest = () => {
@@ -64,7 +55,6 @@ const Login = ({ login, setLogin }) => {
                             <input
                                 type="text"
                                 onChange={(e) => setEmail(e.target.value)}
-                                value="tester1@gmail.com"
                                 required
                             />
                         </label>
@@ -76,7 +66,6 @@ const Login = ({ login, setLogin }) => {
                                 type="password"
                                 minLength="5"
                                 onChange={(e) => setPassword(e.target.value)}
-                                value="tester1"
                                 required
                             />
                         </label>

@@ -1,12 +1,15 @@
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { User, validate } = require('../modules/user');
+const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+const auth = require('./users/auth');
+
+router.post('/register', async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -20,5 +23,7 @@ router.post('/', async (req, res) => {
 
     res.send(_.pick(user, ['_id', 'name', 'email']));
 });
+
+router.use('/auth', auth);
 
 module.exports = router;

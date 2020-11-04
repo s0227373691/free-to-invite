@@ -1,7 +1,7 @@
-import { apiUserRegister } from './api';
+import { apiPostUserRegister } from './api';
 
 export const postRegister = ({ name, email, password }) => {
-    apiUserRegister({
+    apiPostUserRegister({
         name,
         email,
         password,

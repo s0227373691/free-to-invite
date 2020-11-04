@@ -8,6 +8,7 @@ const userRequest = Axios.create({
 });
 
 // User 相關的 api
-export const apiUserRegister = (data) => userRequest.post('/register', data);
+export const apiPostUserRegister = (data) =>
+    userRequest.post('/register', data);
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
 export const apiPostUserAuth = (data) => userRequest.post('/auth', data);

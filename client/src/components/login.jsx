@@ -13,7 +13,9 @@ const Login = ({ login, setLogin }) => {
 
     useEffect(() => {
         async function fetchLoginStatus() {
-            const { loggedIn } = await getUserAuth();
+            const {
+                data: { loggedIn },
+            } = await getUserAuth();
             if (loggedIn) setLoginStatus(true);
         }
         fetchLoginStatus();
@@ -23,7 +25,9 @@ const Login = ({ login, setLogin }) => {
         //TODO 前端未寫表單驗證
         e.preventDefault();
 
-        const { auth, token } = await postUserAuth({ email, password });
+        const {
+            data: { auth, token },
+        } = await postUserAuth({ email, password });
         if (!auth) {
             alert('登入失敗');
             setLoginStatus(false);

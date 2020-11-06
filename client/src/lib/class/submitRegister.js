@@ -3,26 +3,45 @@ import { apiPostUserRegister } from '../api/api';
 
 //TODO 前端 Register 未寫表單驗證
 class SubmitRegister {
-    constructor({ name, email, password, password2 }) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.password2 = password2;
-        this.isValidate = false;
-        this.isvalidateName = false;
+    constructor(inputValue) {
+        this.inputValue = inputValue;
+        // this.name = name;
+        // this.email = email;
+        // this.password = password;
+        // this.password2 = password2;
+        // this.isValidate = false;
     }
 
     validateName() {
         const schema = Joi.object({
             name: Joi.string().min(3).max(20).required(),
         });
-        const { error } = schema.validate({ name: this.name });
-        if (error) {
-            return this;
-        } else {
-            this.isvalidateName = true;
-            return this;
-        }
+
+        const { error } = schema.validate({ name: this.inputValue });
+        const resultValidate = !error ? true : false;
+        return resultValidate;
+    }
+    validateEmail() {
+        const schema = Joi.object({
+            email: Joi.string()
+                .min(5)
+                .max(255)
+                .required()
+                .email({ tlds: { allow: false } }),
+        });
+
+        const { error } = schema.validate({ email: this.inputValue });
+        const resultValidate = !error ? true : false;
+        return resultValidate;
+    }
+    validatePassword() {
+        const schema = Joi.object({
+            password: Joi.string().min(5).max(255).required(),
+        });
+
+        const { error } = schema.validate({ password: this.inputValue });
+        const resultValidate = !error ? true : false;
+        return resultValidate;
     }
 
     validate() {

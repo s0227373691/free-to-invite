@@ -22,54 +22,67 @@ const Register = ({ register, setRegister }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // 確認所有 <input /> border為綠色
+        const inputBorderColors = [
+            inputBorderColorName,
+            inputBorderColorEmail,
+            inputBorderColorPassword,
+            inputBorderColorPassword2,
+        ];
+        const result = inputBorderColors.every((item) => item === 'green');
+        if (!result) return alert('Fail to submit');
+
+        // 再次驗證表單
         const formValue = {
             name,
             email,
             password,
-            password2,
         };
-        const formManager = new SubmitRegister(formValue);
+        const formValidater = new SubmitRegister(formValue);
 
-        formManager.validate().postToServer();
-        // formManager.postToServer();
+        formValidater.validateAll().postToServer();
     };
 
-    const validateName = (e, validateType) => {
+    const validateName = (e) => {
         const inputValue = e.target.value;
-        const formValidater = new SubmitRegister(inputValue);
+        const formValidater = new SubmitRegister({ name: inputValue });
 
-        switch (validateType) {
-            case 'name':
-                formValidater.validateName()
-                    ? setInputBorderColorName('green')
-                    : setInputBorderColorName('red');
+        formValidater.validateName()
+            ? setInputBorderColorName('green')
+            : setInputBorderColorName('red');
 
-                setName(inputValue);
-                break;
-            case 'email':
-                formValidater.validateEmail()
-                    ? setInputBorderColorEmail('green')
-                    : setInputBorderColorEmail('red');
+        setName(inputValue);
+    };
 
-                setEmail(inputValue);
-                break;
-            case 'password':
-                formValidater.validatePassword()
-                    ? setInputBorderColorPassword('green')
-                    : setInputBorderColorPassword('red');
+    const validateEmail = (e) => {
+        const inputValue = e.target.value;
+        const formValidater = new SubmitRegister({ email: inputValue });
 
-                setPassword(inputValue);
-                break;
-            case 'password2':
-                password === inputValue
-                    ? setInputBorderColorPassword2('green')
-                    : setInputBorderColorPassword2('red');
-                setPassword2(inputValue);
-                break;
-            default:
-                console.log('請輸入驗證表單類型');
-                break;
-        }
+        formValidater.validateEmail()
+            ? setInputBorderColorEmail('green')
+            : setInputBorderColorEmail('red');
+
+        setEmail(inputValue);
+    };
+
+    const validatePassword = (e) => {
+        const inputValue = e.target.value;
+        const formValidater = new SubmitRegister({ password: inputValue });
+
+        formValidater.validatePassword()
+            ? setInputBorderColorPassword('green')
+            : setInputBorderColorPassword('red');
+
+        setPassword(inputValue);
+    };
+
+    const validatePassword2 = (e) => {
+        const inputValue = e.target.value;
+        password === inputValue
+            ? setInputBorderColorPassword2('green')
+            : setInputBorderColorPassword2('red');
+
+        setPassword2(inputValue);
     };
 
     return register ? (
@@ -82,7 +95,7 @@ const Register = ({ register, setRegister }) => {
                             <p>使用者名稱</p>
                             <Input
                                 type="text"
-                                onChange={(e) => validateName(e, 'name')}
+                                onChange={validateName}
                                 style={{ borderColor: inputBorderColorName }}
                                 autoFocus
                                 required
@@ -94,7 +107,7 @@ const Register = ({ register, setRegister }) => {
                             <p>電子信箱</p>
                             <Input
                                 type="email"
-                                onChange={(e) => validateName(e, 'email')}
+                                onChange={validateEmail}
                                 style={{ borderColor: inputBorderColorEmail }}
                                 required
                             />
@@ -105,7 +118,7 @@ const Register = ({ register, setRegister }) => {
                             <p>密碼</p>
                             <Input
                                 type="password"
-                                onChange={(e) => validateName(e, 'password')}
+                                onChange={validatePassword}
                                 style={{
                                     borderColor: inputBorderColorPassword,
                                 }}
@@ -118,7 +131,7 @@ const Register = ({ register, setRegister }) => {
                             <p>確認密碼</p>
                             <Input
                                 type="password"
-                                onChange={(e) => validateName(e, 'password2')}
+                                onChange={validatePassword2}
                                 style={{
                                     borderColor: inputBorderColorPassword2,
                                 }}

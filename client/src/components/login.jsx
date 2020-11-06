@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 import BackDrop from './commom/backDrop';
 
-import { getUserAuth, postUserAuth } from '../api/auth';
+import { getUserAuth, postUserAuth } from '../lib/api/auth';
 
 const Login = ({ login, setLogin }) => {
     const [email, setEmail] = useState('');

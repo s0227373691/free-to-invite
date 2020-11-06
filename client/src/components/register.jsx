@@ -3,18 +3,37 @@ import styled from 'styled-components';
 
 import BackDrop from './commom/backDrop';
 
-import { postRegister } from '../api/users';
+import SubmitRegister from '../lib/class/submitRegister';
 
 const Register = ({ register, setRegister }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
+    const [inputNameBorderColor, setInputNameBorderColor] = useState('black');
 
     const handleSubmit = (e) => {
-        //TODO 前端未寫表單驗證
-        postRegister({ name, email, password });
         e.preventDefault();
+
+        const formValue = {
+            name,
+            email,
+            password,
+            password2,
+        };
+        const formManager = new SubmitRegister(formValue);
+
+        formManager.validate().postToServer();
+        // formManager.postToServer();
+    };
+
+    const validateName = (e) => {
+        const name = e.target.value;
+        setName(name);
+        const formManager = new SubmitRegister({ name });
+        formManager.validateName().isvalidateName
+            ? setInputNameBorderColor('green')
+            : setInputNameBorderColor('red');
     };
 
     return register ? (
@@ -25,10 +44,11 @@ const Register = ({ register, setRegister }) => {
                     <div>
                         <label>
                             <p>使用者名稱</p>
-                            <input
+                            <Input
                                 type="text"
-                                minLength="3"
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={validateName}
+                                borderColor={inputNameBorderColor}
+                                autoFocus
                                 required
                             />
                         </label>
@@ -36,7 +56,7 @@ const Register = ({ register, setRegister }) => {
                     <div>
                         <label>
                             <p>電子信箱</p>
-                            <input
+                            <Input
                                 type="email"
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -46,7 +66,7 @@ const Register = ({ register, setRegister }) => {
                     <div>
                         <label>
                             <p>密碼</p>
-                            <input
+                            <Input
                                 type="password"
                                 minLength="5"
                                 onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +77,7 @@ const Register = ({ register, setRegister }) => {
                     <div>
                         <label>
                             <p>確認密碼</p>
-                            <input
+                            <Input
                                 type="password"
                                 minLength="5"
                                 onChange={(e) => setPassword2(e.target.value)}
@@ -84,4 +104,15 @@ const Modal = styled.section`
     top: 20%;
     left: calc(50% - 250px);
     background-color: white;
+`;
+
+const Input = styled.input`
+    border: 2px solid;
+    border-color: ${(borderColor) => borderColor};
+    /* &:valid {
+        border: 2px solid green;
+    }
+    &:invalid {
+        border: 2px solid red;
+    } */
 `;

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { Modal } from './styles/modals';
+import { Input } from './styles/inputs';
+import { Button } from './styles/buttons';
 import BackDrop from './commom/backDrop';
 
 import SubmitRegister from '../lib/class/submitRegister';
@@ -10,156 +13,159 @@ const Register = ({ register, setRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const [inputBorderColorName, setInputBorderColorName] = useState('black');
-    const [inputBorderColorEmail, setInputBorderColorEmail] = useState('black');
-    const [inputBorderColorPassword, setInputBorderColorPassword] = useState(
-        'black'
-    );
-    const [inputBorderColorPassword2, setInputBorderColorPassword2] = useState(
-        'black'
-    );
+
+    const borderColor = { border: '1px solid grey' };
+    const [nameInputStyle, setNameInputStyle] = useState(borderColor);
+    const [emailInputStyle, setEmailInputStyle] = useState(borderColor);
+    const [passwordInputStyle, setPasswordInputStyle] = useState(borderColor);
+    const [password2InputStyle, setPassword2InputStyle] = useState(borderColor);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 確認所有 <input /> border為綠色
-        const inputBorderColors = [
-            inputBorderColorName,
-            inputBorderColorEmail,
-            inputBorderColorPassword,
-            inputBorderColorPassword2,
-        ];
-        const result = inputBorderColors.every((item) => item === 'green');
-        if (!result) return alert('Fail to submit');
-
         // 再次驗證表單
         const formValue = {
-            name,
-            email,
-            password,
+            name: name,
+            email: email,
+            password: password,
+            setNameInputStyle: setNameInputStyle,
+            setEmailInputStyle: setEmailInputStyle,
+            setPasswordInputStyle: setPasswordInputStyle,
         };
         const formValidater = new SubmitRegister(formValue);
 
         formValidater.validateAll().postToServer();
     };
 
-    const validateName = (e) => {
+    const handleValidateName = (e) => {
         const inputValue = e.target.value;
-        const formValidater = new SubmitRegister({ name: inputValue });
-
-        formValidater.validateName()
-            ? setInputBorderColorName('green')
-            : setInputBorderColorName('red');
-
         setName(inputValue);
+
+        const formValue = {
+            name: inputValue,
+            setNameInputStyle: setNameInputStyle,
+        };
+        const formValidater = new SubmitRegister(formValue);
+
+        formValidater.validateName();
     };
 
-    const validateEmail = (e) => {
+    const handleValidateEmail = (e) => {
         const inputValue = e.target.value;
-        const formValidater = new SubmitRegister({ email: inputValue });
-
-        formValidater.validateEmail()
-            ? setInputBorderColorEmail('green')
-            : setInputBorderColorEmail('red');
-
         setEmail(inputValue);
+
+        const formValue = {
+            email: inputValue,
+            setEmailInputStyle: setEmailInputStyle,
+        };
+        const formValidater = new SubmitRegister(formValue);
+
+        formValidater.validateEmail();
     };
 
-    const validatePassword = (e) => {
+    const handleValidatePassword = (e) => {
         const inputValue = e.target.value;
-        const formValidater = new SubmitRegister({ password: inputValue });
-
-        formValidater.validatePassword()
-            ? setInputBorderColorPassword('green')
-            : setInputBorderColorPassword('red');
-
         setPassword(inputValue);
+        setPassword2('');
+        setPassword2InputStyle({ border: '1px solid grey' });
+
+        const formValue = {
+            password: inputValue,
+            setPasswordInputStyle: setPasswordInputStyle,
+        };
+        const formValidater = new SubmitRegister(formValue);
+
+        formValidater.validatePassword();
     };
 
-    const validatePassword2 = (e) => {
+    const handleValidatePassword2 = (e) => {
         const inputValue = e.target.value;
-        password === inputValue
-            ? setInputBorderColorPassword2('green')
-            : setInputBorderColorPassword2('red');
-
         setPassword2(inputValue);
+
+        const inputStyle =
+            password === inputValue
+                ? { border: '2px solid green' }
+                : { border: '2px solid red' };
+        setPassword2InputStyle(inputStyle);
     };
 
-    return register ? (
-        <div>
+    const RegisterComponent = (
+        <>
             <Modal>
-                <h2>register</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>
-                            <p>使用者名稱</p>
-                            <Input
-                                type="text"
-                                onChange={validateName}
-                                style={{ borderColor: inputBorderColorName }}
-                                autoFocus
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <p>電子信箱</p>
-                            <Input
-                                type="email"
-                                onChange={validateEmail}
-                                style={{ borderColor: inputBorderColorEmail }}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <p>密碼</p>
-                            <Input
-                                type="password"
-                                onChange={validatePassword}
-                                style={{
-                                    borderColor: inputBorderColorPassword,
-                                }}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <p>確認密碼</p>
-                            <Input
-                                type="password"
-                                onChange={validatePassword2}
-                                style={{
-                                    borderColor: inputBorderColorPassword2,
-                                }}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <button type="submit">submit</button>
-                </form>
+                <Title>註冊</Title>
+                <Form onSubmit={handleSubmit}>
+                    <FormRow>
+                        <Input
+                            type="text"
+                            placeholder="使用者名稱"
+                            width="100%"
+                            value={name}
+                            style={nameInputStyle}
+                            onChange={handleValidateName}
+                            autoFocus
+                            required
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <Input
+                            type="email"
+                            placeholder="電子信箱"
+                            width="100%"
+                            value={email}
+                            style={emailInputStyle}
+                            onChange={handleValidateEmail}
+                            required
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <Input
+                            type="password"
+                            placeholder="密碼"
+                            width="100%"
+                            value={password}
+                            style={passwordInputStyle}
+                            onChange={handleValidatePassword}
+                            required
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <Input
+                            type="password"
+                            placeholder="確認密碼"
+                            width="100%"
+                            value={password2}
+                            style={password2InputStyle}
+                            onChange={handleValidatePassword2}
+                            required
+                        />
+                    </FormRow>
+                    <Button type="submit" bgColor="#8a8a8a">
+                        立即註冊
+                    </Button>
+                </Form>
             </Modal>
             <BackDrop setFunction={setRegister} />
-        </div>
-    ) : null;
+        </>
+    );
+    return register ? RegisterComponent : null;
 };
 
 export default Register;
 
-const Modal = styled.section`
-    width: 500px;
-    padding: 25px;
-    border-radius: 10px;
-    position: fixed;
-    z-index: 999;
-    top: 20%;
-    left: calc(50% - 250px);
-    background-color: white;
+const Title = styled.h2`
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
 `;
 
-const Input = styled.input`
-    border: 2px solid black;
+const Form = styled.form`
+    width: 400px;
+    margin: auto;
+    margin-bottom: 50px;
+`;
+
+const FormRow = styled.div`
+    margin-bottom: 20px;
 `;

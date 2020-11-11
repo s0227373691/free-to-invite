@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Axios from 'axios';
 
+import { Modal } from './styles/modals';
+import { Input } from './styles/inputs';
+import { Button } from './styles/buttons';
 import BackDrop from './commom/backDrop';
 
 import { getUserAuth, postUserAuth } from '../lib/api/auth';
@@ -24,7 +27,6 @@ const Login = ({ login, setLogin }) => {
     const handleSubmit = async (e) => {
         //TODO 前端未寫表單驗證
         e.preventDefault();
-
         const {
             data: { auth, token },
         } = await postUserAuth({ email, password });
@@ -48,52 +50,59 @@ const Login = ({ login, setLogin }) => {
         });
     };
 
-    return login ? (
-        <div>
+    const LogonComponent = (
+        <>
             <Modal>
-                <h2>login</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>
-                            <p>電子郵件</p>
-                            <input
-                                type="text"
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            <p>密碼</p>
-                            <input
-                                type="password"
-                                minLength="5"
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <button type="submit">submit</button>
-                </form>
+                <Title>登入帳號</Title>
+                <Form onSubmit={handleSubmit}>
+                    <FormRow>
+                        <Input
+                            type="text"
+                            placeholder="電子郵件"
+                            width="100%"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </FormRow>
+                    <FormRow>
+                        <Input
+                            type="password"
+                            placeholder="密碼"
+                            width="100%"
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </FormRow>
+                    <Button type="submit" bgColor="#8a8a8a">
+                        立即登入
+                    </Button>
+                </Form>
                 {loginStatus && (
                     <button onClick={visitAPITest}>JsonWebToken</button>
                 )}
             </Modal>
             <BackDrop setFunction={setLogin} />
-        </div>
-    ) : null;
+        </>
+    );
+    return login ? LogonComponent : null;
 };
 
 export default Login;
 
-const Modal = styled.section`
-    width: 500px;
-    padding: 25px;
-    border-radius: 10px;
-    position: fixed;
-    z-index: 999;
-    top: 20%;
-    left: calc(50% - 250px);
-    background-color: white;
+const Title = styled.h2`
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+`;
+
+const Form = styled.form`
+    width: 400px;
+    margin: auto;
+    margin-bottom: 50px;
+`;
+
+const FormRow = styled.div`
+    margin-bottom: 20px;
 `;

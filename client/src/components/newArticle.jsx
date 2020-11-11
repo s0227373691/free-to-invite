@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Axios from 'axios';
+import BaseInput from './commom/baseTag/Input';
 
 const NewArticle = () => {
     const [board, setBoard] = useState('');
@@ -25,6 +26,7 @@ const NewArticle = () => {
     };
     return (
         <Container>
+            <Title className="title">新增文章</Title>
             <Form onSubmit={handleSubmit}>
                 <Upperlock>
                     <Select required onChange={(e) => setBoard(e.target.value)}>
@@ -35,35 +37,39 @@ const NewArticle = () => {
                         <option value="運動">運動</option>
                         <option value="旅遊">旅遊</option>
                     </Select>
-                    <label htmlFor="date"></label>
-                    <input
-                        id="date"
-                        type="text"
-                        onChange={(e) => setDate(e.target.value)}
-                    ></input>
-                    <label htmlFor="people"></label>
-                    <input
-                        id="people"
-                        type="number"
-                        placeholder="人數"
-                        onChange={(e) => setPeople(e.target.value)}
-                    />
+                    <Label htmlFor="date">
+                        <Span>日期 : </Span>
+                        <Input
+                            id="date"
+                            type="text"
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                    </Label>
+
+                    <Label htmlFor="people">
+                        <Span>人數 : </Span>
+                        <Input
+                            id="people"
+                            type="number"
+                            onChange={(e) => setPeople(e.target.value)}
+                        />
+                    </Label>
                 </Upperlock>
                 <LowerBlock>
-                    <input
+                    <Input
                         type="text"
                         placeholder="標題"
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <textarea
+                    <TextArea
                         name=""
                         id=""
-                        cols="50"
-                        rows="20"
                         onChange={(e) => setContent(e.target.value)}
-                    ></textarea>
-                </LowerBlock>
-                <SendBtn type="submit">送出</SendBtn>
+                    ></TextArea>
+                </LowerBlock>{' '}
+                <Footer>
+                    <SendBtn type="submit">送出</SendBtn>
+                </Footer>
             </Form>
         </Container>
     );
@@ -71,37 +77,84 @@ const NewArticle = () => {
 
 export default NewArticle;
 
-const Container = styled.div``;
-const Form = styled.form``;
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+const Title = styled.h2`
+    font-size: 28px;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    font-weight: 700;
+`;
+
+const Form = styled.form`
+    max-width: 800px;
+
+    position: relative;
+`;
+
 const Upperlock = styled.div`
-    input[type='date'] {
-        width: 200px;
-    }
-    input[type='text'] {
-    }
+    display: flex;
+    justify-content: space-around;
+
+    margin-bottom: 16px;
 `;
 
 const Select = styled.select`
-    margin: 20px;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
+    margin: 0 16px;
     &:focus {
         outline: none;
     }
     option {
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        padding: 0;
-        margin: 0 auto;
-    }
-    input[type='text'] {
     }
 `;
+
+const Input = styled(BaseInput)`
+    height: 40px;
+    border: 1px solid #dadce0;
+`;
+
+const Label = styled.label`
+    display: flex;
+    flex-grow: 1;
+    white-space: nowrap;
+    align-items: center;
+`;
+
+const Span = styled.span`
+    margin: 0 10px;
+`;
+
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
+
+    input[type='text'] {
+        margin-bottom: 16px;
+    }
 `;
 
+const TextArea = styled.textarea`
+    border: 1px solid black;
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Footer = styled.footer`
+    width: 100%;
+    height: 40px;
+    background: red;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+`;
 const SendBtn = styled.button``;

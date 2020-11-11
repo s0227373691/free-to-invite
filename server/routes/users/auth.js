@@ -9,6 +9,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.session.user) {
+        console.log('a');
+        console.log(req.session.user);
         res.send({ loggedIn: true, user: req.session.user });
     } else {
         res.send({ loggedIn: false });

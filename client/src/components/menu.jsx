@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import menuList from '../../menuList.js';
 
 const Menu = () => {
     return (
@@ -21,66 +22,31 @@ const Menu = () => {
                         個人檔案
                     </Link>
                 </UserItem>
-                <NavItem>
-                    <Link
-                        className="navLink"
-                        to={(location) => `${location.pathname}`}
-                    >
-                        休閒
+                <UserItem>
+                    <Link to="/myarticle" className="navLink">
+                        我的文章
                     </Link>
-                    <ClassMenu className="classMenu">
-                        <Diamond></Diamond>
-                        <ClassItem>
-                            <a href="#">休閒分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">休閒分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">休閒分類</a>
-                        </ClassItem>
-                    </ClassMenu>
-                </NavItem>
-                <NavItem>
-                    <Link
-                        className="navLink"
-                        to={(location) => `${location.pathname}`}
-                    >
-                        運動
-                    </Link>
-                    <ClassMenu className="classMenu">
-                        <Diamond></Diamond>
-                        <ClassItem>
-                            <a href="#">運動分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">運動分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">運動分類</a>
-                        </ClassItem>
-                    </ClassMenu>
-                </NavItem>
-                <NavItem>
-                    <Link
-                        className="navLink"
-                        to={(location) => `${location.pathname}`}
-                    >
-                        旅遊
-                    </Link>
-                    <ClassMenu className="classMenu">
-                        <Diamond></Diamond>
-                        <ClassItem>
-                            <a href="#">旅遊分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">旅遊分類</a>
-                        </ClassItem>
-                        <ClassItem>
-                            <a href="#">旅遊分類</a>
-                        </ClassItem>
-                    </ClassMenu>
-                </NavItem>
+                </UserItem>
+            </NavMeun>
+            <NavMeun>
+                {menuList.map((list) => {
+                    return (
+                        <NavItem key={list.primaryType}>
+                            {list.primaryType}
+                            <Link className="navLink" to="#"></Link>
+                            <ClassMenu className="classMenu">
+                                <Diamond></Diamond>
+                                {list.content.map((minorType) => {
+                                    return (
+                                        <ClassItem key={minorType.minorType}>
+                                            <a href="">{minorType.minorType}</a>
+                                        </ClassItem>
+                                    );
+                                })}
+                            </ClassMenu>
+                        </NavItem>
+                    );
+                })}
             </NavMeun>
         </Aside>
     );
@@ -88,12 +54,13 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-    height: 100%;
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 25px 0;
     background: #74b9ff;
+    min-width: 150px;
 `;
 
 const UserItem = styled.li``;
@@ -123,7 +90,7 @@ const ClassMenu = styled.ul`
     border-radius: 10px;
     width: 150px;
     white-space: nowrap;
-    left: 54px;
+    left: 44px;
     right: 0;
 `;
 

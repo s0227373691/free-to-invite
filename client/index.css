@@ -135,12 +135,12 @@ table {
     box-sizing: border-box;
 }
 body {
+    height: 100%;
     box-sizing: border-box;
     font-family: 'Helvetica', 'Arial', 'LiHei Pro', '黑體-繁', '微軟正黑體',
         sans-serif;
     line-height: 1.5;
     letter-spacing: 1.2px;
-    overflow: hidden;
 }
 a {
     text-decoration: none;

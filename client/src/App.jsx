@@ -9,6 +9,8 @@ import Login from './components/login';
 import Member from './components/member';
 import Article from './components/article';
 import NewArticle from './components/newArticle';
+import MyArticle from './components/myArticle';
+
 const App = () => {
     return (
         <Router>
@@ -20,6 +22,7 @@ const App = () => {
                     <Route path="/member" component={Member} />
                     <Route path="/article" component={Article} />
                     <Route path="/newarticle" component={NewArticle} />
+                    <Route path="/myarticle" component={MyArticle} />
                 </Switch>
             </Main>
         </Router>
@@ -29,7 +32,6 @@ const App = () => {
 export default App;
 
 const Main = styled.div`
-    width: 100%;
-    height: 100vh;
+    max-width: 1920px;
     display: flex;
 `;

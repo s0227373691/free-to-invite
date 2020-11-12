@@ -55,7 +55,7 @@ const NewArticle = () => {
                         />
                     </Label>
                 </Upperlock>
-                <LowerBlock>
+                <LowerBlock contenteditable="true">
                     <Input
                         type="text"
                         placeholder="標題"
@@ -137,15 +137,18 @@ const Span = styled.span`
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh -80px);
+    height: 100%;
     input[type='text'] {
         margin-bottom: 16px;
     }
 `;
 
 const TextArea = styled.textarea`
+    display: block;
     border: 1px solid black;
-
+    height: 2000px;
+    flex-grow: 1;
+    overflow-y: hidden;
     &:focus {
         outline: none;
     }

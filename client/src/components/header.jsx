@@ -25,14 +25,19 @@ const Header = () => {
 };
 
 export default Header;
-
 const Head = styled.header`
-    width: 100%;
-    padding: 8px;
+    max-width: 1920px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    margin: 0 auto;
+    padding: 8px;
+    background: white;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
 `;

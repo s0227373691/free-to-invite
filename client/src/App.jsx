@@ -4,6 +4,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Menu from './components/menu';
 import Header from './components/header';
+import Board from './components/board';
 // import Main from './components/main';
 import Login from './components/login';
 import Member from './components/member';
@@ -13,21 +14,20 @@ import MyArticle from './components/myArticle';
 
 const App = () => {
     return (
-        <Container>
-            <Router>
-                <Header />
-                <Main>
-                    <Menu />
-                    <Switch>
-                        <Route path="/login" component={Login} />
-                        <Route path="/member" component={Member} />
-                        <Route path="/article" component={Article} />
-                        <Route path="/newarticle" component={NewArticle} />
-                        <Route path="/myarticle" component={MyArticle} />
-                    </Switch>
-                </Main>
-            </Router>
-        </Container>
+        <Router>
+            <Header />
+            <Main>
+                <Menu />
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/member" component={Member} />
+                    <Route path="/article" component={Article} />
+                    <Route path="/newarticle" component={NewArticle} />
+                    <Route path="/myarticle" component={MyArticle} />
+                    {/* <Route path="/myarticle" component={Board} /> */}
+                </Switch>
+            </Main>
+        </Router>
     );
 };
 

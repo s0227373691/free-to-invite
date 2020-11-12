@@ -1,60 +1,63 @@
 const menuList = [
     {
         primaryType: '休閒',
+        path: '/free',
         content: [
             {
                 minorType: '桌游',
-                url: '/abc',
+                path: '/free/boardgame',
                 value: 'type',
             },
             {
                 minorType: '電動',
-                url: '/abc',
+                path: '/free/electricalgame',
                 value: 'type',
             },
             {
                 minorType: '聽音樂',
-                url: '/abc',
+                path: '/free/music',
                 value: 'type',
             },
         ],
     },
     {
         primaryType: '運動',
+        path: '/sport',
         content: [
             {
                 minorType: '慢跑',
-                url: '/abc',
+                path: '/sport/running',
                 value: 'type',
             },
             {
                 minorType: '籃球',
-                url: '/abc',
+                path: '/sport/basketball',
                 value: 'type',
             },
             {
                 minorType: '格鬥',
-                url: '/abc',
+                path: '/sport/fighting',
                 value: 'type',
             },
         ],
     },
     {
         primaryType: '旅遊',
+        path: '/travel',
         content: [
             {
                 minorType: '台灣',
-                url: '/abc',
+                path: '/travel/abc',
                 value: 'type',
             },
             {
                 minorType: '日本',
-                url: '/abc',
+                path: '/travel/abc',
                 value: 'type',
             },
             {
                 minorType: '美國',
-                url: '/abc',
+                path: '/travel/abc',
                 value: 'type',
             },
         ],

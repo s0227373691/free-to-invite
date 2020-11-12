@@ -13,7 +13,7 @@ const Menu = () => {
                     </Link>
                 </UserItem>
                 <UserItem>
-                    <Link to="newarticle" className="navLink">
+                    <Link to="/newarticle" className="navLink">
                         新增文章
                     </Link>
                 </UserItem>
@@ -32,14 +32,18 @@ const Menu = () => {
                 {menuList.map((list) => {
                     return (
                         <NavItem key={list.primaryType}>
-                            {list.primaryType}
-                            <Link className="navLink" to="#"></Link>
+                            <Link className="navLink" to={list.path}>
+                                {list.primaryType}
+                            </Link>
                             <ClassMenu className="classMenu">
                                 <Diamond></Diamond>
                                 {list.content.map((minorType) => {
+                                    console.log(minorType);
                                     return (
                                         <ClassItem key={minorType.minorType}>
-                                            <a href="">{minorType.minorType}</a>
+                                            <Link to={minorType.path}>
+                                                {minorType.minorType}
+                                            </Link>
                                         </ClassItem>
                                     );
                                 })}

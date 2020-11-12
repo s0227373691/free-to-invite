@@ -37,14 +37,6 @@ const App = () => {
 
 export default App;
 const Container = styled.div`
-<<<<<<< HEAD
-    height: 100%;
-`;
-const Main = styled.div`
-    max-width: 1920px;
-    display: flex;
-    height: calc(100% - 80px);
-=======
     max-width: 1920px;
     margin: 0 auto;
 `;
@@ -53,7 +45,6 @@ const Body = styled.div`
     max-width: 1920px;
     display: flex;
     margin-top: 80px;
->>>>>>> js0731
 `;
 const Main = styled.div`
     width: calc(100% - 280px);

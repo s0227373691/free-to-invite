@@ -49,4 +49,4 @@ const Body = styled.div`
 const Main = styled.div`
     width: calc(100% - 280px);
     margin-left: 280px;
-`;
+

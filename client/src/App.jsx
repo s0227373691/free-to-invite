@@ -14,24 +14,20 @@ import MyArticle from './components/myArticle';
 
 const App = () => {
     return (
-        <Container>
+        <Router>
             <Header />
-            <Router>
-                <Body>
-                    <Menu />
-                    <Main>
-                        <Switch>
-                            <Route path="/login" component={Login} />
-                            <Route path="/member" component={Member} />
-                            <Route path="/article" component={Article} />
-                            <Route path="/newarticle" component={NewArticle} />
-                            <Route path="/myarticle" component={MyArticle} />
-                            {/* <Route path="/myarticle" component={Board} /> */}
-                        </Switch>
-                    </Main>
-                </Body>
-            </Router>
-        </Container>
+            <Main>
+                <Menu />
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/member" component={Member} />
+                    <Route path="/article" component={Article} />
+                    <Route path="/newarticle" component={NewArticle} />
+                    <Route path="/myarticle" component={MyArticle} />
+                    {/* <Route path="/myarticle" component={Board} /> */}
+                </Switch>
+            </Main>
+        </Router>
     );
 };
 
@@ -49,4 +45,4 @@ const Body = styled.div`
 const Main = styled.div`
     width: calc(100% - 280px);
     margin-left: 280px;
-
+`

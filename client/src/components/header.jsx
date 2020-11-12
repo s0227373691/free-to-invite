@@ -11,7 +11,7 @@ const Header = () => {
     const [register, setRegister] = useState(false);
 
     return (
-        <>
+        <div style={{ height: '80px' }}>
             <Head>
                 <MenuBtn>三</MenuBtn>
                 <Search onChange={(e) => setSearch(e.target.value)} />
@@ -20,7 +20,7 @@ const Header = () => {
             </Head>
             <Login login={login} setLogin={setLogin} />
             <Register register={register} setRegister={setRegister} />
-        </>
+        </div>
     );
 };
 

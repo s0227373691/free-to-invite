@@ -64,7 +64,8 @@ const Aside = styled.aside`
     align-items: center;
     padding: 25px 0;
     background: #74b9ff;
-    min-width: 150px;
+    position: fixed;
+    top: 68;
 `;
 
 const UserItem = styled.li``;

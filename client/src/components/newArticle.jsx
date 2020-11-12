@@ -137,12 +137,8 @@ const Span = styled.span`
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
     flex: 1;
     height: 100%;
-=======
-    min-height: calc(100vh -80px);
->>>>>>> js0731
     input[type='text'] {
         margin-bottom: 16px;
     }

@@ -26,7 +26,6 @@ const Header = () => {
 
 export default Header;
 const Head = styled.header`
-    max-width: 1920px;
     display: flex;
     justify-content: flex-end;
     align-items: center;

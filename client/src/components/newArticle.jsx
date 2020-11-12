@@ -145,7 +145,7 @@ const LowerBlock = styled.div`
 `;
 
 const TextArea = styled.textarea`
-    height: 100%;
+    height: 2000px;
     border: 1px solid black;
 
     &:focus {
@@ -160,10 +160,6 @@ const Footer = styled.footer`
     position: absolute;
     left: 0;
     right: 0;
-<<<<<<< HEAD
-    bottom: 80px;
-=======
     bottom: -80px; ;
->>>>>>> js0731
 `;
 const SendBtn = styled.button``;

@@ -50,11 +50,13 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-    height: calc(100vh - 81px);
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 40px 25px;
+    background: #fff;
+    margin-top: 80px;
 `;
 
 const UserItem = styled.li`

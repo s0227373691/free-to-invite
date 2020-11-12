@@ -42,11 +42,8 @@ const Body = styled.div`
     width: 100%;
     overflow-y: scroll;
 `;
-const Main = styled.div`
-    display: flex;
-    margin-top: 80px;
-`;
+
 const Main = styled.div`
     width: calc(100% - 280px);
     margin-left: 280px;
-`
+`;

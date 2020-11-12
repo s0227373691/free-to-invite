@@ -60,8 +60,7 @@ const Aside = styled.aside`
 `;
 
 const UserItem = styled.li`
-
-    a{
+    a {
         padding: 10px 20px;
         &:visited {
             color: #3e3e3e;

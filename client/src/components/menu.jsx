@@ -8,24 +8,16 @@ const Menu = () => {
         <Aside>
             <NavMeun>
                 <UserItem>
-                    <Link to="/" className="navLink">
-                        首頁
-                    </Link>
+                    <Link to="/">首頁</Link>
                 </UserItem>
                 <UserItem>
-                    <Link to="/newarticle" className="navLink">
-                        新增文章
-                    </Link>
+                    <Link to="/newarticle">新增文章</Link>
                 </UserItem>
                 <UserItem>
-                    <Link to="/member" className="navLink">
-                        個人檔案
-                    </Link>
+                    <Link to="/member">個人檔案</Link>
                 </UserItem>
                 <UserItem>
-                    <Link to="/myarticle" className="navLink">
-                        我的文章
-                    </Link>
+                    <Link to="/myarticle">我的文章</Link>
                 </UserItem>
             </NavMeun>
             <NavMeun>
@@ -58,17 +50,22 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 81px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25px 0;
-    background: #74b9ff;
-    min-width: 150px;
+    padding: 40px 25px;
 `;
 
-const UserItem = styled.li``;
+const UserItem = styled.li`
+    padding: 10px 20px;
+    a:visited {
+        color: #3e3e3e;
+    }
+`;
+
 const NavMeun = styled.ul`
+    width: 100%;
     font-size: 20px;
 `;
 

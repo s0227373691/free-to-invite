@@ -81,6 +81,8 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    background: red;
 `;
 const Title = styled.h2`
     font-size: 28px;
@@ -135,7 +137,7 @@ const Span = styled.span`
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
-
+    min-height: calc(100vh -80px);
     input[type='text'] {
         margin-bottom: 16px;
     }
@@ -143,6 +145,7 @@ const LowerBlock = styled.div`
 
 const TextArea = styled.textarea`
     border: 1px solid black;
+
     &:focus {
         outline: none;
     }
@@ -155,6 +158,6 @@ const Footer = styled.footer`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -80px; ;
 `;
 const SendBtn = styled.button``;

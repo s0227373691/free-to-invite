@@ -14,36 +14,32 @@ import MyArticle from './components/myArticle';
 
 const App = () => {
     return (
-        <Container>
-            <Router>
-                <Header />
-                <Main>
-                    <Menu />
-                    <Body>
-                        <Switch>
-                            <Route path="/login" component={Login} />
-                            <Route path="/member" component={Member} />
-                            <Route path="/article" component={Article} />
-                            <Route path="/newarticle" component={NewArticle} />
-                            <Route path="/myarticle" component={MyArticle} />
-                            {/* <Route path="/myarticle" component={Board} /> */}
-                        </Switch>
-                    </Body>
-                </Main>
-            </Router>
-        </Container>
+        <Router>
+            <Header />
+            <Main>
+                <Menu />
+                <div
+                    style={{
+                        width: '100%',
+                        overflowY: 'scroll',
+                    }}
+                >
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Route path="/member" component={Member} />
+                        <Route path="/article" component={Article} />
+                        <Route path="/newarticle" component={NewArticle} />
+                        <Route path="/myarticle" component={MyArticle} />
+                        {/* <Route path="/myarticle" component={Board} /> */}
+                    </Switch>
+                </div>
+            </Main>
+        </Router>
     );
 };
 
 export default App;
 
-const Container = styled.div``;
-const Body = styled.div`
-    width: 100%;
-    overflow-y: scroll;
-`;
-
 const Main = styled.div`
-    width: calc(100% - 280px);
-    margin-left: 280px;
+    display: flex;
 `;

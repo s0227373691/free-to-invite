@@ -58,9 +58,12 @@ const Aside = styled.aside`
 `;
 
 const UserItem = styled.li`
-    padding: 10px 20px;
-    a:visited {
-        color: #3e3e3e;
+
+    a{
+        padding: 10px 20px;
+        &:visited {
+            color: #3e3e3e;
+        }
     }
 `;
 

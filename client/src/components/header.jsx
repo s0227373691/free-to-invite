@@ -13,8 +13,10 @@ const Header = () => {
     return (
         <div style={{ height: '80px' }}>
             <Head>
-                <MenuBtn>三</MenuBtn>
-                <Search onChange={(e) => setSearch(e.target.value)} />
+                <Search
+                    placeholder="搜尋"
+                    onChange={(e) => setSearch(e.target.value)}
+                />
                 <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
                 <BtnLogin onClick={() => setRegister(true)}>註冊</BtnLogin>
             </Head>
@@ -41,10 +43,6 @@ const Head = styled.header`
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
 `;
 
-const MenuBtn = styled(Button)`
-    padding: 5px;
-`;
-
 const Search = styled.input`
     width: 500px;
     height: 35px;
@@ -53,7 +51,7 @@ const Search = styled.input`
 const BtnLogin = styled(Button)`
     height: min-content;
     margin: 5px;
-    padding: 15px;
+    padding: 7px 10px;
     border-radius: 5px;
     font-size: 18px;
 

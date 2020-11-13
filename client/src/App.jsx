@@ -30,7 +30,9 @@ const App = () => {
                         <Route path="/article" component={Article} />
                         <Route path="/newarticle" component={NewArticle} />
                         <Route path="/myarticle" component={MyArticle} />
-                        {/* <Route path="/myarticle" component={Board} /> */}
+                        <Route path="/:board" component={Board} />
+                        <Route path="/:board/:subboard" component={Board} />
+                        {/* <Route path="/:board/:subboard/:id" component={Board} /> */}
                     </Switch>
                 </div>
             </Main>

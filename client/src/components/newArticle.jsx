@@ -11,11 +11,11 @@ const NewArticle = () => {
     const [content, setContent] = useState('');
     const handleSubmit = (e) => {
         Axios.post('http://localhost:3000/api/newarticle', {
-            board: 'testboard',
-            date: 'testdate',
-            people: 5,
-            title: 'testtitle',
-            content: 'tsetcontent',
+            board,
+            date,
+            people,
+            title,
+            content,
         })
             .then((res) => {
                 alert('上傳成功');

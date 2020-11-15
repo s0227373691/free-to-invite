@@ -30,7 +30,6 @@ const Menu = () => {
                             <ClassMenu className="classMenu">
                                 <Diamond></Diamond>
                                 {list.content.map((minorType) => {
-                                    console.log(minorType);
                                     return (
                                         <ClassItem key={minorType.minorType}>
                                             <Link to={minorType.path}>

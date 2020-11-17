@@ -6,11 +6,13 @@
     "start": "webpack-dev-server --config webpack.config.js"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.20.0",
     "joi": "^17.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "styled-components": "^5.2.0"
   },
   "author": "",

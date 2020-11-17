@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Axios from 'axios';
+import Button from './commom/baseTag/button';
 import BaseInput from './commom/baseTag/Input';
-
 const NewArticle = () => {
     const [board, setBoard] = useState('');
     const [date, setDate] = useState('');
@@ -26,16 +26,16 @@ const NewArticle = () => {
     };
     return (
         <Container>
-            <Title className="title">新增文章</Title>
             <Form onSubmit={handleSubmit}>
+                <Title className="title">新增文章</Title>{' '}
                 <Upperlock>
                     <Select required onChange={(e) => setBoard(e.target.value)}>
                         <option value="" hidden>
                             請選擇分類
                         </option>
-                        <option value="休閒">休閒</option>
-                        <option value="運動">運動</option>
-                        <option value="旅遊">旅遊</option>
+                        <option value="休閒">休閒</option>{' '}
+                        <option value="運動">運動</option>{' '}
+                        <option value="旅遊">旅遊</option>{' '}
                     </Select>
                     <Label htmlFor="date">
                         <Span>日期 : </Span>
@@ -45,7 +45,6 @@ const NewArticle = () => {
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </Label>
-
                     <Label htmlFor="people">
                         <Span>人數 : </Span>
                         <Input
@@ -66,23 +65,20 @@ const NewArticle = () => {
                         id=""
                         onChange={(e) => setContent(e.target.value)}
                     ></TextArea>
-                </LowerBlock>{' '}
+                </LowerBlock>
                 <Footer>
-                    <SendBtn type="submit">送出</SendBtn>
+                    <SendBtn type="submit">送出</SendBtn>{' '}
                 </Footer>
             </Form>
         </Container>
     );
 };
-
 export default NewArticle;
-
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     width: 100%;
-
-    background: red;
+    overflow-y: scroll;
 `;
 const Title = styled.h2`
     font-size: 28px;
@@ -92,20 +88,15 @@ const Title = styled.h2`
     margin-bottom: 20px;
     font-weight: 700;
 `;
-
 const Form = styled.form`
-    max-width: 800px;
-
+    width: 800px;
     position: relative;
 `;
-
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-around;
-
     margin-bottom: 16px;
 `;
-
 const Select = styled.select`
     padding: 10px;
     text-align: center;
@@ -117,23 +108,19 @@ const Select = styled.select`
     option {
     }
 `;
-
 const Input = styled(BaseInput)`
     height: 40px;
     border: 1px solid #dadce0;
 `;
-
 const Label = styled.label`
     display: flex;
     flex-grow: 1;
     white-space: nowrap;
     align-items: center;
 `;
-
 const Span = styled.span`
     margin: 0 10px;
 `;
-
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
@@ -143,22 +130,27 @@ const LowerBlock = styled.div`
         margin-bottom: 16px;
     }
 `;
-
 const TextArea = styled.textarea`
     border: 1px solid black;
-    height: 100vh;
+    height: 1000px;
+    margin-bottom: 60px;
+    white-space: normal;
     &:focus {
         outline: none;
     }
 `;
-
 const Footer = styled.footer`
     width: 100%;
-    height: 40px;
-    background: red;
+    height: 60px;
     position: absolute;
-    left: 0;
-    right: 0;
     bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 `;
-const SendBtn = styled.button``;
+const SendBtn = styled(Button)`
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #b2bec3;
+`;

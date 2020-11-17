@@ -18,12 +18,7 @@ const App = () => {
             <Header />
             <Main>
                 <Menu />
-                <div
-                    style={{
-                        width: '100%',
-                        overflowY: 'scroll',
-                    }}
-                >
+                <div>
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/member" component={Member} />
@@ -44,4 +39,5 @@ export default App;
 
 const Main = styled.div`
     display: flex;
+    width: '100%';
 `;

@@ -49,20 +49,25 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 25px;
+    margin-top: 35px;
+    padding: 15px;
     background: #fff;
-    margin-top: 80px;
+    border-right: 2px solid #606060;
 `;
 
 const UserItem = styled.li`
     a {
-        padding: 10px 20px;
-        &:visited {
-            color: #3e3e3e;
+        width: 100%;
+        padding: 5px 20px;
+        color: #3e3e3e;
+        display: block;
+        box-sizing: border-box;
+        &:hover {
+            color: #717070;
         }
     }
 `;

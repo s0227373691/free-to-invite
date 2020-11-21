@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Menu from './components/menu';
@@ -12,7 +13,20 @@ import Article from './components/article';
 import NewArticle from './components/newArticle';
 import MyArticle from './components/myArticle';
 
-const App = () => {
+import { getUserAuth } from './lib/api/auth';
+import { userCheckedLoginStatus } from './store/slices/users';
+
+const fetchUserStatus = async (props) => {
+    const {
+        data: { loggedIn },
+    } = await getUserAuth();
+    props.userCheckedLoginStatus(loggedIn);
+};
+
+const App = (props) => {
+    useEffect(() => {
+        fetchUserStatus(props);
+    }, []);
     return (
         <Router>
             <Header />
@@ -35,7 +49,13 @@ const App = () => {
     );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+    users: state.users,
+});
+
+const mapDispatchToProps = { userCheckedLoginStatus };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const Main = styled.div`
     display: flex;

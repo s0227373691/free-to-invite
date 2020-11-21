@@ -14,13 +14,14 @@ const Login = ({ login, setLogin }) => {
     const [password, setPassword] = useState('');
     const [loginStatus, setLoginStatus] = useState(false);
 
+    async function fetchLoginStatus() {
+        const {
+            data: { loggedIn },
+        } = await getUserAuth();
+        if (loggedIn) setLoginStatus(true);
+    }
+
     useEffect(() => {
-        async function fetchLoginStatus() {
-            const {
-                data: { loggedIn },
-            } = await getUserAuth();
-            if (loggedIn) setLoginStatus(true);
-        }
         fetchLoginStatus();
     }, []);
 

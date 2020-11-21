@@ -5,6 +5,12 @@ const slice = createSlice({
     initialState: {
         loggedIn: false,
     },
+    reducers: {
+        userCheckedLoginStatus: (users, action) => {
+            users.loggedIn = action.payload;
+        },
+    },
 });
 
 export default slice.reducer;
+export const { userCheckedLoginStatus } = slice.actions;

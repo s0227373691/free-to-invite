@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Button from './commom/baseTag/button';
 import Login from './login';
 import Register from './register';
+import configureStore from '../store/configureStore';
 
 const Header = () => {
     const [search, setSearch] = useState('');
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
+    const store = configureStore();
+    useEffect(() => {
+        const { users } = store.getState();
+        setLoggedIn(users.loggedIn);
+    }, []);
     return (
         <div style={{ height: '80px' }}>
             <Head>
@@ -17,8 +24,16 @@ const Header = () => {
                     placeholder="搜尋"
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
-                <BtnLogin onClick={() => setRegister(true)}>註冊</BtnLogin>
+                {loggedIn ? (
+                    <div>hi Elmer</div>
+                ) : (
+                    <>
+                        <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
+                        <BtnLogin onClick={() => setRegister(true)}>
+                            註冊
+                        </BtnLogin>
+                    </>
+                )}
             </Head>
             <Login login={login} setLogin={setLogin} />
             <Register register={register} setRegister={setRegister} />

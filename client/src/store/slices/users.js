@@ -8,7 +8,7 @@ const slice = createSlice({
     reducers: {
         userCheckedLoginStatus: (users, action) => {
             let newUsers = { ...users };
-            newUsers.loggedIn = action.payload;
+            newUsers = action.payload;
             return newUsers;
         },
     },

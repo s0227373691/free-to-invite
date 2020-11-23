@@ -12,7 +12,7 @@ const Header = (props) => {
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
-    const { loggedIn } = props.users;
+    const { loggedIn, user } = props.users;
     return (
         <div style={{ height: '80px' }}>
             <Head>
@@ -22,7 +22,21 @@ const Header = (props) => {
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 {loggedIn ? (
-                    <div>hi Elmer</div>
+                    <BtnUser>
+                        Hi {user.name}
+                        <div className="logout">
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                            <div>logout</div>
+                        </div>
+                    </BtnUser>
                 ) : (
                     <>
                         <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
@@ -32,8 +46,12 @@ const Header = (props) => {
                     </>
                 )}
             </Head>
-            <Login login={login} setLogin={setLogin} />
-            <Register register={register} setRegister={setRegister} />
+            {loggedIn ? null : (
+                <>
+                    <Login login={login} setLogin={setLogin} />
+                    <Register register={register} setRegister={setRegister} />
+                </>
+            )}
         </div>
     );
 };
@@ -53,7 +71,6 @@ const Head = styled.header`
     top: 0;
     z-index: 100;
     margin: 0 auto;
-    padding: 8px;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -62,6 +79,7 @@ const Head = styled.header`
 const Search = styled.input`
     width: 500px;
     height: 35px;
+    margin-right: 100px;
 `;
 
 const BtnLogin = styled(Button)`
@@ -75,5 +93,22 @@ const BtnLogin = styled(Button)`
         color: #ffffff;
         background: #c4c4c4;
         transition: 0.3s;
+    }
+`;
+
+const BtnUser = styled(Button)`
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: content-box;
+
+    &:hover .logout {
+        display: block;
+    }
+    .logout {
+        display: none;
+        position: absolute;
+        background: grey;
+        width: 150px;
     }
 `;

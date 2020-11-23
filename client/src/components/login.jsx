@@ -1,56 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Axios from 'axios';
 
 import { Modal } from './styles/modals';
 import { Input } from './styles/inputs';
 import { Button } from './styles/buttons';
 import BackDrop from './commom/backDrop';
 
-import { getUserAuth, postUserAuth } from '../lib/api/auth';
+import { postUserAuth } from '../lib/api/auth';
 import { userCheckedLoginStatus } from '../store/slices/users';
 
 const Login = (props) => {
-    // const Login = ({ login, setLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    async function fetchLoginStatus(props) {
-        const {
-            data: { loggedIn },
-        } = await getUserAuth();
-        props.userCheckedLoginStatus(loggedIn);
-    }
-
-    useEffect(() => {
-        fetchLoginStatus(props);
-    }, []);
 
     const handleSubmit = async (e) => {
         //TODO 前端未寫表單驗證
         e.preventDefault();
         const {
-            data: { auth, token },
+            data: { auth, user, token },
         } = await postUserAuth({ email, password });
         if (!auth) {
             alert('登入失敗');
         } else {
-            alert('登入成功');
             localStorage.setItem('token', token);
         }
-        props.userCheckedLoginStatus(auth);
+        props.userCheckedLoginStatus({ loggedIn: auth, user });
     };
 
-    const visitAPITest = () => {
-        Axios.get('http://localhost:3000/api/test', {
-            headers: {
-                'x-access-token': localStorage.getItem('token'),
-            },
-        }).then((res) => {
-            console.log(res);
-        });
-    };
+    // const visitAPITest = () => {
+    //     Axios.get('http://localhost:3000/api/test', {
+    //         headers: {
+    //             'x-access-token': localStorage.getItem('token'),
+    //         },
+    //     }).then((res) => {
+    //         console.log(res);
+    //     });
+    // };
 
     const LogonComponent = (
         <>
@@ -79,7 +65,7 @@ const Login = (props) => {
                         立即登入
                     </Button>
                 </Form>
-                <button onClick={visitAPITest}>JsonWebToken</button>
+                {/* <button onClick={visitAPITest}>JsonWebToken</button> */}
             </Modal>
             <BackDrop setFunction={props.setLogin} />
         </>

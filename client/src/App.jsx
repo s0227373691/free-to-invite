@@ -17,10 +17,8 @@ import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';
 
 const fetchUserStatus = async (props) => {
-    const {
-        data: { loggedIn },
-    } = await getUserAuth();
-    props.userCheckedLoginStatus(loggedIn);
+    const { data } = await getUserAuth();
+    props.userCheckedLoginStatus(data);
 };
 
 const App = (props) => {

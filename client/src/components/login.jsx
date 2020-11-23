@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Axios from 'axios';
 
 import { Modal } from './styles/modals';
@@ -8,21 +9,22 @@ import { Button } from './styles/buttons';
 import BackDrop from './commom/backDrop';
 
 import { getUserAuth, postUserAuth } from '../lib/api/auth';
+import { userCheckedLoginStatus } from '../store/slices/users';
 
-const Login = ({ login, setLogin }) => {
+const Login = (props) => {
+    // const Login = ({ login, setLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginStatus, setLoginStatus] = useState(false);
 
-    async function fetchLoginStatus() {
+    async function fetchLoginStatus(props) {
         const {
             data: { loggedIn },
         } = await getUserAuth();
-        if (loggedIn) setLoginStatus(true);
+        props.userCheckedLoginStatus(loggedIn);
     }
 
     useEffect(() => {
-        fetchLoginStatus();
+        fetchLoginStatus(props);
     }, []);
 
     const handleSubmit = async (e) => {
@@ -33,12 +35,11 @@ const Login = ({ login, setLogin }) => {
         } = await postUserAuth({ email, password });
         if (!auth) {
             alert('登入失敗');
-            setLoginStatus(false);
         } else {
             alert('登入成功');
-            setLoginStatus(true);
             localStorage.setItem('token', token);
         }
+        props.userCheckedLoginStatus(auth);
     };
 
     const visitAPITest = () => {
@@ -78,17 +79,18 @@ const Login = ({ login, setLogin }) => {
                         立即登入
                     </Button>
                 </Form>
-                {loginStatus && (
-                    <button onClick={visitAPITest}>JsonWebToken</button>
-                )}
+                <button onClick={visitAPITest}>JsonWebToken</button>
             </Modal>
-            <BackDrop setFunction={setLogin} />
+            <BackDrop setFunction={props.setLogin} />
         </>
     );
-    return login ? LogonComponent : null;
+    return props.login ? LogonComponent : null;
 };
 
-export default Login;
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = { userCheckedLoginStatus };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const Title = styled.h2`
     width: 100%;

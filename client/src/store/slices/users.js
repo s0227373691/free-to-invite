@@ -7,7 +7,9 @@ const slice = createSlice({
     },
     reducers: {
         userCheckedLoginStatus: (users, action) => {
-            users.loggedIn = action.payload;
+            let newUsers = { ...users };
+            newUsers.loggedIn = action.payload;
+            return newUsers;
         },
     },
 });

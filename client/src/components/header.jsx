@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import Button from './commom/baseTag/button';
 import Login from './login';
 import Register from './register';
-import configureStore from '../store/configureStore';
+import { userCheckedLoginStatus } from '../store/slices/users';
 
-const Header = () => {
+const Header = (props) => {
     const [search, setSearch] = useState('');
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
 
-    const store = configureStore();
-    useEffect(() => {
-        const { users } = store.getState();
-        setLoggedIn(users.loggedIn);
-    }, []);
+    const { loggedIn } = props.users;
     return (
         <div style={{ height: '80px' }}>
             <Head>
                 <Search
                     placeholder="搜尋"
+                    value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 {loggedIn ? (
@@ -41,7 +38,11 @@ const Header = () => {
     );
 };
 
-export default Header;
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = { userCheckedLoginStatus };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 const Head = styled.header`
     display: flex;
     justify-content: flex-end;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const URI =
-    'mongodb+srv://test123:test123@cluster0.oxdz0.mongodb.net/group?retryWrites=true&w=majority';
+    'mongodb+srv://test123:test123@cluster0.oxdz0.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
 const connectDB = async () => {
     try {
@@ -10,8 +10,8 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('db connected...');
-    } catch {
+        console.log('mongodb connected...');
+    } catch (err) {
         console.error(err.message);
         process.exit(1);
     }

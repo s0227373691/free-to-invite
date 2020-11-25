@@ -1,54 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Axios from 'axios';
+import { connect } from 'react-redux';
 
 import { Modal } from './styles/modals';
 import { Input } from './styles/inputs';
 import { Button } from './styles/buttons';
 import BackDrop from './commom/backDrop';
 
-import { getUserAuth, postUserAuth } from '../lib/api/auth';
+import { postUserAuth } from '../lib/api/auth';
+import { userCheckedLoginStatus } from '../store/slices/users';
 
-const Login = ({ login, setLogin }) => {
+const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginStatus, setLoginStatus] = useState(false);
-
-    useEffect(() => {
-        async function fetchLoginStatus() {
-            const {
-                data: { loggedIn },
-            } = await getUserAuth();
-            if (loggedIn) setLoginStatus(true);
-        }
-        fetchLoginStatus();
-    }, []);
 
     const handleSubmit = async (e) => {
         //TODO 前端未寫表單驗證
         e.preventDefault();
         const {
-            data: { auth, token },
+            data: { auth, user, token },
         } = await postUserAuth({ email, password });
         if (!auth) {
             alert('登入失敗');
-            setLoginStatus(false);
         } else {
-            alert('登入成功');
-            setLoginStatus(true);
             localStorage.setItem('token', token);
         }
+        props.userCheckedLoginStatus({ loggedIn: auth, user });
     };
 
-    const visitAPITest = () => {
-        Axios.get('http://localhost:3000/api/test', {
-            headers: {
-                'x-access-token': localStorage.getItem('token'),
-            },
-        }).then((res) => {
-            console.log(res);
-        });
-    };
+    // const visitAPITest = () => {
+    //     Axios.get('http://localhost:3000/api/test', {
+    //         headers: {
+    //             'x-access-token': localStorage.getItem('token'),
+    //         },
+    //     }).then((res) => {
+    //         console.log(res);
+    //     });
+    // };
 
     const LogonComponent = (
         <>
@@ -77,17 +65,18 @@ const Login = ({ login, setLogin }) => {
                         立即登入
                     </Button>
                 </Form>
-                {loginStatus && (
-                    <button onClick={visitAPITest}>JsonWebToken</button>
-                )}
+                {/* <button onClick={visitAPITest}>JsonWebToken</button> */}
             </Modal>
-            <BackDrop setFunction={setLogin} />
+            <BackDrop setFunction={props.setLogin} />
         </>
     );
-    return login ? LogonComponent : null;
+    return props.login ? LogonComponent : null;
 };
 
-export default Login;
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = { userCheckedLoginStatus };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const Title = styled.h2`
     width: 100%;

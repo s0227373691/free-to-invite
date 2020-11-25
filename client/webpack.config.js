@@ -22,14 +22,28 @@ module.exports = {
                 },
             },
             {
-                test: /\.(png|jpg|svg)$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8192,
+                test: /\.(png|jpg|gif|jpe?g|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            publicPath: './src/assets/img',
+                            emitFile: false,
+                        },
                     },
-                },
+                ],
             },
+            // {
+            //     test: /\.(png|jpg|svg)$/,
+            //     use: {
+            //         // loader: 'url-loader',
+            //         loader: 'file-loader',
+            //         options: {
+            //             limit: 8192,
+            //         },
+            //     },
+            // },
         ],
     },
     devtool: 'source-map',

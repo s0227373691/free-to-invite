@@ -27,7 +27,7 @@ const App = (props) => {
     return (
         <Router>
             <Header />
-            {/* <Main>
+            <Main>
                 <Container>
                     <Switch>
                         <Route path="/" component={Home} exact />
@@ -38,10 +38,10 @@ const App = (props) => {
                         <Route path="/myarticle" component={MyArticle} />
                         <Route path="/:board" component={Board} />
                         <Route path="/:board/:subboard" component={Board} />
-                        {/* <Route path="/:board/:subboard/:id" component={Board} /> 
+                        {/* <Route path="/:board/:subboard/:id" component={Board} /> */}
                     </Switch>
                 </Container>
-            </Main> */}
+            </Main>
         </Router>
     );
 };

@@ -2,17 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-
-import Menu from './components/menu';
+// 元件
 import Header from './components/header';
 import Board from './components/board';
-// import Main from './components/main';
 import Login from './components/login';
 import Member from './components/member';
 import Article from './components/article';
 import NewArticle from './components/newArticle';
 import MyArticle from './components/myArticle';
-
+// 內部函式
 import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';
 
@@ -29,7 +27,6 @@ const App = (props) => {
         <Router>
             <Header />
             <Main>
-                <Menu />
                 <Container>
                     <Switch>
                         <Route path="/login" component={Login} />

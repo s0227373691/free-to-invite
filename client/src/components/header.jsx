@@ -8,7 +8,7 @@ import Login from './login';
 import Register from './register';
 import { userCheckedLoginStatus } from '../store/slices/users';
 import menuList from '../lib/menuList.js';
-import logo from '../assets/img/logo.jpg';
+import logo from '../assets/img/logo';
 
 const Header = (props) => {
     const [search, setSearch] = useState('');

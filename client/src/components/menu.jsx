@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import menuList from '../../menuList.js';
+import menuList from '../lib/menuList.js';
 
 const Menu = () => {
     return (
@@ -42,6 +42,16 @@ const Menu = () => {
                         </NavItem>
                     );
                 })}
+                <div>
+                    Logo通過
+                    <a
+                        href="https://www.designevo.com/tw/logo-maker/"
+                        title="免費線上logo製作軟體"
+                    >
+                        DesignEvo
+                    </a>
+                    設計製作
+                </div>
             </NavMeun>
         </Aside>
     );

@@ -60,25 +60,31 @@ const NewArticle = () => {
                         placeholder="標題"
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <TextArea
-                        name=""
-                        id=""
-                        onChange={(e) => setContent(e.target.value)}
-                    ></TextArea>
+                    <TextAreaBox>
+                        <Dummy>{content}</Dummy>
+                        <TextArea
+                            name=""
+                            id=""
+                            onChange={(e) => setContent(e.target.value)}
+                        ></TextArea>
+                    </TextAreaBox>
                 </LowerBlock>
-                <Footer>
+                {/* <Footer>
                     <SendBtn type="submit">送出</SendBtn>{' '}
-                </Footer>
+                </Footer> */}
             </Form>
         </Container>
     );
 };
 export default NewArticle;
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
     width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     overflow-y: scroll;
+    background: red;
 `;
 const Title = styled.h2`
     font-size: 28px;
@@ -130,11 +136,35 @@ const LowerBlock = styled.div`
         margin-bottom: 16px;
     }
 `;
+const TextAreaBox = styled.div`
+    position: relative;
+    background: red;
+`;
+const Dummy = styled.div`
+    padding: 2px;
+    border: 1px solid;
+    visibility: hidden;
+    white-space: pre-wrap;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+    &:after {
+        content: ' ';
+    }
+`;
 const TextArea = styled.textarea`
-    border: 1px solid black;
-    height: 1000px;
-    margin-bottom: 60px;
-    white-space: normal;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    resize: none;
+    /* overflow-wrap: break-word; */
+    background: yellow;
+    overflow-y: hidden;
+    font: inherit;
+
     &:focus {
         outline: none;
     }

@@ -50,7 +50,7 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-    height: calc(100vh - 100px);
+
     display: flex;
     flex-direction: column;
     align-items: center;

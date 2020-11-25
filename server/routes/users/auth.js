@@ -16,12 +16,13 @@ router.get('/', (req, res) => {
         res.send({ loggedIn: false });
     }
 });
-
+// user login 處理
 router.post('/', async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ email: req.body.email }); // 獲取user資料，找不到為 null
+
     if (!user) return res.status(400).send('Invalid email or password.');
 
     const validPassword = await bcrypt.compare(

@@ -18,7 +18,7 @@ const App = () => {
             <Header />
             <Main>
                 <Menu />
-                <div>
+                <Container>
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/member" component={Member} />
@@ -29,7 +29,7 @@ const App = () => {
                         <Route path="/:board/:subboard" component={Board} />
                         {/* <Route path="/:board/:subboard/:id" component={Board} /> */}
                     </Switch>
-                </div>
+                </Container>
             </Main>
         </Router>
     );
@@ -41,3 +41,5 @@ const Main = styled.div`
     display: flex;
     width: '100%';
 `;
+
+const Container = styled.div``;

@@ -7,6 +7,8 @@ import Login from './login';
 import Register from './register';
 import { userCheckedLoginStatus } from '../store/slices/users';
 
+import logo from '../assets/img/logo.jpg';
+
 const Header = (props) => {
     const [search, setSearch] = useState('');
     const [login, setLogin] = useState(false);
@@ -16,6 +18,9 @@ const Header = (props) => {
     return (
         <div style={{ height: '80px' }}>
             <Head>
+                <div>
+                    <img src={logo} alt="" />
+                </div>
                 <Search
                     placeholder="搜尋"
                     value={search}

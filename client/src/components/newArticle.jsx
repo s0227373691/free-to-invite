@@ -79,10 +79,7 @@ const NewArticle = () => {
 export default NewArticle;
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    height: 100%;
     overflow-y: scroll;
     background: red;
 `;
@@ -95,8 +92,13 @@ const Title = styled.h2`
     font-weight: 700;
 `;
 const Form = styled.form`
-    width: 800px;
+    max-width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    padding: 0 10px;
+    background: blue;
 `;
 const Upperlock = styled.div`
     display: flex;
@@ -107,11 +109,8 @@ const Select = styled.select`
     padding: 10px;
     text-align: center;
     border-radius: 5px;
-    margin: 0 16px;
     &:focus {
         outline: none;
-    }
-    option {
     }
 `;
 const Input = styled(BaseInput)`
@@ -127,11 +126,10 @@ const Label = styled.label`
 const Span = styled.span`
     margin: 0 10px;
 `;
+
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 1;
-    height: 100%;
     input[type='text'] {
         margin-bottom: 16px;
     }

@@ -49,11 +49,10 @@ const Menu = () => {
 
 const Aside = styled.aside`
     width: 280px;
-
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 35px;
     padding: 15px;
     background: #fff;
     border-right: 2px solid #606060;
@@ -79,6 +78,7 @@ const NavMeun = styled.ul`
 
 const NavItem = styled.li`
     position: relative;
+    padding: 5px 20px;
     &:hover .classMenu {
         display: block;
     }

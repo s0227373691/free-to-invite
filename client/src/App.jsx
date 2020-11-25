@@ -60,4 +60,8 @@ const Main = styled.div`
     width: '100%';
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: gray;
+`;

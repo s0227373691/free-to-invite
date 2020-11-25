@@ -15,3 +15,13 @@ export const Button = styled.button`
         background-color: #adadad;
     }
 `;
+
+export const ButtonClearDefault = styled.button`
+    border: 0px;
+    outline-style: none;
+    background-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+        cursor: pointer;
+    }
+`;

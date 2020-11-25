@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 // 元件
 import Header from './components/header';
+import Home from './components/home';
 import Board from './components/board';
 import Login from './components/login';
 import Member from './components/member';
@@ -29,6 +30,7 @@ const App = (props) => {
             <Main>
                 <Container>
                     <Switch>
+                        <Route path="/" component={Home} exact />
                         <Route path="/login" component={Login} />
                         <Route path="/member" component={Member} />
                         <Route path="/article" component={Article} />

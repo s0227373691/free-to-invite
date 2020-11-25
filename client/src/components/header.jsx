@@ -19,27 +19,16 @@ const Header = (props) => {
     return (
         <div style={{ height: '80px' }}>
             <Head>
-                <div>
-                    <img src={logo} alt="" />
-                </div>
-                <NavMeun>
-                    <UserItem>
-                        <Link to="/">首頁</Link>
-                    </UserItem>
-                    <UserItem>
-                        <Link to="/newarticle">新增文章</Link>
-                    </UserItem>
-                    <UserItem>
-                        <Link to="/member">個人檔案</Link>
-                    </UserItem>
-                    <UserItem>
-                        <Link to="/myarticle">我的文章</Link>
-                    </UserItem>
-                </NavMeun>
+                <Logo>
+                    <Link className="logoLink" href="">
+                        <img src={logo} alt="" />
+                    </Link>
+                </Logo>
+
                 <NavMeun>
                     {menuList.map((list) => {
                         return (
-                            <NavItem key={list.primaryType}>
+                            <DropItem key={list.primaryType}>
                                 <Link className="navLink" to={list.path}>
                                     {list.primaryType}
                                 </Link>
@@ -57,10 +46,41 @@ const Header = (props) => {
                                         );
                                     })}
                                 </ClassMenu>
-                            </NavItem>
+                            </DropItem>
                         );
                     })}
-                    <div>
+                    <Item>
+                        <Link to="/newarticle">新增文章</Link>
+                    </Item>
+                    <Item>
+                        <Link to="/member">個人檔案</Link>
+                    </Item>
+                    <Item>
+                        <Link to="/myarticle">我的文章</Link>
+                    </Item>
+                    {loggedIn ? (
+                        <DropItem>
+                            Hi {user.name}
+                            <ClassMenu className="classMenu">
+                                <Diamond></Diamond>
+                                <ClassItem>
+                                    <Link to="#">123</Link>
+                                    <Link to="#">123</Link>
+                                    <Link to="#">123</Link>
+                                    <Link to="#">123</Link>
+                                    <Link to="#">123</Link>
+                                </ClassItem>
+                            </ClassMenu>
+                        </DropItem>
+                    ) : (
+                        <>
+                            <Item onClick={() => setLogin(true)}>登入</Item>
+                            <Item onClick={() => setRegister(true)}>註冊</Item>
+                        </>
+                    )}
+                </NavMeun>
+
+                {/* <div>
                         Logo通過
                         <a
                             href="https://www.designevo.com/tw/logo-maker/"
@@ -69,38 +89,7 @@ const Header = (props) => {
                             DesignEvo
                         </a>
                         設計製作
-                    </div>
-                </NavMeun>
-                {/* <Search
-                    placeholder="搜尋"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                /> */}
-
-                {loggedIn ? (
-                    <BtnUser>
-                        Hi {user.name}
-                        <div className="logout">
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                            <div>logout</div>
-                        </div>
-                    </BtnUser>
-                ) : (
-                    <>
-                        <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
-                        <BtnLogin onClick={() => setRegister(true)}>
-                            註冊
-                        </BtnLogin>
-                    </>
-                )}
+                    </div> */}
             </Head>
             {loggedIn ? null : (
                 <>
@@ -119,6 +108,12 @@ const mapDispatchToProps = { userCheckedLoginStatus };
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 const Head = styled.header`
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    background: red;
+    padding: 0 15px;
+    /* display: flex;
     justify-content: flex-end;
     align-items: center;
     position: fixed;
@@ -129,50 +124,51 @@ const Head = styled.header`
     margin: 0 auto;
     background: white;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        rgba(0, 0, 0, 0.23) 0px 6px 6px; */
 `;
 
-const Search = styled.input`
-    width: 500px;
-    height: 35px;
-    margin-right: 100px;
+const Logo = styled.h1`
+    display: flex;
+    width: 80px;
+    height: 40px;
+    .logoLink {
+        display: block;
+        img {
+            width: 80px;
+            height: 40px;
+        }
+    }
 `;
-
-const BtnLogin = styled(Button)`
-    height: min-content;
-    margin: 5px;
-    padding: 7px 10px;
-    border-radius: 5px;
+const NavMeun = styled.ul`
+    display: flex;
     font-size: 18px;
-
-    &:hover {
-        color: #ffffff;
-        background: #c4c4c4;
-        transition: 0.3s;
+    li {
+        margin: 0 20px;
     }
 `;
 
-const BtnUser = styled(Button)`
-    width: 150px;
-    height: 50px;
-    line-height: 50px;
-    box-sizing: content-box;
-
-    &:hover .logout {
+const DropItem = styled.li`
+    position: relative;
+    &:hover .classMenu {
         display: block;
     }
-    .logout {
+    .navLink {
+        display: block;
+        height: 100%;
+        color: black;
+    }
+    .classMenu {
         display: none;
-        position: absolute;
-        background: grey;
-        width: 150px;
     }
 `;
 
-const UserItem = styled.li`
+const Item = styled.li`
+    &:hover {
+        cursor: pointer;
+    }
     a {
         width: 100%;
-        padding: 5px 20px;
+        height: 100%;
         color: #3e3e3e;
         display: block;
         box-sizing: border-box;
@@ -181,44 +177,23 @@ const UserItem = styled.li`
         }
     }
 `;
-
-const NavMeun = styled.ul`
-    width: 100%;
-    font-size: 20px;
-`;
-
-const NavItem = styled.li`
-    position: relative;
-    padding: 5px 20px;
-    &:hover .classMenu {
-        display: block;
-    }
-    .navLink {
-        color: black;
-    }
-    .classMenu {
-        display: none;
-    }
-`;
-
 const ClassMenu = styled.ul`
+    width: 150px;
     padding: 10px;
     position: absolute;
+    left: calc(-75px + 50%);
+    top: 40px;
     background: #fff;
     filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
-    top: calc(-50% - 25px);
     border-radius: 10px;
-    width: 150px;
     white-space: nowrap;
-    left: 44px;
-    right: 0;
 `;
 
 const Diamond = styled.div`
     background: #fff;
     position: absolute;
-    top: 45px;
-    left: -5px;
+    top: 0px;
+    left: calc(-5px + 50%);
     margin: 0 auto;
     width: 20px;
     height: 20px;

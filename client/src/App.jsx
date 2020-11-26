@@ -28,7 +28,11 @@ const App = (props) => {
         <Router>
             <Header />
 <<<<<<< HEAD
+<<<<<<< HEAD
             {/* <Main>
+=======
+            <Main>
+>>>>>>> 08ef0fbc3bbcdbdaba84a36ae466044d5e820b20
                 <Container>
                     <Switch>
                         <Route path="/" component={Home} exact />
@@ -39,9 +43,10 @@ const App = (props) => {
                         <Route path="/myarticle" component={MyArticle} />
                         <Route path="/:board" component={Board} />
                         <Route path="/:board/:subboard" component={Board} />
-                        {/* <Route path="/:board/:subboard/:id" component={Board} /> 
+                        {/* <Route path="/:board/:subboard/:id" component={Board} /> */}
                     </Switch>
                 </Container>
+<<<<<<< HEAD
             </Main> */}
 =======
             <Main>
@@ -57,6 +62,9 @@ const App = (props) => {
                 </Switch>
             </Main>
 >>>>>>> js0731
+=======
+            </Main>
+>>>>>>> 08ef0fbc3bbcdbdaba84a36ae466044d5e820b20
         </Router>
     );
 };

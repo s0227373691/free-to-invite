@@ -21,7 +21,7 @@ const Header = (props) => {
             <Head>
                 <Logo>
                     <Link className="logoLink" to="/">
-                        <img src={logo} alt="" />
+                        <img src={logo} alt="image load fail..." />
                     </Link>
                 </Logo>
 
@@ -127,14 +127,11 @@ const Head = styled.header`
 `;
 
 const Logo = styled.h1`
-    width: 80px;
-    height: 40px;
     display: flex;
     .logoLink {
         display: block;
         img {
-            width: 80px;
-            height: 40px;
+            height: 110px;
         }
     }
 `;

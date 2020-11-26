@@ -9,6 +9,7 @@ import Register from './register';
 import { userCheckedLoginStatus } from '../store/slices/users';
 import menuList from '../lib/menuList.js';
 import logo from '../assets/img/logo';
+import { ButtonClearDefault } from './styles/buttons';
 
 const Header = (props) => {
     const [search, setSearch] = useState('');
@@ -17,7 +18,7 @@ const Header = (props) => {
 
     const { loggedIn, user } = props.users;
     return (
-        <div style={{ height: '80px' }}>
+        <Contener>
             <Head>
                 <Logo>
                     <Link className="logoLink" to="/">
@@ -50,35 +51,30 @@ const Header = (props) => {
                         );
                     })}
                     <Item>
-                        <Link to="/newarticle">新增文章</Link>
-                    </Item>
-                    <Item>
                         <Link to="/member">個人檔案</Link>
                     </Item>
                     <Item>
                         <Link to="/myarticle">我的文章</Link>
                     </Item>
                     {loggedIn ? (
-                        <DropItem>
-                            Hi {user.name}
-                            <ClassMenu className="classMenu">
-                                <Diamond></Diamond>
-                                <ClassItem>
-                                    <Link to="#">123</Link>
-                                    <Link to="#">123</Link>
-                                    <Link to="#">123</Link>
-                                    <Link to="#">123</Link>
-                                    <Link to="#">123</Link>
-                                </ClassItem>
-                            </ClassMenu>
-                        </DropItem>
+                        <BtnUser>
+                            {user.name}
+                            <DropUser className="userDrop">
+                                <ItemUser>
+                                    <Link to="/personalinformation">
+                                        個人資料
+                                    </Link>
+                                    <Link to="/newactive">新增活動</Link>
+                                </ItemUser>
+                                <ItemUser>登出</ItemUser>
+                            </DropUser>
+                        </BtnUser>
                     ) : (
                         <>
                             <Item onClick={() => setLogin(true)}>
                                 <Link to="#">登入</Link>
                             </Item>
                             <Item onClick={() => setRegister(true)}>
-                                {' '}
                                 <Link to="#">註冊</Link>
                             </Item>
                         </>
@@ -102,7 +98,7 @@ const Header = (props) => {
                     <Register register={register} setRegister={setRegister} />
                 </>
             )}
-        </div>
+        </Contener>
     );
 };
 
@@ -111,19 +107,30 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = { userCheckedLoginStatus };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+const Contener = styled.div`
+    height: 80px;
+`;
+
 const Head = styled.header`
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* position: fixed; */
+    position: fixed;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: #fff;
+    background: #e6e6e6;
+    opacity: 0.6;
     padding: 0 15px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+    &:hover {
+        opacity: 1;
+        transition: 0.3s;
+    }
 `;
 
 const Logo = styled.h1`
@@ -182,3 +189,30 @@ const Diamond = styled.div`
 `;
 
 const ClassItem = styled.li``;
+
+const BtnUser = styled(ButtonClearDefault)`
+    padding: 10px;
+    color: #2d3436;
+    font-size: 16px;
+    &:hover {
+        color: #0984e3;
+    }
+
+    &:hover .userDrop {
+        color: black;
+        display: block;
+    }
+`;
+
+const DropUser = styled.ul`
+    padding: 0 10px;
+    display: none;
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #c4c4c4;
+`;
+const ItemUser = styled.li`
+    &:hover {
+        color: #0984e3;
+    }
+`;

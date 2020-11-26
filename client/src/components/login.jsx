@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -19,7 +19,11 @@ const Login = (props) => {
         e.preventDefault();
         const {
             data: { auth, user, token },
-        } = await postUserAuth({ email, password });
+        } = await postUserAuth({
+            email: 'test003@gmail.com',
+            password: 'test003',
+        });
+        // } = await postUserAuth({ email, password });
         if (!auth) {
             alert('登入失敗');
         } else {
@@ -48,6 +52,8 @@ const Login = (props) => {
                             type="text"
                             placeholder="電子郵件"
                             width="100%"
+                            value="test003@gmail.com"
+                            // value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
@@ -57,6 +63,8 @@ const Login = (props) => {
                             type="password"
                             placeholder="密碼"
                             width="100%"
+                            value="test003"
+                            // value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />

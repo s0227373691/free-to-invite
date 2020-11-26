@@ -26,8 +26,8 @@ const NewArticle = () => {
     };
     return (
         <Container>
+            <Title className="title">新增文章</Title>{' '}
             <Form onSubmit={handleSubmit}>
-                <Title className="title">新增文章</Title>{' '}
                 <Upperlock>
                     <Select required onChange={(e) => setBoard(e.target.value)}>
                         <option value="" hidden>
@@ -69,6 +69,10 @@ const NewArticle = () => {
                         ></TextArea>
                     </TextAreaBox>
                 </LowerBlock>
+                <Footer>
+                    <button className="btnCancel">取消</button>
+                    <button className="btnNext">下一步</button>
+                </Footer>
                 {/* <Footer>
                     <SendBtn type="submit">送出</SendBtn>{' '}
                 </Footer> */}
@@ -78,10 +82,11 @@ const NewArticle = () => {
 };
 export default NewArticle;
 const Container = styled.div`
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    background: red;
+    max-width: 800px;
+    min-height: calc(100vh - 80px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 `;
 const Title = styled.h2`
     font-size: 28px;
@@ -92,13 +97,12 @@ const Title = styled.h2`
     font-weight: 700;
 `;
 const Form = styled.form`
-    max-width: 800px;
     height: 100%;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     position: relative;
     padding: 0 10px;
-    background: blue;
 `;
 const Upperlock = styled.div`
     display: flex;
@@ -109,6 +113,7 @@ const Select = styled.select`
     padding: 10px;
     text-align: center;
     border-radius: 5px;
+    border: 1px solid #dadce0;
     &:focus {
         outline: none;
     }
@@ -130,6 +135,7 @@ const Span = styled.span`
 const LowerBlock = styled.div`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     input[type='text'] {
         margin-bottom: 16px;
     }
@@ -137,6 +143,7 @@ const LowerBlock = styled.div`
 const TextAreaBox = styled.div`
     position: relative;
     background: red;
+    flex-grow: 1;
 `;
 const Dummy = styled.div`
     padding: 2px;
@@ -157,9 +164,11 @@ const TextArea = styled.textarea`
     right: 0;
     top: 0;
     bottom: 0;
+    border: none;
     resize: none;
+    border: 1px solid #dadce0;
     /* overflow-wrap: break-word; */
-    background: yellow;
+
     overflow-y: hidden;
     font: inherit;
 
@@ -167,18 +176,33 @@ const TextArea = styled.textarea`
         outline: none;
     }
 `;
-const Footer = styled.footer`
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-`;
+
 const SendBtn = styled(Button)`
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #b2bec3;
+`;
+
+const Footer = styled.footer`
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: sticky;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    button {
+        height: 44px;
+        padding: 0 8px;
+        border-radius: 5px;
+        &:hover {
+            background: rgb(90, 176, 219);
+        }
+    }
+    .btnNext {
+        margin-left: 16px;
+    }
 `;

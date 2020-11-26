@@ -27,6 +27,7 @@ const App = (props) => {
     return (
         <Router>
             <Header />
+<<<<<<< HEAD
             {/* <Main>
                 <Container>
                     <Switch>
@@ -42,6 +43,20 @@ const App = (props) => {
                     </Switch>
                 </Container>
             </Main> */}
+=======
+            <Main>
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/member" component={Member} />
+                    <Route path="/article" component={Article} />
+                    <Route path="/newarticle" component={NewArticle} />
+                    <Route path="/myarticle" component={MyArticle} />
+                    <Route path="/:board" component={Board} />
+                    <Route path="/:board/:subboard" component={Board} />
+                    <Route path="/:board/:subboard/:id" component={Board} />
+                </Switch>
+            </Main>
+>>>>>>> js0731
         </Router>
     );
 };
@@ -55,12 +70,5 @@ const mapDispatchToProps = { userCheckedLoginStatus };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const Main = styled.div`
-    display: flex;
-    width: '100%';
-`;
-
-const Container = styled.div`
     width: 100%;
-    height: calc(100vh - 80px);
-    background: gray;
 `;

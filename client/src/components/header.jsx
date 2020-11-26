@@ -20,7 +20,7 @@ const Header = (props) => {
         <div style={{ height: '80px' }}>
             <Head>
                 <Logo>
-                    <Link className="logoLink" href="">
+                    <Link className="logoLink" to="/">
                         <img src={logo} alt="" />
                     </Link>
                 </Logo>
@@ -74,8 +74,13 @@ const Header = (props) => {
                         </DropItem>
                     ) : (
                         <>
-                            <Item onClick={() => setLogin(true)}>登入</Item>
-                            <Item onClick={() => setRegister(true)}>註冊</Item>
+                            <Item onClick={() => setLogin(true)}>
+                                <Link to="#">登入</Link>
+                            </Item>
+                            <Item onClick={() => setRegister(true)}>
+                                {' '}
+                                <Link to="#">註冊</Link>
+                            </Item>
                         </>
                     )}
                 </NavMeun>
@@ -107,30 +112,24 @@ const mapDispatchToProps = { userCheckedLoginStatus };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 const Head = styled.header`
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
-    background: red;
-    padding: 0 15px;
-    /* display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     right: 0;
-    top: 0;
-    z-index: 100;
-    margin: 0 auto;
-    background: white;
+    z-index: 1000;
+    background: #fff;
+    padding: 0 15px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
 `;
 
 const Logo = styled.h1`
-    display: flex;
     width: 80px;
     height: 40px;
+    display: flex;
     .logoLink {
         display: block;
         img {
@@ -141,44 +140,31 @@ const Logo = styled.h1`
 `;
 const NavMeun = styled.ul`
     display: flex;
-    font-size: 18px;
     li {
-        margin: 0 20px;
+        margin: 0 10px;
+    }
+    a {
+        display: block;
+        padding: 10px;
+        color: #2d3436;
+        transition: 0.3s;
+        &:hover {
+            color: #0984e3;
+        }
     }
 `;
+const Item = styled.li``;
 
 const DropItem = styled.li`
     position: relative;
     &:hover .classMenu {
         display: block;
     }
-    .navLink {
-        display: block;
-        height: 100%;
-        color: black;
-    }
-    .classMenu {
-        display: none;
-    }
 `;
 
-const Item = styled.li`
-    &:hover {
-        cursor: pointer;
-    }
-    a {
-        width: 100%;
-        height: 100%;
-        color: #3e3e3e;
-        display: block;
-        box-sizing: border-box;
-        &:hover {
-            color: #717070;
-        }
-    }
-`;
 const ClassMenu = styled.ul`
     width: 150px;
+    display: none;
     padding: 10px;
     position: absolute;
     left: calc(-75px + 50%);
@@ -186,20 +172,16 @@ const ClassMenu = styled.ul`
     background: #fff;
     filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
     border-radius: 10px;
-    white-space: nowrap;
 `;
 
 const Diamond = styled.div`
-    background: #fff;
-    position: absolute;
-    top: 0px;
-    left: calc(-5px + 50%);
-    margin: 0 auto;
     width: 20px;
     height: 20px;
+    background: #fff;
+    position: absolute;
+    top: -5px;
+    left: calc(-10px + 50%);
     transform: rotate(45deg);
 `;
 
-const ClassItem = styled.li`
-    padding: 0 10px;
-`;
+const ClassItem = styled.li``;

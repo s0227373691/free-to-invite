@@ -34,11 +34,10 @@ const Container = styled.div`
     opacity: 0.8;
     background: no-repeat;
     background-size: cover;
-`;
-
-const Content = styled.div`
     position: absolute;
 `;
+
+const Content = styled.div``;
 
 const Title = styled.h1`
     margin-bottom: 20px;

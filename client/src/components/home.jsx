@@ -10,7 +10,7 @@ const Home = () => {
     const [register, setRegister] = useState(false);
     return (
         <>
-            <Container style={{ backgroundImage: `url(${titlePage})` }}>
+            <Container>
                 <Content>
                     <Title>與朋友聚會</Title>
                     <BtnRegister onClick={() => setRegister(true)}>
@@ -35,6 +35,7 @@ const Container = styled.div`
     background: no-repeat;
     background-size: cover;
     position: absolute;
+    background-image: url(${titlePage});
 `;
 
 const Content = styled.div``;

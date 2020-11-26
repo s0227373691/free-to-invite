@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import Axios from 'axios';
 import Button from './commom/baseTag/button';
 import BaseInput from './commom/baseTag/Input';
+import menuList from '../lib/menuList.js';
+import { x } from 'joi';
 const NewArticle = () => {
-    const [board, setBoard] = useState('');
+    const [primaryType, setPrimaryType] = useState('');
+    const [minorType, setMinorType] = useState('');
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
     const handleSubmit = (e) => {
         Axios.post('http://localhost:3000/api/newarticle', {
-            board,
+            primaryType,
+            minorType,
             date,
             people,
             title,
@@ -26,17 +31,55 @@ const NewArticle = () => {
     };
     return (
         <Container>
-            <Title className="title">新增文章</Title>{' '}
+            <Title className="title">新增活動</Title>{' '}
             <Form onSubmit={handleSubmit}>
                 <Upperlock>
-                    <Select required onChange={(e) => setBoard(e.target.value)}>
+                    <SelectPrimaryType
+                        required
+                        onChange={(e) => {
+                            setPrimaryType(e.target.value);
+                        }}
+                    >
                         <option value="" hidden>
                             請選擇分類
                         </option>
-                        <option value="休閒">休閒</option>{' '}
-                        <option value="運動">運動</option>{' '}
-                        <option value="旅遊">旅遊</option>{' '}
-                    </Select>
+                        {menuList.map((x) => {
+                            return (
+                                <option
+                                    value={x.primaryType}
+                                    key={x.primaryType}
+                                >
+                                    {x.primaryType}
+                                </option>
+                            );
+                        })}
+                    </SelectPrimaryType>
+                    {primaryType ? (
+                        <>
+                            <SelectMinorType
+                                onChange={(e) => {
+                                    setMinorType(e.target.value);
+                                    console.log(e.target.value);
+                                }}
+                            >
+                                {menuList[
+                                    menuList
+                                        .map((x) => x.primaryType)
+                                        .indexOf(primaryType)
+                                ].content.map((x) => {
+                                    return (
+                                        <option
+                                            value={x.primaryType}
+                                            key={x.minorType}
+                                        >
+                                            {x.minorType}
+                                        </option>
+                                    );
+                                })}
+                            </SelectMinorType>
+                        </>
+                    ) : null}
+
                     <Label htmlFor="date">
                         <Span>日期 : </Span>
                         <Input
@@ -106,14 +149,27 @@ const Form = styled.form`
 `;
 const Upperlock = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 16px;
 `;
-const Select = styled.select`
-    padding: 10px;
-    text-align: center;
+const SelectPrimaryType = styled.select`
+    padding: 0 10px;
+
+    text-align-last: center;
     border-radius: 5px;
     border: 1px solid #dadce0;
+    margin: 0 10px;
+    &:focus {
+        outline: none;
+    }
+`;
+const SelectMinorType = styled.select`
+    padding: 0 10px;
+    text-align-last: center;
+    border-radius: 5px;
+    border: 1px solid #dadce0;
+    margin: 0 10px;
+    transition: 1s;
     &:focus {
         outline: none;
     }
@@ -127,9 +183,11 @@ const Label = styled.label`
     flex-grow: 1;
     white-space: nowrap;
     align-items: center;
+    margin: 0 10px;
 `;
 const Span = styled.span`
-    margin: 0 10px;
+    padding-right: 10px;
+    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`

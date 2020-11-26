@@ -10,7 +10,14 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     const data = req.body;
     const newArticle = new NewArticle(
-        _.pick(req.body, ['board', 'date', 'people', 'title', 'content'])
+        _.pick(req.body, [
+            'primaryType',
+            'minorType',
+            'date',
+            'people',
+            'title',
+            'content',
+        ])
     );
     await newArticle.save();
     res.send(data);

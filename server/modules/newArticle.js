@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const NewArticle = mongoose.model(
     'NewArticle',
     new mongoose.Schema({
-        board: {
+        primaryType: {
+            type: String,
+        },
+        minorType: {
             type: String,
         },
         date: {

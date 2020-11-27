@@ -4,6 +4,10 @@ const Joi = require('joi');
 const User = mongoose.model(
     'User',
     new mongoose.Schema({
+        type: {
+            type: String,
+            required: true,
+        },
         name: {
             type: String,
             required: true,

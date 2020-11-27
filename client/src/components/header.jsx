@@ -50,21 +50,30 @@ const Header = (props) => {
                             </DropItem>
                         );
                     })}
-                    <Item>
-                        <Link to="/member">個人檔案</Link>
-                    </Item>
-                    <Item>
-                        <Link to="/myarticle">我的文章</Link>
-                    </Item>
                     {loggedIn ? (
                         <BtnUser>
                             {user.name}
                             <DropUser className="userDrop">
+                                <a
+                                    href="http://localhost:1000/"
+                                    target="_blank"
+                                >
+                                    後台管理
+                                </a>
+
                                 <ItemUser>
                                     <Link to="/personalinformation">
                                         個人資料
                                     </Link>
+                                </ItemUser>
+                                <ItemUser>
+                                    <Link to="/member">個人檔案</Link>
+                                </ItemUser>
+                                <ItemUser>
                                     <Link to="/newactive">新增活動</Link>
+                                </ItemUser>
+                                <ItemUser>
+                                    <Link to="/myarticle">我的文章</Link>
                                 </ItemUser>
                                 <ItemUser>登出</ItemUser>
                             </DropUser>
@@ -191,6 +200,7 @@ const Diamond = styled.div`
 const ClassItem = styled.li``;
 
 const BtnUser = styled(ButtonClearDefault)`
+    width: 150px;
     padding: 10px;
     color: #2d3436;
     font-size: 16px;

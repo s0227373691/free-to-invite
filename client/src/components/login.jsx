@@ -20,8 +20,8 @@ const Login = (props) => {
         const {
             data: { auth, user, token },
         } = await postUserAuth({
-            email: 'test003@gmail.com',
-            password: 'test003',
+            email: 'elmer000@gmail.com',
+            password: 'elmer000',
         });
         // } = await postUserAuth({ email, password });
         if (!auth) {
@@ -52,7 +52,7 @@ const Login = (props) => {
                             type="text"
                             placeholder="電子郵件"
                             width="100%"
-                            value="test003@gmail.com"
+                            value="elmer000@gmail.com"
                             // value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -63,7 +63,7 @@ const Login = (props) => {
                             type="password"
                             placeholder="密碼"
                             width="100%"
-                            value="test003"
+                            value="elmer000"
                             // value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

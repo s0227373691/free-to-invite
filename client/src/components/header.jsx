@@ -54,12 +54,7 @@ const Header = (props) => {
                         <BtnUser>
                             {user.name}
                             <DropUser className="userDrop">
-                                <a
-                                    href="http://localhost:1000/"
-                                    target="_blank"
-                                >
-                                    後台管理
-                                </a>
+                                <a href="http://localhost:1000/" target="_blank">後台管理</a>
 
                                 <ItemUser>
                                     <Link to="/personalinformation">

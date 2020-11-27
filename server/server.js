@@ -13,7 +13,7 @@ const connectDB = require('./config/db');
 
 connectDB();
 
-app.use(express.json());
+// app.use(express.json());
 // app.use(
 //     cors({
 //         origin: 'http://localhost:9000',
@@ -21,19 +21,19 @@ app.use(express.json());
 //         credentials: true,
 //     })
 // );
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-    session({
-        key: 'userId',
-        secret: 'subscrible',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 30 * 60 * 1000,
-        },
-    })
-);
+// app.use(cookieParser());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(
+//     session({
+//         key: 'userId',
+//         secret: 'subscrible',
+//         resave: false,
+//         saveUninitialized: false,
+//         cookie: {
+//             maxAge: 30 * 60 * 1000,
+//         },
+//     })
+// );
 
 app.get('/', (req, res) => {
     // app.use('/', express.static('./dist'));

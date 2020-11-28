@@ -14,6 +14,12 @@ const NewArticle = () => {
     const [content, setContent] = useState('');
 
     const handleSubmit = (e) => {
+        if (minorType === '') {
+            alert('請選擇minorprimary');
+            return;
+        }
+        console.log(primaryType, minorType, date, people, title, content);
+
         Axios.post('http://localhost:3000/api/newarticle', {
             primaryType,
             minorType,
@@ -54,14 +60,18 @@ const NewArticle = () => {
                             );
                         })}
                     </SelectPrimaryType>
+
                     {primaryType ? (
                         <>
                             <SelectMinorType
+                                required
                                 onChange={(e) => {
                                     setMinorType(e.target.value);
-                                    console.log(e.target.value);
                                 }}
                             >
+                                <option value="" hidden>
+                                    請選擇minorprimary
+                                </option>
                                 {menuList[
                                     menuList
                                         .map((x) => x.primaryType)

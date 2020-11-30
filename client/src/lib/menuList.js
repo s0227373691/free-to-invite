@@ -6,17 +6,51 @@ const menuList = [
             {
                 minorType: '桌游',
                 path: '/free/boardgame',
-                value: 'type',
+                value: [
+                    {
+                        boardGameType: [
+                            '策略遊戲',
+                            '益智遊戲',
+                            '推理遊戲',
+                            '角色扮演遊戲',
+                            '幼教遊戲',
+                            '小品遊戲',
+                            '合作遊戲',
+                            '陣營遊戲',
+                        ],
+                    },
+                    {
+                        boardGameType2: [
+                            '策略遊戲2',
+                            '益智遊戲2',
+                            '推理遊戲2',
+                            '角色扮演遊戲2',
+                            '幼教遊戲2',
+                            '小品遊戲2',
+                            '合作遊戲2',
+                            '陣營遊戲2',
+                        ],
+                    },
+                ],
             },
             {
-                minorType: '電動',
+                minorType: '線上遊戲',
                 path: '/free/electricalgame',
-                value: 'type',
+                value: [{ onlineGameType: ['射擊類', '鬥塔遊戲', '策略遊戲'] }],
             },
             {
-                minorType: '聽音樂',
-                path: '/free/music',
-                value: 'type',
+                minorType: '電影',
+                path: '/free/movie',
+                value: [
+                    {
+                        movieType: [
+                            '動作類型',
+                            '愛情類型',
+                            '戲劇類型',
+                            '卡通類型',
+                        ],
+                    },
+                ],
             },
         ],
     },
@@ -27,17 +61,29 @@ const menuList = [
             {
                 minorType: '慢跑',
                 path: '/sport/running',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
             {
                 minorType: '籃球',
                 path: '/sport/basketball',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
             {
                 minorType: '格鬥',
                 path: '/sport/fighting',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
         ],
     },
@@ -48,17 +94,29 @@ const menuList = [
             {
                 minorType: '台灣',
                 path: '/travel/abc',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
             {
                 minorType: '日本',
                 path: '/travel/abc',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
             {
                 minorType: '美國',
                 path: '/travel/abc',
-                value: 'type',
+                value: [
+                    {
+                        difficulty: ['專業', '高級', '新手'],
+                    },
+                ],
             },
         ],
     },

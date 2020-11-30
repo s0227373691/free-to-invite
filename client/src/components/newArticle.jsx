@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import Axios from 'axios';
 import Button from './commom/baseTag/button';
 import BaseInput from './commom/baseTag/Input';
+import Select from './commom/baseTag/select';
 import menuList from '../lib/menuList.js';
+
+import Test from './test.jsx';
+
 import { x } from 'joi';
 const NewArticle = () => {
     const [primaryType, setPrimaryType] = useState('');
@@ -12,6 +16,7 @@ const NewArticle = () => {
     const [people, setPeople] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [open, setOpen] = useState(false);
 
     const handleSubmit = (e) => {
         if (minorType === '') {
@@ -67,6 +72,7 @@ const NewArticle = () => {
                                 required
                                 onChange={(e) => {
                                     setMinorType(e.target.value);
+                                    setOpen(true);
                                 }}
                             >
                                 <option value="" hidden>
@@ -77,6 +83,8 @@ const NewArticle = () => {
                                         .map((x) => x.primaryType)
                                         .indexOf(primaryType)
                                 ].content.map((x) => {
+                                    console.log(x);
+
                                     return (
                                         <option
                                             value={x.primaryType}
@@ -126,10 +134,16 @@ const NewArticle = () => {
                     <button className="btnCancel">取消</button>
                     <button className="btnNext">下一步</button>
                 </Footer>
-                {/* <Footer>
-                    <SendBtn type="submit">送出</SendBtn>{' '}
-                </Footer> */}
             </Form>
+            {open ? (
+                <>
+                    <Test
+                        primaryType={primaryType}
+                        minorType={minorType}
+                        setOpen={setOpen}
+                    />
+                </>
+            ) : null}
         </Container>
     );
 };
@@ -162,28 +176,8 @@ const Upperlock = styled.div`
     justify-content: space-between;
     margin-bottom: 16px;
 `;
-const SelectPrimaryType = styled.select`
-    padding: 0 10px;
-
-    text-align-last: center;
-    border-radius: 5px;
-    border: 1px solid #dadce0;
-    margin: 0 10px;
-    &:focus {
-        outline: none;
-    }
-`;
-const SelectMinorType = styled.select`
-    padding: 0 10px;
-    text-align-last: center;
-    border-radius: 5px;
-    border: 1px solid #dadce0;
-    margin: 0 10px;
-    transition: 1s;
-    &:focus {
-        outline: none;
-    }
-`;
+const SelectPrimaryType = styled(Select)``;
+const SelectMinorType = styled(Select)``;
 const Input = styled(BaseInput)`
     height: 40px;
     border: 1px solid #dadce0;

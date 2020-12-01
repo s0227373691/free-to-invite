@@ -125,11 +125,11 @@ const NewArticle = () => {
                         ></TextArea>
                     </TextAreaBox>
                 </LowerBlock>
-                <Footer>
-                    <button className="btnCancel">取消</button>
-                    <button className="btnNext">下一步</button>
-                </Footer>
             </Form>
+            <Footer>
+                <button className="btnCancel">取消</button>
+                <button className="btnNext">下一步</button>
+            </Footer>
         </Container>
     );
 };

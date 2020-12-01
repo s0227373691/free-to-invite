@@ -7,7 +7,7 @@ import Button from './commom/baseTag/button';
 import Login from './login';
 import Register from './register';
 import { userCheckedLoginStatus } from '../store/slices/users';
-import menuList from '../lib/menuList.js';
+import activeList from '../lib/activeList.js';
 import logo from '../assets/img/logo';
 import { ButtonClearDefault } from './styles/buttons';
 
@@ -27,7 +27,7 @@ const Header = (props) => {
                 </Logo>
 
                 <NavMeun>
-                    {menuList.map((list) => {
+                    {activeList.map((list) => {
                         return (
                             <DropItem key={list.primaryType}>
                                 <Link className="navLink" to={list.path}>
@@ -35,7 +35,7 @@ const Header = (props) => {
                                 </Link>
                                 <ClassMenu className="classMenu">
                                     <Diamond></Diamond>
-                                    {list.content.map((minorType) => {
+                                    {list.subActiveList.map((minorType) => {
                                         return (
                                             <ClassItem
                                                 key={minorType.minorType}

@@ -4,11 +4,10 @@ import Axios from 'axios';
 import Button from './commom/baseTag/button';
 import BaseInput from './commom/baseTag/Input';
 import Select from './commom/baseTag/select';
-import menuList from '../lib/menuList.js';
-
-import Test from './test.jsx';
+import activeList from '../lib/activeList.js';
 
 import { x } from 'joi';
+// TODO primaryType  minorType 共用 其他動態
 const NewArticle = () => {
     const [primaryType, setPrimaryType] = useState('');
     const [minorType, setMinorType] = useState('');
@@ -16,7 +15,6 @@ const NewArticle = () => {
     const [people, setPeople] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [open, setOpen] = useState(false);
 
     const handleSubmit = (e) => {
         if (minorType === '') {
@@ -24,7 +22,6 @@ const NewArticle = () => {
             return;
         }
         console.log(primaryType, minorType, date, people, title, content);
-
         Axios.post('http://localhost:3000/api/newarticle', {
             primaryType,
             minorType,
@@ -54,7 +51,7 @@ const NewArticle = () => {
                         <option value="" hidden>
                             請選擇分類
                         </option>
-                        {menuList.map((x) => {
+                        {activeList.map((x) => {
                             return (
                                 <option
                                     value={x.primaryType}
@@ -72,19 +69,17 @@ const NewArticle = () => {
                                 required
                                 onChange={(e) => {
                                     setMinorType(e.target.value);
-                                    setOpen(true);
                                 }}
                             >
                                 <option value="" hidden>
                                     請選擇minorprimary
                                 </option>
-                                {menuList[
-                                    menuList
+                                {activeList[
+                                    activeList
                                         .map((x) => x.primaryType)
                                         .indexOf(primaryType)
-                                ].content.map((x) => {
+                                ].subActiveList.map((x) => {
                                     console.log(x);
-
                                     return (
                                         <option
                                             value={x.primaryType}
@@ -135,15 +130,6 @@ const NewArticle = () => {
                     <button className="btnNext">下一步</button>
                 </Footer>
             </Form>
-            {open ? (
-                <>
-                    <Test
-                        primaryType={primaryType}
-                        minorType={minorType}
-                        setOpen={setOpen}
-                    />
-                </>
-            ) : null}
         </Container>
     );
 };

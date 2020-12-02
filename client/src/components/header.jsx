@@ -135,6 +135,7 @@ const Head = styled.header`
     background: #e6e6e6;
     opacity: 0.6;
     padding: 0 15px;
+    transition: 0.5s;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
 

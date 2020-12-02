@@ -5,7 +5,7 @@ const Fighting = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+      const [cost, setCost] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [appliance, setAppliance] = useState('');
     return (

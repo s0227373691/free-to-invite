@@ -5,7 +5,7 @@ const Newtaipei = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+        const [cost, setCost] = useState('');
     return (
         <Container>
             <Upperlock>
@@ -46,14 +46,8 @@ const Newtaipei = () => {
                 <option value="" hidden>
                     請選擇行政區
                 </option>
-                <option>五股</option>
-                <option>益智遊戲</option>
-                <option>推理遊戲</option>
-                <option>角色扮演遊戲</option>
-                <option>幼教遊戲</option>
-                <option>小品遊戲</option>
-                <option>合作遊戲</option>
-                <option>陣營遊戲</option>
+          
+       
             </Select>
         </Container>
     );

@@ -5,7 +5,6 @@ const Basketball = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
     const [basketballRole, setBasketballRole] = useState('');
     const [difficulty, setDifficulty] = useState('');
     return (

@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const taichung = () => {
-    return;
+        const [date, setDate] = useState('');
+    const [people, setPeople] = useState('');
+    const [precautions, setPrecautions] = useState('');
+       const [cost, setCost] = useState('');
+    return(
     <Container>
         <Upperlock>
             <Label htmlFor="date">
@@ -38,20 +42,8 @@ const taichung = () => {
                 />
             </Label>
         </Upperlock>
-        <Select>
-            <option value="" hidden>
-                請選擇分類
-            </option>
-            <option>策略遊戲</option>
-            <option>益智遊戲</option>
-            <option>推理遊戲</option>
-            <option>角色扮演遊戲</option>
-            <option>幼教遊戲</option>
-            <option>小品遊戲</option>
-            <option>合作遊戲</option>
-            <option>陣營遊戲</option>
-        </Select>
-    </Container>;
+  
+    </Container>)
 };
 const Container = styled.div``;
 const Select = styled(Select)``;

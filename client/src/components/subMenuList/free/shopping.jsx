@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Shopping = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
+    const [cost, setCost] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
     const [shoppingType, setShoppingType] = useState('');
     return (
         <Container>

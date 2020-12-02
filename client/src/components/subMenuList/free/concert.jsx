@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Fighting = () => {
+const Concert = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
+    const [cost, setCost] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
-    const [difficulty, setDifficulty] = useState('');
-    const [appliance, setAppliance] = useState('');
+    const [musicSite, setMusicSite] = useState('');
+    const [musicType, setMusicType] = useState('');
     return (
         <Container>
             <Upperlock>
@@ -46,28 +46,32 @@ const Fighting = () => {
             </Upperlock>
             <Select
                 onChange={(e) => {
-                    setDifficulty(e.target.value);
+                    setMusicSite(e.target.value);
                 }}
             >
-                <option value="" hidden>
-                    器具
-                </option>
-                <option value="自行準備">自行準備</option>
-                <option value="現場提供">現場提供</option>
+                <option hidden>音樂場地</option>
+                <option value="演唱會">演唱會</option>
+                <option value="小型演唱會">小型演唱會</option>
+                <option value="音樂廣場">音樂廣場</option>
             </Select>
             <Select
                 onChange={(e) => {
-                    setAppliance(e.target.value);
+                    setMusicType(e.target.value);
                 }}
             >
-                <option hidden>難度</option>
-                <option value="專業">專業</option>
-                <option value="一般">一般</option>
-                <option value="初學者">初學者</option>
+                <option hidden>音樂類型</option>
+                <option value="古典樂">古典樂</option>
+                <option value="鄉村歌曲">鄉村歌曲</option>
+                <option value="電音">電音</option>
+                <option value="饒舌樂">饒舌樂</option>
+                <option value="饒舌樂">饒舌樂</option>
+                <option value="">c</option>
+                <option value="">搖滾音樂</option>
             </Select>
         </Container>
     );
 };
+
 const Container = styled.div``;
 const Select = styled(Select)``;
 const Upperlock = styled.div`
@@ -87,4 +91,4 @@ const Span = styled.span`
     padding-right: 10px;
     /* margin: 0 10px; */
 `;
-export default Fighting;
+export default Concert;

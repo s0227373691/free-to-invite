@@ -8,12 +8,12 @@ const activeList = [
                 path: '/free/boardgame',
             },
             {
-                minorType: '電動',
-                path: '/free/electricalgame',
+                minorType: '購物',
+                path: '/free/shopping',
             },
             {
-                minorType: '聽音樂',
-                path: '/free/music',
+                minorType: '演唱會',
+                path: '/free/concert',
             },
         ],
     },

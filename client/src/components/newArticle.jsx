@@ -11,8 +11,7 @@ import { x } from 'joi';
 const NewArticle = () => {
     const [primaryType, setPrimaryType] = useState('');
     const [minorType, setMinorType] = useState('');
-    const [date, setDate] = useState('');
-    const [people, setPeople] = useState('');
+
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -49,7 +48,7 @@ const NewArticle = () => {
                         }}
                     >
                         <option value="" hidden>
-                            請選擇分類
+                            主分類
                         </option>
                         {activeList.map((x) => {
                             return (
@@ -72,7 +71,7 @@ const NewArticle = () => {
                                 }}
                             >
                                 <option value="" hidden>
-                                    請選擇minorprimary
+                                    次分類
                                 </option>
                                 {activeList[
                                     activeList
@@ -92,24 +91,8 @@ const NewArticle = () => {
                             </SelectMinorType>
                         </>
                     ) : null}
-
-                    <Label htmlFor="date">
-                        <Span>日期 : </Span>
-                        <Input
-                            id="date"
-                            type="text"
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                    </Label>
-                    <Label htmlFor="people">
-                        <Span>人數 : </Span>
-                        <Input
-                            id="people"
-                            type="number"
-                            onChange={(e) => setPeople(e.target.value)}
-                        />
-                    </Label>
                 </Upperlock>
+
                 <LowerBlock>
                     <Input
                         type="text"

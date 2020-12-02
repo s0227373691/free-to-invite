@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Fighting = () => {
+const Shopping = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');
     const [precautions, setPrecautions] = useState('');
     const [boardgameType, setBoardgameType] = useState('');
-    const [difficulty, setDifficulty] = useState('');
-    const [appliance, setAppliance] = useState('');
+    const [shoppingType, setShoppingType] = useState('');
     return (
         <Container>
             <Upperlock>
@@ -46,24 +45,14 @@ const Fighting = () => {
             </Upperlock>
             <Select
                 onChange={(e) => {
-                    setDifficulty(e.target.value);
+                    setShoppingType(e.target.value);
                 }}
             >
-                <option value="" hidden>
-                    器具
-                </option>
-                <option value="自行準備">自行準備</option>
-                <option value="現場提供">現場提供</option>
-            </Select>
-            <Select
-                onChange={(e) => {
-                    setAppliance(e.target.value);
-                }}
-            >
-                <option hidden>難度</option>
-                <option value="專業">專業</option>
-                <option value="一般">一般</option>
-                <option value="初學者">初學者</option>
+                <option hidden>購物類型</option>
+                <option value="百貨公司">百貨公司</option>
+                <option value="大賣場">大賣場</option>
+                <option value="夜市">夜市</option>
+                <option value="菜市場">菜市場</option>
             </Select>
         </Container>
     );
@@ -87,4 +76,4 @@ const Span = styled.span`
     padding-right: 10px;
     /* margin: 0 10px; */
 `;
-export default Fighting;
+export default Shopping;

@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Article = () => {
-    return;
-    <Container></Container>;
+    return <Container></Container>;
 };
 
 const Container = styled.div`

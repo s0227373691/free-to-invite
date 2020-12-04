@@ -15,22 +15,26 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const submitActive = async (e) => {
         e.preventDefault();
-        console.log('a');
-        await postActive_free_boardGame({
-            date: date,
-            people: people,
-            precautions: precautions,
-            boardgameType: boardgameType,
-            title: title,
-            content: content,
+        console.log({
+            primaryType: props.primaryType,
+            minorType: props.minorType,
+            date,
+            people,
+            precautions,
+            boardgameType,
+            title,
+            content,
         });
-        // const submitActive = async (e) => {
-        //     e.preventDefault();
-        //     await postUserAuth({
-        //         email: 'elmer000@gmail.com',
-        //         password: 'elmer000',
-        //     });
-        // };
+        await postActive_free_boardGame({
+            primaryType: props.primaryType,
+            minorType: props.minorType,
+            date,
+            people,
+            precautions,
+            boardgameType,
+            title,
+            content,
+        });
     };
     return (
         <From onSubmit={submitActive}>
@@ -51,7 +55,14 @@ const Boardgame = (props) => {
                         onChange={(e) => setPeople(e.target.value)}
                     />
                 </Label>
-
+                <Label htmlFor="precautions">
+                    <Span>注意事項 : </Span>
+                    <Input
+                        id="precautions"
+                        type="text"
+                        onChange={(e) => setPrecautions(e.target.value)}
+                    />
+                </Label>
                 <SelectTag
                     onChange={(e) => {
                         setBoardgameType(e.target.value);

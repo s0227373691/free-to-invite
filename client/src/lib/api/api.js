@@ -13,5 +13,5 @@ export const apiPostUserRegister = (data) =>
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
 export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
 // 新增文章相關 api
-export const apiPostActive_free_boardGame = (data) =>
-    userRequest.post('/addactive/free', data);
+export const apiPostActiveFreeBoardGame = (data) =>
+    userRequest.post('/addactive/free/boardgame', data);

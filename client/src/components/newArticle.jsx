@@ -29,6 +29,7 @@ const NewArticle = () => {
                     required
                     onChange={(e) => {
                         setPrimaryType(e.target.value);
+                        console.log(e.target.value, primaryType);
                     }}
                 >
                     <option value="" hidden>
@@ -49,12 +50,13 @@ const NewArticle = () => {
                             required
                             onChange={(e) => {
                                 setMinorType(e.target.value);
+                                console.log(e.target.value, minorType);
                                 switch (e.target.value) {
                                     case '桌游':
                                         setFormType(
                                             <Boardgame
                                                 primaryType={primaryType}
-                                                minorType={minorType}
+                                                minorType={e.target.value}
                                             />
                                         );
                                         break;
@@ -111,7 +113,7 @@ const NewArticle = () => {
                             ].subActiveList.map((x) => {
                                 return (
                                     <option
-                                        value={x.primaryType}
+                                        value={x.minorType}
                                         key={x.minorType}
                                     >
                                         {x.minorType}

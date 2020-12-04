@@ -1,118 +1,128 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Axios from 'axios';
-import Button from './commom/baseTag/button';
-import BaseInput from './commom/baseTag/Input';
+// customize modules
 import Select from './commom/baseTag/select';
 import activeList from '../lib/activeList.js';
+// 分類
+import Boardgame from './subMenuList/free/boardgame';
+import Concert from './subMenuList/free/concert';
+import Shopping from './subMenuList/free/shopping';
+import Basketball from './subMenuList/sport/basketball';
+import Fighting from './subMenuList/sport/fighting';
+import Running from './subMenuList/sport/running';
+import Newtaipei from './subMenuList/travel/newtaipei';
+import Taichung from './subMenuList/travel/taichung';
+import Taipei from './subMenuList/travel/taipei';
 
 import { x } from 'joi';
 // TODO primaryType  minorType 共用 其他動態
+
 const NewArticle = () => {
     const [primaryType, setPrimaryType] = useState('');
     const [minorType, setMinorType] = useState('');
-
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-
-    const handleSubmit = (e) => {
-        if (minorType === '') {
-            alert('請選擇minorprimary');
-            return;
-        }
-        console.log(primaryType, minorType, date, people, title, content);
-        Axios.post('http://localhost:3000/api/newarticle', {
-            primaryType,
-            minorType,
-            date,
-            people,
-            title,
-            content,
-        })
-            .then((res) => {
-                alert('上傳成功');
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    };
+    const [formType, setFormType] = useState('');
     return (
         <Container>
             <Title className="title">新增活動</Title>{' '}
-            <Form onSubmit={handleSubmit}>
-                <Upperlock>
-                    <SelectPrimaryType
-                        required
-                        onChange={(e) => {
-                            setPrimaryType(e.target.value);
-                        }}
-                    >
-                        <option value="" hidden>
-                            主分類
-                        </option>
-                        {activeList.map((x) => {
-                            return (
-                                <option
-                                    value={x.primaryType}
-                                    key={x.primaryType}
-                                >
-                                    {x.primaryType}
-                                </option>
-                            );
-                        })}
-                    </SelectPrimaryType>
+            <UpperBlock>
+                <SelectPrimaryType
+                    required
+                    onChange={(e) => {
+                        setPrimaryType(e.target.value);
+                    }}
+                >
+                    <option value="" hidden>
+                        主分類
+                    </option>
+                    {activeList.map((x) => {
+                        return (
+                            <option value={x.primaryType} key={x.primaryType}>
+                                {x.primaryType}
+                            </option>
+                        );
+                    })}
+                </SelectPrimaryType>
 
-                    {primaryType ? (
-                        <>
-                            <SelectMinorType
-                                required
-                                onChange={(e) => {
-                                    setMinorType(e.target.value);
-                                }}
-                            >
-                                <option value="" hidden>
-                                    次分類
-                                </option>
-                                {activeList[
-                                    activeList
-                                        .map((x) => x.primaryType)
-                                        .indexOf(primaryType)
-                                ].subActiveList.map((x) => {
-                                    console.log(x);
-                                    return (
-                                        <option
-                                            value={x.primaryType}
-                                            key={x.minorType}
-                                        >
-                                            {x.minorType}
-                                        </option>
-                                    );
-                                })}
-                            </SelectMinorType>
-                        </>
-                    ) : null}
-                </Upperlock>
-
-                <LowerBlock>
-                    <Input
-                        type="text"
-                        placeholder="標題"
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <TextAreaBox>
-                        <Dummy>{content}</Dummy>
-                        <TextArea
-                            name=""
-                            id=""
-                            onChange={(e) => setContent(e.target.value)}
-                        ></TextArea>
-                    </TextAreaBox>
-                </LowerBlock>
-            </Form>
-            <Footer>
-                <button className="btnCancel">取消</button>
-                <button className="btnNext">下一步</button>
-            </Footer>
+                {primaryType ? (
+                    <>
+                        <SelectMinorType
+                            required
+                            onChange={(e) => {
+                                setMinorType(e.target.value);
+                                switch (e.target.value) {
+                                    case '桌游':
+                                        setFormType(
+                                            <Boardgame
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                    case '購物':
+                                        setFormType(
+                                            <Shopping
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                    case '演唱會':
+                                        setFormType(
+                                            <Concert
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                    case '慢跑':
+                                        setFormType(
+                                            <Running
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                    case '籃球':
+                                        setFormType(
+                                            <Basketball
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                    case '格鬥':
+                                        setFormType(
+                                            <Fighting
+                                                primaryType={primaryType}
+                                                minorType={minorType}
+                                            />
+                                        );
+                                        break;
+                                }
+                            }}
+                        >
+                            <option value="" hidden>
+                                次分類
+                            </option>
+                            {activeList[
+                                activeList
+                                    .map((x) => x.primaryType)
+                                    .indexOf(primaryType)
+                            ].subActiveList.map((x) => {
+                                return (
+                                    <option
+                                        value={x.primaryType}
+                                        key={x.minorType}
+                                    >
+                                        {x.minorType}
+                                    </option>
+                                );
+                            })}
+                        </SelectMinorType>
+                    </>
+                ) : null}
+            </UpperBlock>
+            {formType}
         </Container>
     );
 };
@@ -132,88 +142,14 @@ const Title = styled.h2`
     margin-bottom: 20px;
     font-weight: 700;
 `;
-const Form = styled.form`
-    height: 100%;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    position: relative;
-    padding: 0 10px;
-`;
-const Upperlock = styled.div`
+
+const UpperBlock = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
 `;
 const SelectPrimaryType = styled(Select)``;
 const SelectMinorType = styled(Select)``;
-const Input = styled(BaseInput)`
-    height: 40px;
-    border: 1px solid #dadce0;
-`;
-const Label = styled.label`
-    display: flex;
-    flex-grow: 1;
-    white-space: nowrap;
-    align-items: center;
-    margin: 0 10px;
-`;
-const Span = styled.span`
-    padding-right: 10px;
-    /* margin: 0 10px; */
-`;
-
-const LowerBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    input[type='text'] {
-        margin-bottom: 16px;
-    }
-`;
-const TextAreaBox = styled.div`
-    position: relative;
-    background: red;
-    flex-grow: 1;
-`;
-const Dummy = styled.div`
-    padding: 2px;
-    border: 1px solid;
-    visibility: hidden;
-    white-space: pre-wrap;
-    overflow: hidden;
-    word-wrap: break-word;
-    word-break: break-all;
-    &:after {
-        content: ' ';
-    }
-`;
-const TextArea = styled.textarea`
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border: none;
-    resize: none;
-    border: 1px solid #dadce0;
-    /* overflow-wrap: break-word; */
-
-    overflow-y: hidden;
-    font: inherit;
-
-    &:focus {
-        outline: none;
-    }
-`;
-
-const SendBtn = styled(Button)`
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #b2bec3;
-`;
 
 const Footer = styled.footer`
     height: 68px;

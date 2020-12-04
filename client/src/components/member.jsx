@@ -12,18 +12,12 @@ const Member = () => {
                 pigone efkfkf @Pigone55 x_x
                 {/* <Bio type="text"></Bio> */}
             </List>
-            userData.map(x => {
-                <p>x.userName</p>
-            })
+            userData.map(x => {<p>x.userName</p>})
             <List2>
                 <About href="/user/about/:userId">About</About>
                 <About href="">About</About>
                 <About href="">About</About>
-                
-                
-                <button onclick='aaa(userId)'></button>
-
-
+                <button onClick="aaa(userId)"></button>
             </List2>
         </Container>
     );

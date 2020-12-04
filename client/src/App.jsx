@@ -9,7 +9,7 @@ import Board from './components/board';
 import Login from './components/login';
 import Member from './components/member';
 import Article from './components/article';
-import NewArticle from './components/newArticle';
+import NewActive from './components/newActive';
 import MyArticle from './components/myArticle';
 // 內部函式
 import { getUserAuth } from './lib/api/auth';
@@ -33,7 +33,7 @@ const App = (props) => {
                     <Route path="/login" component={Login} />
                     <Route path="/member" component={Member} />
                     <Route path="/article" component={Article} />
-                    <Route path="/newactive" component={NewArticle} />
+                    <Route path="/newactive" component={NewActive} />
                     <Route path="/myarticle" component={MyArticle} />
                     <Route path="/:board" component={Board} />
                     <Route path="/:board/:subboard" component={Board} />

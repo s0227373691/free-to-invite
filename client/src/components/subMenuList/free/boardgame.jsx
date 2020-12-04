@@ -1,36 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 
-// import { postBoardgameActive } from '../lib/api/auth';
 import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
-    const [people, setPeople] = useState('');
+    const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
     const [boardgameType, setBoardgameType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const submitActive = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(props);
-        console.log({
-            primaryType: props.primaryType,
-            minorType: props.minorType,
-            date,
-            people,
-            precautions,
-            boardgameType,
-            title,
-            content,
-        });
         await postActiveFreeBoardGame({
             primaryType: props.primaryType,
             minorType: props.minorType,
             date,
-            people,
+            people: population,
             precautions,
             boardgameType,
             title,
@@ -38,22 +27,25 @@ const Boardgame = (props) => {
         });
     };
     return (
-        <From onSubmit={submitActive}>
+        <From onSubmit={handleSubmit}>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
                     <Input
                         id="date"
-                        type="text"
+                        type="date"
+                        value={date}
                         onChange={(e) => setDate(e.target.value)}
+                        required
                     />
                 </Label>
-                <Label htmlFor="people">
+                <Label htmlFor="population">
                     <Span>人數 : </Span>
                     <Input
-                        id="people"
+                        id="population"
                         type="number"
-                        onChange={(e) => setPeople(e.target.value)}
+                        value={population}
+                        onChange={(e) => setPopulation(e.target.value)}
                     />
                 </Label>
                 <Label htmlFor="precautions">
@@ -61,47 +53,44 @@ const Boardgame = (props) => {
                     <Input
                         id="precautions"
                         type="text"
+                        value={precautions}
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectTag
-                    onChange={(e) => {
-                        setBoardgameType(e.target.value);
-                    }}
+                <SelectBoardGameType
+                    onChange={(e) => setBoardgameType(e.target.value)}
                 >
-                    <option value="" hidden>
-                        遊戲分類
-                    </option>
-                    <option value="策略遊戲">策略遊戲</option>
-                    <option value="益智遊戲">益智遊戲</option>
-                    <option value="推理遊戲">推理遊戲</option>
-                    <option value="角色扮演遊戲">角色扮演遊戲</option>
-                    <option value="幼教遊戲">幼教遊戲</option>
-                    <option value="小品遊戲">小品遊戲</option>
-                    <option value="合作遊戲">合作遊戲</option>
-                    <option value="陣營遊戲">陣營遊戲</option>
-                </SelectTag>
+                    <option hidden>請選擇桌遊類型</option>
+                    <option value="策略">策略</option>
+                    <option value="益智">益智</option>
+                    <option value="推理">推理</option>
+                    <option value="角色扮演">角色扮演</option>
+                    <option value="幼教">幼教</option>
+                    <option value="小品">小品</option>
+                    <option value="合作">合作</option>
+                    <option value="陣營">陣營</option>
+                </SelectBoardGameType>
             </Upperlock>
 
             <LowerBlock>
                 <Input
                     type="text"
                     placeholder="標題"
+                    value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <TextAreaBox>
                     <Dummy>{content}</Dummy>
                     <TextArea
-                        name=""
-                        id=""
+                        value={content}
                         onChange={(e) => setContent(e.target.value)}
                     ></TextArea>
                 </TextAreaBox>
             </LowerBlock>
-            <Button>
+            <ButtonGroup>
                 <button className="btnCancel">取消</button>
                 <button className="btnNext">下一步</button>
-            </Button>
+            </ButtonGroup>
         </From>
     );
 };
@@ -110,7 +99,7 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectTag = styled(Select)``;
+const SelectBoardGameType = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -142,6 +131,7 @@ const LowerBlock = styled.div`
     }
 `;
 const TextAreaBox = styled.div`
+    height: 300px;
     position: relative;
     background: red;
     flex-grow: 1;
@@ -177,7 +167,7 @@ const TextArea = styled.textarea`
         outline: none;
     }
 `;
-const Button = styled.footer`
+const ButtonGroup = styled.div`
     height: 68px;
     display: flex;
     align-items: center;

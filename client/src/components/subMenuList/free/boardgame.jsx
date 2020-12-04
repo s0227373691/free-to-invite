@@ -4,7 +4,7 @@ import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 
 // import { postBoardgameActive } from '../lib/api/auth';
-import { postActive_free_boardGame } from '../../../lib/api/addActive/free';
+import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -15,6 +15,7 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const submitActive = async (e) => {
         e.preventDefault();
+        console.log(props);
         console.log({
             primaryType: props.primaryType,
             minorType: props.minorType,
@@ -25,7 +26,7 @@ const Boardgame = (props) => {
             title,
             content,
         });
-        await postActive_free_boardGame({
+        await postActiveFreeBoardGame({
             primaryType: props.primaryType,
             minorType: props.minorType,
             date,

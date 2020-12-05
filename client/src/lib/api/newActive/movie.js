@@ -1,6 +1,6 @@
-import { apiPostActiveFreeBoardGame } from '../../api.js';
+import { apiPostNewActiveMovie } from '../api.js';
 
-export const postActiveFreeBoardGame = ({
+export const postNewActiveMovie = ({
     date,
     people,
     precautions,
@@ -8,8 +8,7 @@ export const postActiveFreeBoardGame = ({
     title,
     content,
 }) => {
-    console.log(date, people, precautions, boardgameType, title, content);
-    return apiPostActiveFreeBoardGame({
+    return apiPostNewActiveMovie({
         date,
         people,
         precautions,
@@ -17,7 +16,7 @@ export const postActiveFreeBoardGame = ({
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

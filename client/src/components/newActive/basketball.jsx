@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
-import { ButtonClearDefault } from '../../styles/buttons';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+// import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -28,7 +27,7 @@ const Boardgame = (props) => {
         });
     };
     return (
-        <Form onSubmit={handleSubmit}>
+        <From onSubmit={handleSubmit}>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
@@ -89,13 +88,13 @@ const Boardgame = (props) => {
                 </TextAreaBox>
             </LowerBlock>
             <ButtonGroup>
-                <Button>取消</Button>
-                <Button>新增</Button>
+                <button className="btnCancel">取消</button>
+                <button className="btnNext">下一步</button>
             </ButtonGroup>
-        </Form>
+        </From>
     );
 };
-const Form = styled.form`
+const From = styled.form`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -119,6 +118,7 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
+    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`
@@ -158,24 +158,35 @@ const TextArea = styled.textarea`
     border: none;
     resize: none;
     border: 1px solid #dadce0;
+    /* overflow-wrap: break-word; */
+
     overflow-y: hidden;
+    font: inherit;
 
     &:focus {
         outline: none;
     }
 `;
 const ButtonGroup = styled.div`
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-`;
+    position: sticky;
+    right: 0;
+    left: 0;
+    bottom: 0;
 
-const Button = styled(ButtonClearDefault)`
-    padding: 10px 15px;
-    border-radius: 5px;
-
-    &:hover {
-        background: rgb(90, 176, 219);
+    button {
+        height: 44px;
+        padding: 0 8px;
+        border-radius: 5px;
+        &:hover {
+            background: rgb(90, 176, 219);
+        }
+    }
+    .btnNext {
+        margin-left: 16px;
     }
 `;
 export default Boardgame;

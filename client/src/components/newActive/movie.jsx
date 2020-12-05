@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+import { postNewActiveMovie } from '../../lib/api/newActive/movie';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [movieType, setMovieType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
+        await postNewActiveMovie({
             primaryType: props.primaryType,
             minorType: props.minorType,
             date,
             people: population,
             precautions,
-            boardgameType,
+            movieType,
             title,
             content,
         });
@@ -58,17 +58,24 @@ const Boardgame = (props) => {
                     />
                 </Label>
                 <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
+                    onChange={(e) => setMovieType(e.target.value)}
                 >
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
+                    <option hidden>請選擇電影類型</option>
+                    <option value="動作片">動作片</option>
+                    <option value="冒險片">冒險片</option>
+                    <option value="喜劇片">喜劇片</option>
                     <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
+                    <option value="劇情片">劇情片</option>
+                    <option value="恐怖片">恐怖片</option>
+                    <option value="奇幻片"> 奇幻片</option>
+                    <option value="愛情片">愛情片</option>
+                    <option value="愛情片">動畫片</option>
+                    <option value="愛情片">驚悚片</option>
+                    <option value="愛情片">懸疑片</option>
+                    <option value="愛情片">科幻片</option>
+                    <option value="愛情片">歌舞劇、音樂片</option>
+                    <option value="愛情片">戰爭片</option>
+                    <option value="愛情片">歷史電影</option>
                 </SelectBoardGameType>
             </Upperlock>
 

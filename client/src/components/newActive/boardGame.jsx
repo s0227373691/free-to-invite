@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
+import { ButtonClearDefault } from '../styles/buttons';
 
-import { postMovieForm } from '../../../lib/api/addActive/free/movie';
+import { postNewActiveBoardGame } from '../../lib/api/newActive/boardgame';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [movieType, setMovieType] = useState('');
+    const [boardGameType, setBoardGameType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postMovieForm({
-            primaryType: props.primaryType,
-            minorType: props.minorType,
+        await postNewActiveBoardGame({
+            activeType: props.activeType,
             date,
-            people: population,
+            population,
             precautions,
-            movieType,
+            boardGameType,
             title,
             content,
         });
     };
     return (
-        <From onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
@@ -58,24 +58,17 @@ const Boardgame = (props) => {
                     />
                 </Label>
                 <SelectBoardGameType
-                    onChange={(e) => setMovieType(e.target.value)}
+                    onChange={(e) => setBoardGameType(e.target.value)}
                 >
-                    <option hidden>請選擇電影類型</option>
-                    <option value="動作片">動作片</option>
-                    <option value="冒險片">冒險片</option>
-                    <option value="喜劇片">喜劇片</option>
+                    <option hidden>請選擇桌遊類型</option>
+                    <option value="策略">策略</option>
+                    <option value="益智">益智</option>
+                    <option value="推理">推理</option>
                     <option value="角色扮演">角色扮演</option>
-                    <option value="劇情片">劇情片</option>
-                    <option value="恐怖片">恐怖片</option>
-                    <option value="奇幻片"> 奇幻片</option>
-                    <option value="愛情片">愛情片</option>
-                    <option value="愛情片">動畫片</option>
-                    <option value="愛情片">驚悚片</option>
-                    <option value="愛情片">懸疑片</option>
-                    <option value="愛情片">科幻片</option>
-                    <option value="愛情片">歌舞劇、音樂片</option>
-                    <option value="愛情片">戰爭片</option>
-                    <option value="愛情片">歷史電影</option>
+                    <option value="幼教">幼教</option>
+                    <option value="小品">小品</option>
+                    <option value="合作">合作</option>
+                    <option value="陣營">陣營</option>
                 </SelectBoardGameType>
             </Upperlock>
 
@@ -95,13 +88,13 @@ const Boardgame = (props) => {
                 </TextAreaBox>
             </LowerBlock>
             <ButtonGroup>
-                <button className="btnCancel">取消</button>
-                <button className="btnNext">下一步</button>
+                <Button>取消</Button>
+                <Button>新增</Button>
             </ButtonGroup>
-        </From>
+        </Form>
     );
 };
-const From = styled.form`
+const Form = styled.form`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -125,7 +118,6 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
-    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`
@@ -165,35 +157,24 @@ const TextArea = styled.textarea`
     border: none;
     resize: none;
     border: 1px solid #dadce0;
-    /* overflow-wrap: break-word; */
-
     overflow-y: hidden;
-    font: inherit;
 
     &:focus {
         outline: none;
     }
 `;
 const ButtonGroup = styled.div`
-    height: 68px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: sticky;
-    right: 0;
-    left: 0;
-    bottom: 0;
+`;
 
-    button {
-        height: 44px;
-        padding: 0 8px;
-        border-radius: 5px;
-        &:hover {
-            background: rgb(90, 176, 219);
-        }
-    }
-    .btnNext {
-        margin-left: 16px;
+const Button = styled(ButtonClearDefault)`
+    padding: 10px 15px;
+    border-radius: 5px;
+
+    &:hover {
+        background: rgb(90, 176, 219);
     }
 `;
 export default Boardgame;

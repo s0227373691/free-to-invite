@@ -1,51 +1,31 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
-
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
-
-const Boardgame = (props) => {
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
+const Taichung = () => {
     const [date, setDate] = useState('');
-    const [population, setPopulation] = useState('');
+    const [people, setPeople] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await postActiveFreeBoardGame({
-            primaryType: props.primaryType,
-            minorType: props.minorType,
-            date,
-            people: population,
-            precautions,
-            boardgameType,
-            title,
-            content,
-        });
-    };
     return (
-        <From onSubmit={handleSubmit}>
+        <Container>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
                     <Input
                         id="date"
-                        type="date"
-                        value={date}
+                        type="text"
                         onChange={(e) => setDate(e.target.value)}
-                        required
                     />
                 </Label>
-                <Label htmlFor="population">
+                <Label htmlFor="people">
                     <Span>人數 : </Span>
                     <Input
-                        id="population"
+                        id="people"
                         type="number"
-                        value={population}
-                        onChange={(e) => setPopulation(e.target.value)}
+                        onChange={(e) => setPeople(e.target.value)}
                     />
                 </Label>
                 <Label htmlFor="precautions">
@@ -53,53 +33,44 @@ const Boardgame = (props) => {
                     <Input
                         id="precautions"
                         type="text"
-                        value={precautions}
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
-                >
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
-                </SelectBoardGameType>
+                {/* xxxxxx */}
+                <Select>
+                    <option value="" hidden>
+                        請選擇xxxx
+                    </option>
+                </Select>
+                <Select>
+                    <option value="" hidden>
+                        請選擇xxxx
+                    </option>
+                </Select>
+                {/* xxxxxxx */}
             </Upperlock>
 
             <LowerBlock>
                 <Input
                     type="text"
                     placeholder="標題"
-                    value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <TextAreaBox>
                     <Dummy>{content}</Dummy>
                     <TextArea
-                        value={content}
+                        name=""
+                        id=""
                         onChange={(e) => setContent(e.target.value)}
                     ></TextArea>
                 </TextAreaBox>
             </LowerBlock>
-            <ButtonGroup>
-                <button className="btnCancel">取消</button>
-                <button className="btnNext">下一步</button>
-            </ButtonGroup>
-        </From>
+        </Container>
     );
 };
-const From = styled.form`
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-`;
-const SelectBoardGameType = styled(Select)``;
+
+const Container = styled.div``;
+const SelectTag = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -122,7 +93,6 @@ const Span = styled.span`
 `;
 
 const LowerBlock = styled.div`
-    height: 100%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -131,7 +101,6 @@ const LowerBlock = styled.div`
     }
 `;
 const TextAreaBox = styled.div`
-    height: 300px;
     position: relative;
     background: red;
     flex-grow: 1;
@@ -167,26 +136,5 @@ const TextArea = styled.textarea`
         outline: none;
     }
 `;
-const ButtonGroup = styled.div`
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: sticky;
-    right: 0;
-    left: 0;
-    bottom: 0;
 
-    button {
-        height: 44px;
-        padding: 0 8px;
-        border-radius: 5px;
-        &:hover {
-            background: rgb(90, 176, 219);
-        }
-    }
-    .btnNext {
-        margin-left: 16px;
-    }
-`;
-export default Boardgame;
+export default Taichung;

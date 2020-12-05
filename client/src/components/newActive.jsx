@@ -5,8 +5,8 @@ import Select from './commom/baseTag/select';
 import activeList from '../lib/activeList.js';
 // 分類
 import Boardgame from './subMenuList/free/boardgame';
+import Movie from './subMenuList/free/movie';
 import Concert from './subMenuList/free/concert';
-import Shopping from './subMenuList/free/shopping';
 import Basketball from './subMenuList/sport/basketball';
 import Fighting from './subMenuList/sport/fighting';
 import Running from './subMenuList/sport/running';
@@ -29,14 +29,14 @@ const NewArticle = () => {
                     <Boardgame minorType={selectedActiveType} />
                 );
                 break;
-            case '購物':
-                activeFormTypeComponent = (
-                    <Shopping minorType={selectedActiveType} />
-                );
-                break;
             case '演唱會':
                 activeFormTypeComponent = (
                     <Concert minorType={selectedActiveType} />
+                );
+                break;
+            case '電影':
+                activeFormTypeComponent = (
+                    <Movie minorType={selectedActiveType} />
                 );
                 break;
             case '慢跑':
@@ -92,7 +92,6 @@ const Container = styled.div`
     max-width: 800px;
     min-height: calc(100vh - 80px);
     margin: 0 auto;
-    padding: 40px 0;
     display: flex;
     flex-direction: column;
 `;
@@ -100,15 +99,18 @@ const Container = styled.div`
 const Title = styled.h2`
     font-size: 28px;
     color: #0984e3;
-    margin-bottom: 30px;
     font-weight: 500;
+    padding: 20px 0;
 `;
 
 const FormContainer = styled.div`
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 `;
 const SelectFormType = styled(Select)`
     width: 100%;
+    height: 40px;
     margin-bottom: 20px;
     font-size: 18px;
 `;

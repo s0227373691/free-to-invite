@@ -8,8 +8,8 @@ const activeList = [
                 path: '/free/boardgame',
             },
             {
-                minorType: '購物',
-                path: '/free/shopping',
+                minorType: '電影',
+                path: '/free/movie',
             },
             {
                 minorType: '演唱會',

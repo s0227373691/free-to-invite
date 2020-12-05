@@ -5,7 +5,7 @@ import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 import { ButtonClearDefault } from '../../styles/buttons';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free';
+import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');

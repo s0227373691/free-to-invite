@@ -1,4 +1,4 @@
-import { apiPostActiveFreeBoardGame } from '../api';
+import { apiPostActiveFreeBoardGame } from '../../api.js';
 
 export const postActiveFreeBoardGame = ({
     date,

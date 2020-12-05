@@ -1,32 +1,51 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
-const Shopping = () => {
+
+import { postMovieForm } from '../../../lib/api/addActive/free/movie';
+
+const Boardgame = (props) => {
     const [date, setDate] = useState('');
-    const [people, setPeople] = useState('');
-    const [cost, setCost] = useState('');
+    const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [shoppingType, setShoppingType] = useState('');
+    const [movieType, setMovieType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await postMovieForm({
+            primaryType: props.primaryType,
+            minorType: props.minorType,
+            date,
+            people: population,
+            precautions,
+            movieType,
+            title,
+            content,
+        });
+    };
     return (
-        <>
+        <From onSubmit={handleSubmit}>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
                     <Input
                         id="date"
-                        type="text"
+                        type="date"
+                        value={date}
                         onChange={(e) => setDate(e.target.value)}
+                        required
                     />
                 </Label>
-                <Label htmlFor="people">
+                <Label htmlFor="population">
                     <Span>人數 : </Span>
                     <Input
-                        id="people"
+                        id="population"
                         type="number"
-                        onChange={(e) => setPeople(e.target.value)}
+                        value={population}
+                        onChange={(e) => setPopulation(e.target.value)}
                     />
                 </Label>
                 <Label htmlFor="precautions">
@@ -34,45 +53,60 @@ const Shopping = () => {
                     <Input
                         id="precautions"
                         type="text"
+                        value={precautions}
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectTag
-                    onChange={(e) => {
-                        setShoppingType(e.target.value);
-                    }}
+                <SelectBoardGameType
+                    onChange={(e) => setMovieType(e.target.value)}
                 >
-                    <option hidden>購物類型</option>
-                    <option value="百貨公司">百貨公司</option>
-                    <option value="大賣場">大賣場</option>
-                    <option value="夜市">夜市</option>
-                    <option value="菜市場">菜市場</option>
-                </SelectTag>
+                    <option hidden>請選擇電影類型</option>
+                    <option value="動作片">動作片</option>
+                    <option value="冒險片">冒險片</option>
+                    <option value="喜劇片">喜劇片</option>
+                    <option value="角色扮演">角色扮演</option>
+                    <option value="劇情片">劇情片</option>
+                    <option value="恐怖片">恐怖片</option>
+                    <option value="奇幻片"> 奇幻片</option>
+                    <option value="愛情片">愛情片</option>
+                    <option value="愛情片">動畫片</option>
+                    <option value="愛情片">驚悚片</option>
+                    <option value="愛情片">懸疑片</option>
+                    <option value="愛情片">科幻片</option>
+                    <option value="愛情片">歌舞劇、音樂片</option>
+                    <option value="愛情片">戰爭片</option>
+                    <option value="愛情片">歷史電影</option>
+                </SelectBoardGameType>
             </Upperlock>
+
             <LowerBlock>
                 <Input
                     type="text"
                     placeholder="標題"
+                    value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <TextAreaBox>
                     <Dummy>{content}</Dummy>
                     <TextArea
-                        name=""
-                        id=""
+                        value={content}
                         onChange={(e) => setContent(e.target.value)}
                     ></TextArea>
                 </TextAreaBox>
-            </LowerBlock>{' '}
-            <Footer>
+            </LowerBlock>
+            <ButtonGroup>
                 <button className="btnCancel">取消</button>
                 <button className="btnNext">下一步</button>
-            </Footer>
-        </>
+            </ButtonGroup>
+        </From>
     );
 };
-
-const SelectTag = styled(Select)``;
+const From = styled.form`
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+`;
+const SelectBoardGameType = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -95,6 +129,7 @@ const Span = styled.span`
 `;
 
 const LowerBlock = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -103,6 +138,7 @@ const LowerBlock = styled.div`
     }
 `;
 const TextAreaBox = styled.div`
+    height: 300px;
     position: relative;
     background: red;
     flex-grow: 1;
@@ -138,7 +174,7 @@ const TextArea = styled.textarea`
         outline: none;
     }
 `;
-const Footer = styled.footer`
+const ButtonGroup = styled.div`
     height: 68px;
     display: flex;
     align-items: center;
@@ -160,4 +196,4 @@ const Footer = styled.footer`
         margin-left: 16px;
     }
 `;
-export default Shopping;
+export default Boardgame;

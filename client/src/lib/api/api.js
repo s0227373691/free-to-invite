@@ -18,3 +18,15 @@ export const apiPostActiveFreeBoardGame = (data) =>
 
 export const apiPostMovieForm = (data) =>
     userRequest.post('/addactive/free/movie', data);
+
+export const apiPostConcertForm = (data) =>
+    userRequest.post('/addactive/free/concert', data);
+
+export const apiPostBasketballForm = (data) =>
+    userRequest.post('/addactive/sport/basketball', data);
+
+export const apiPostActiveRunning = (data) =>
+    userRequest.post('/addactive/sport/running', data);
+
+export const apiPostActiveFighting = (data) =>
+    userRequest.post('/addactive/sport/fighting', data);

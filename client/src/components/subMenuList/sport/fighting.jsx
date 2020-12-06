@@ -4,24 +4,23 @@ import styled from 'styled-components';
 import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+import { postActiveFighting } from '../../../lib/api/addActive/sport/fighting';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [fightingType, setFightingeType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
-            primaryType: props.primaryType,
+        await postActiveFighting({
             minorType: props.minorType,
+            fightingType,
             date,
             people: population,
             precautions,
-            boardgameType,
             title,
             content,
         });
@@ -57,19 +56,15 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
-                >
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
-                </SelectBoardGameType>
+                <Select onChange={(e) => setFightingeType(e.target.value)}>
+                    <option hidden>請選擇格鬥類型</option>
+                    <option value="綜合">綜合</option>
+                    <option value="自由搏擊">自由搏擊</option>
+                    <option value="拳擊">拳擊</option>
+                    <option value="柔道">柔道</option>
+                    <option value="跆拳道">跆拳道</option>
+                    <option value="散打">散打</option>
+                </Select>
             </Upperlock>
 
             <LowerBlock>
@@ -99,7 +94,6 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectBoardGameType = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -118,7 +112,6 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
-    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`
@@ -159,7 +152,6 @@ const TextArea = styled.textarea`
     resize: none;
     border: 1px solid #dadce0;
     /* overflow-wrap: break-word; */
-
     overflow-y: hidden;
     font: inherit;
 

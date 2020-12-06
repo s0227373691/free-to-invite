@@ -1,19 +1,29 @@
 import { apiPostMovieForm } from '../../api.js';
 
 export const postMovieForm = ({
-    date,
+    primaryType,
+    minorType,
     people,
     precautions,
-    boardgameType,
+    movieType,
     title,
     content,
 }) => {
-    console.log(date, people, precautions, boardgameType, title, content);
-    return apiPostActiveFreeBoardGame({
-        date,
+    console.log(
+        primaryType,
+        minorType,
         people,
         precautions,
-        boardgameType,
+        movieType,
+        title,
+        content
+    );
+    return apiPostMovieForm({
+        primaryType,
+        minorType,
+        people,
+        precautions,
+        movieType,
         title,
         content,
     })

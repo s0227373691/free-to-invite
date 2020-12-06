@@ -4,24 +4,23 @@ import styled from 'styled-components';
 import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+import { postConcertForm } from '../../../lib/api/addActive/free/concert';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [musicType, setMusicType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
-            primaryType: props.primaryType,
+        await postConcertForm({
             minorType: props.minorType,
             date,
             people: population,
             precautions,
-            boardgameType,
+            musicType,
             title,
             content,
         });
@@ -57,19 +56,15 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
-                >
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
-                </SelectBoardGameType>
+                <Select onChange={(e) => setMusicType(e.target.value)}>
+                    <option hidden>請選擇音樂類型</option>
+                    <option value="個人演唱會">個人演唱會</option>
+                    <option value="古典樂">古典樂</option>
+                    <option value="鄉村歌曲">鄉村歌曲</option>
+                    <option value="電音">電音</option>
+                    <option value="饒舌樂">饒舌樂</option>
+                    <option value="搖滾音樂">搖滾音樂</option>
+                </Select>
             </Upperlock>
 
             <LowerBlock>
@@ -99,7 +94,7 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectBoardGameType = styled(Select)``;
+
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -118,7 +113,6 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
-    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`

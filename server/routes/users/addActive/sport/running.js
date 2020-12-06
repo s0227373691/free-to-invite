@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 
-const { Boardgame } = require('../../../../modules/activeForm/free/boardgame');
+const { Running } = require('../../../../modules/activeForm/sport/running');
 
 router.post('/', (req, res) => {
     console.log(req.body);
@@ -11,21 +11,21 @@ router.post('/', (req, res) => {
         date,
         people,
         precautions,
-        boardgameType,
+        runningType,
         title,
         content,
     } = req.body;
 
-    const boardgame = new Boardgame({
+    const running = new Running({
         minorType,
         date,
         people,
         precautions,
-        boardgameType,
+        runningType,
         title,
         content,
     });
-    boardgame.save();
+    running.save();
 });
 
 module.exports = router;

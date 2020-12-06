@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Select from '../commom/baseTag/select';
-import BaseInput from '../commom/baseTag/Input';
+import Select from '../../commom/baseTag/select';
+import BaseInput from '../../commom/baseTag/Input';
 const Boardgame = () => {
     const [date, setDate] = useState('');
     const [people, setPeople] = useState('');

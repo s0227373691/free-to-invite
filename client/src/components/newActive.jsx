@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+// customize modules
 import Select from './commom/baseTag/select';
 import activeList from '../lib/activeList.js';
+// 分類
+import Boardgame from './subMenuList/free/boardgame';
+import Movie from './subMenuList/free/movie';
+import Concert from './subMenuList/free/concert';
+import Basketball from './subMenuList/sport/basketball';
+import Fighting from './subMenuList/sport/fighting';
+import Running from './subMenuList/sport/running';
+import Newtaipei from './subMenuList/travel/newtaipei';
+import Taichung from './subMenuList/travel/taichung';
+import Taipei from './subMenuList/travel/taipei';
 
-import BoardGame from './newActive/boardgame';
-import Movie from './newActive/movie';
-import Concert from './newActive/concert';
-import Basketball from './newActive/basketball';
-import Fighting from './newActive/fighting';
-import Running from './newActive/running';
-import Newtaipei from './newActive/newtaipei';
-import Taichung from './newActive/taichung';
-import Taipei from './newActive/taipei';
+// TODO primaryType  minorType 共用 其他動態
 
 const NewArticle = () => {
     const [formTypeComponent, setFormTypeComponent] = useState(null);
@@ -24,32 +26,32 @@ const NewArticle = () => {
         switch (selectedActiveType) {
             case '桌游':
                 activeFormTypeComponent = (
-                    <BoardGame activeType={selectedActiveType} />
+                    <Boardgame minorType={selectedActiveType} />
                 );
                 break;
             case '演唱會':
                 activeFormTypeComponent = (
-                    <Concert activeType={selectedActiveType} />
+                    <Concert minorType={selectedActiveType} />
                 );
                 break;
             case '電影':
                 activeFormTypeComponent = (
-                    <Movie activeType={selectedActiveType} />
+                    <Movie minorType={selectedActiveType} />
                 );
                 break;
             case '慢跑':
                 activeFormTypeComponent = (
-                    <Running activeType={selectedActiveType} />
+                    <Running minorType={selectedActiveType} />
                 );
                 break;
             case '籃球':
                 activeFormTypeComponent = (
-                    <Basketball activeType={selectedActiveType} />
+                    <Basketball minorType={selectedActiveType} />
                 );
                 break;
             case '格鬥':
                 activeFormTypeComponent = (
-                    <Fighting activeType={selectedActiveType} />
+                    <Fighting minorType={selectedActiveType} />
                 );
                 break;
             default:

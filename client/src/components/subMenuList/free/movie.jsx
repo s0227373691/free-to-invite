@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../commom/baseTag/select';
-import BaseInput from '../commom/baseTag/Input';
+import Select from '../../commom/baseTag/select';
+import BaseInput from '../../commom/baseTag/Input';
 
-<<<<<<< HEAD:client/src/components/subMenuList/free/concert.jsx
-import { postConcertForm } from '../../../lib/api/addActive/free/concert';
-=======
-// import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
->>>>>>> 15ddf1cd4dc7b912279bb5939270b50aad926fc4:client/src/components/newActive/concert.jsx
+import { postMovieForm } from '../../../lib/api/addActive/free/movie';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [musicType, setMusicType] = useState('');
+    const [movieType, setMovieType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postConcertForm({
+        await postMovieForm({
             minorType: props.minorType,
             date,
             people: population,
             precautions,
-            musicType,
+            movieType,
             title,
             content,
         });
@@ -60,14 +56,23 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <Select onChange={(e) => setMusicType(e.target.value)}>
-                    <option hidden>請選擇音樂類型</option>
-                    <option value="個人演唱會">個人演唱會</option>
-                    <option value="古典樂">古典樂</option>
-                    <option value="鄉村歌曲">鄉村歌曲</option>
-                    <option value="電音">電音</option>
-                    <option value="饒舌樂">饒舌樂</option>
-                    <option value="搖滾音樂">搖滾音樂</option>
+                <Select onChange={(e) => setMovieType(e.target.value)}>
+                    <option hidden>請選擇電影類型</option>
+                    <option value="動作片">動作片</option>
+                    <option value="冒險片">冒險片</option>
+                    <option value="喜劇片">喜劇片</option>
+                    <option value="角色扮演">角色扮演</option>
+                    <option value="劇情片">劇情片</option>
+                    <option value="恐怖片">恐怖片</option>
+                    <option value="奇幻片"> 奇幻片</option>
+                    <option value="愛情片">愛情片</option>
+                    <option value="愛情片">動畫片</option>
+                    <option value="愛情片">驚悚片</option>
+                    <option value="愛情片">懸疑片</option>
+                    <option value="愛情片">科幻片</option>
+                    <option value="愛情片">歌舞劇、音樂片</option>
+                    <option value="愛情片">戰爭片</option>
+                    <option value="愛情片">歷史電影</option>
                 </Select>
             </Upperlock>
 

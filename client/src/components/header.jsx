@@ -35,13 +35,13 @@ const Header = (props) => {
                                 </Link>
                                 <ClassMenu className="classMenu">
                                     <Diamond></Diamond>
-                                    {list.subActiveList.map((minorType) => {
+                                    {list.subActiveList.map((activeType) => {
                                         return (
                                             <ClassItem
-                                                key={minorType.minorType}
+                                                key={activeType.activeType}
                                             >
-                                                <Link to={minorType.path}>
-                                                    {minorType.minorType}
+                                                <Link to={activeType.path}>
+                                                    {activeType.activeType}
                                                 </Link>
                                             </ClassItem>
                                         );

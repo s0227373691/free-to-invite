@@ -16,7 +16,6 @@ const Boardgame = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await postMovieForm({
-            primaryType: props.primaryType,
             minorType: props.minorType,
             date,
             people: population,
@@ -57,9 +56,7 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setMovieType(e.target.value)}
-                >
+                <Select onChange={(e) => setMovieType(e.target.value)}>
                     <option hidden>請選擇電影類型</option>
                     <option value="動作片">動作片</option>
                     <option value="冒險片">冒險片</option>
@@ -76,7 +73,7 @@ const Boardgame = (props) => {
                     <option value="愛情片">歌舞劇、音樂片</option>
                     <option value="愛情片">戰爭片</option>
                     <option value="愛情片">歷史電影</option>
-                </SelectBoardGameType>
+                </Select>
             </Upperlock>
 
             <LowerBlock>
@@ -106,7 +103,7 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectBoardGameType = styled(Select)``;
+
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -125,7 +122,6 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
-    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`

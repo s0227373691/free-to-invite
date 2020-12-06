@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const Concert = mongoose.model(
     'Concert',
     new mongoose.Schema({
-        primaryType: {
+        minorType: {
             type: String,
         },
-        minorType: {
+        musicType: {
+            type: String,
+        },
+        precautions: {
             type: String,
         },
         date: {

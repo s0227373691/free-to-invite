@@ -17,7 +17,6 @@ const Boardgame = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await postActiveFreeBoardGame({
-            primaryType: props.primaryType,
             minorType: props.minorType,
             date,
             people: population,
@@ -58,9 +57,7 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
-                >
+                <Select onChange={(e) => setBoardgameType(e.target.value)}>
                     <option hidden>請選擇桌遊類型</option>
                     <option value="策略">策略</option>
                     <option value="益智">益智</option>
@@ -70,7 +67,7 @@ const Boardgame = (props) => {
                     <option value="小品">小品</option>
                     <option value="合作">合作</option>
                     <option value="陣營">陣營</option>
-                </SelectBoardGameType>
+                </Select>
             </Upperlock>
 
             <LowerBlock>
@@ -100,7 +97,6 @@ const Form = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectBoardGameType = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -131,7 +127,6 @@ const LowerBlock = styled.div`
     }
 `;
 const TextAreaBox = styled.div`
-    height: 300px;
     position: relative;
     background: red;
     flex-grow: 1;

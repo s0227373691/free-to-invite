@@ -3,10 +3,16 @@ const mongoose = require('mongoose');
 const Basketball = mongoose.model(
     'Basketball',
     new mongoose.Schema({
-        primaryType: {
+        minorType: {
             type: String,
         },
-        minorType: {
+        basketballType: {
+            type: String,
+        },
+        difficulty: {
+            type: String,
+        },
+        precautions: {
             type: String,
         },
         date: {

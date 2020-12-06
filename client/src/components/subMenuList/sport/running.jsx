@@ -4,24 +4,23 @@ import styled from 'styled-components';
 import Select from '../../commom/baseTag/select';
 import BaseInput from '../../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+import { postActiveRunning } from '../../../lib/api/addActive/sport/running';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [runningType, setRunningType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
-            primaryType: props.primaryType,
+        await postActiveRunning({
             minorType: props.minorType,
             date,
             people: population,
             precautions,
-            boardgameType,
+            runningType,
             title,
             content,
         });
@@ -57,19 +56,13 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <SelectBoardGameType
-                    onChange={(e) => setBoardgameType(e.target.value)}
-                >
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
-                </SelectBoardGameType>
+                <Select onChange={(e) => setRunningType(e.target.value)}>
+                    <option hidden>請選擇跑步類型</option>
+                    <option value="長跑">長跑</option>
+                    <option value="短跑">短跑</option>
+                    <option value="馬拉松">馬拉松</option>
+                    <option value="放鬆跑">放鬆跑</option>
+                </Select>
             </Upperlock>
 
             <LowerBlock>
@@ -99,7 +92,6 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectBoardGameType = styled(Select)``;
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -118,7 +110,6 @@ const Label = styled.label`
 `;
 const Span = styled.span`
     padding-right: 10px;
-    /* margin: 0 10px; */
 `;
 
 const LowerBlock = styled.div`

@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const Movie = mongoose.model(
-    'Movie',
+const Running = mongoose.model(
+    'Running',
     new mongoose.Schema({
         minorType: {
             type: String,
         },
-        movieType: {
-            type: String,
-        },
-        date: {
+        runningType: {
             type: String,
         },
         precautions: {
+            type: String,
+        },
+        date: {
             type: String,
         },
         people: {
@@ -27,4 +27,4 @@ const Movie = mongoose.model(
     })
 );
 
-exports.Movie = Movie;
+exports.Running = Running;

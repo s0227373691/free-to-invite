@@ -1,6 +1,7 @@
 import { apiPostActiveFreeBoardGame } from '../../api.js';
 
 export const postActiveFreeBoardGame = ({
+    minorType,
     date,
     people,
     precautions,
@@ -10,6 +11,7 @@ export const postActiveFreeBoardGame = ({
 }) => {
     console.log(date, people, precautions, boardgameType, title, content);
     return apiPostActiveFreeBoardGame({
+        minorType,
         date,
         people,
         precautions,

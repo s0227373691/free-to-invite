@@ -3,17 +3,20 @@ const mongoose = require('mongoose');
 const Fighting = mongoose.model(
     'Fighting',
     new mongoose.Schema({
-        primaryType: {
-            type: String,
-        },
         minorType: {
             type: String,
         },
         date: {
             type: String,
         },
+        fightingType: {
+            type: String,
+        },
         people: {
             type: Number,
+        },
+        precautions: {
+            type: String,
         },
         title: {
             type: String,

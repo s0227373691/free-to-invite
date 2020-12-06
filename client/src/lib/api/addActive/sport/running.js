@@ -1,7 +1,7 @@
 import { apiPostActiveRunning } from '../../api.js';
 
 export const postActiveRunning = ({
-    minorType,
+    activeType,
     date,
     people,
     precautions,
@@ -10,7 +10,7 @@ export const postActiveRunning = ({
     content,
 }) => {
     return apiPostActiveRunning({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

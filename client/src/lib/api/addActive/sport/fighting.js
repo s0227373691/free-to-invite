@@ -1,7 +1,7 @@
 import { apiPostActiveFighting } from '../../api.js';
 
 export const postActiveFighting = ({
-    minorType,
+    activeType,
     date,
     people,
     precautions,
@@ -10,7 +10,7 @@ export const postActiveFighting = ({
     content,
 }) => {
     return apiPostActiveFighting({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

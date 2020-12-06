@@ -9,7 +9,7 @@ const {
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
-        minorType,
+        activeType,
         date,
         people,
         precautions,
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
     } = req.body;
 
     const basketball = new Basketball({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

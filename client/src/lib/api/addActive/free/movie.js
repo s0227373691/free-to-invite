@@ -2,7 +2,7 @@ import { apiPostMovieForm } from '../../api.js';
 
 export const postMovieForm = ({
     primaryType,
-    minorType,
+    activeType,
     people,
     precautions,
     movieType,
@@ -11,7 +11,7 @@ export const postMovieForm = ({
 }) => {
     console.log(
         primaryType,
-        minorType,
+        activeType,
         people,
         precautions,
         movieType,
@@ -20,7 +20,7 @@ export const postMovieForm = ({
     );
     return apiPostMovieForm({
         primaryType,
-        minorType,
+        activeType,
         people,
         precautions,
         movieType,

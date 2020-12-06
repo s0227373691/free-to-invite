@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Running = mongoose.model(
     'Running',
     new mongoose.Schema({
-        minorType: {
+        activeType: {
             type: String,
         },
         runningType: {

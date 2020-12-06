@@ -7,7 +7,7 @@ const { Movie } = require('../../../../modules/activeForm/free/movie');
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
-        minorType,
+        activeType,
         date,
         people,
         precautions,
@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     } = req.body;
 
     const movie = new Movie({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

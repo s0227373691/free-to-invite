@@ -1,10 +1,11 @@
 const Axios = require('axios');
+const baseURL = 'http://localhost:3000/api';
 
 Axios.defaults.withCredentials = true;
 
 // User 相關的 api
 const userRequest = Axios.create({
-    baseURL: 'http://localhost:3000/api/users',
+    baseURL: `${baseURL}/users`,
 });
 
 // User 相關的 api

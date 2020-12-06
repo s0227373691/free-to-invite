@@ -1,7 +1,7 @@
 import { apiPostConcertForm } from '../../api.js';
 
 export const postConcertForm = ({
-    minorType,
+    activeType,
     date,
     people,
     precautions,
@@ -11,7 +11,7 @@ export const postConcertForm = ({
 }) => {
     console.log(date, people, precautions, musicType, title, content);
     return apiPostConcertForm({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

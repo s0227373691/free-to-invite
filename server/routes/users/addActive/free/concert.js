@@ -7,7 +7,7 @@ const { Concert } = require('../../../../modules/activeForm/free/concert');
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
-        minorType,
+        activeType,
         date,
         people,
         precautions,
@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     } = req.body;
 
     const concert = new Concert({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

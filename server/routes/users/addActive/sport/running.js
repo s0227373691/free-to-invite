@@ -7,7 +7,7 @@ const { Running } = require('../../../../modules/activeForm/sport/running');
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
-        minorType,
+        activeType,
         date,
         people,
         precautions,
@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     } = req.body;
 
     const running = new Running({
-        minorType,
+        activeType,
         date,
         people,
         precautions,

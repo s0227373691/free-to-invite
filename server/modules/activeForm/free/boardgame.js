@@ -6,7 +6,7 @@ const Boardgame = mongoose.model(
         primaryType: {
             type: String,
         },
-        minorType: {
+        activeType: {
             type: String,
         },
         date: {

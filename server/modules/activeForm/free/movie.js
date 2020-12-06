@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Movie = mongoose.model(
     'Movie',
     new mongoose.Schema({
-        minorType: {
+        activeType: {
             type: String,
         },
         movieType: {

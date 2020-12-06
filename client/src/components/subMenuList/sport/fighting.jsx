@@ -16,7 +16,7 @@ const Boardgame = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await postActiveFighting({
-            minorType: props.minorType,
+            activeType: props.activeType,
             fightingType,
             date,
             people: population,

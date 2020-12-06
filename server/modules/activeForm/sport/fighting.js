@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Fighting = mongoose.model(
     'Fighting',
     new mongoose.Schema({
-        minorType: {
+        activeType: {
             type: String,
         },
         date: {

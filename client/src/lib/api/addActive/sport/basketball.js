@@ -1,7 +1,7 @@
 import { apiPostBasketballForm } from '../../api.js';
 
 export const postBasketballForm = ({
-    minorType,
+    activeType,
     difficulty,
     date,
     people,
@@ -11,7 +11,7 @@ export const postBasketballForm = ({
     content,
 }) => {
     return apiPostBasketballForm({
-        minorType,
+        activeType,
         difficulty,
         date,
         people,

@@ -1,33 +1,36 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
-import { ButtonClearDefault } from '../../styles/buttons';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+<<<<<<< HEAD:client/src/components/subMenuList/sport/running.jsx
+import { postActiveRunning } from '../../../lib/api/addActive/sport/running';
+=======
+// import { postActiveFreeBoardGame } from '../../../lib/api/addActive/free/boardgame';
+>>>>>>> 15ddf1cd4dc7b912279bb5939270b50aad926fc4:client/src/components/newActive/running.jsx
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [boardgameType, setBoardgameType] = useState('');
+    const [runningType, setRunningType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
+        await postActiveRunning({
             minorType: props.minorType,
             date,
             people: population,
             precautions,
-            boardgameType,
+            runningType,
             title,
             content,
         });
     };
     return (
-        <Form onSubmit={handleSubmit}>
+        <From onSubmit={handleSubmit}>
             <Upperlock>
                 <Label htmlFor="date">
                     <Span>日期 : </Span>
@@ -57,16 +60,12 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <Select onChange={(e) => setBoardgameType(e.target.value)}>
-                    <option hidden>請選擇桌遊類型</option>
-                    <option value="策略">策略</option>
-                    <option value="益智">益智</option>
-                    <option value="推理">推理</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="幼教">幼教</option>
-                    <option value="小品">小品</option>
-                    <option value="合作">合作</option>
-                    <option value="陣營">陣營</option>
+                <Select onChange={(e) => setRunningType(e.target.value)}>
+                    <option hidden>請選擇跑步類型</option>
+                    <option value="長跑">長跑</option>
+                    <option value="短跑">短跑</option>
+                    <option value="馬拉松">馬拉松</option>
+                    <option value="放鬆跑">放鬆跑</option>
                 </Select>
             </Upperlock>
 
@@ -86,13 +85,13 @@ const Boardgame = (props) => {
                 </TextAreaBox>
             </LowerBlock>
             <ButtonGroup>
-                <Button>取消</Button>
-                <Button>新增</Button>
+                <button className="btnCancel">取消</button>
+                <button className="btnNext">下一步</button>
             </ButtonGroup>
-        </Form>
+        </From>
     );
 };
-const Form = styled.form`
+const From = styled.form`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -127,6 +126,7 @@ const LowerBlock = styled.div`
     }
 `;
 const TextAreaBox = styled.div`
+    height: 300px;
     position: relative;
     background: red;
     flex-grow: 1;
@@ -153,24 +153,35 @@ const TextArea = styled.textarea`
     border: none;
     resize: none;
     border: 1px solid #dadce0;
+    /* overflow-wrap: break-word; */
+
     overflow-y: hidden;
+    font: inherit;
 
     &:focus {
         outline: none;
     }
 `;
 const ButtonGroup = styled.div`
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-`;
+    position: sticky;
+    right: 0;
+    left: 0;
+    bottom: 0;
 
-const Button = styled(ButtonClearDefault)`
-    padding: 10px 15px;
-    border-radius: 5px;
-
-    &:hover {
-        background: rgb(90, 176, 219);
+    button {
+        height: 44px;
+        padding: 0 8px;
+        border-radius: 5px;
+        &:hover {
+            background: rgb(90, 176, 219);
+        }
+    }
+    .btnNext {
+        margin-left: 16px;
     }
 `;
 export default Boardgame;

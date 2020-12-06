@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
-const NewArticle = mongoose.model(
-    'NewArticle',
+const Fighting = mongoose.model(
+    'Fighting',
     new mongoose.Schema({
-        primaryType: {
-            type: String,
-        },
         minorType: {
             type: String,
         },
         date: {
             type: String,
         },
+        fightingType: {
+            type: String,
+        },
         people: {
             type: Number,
+        },
+        precautions: {
+            type: String,
         },
         title: {
             type: String,
@@ -24,4 +27,4 @@ const NewArticle = mongoose.model(
     })
 );
 
-exports.NewArticle = NewArticle;
+exports.Fighting = Fighting;

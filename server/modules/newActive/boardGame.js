@@ -1,25 +1,16 @@
 const mongoose = require('mongoose');
 
-const Boardgame = mongoose.model(
-    'Boardgame',
+const BoardGame = mongoose.model(
+    'BoardGame',
     new mongoose.Schema({
-        primaryType: {
-            type: String,
-        },
-        minorType: {
+        activeType: {
             type: String,
         },
         date: {
             type: String,
         },
-        people: {
+        population: {
             type: Number,
-        },
-        title: {
-            type: String,
-        },
-        content: {
-            type: String,
         },
         Precautions: {
             type: String,
@@ -27,7 +18,13 @@ const Boardgame = mongoose.model(
         boardGameType: {
             type: String,
         },
+        title: {
+            type: String,
+        },
+        content: {
+            type: String,
+        },
     })
 );
 
-exports.Boardgame = Boardgame;
+exports.BoardGame = BoardGame;

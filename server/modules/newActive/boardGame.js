@@ -12,9 +12,6 @@ const BoardGame = mongoose.model(
         population: {
             type: Number,
         },
-        Precautions: {
-            type: String,
-        },
         boardGameType: {
             type: String,
         },

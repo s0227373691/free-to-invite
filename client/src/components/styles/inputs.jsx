@@ -7,3 +7,11 @@ export const Input = styled.input`
     border: 1px solid;
     border-radius: 5px;
 `;
+
+export const InputClearDefault = styled.input`
+    width: 100%;
+    border-radius: 5px;
+    &:focus {
+        outline: none;
+    }
+`;

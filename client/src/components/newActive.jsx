@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Select from './commom/baseTag/select';
+import { SelectClearDefault } from './styles/selects';
 import activeList from '../lib/activeList.js';
 
 import BoardGame from './newActive/boardgame';
@@ -90,6 +91,7 @@ const Container = styled.div`
     max-width: 800px;
     min-height: calc(100vh - 80px);
     margin: 0 auto;
+    padding: 15px;
     display: flex;
     flex-direction: column;
 `;
@@ -106,9 +108,9 @@ const FormContainer = styled.div`
     flex-direction: column;
     flex-grow: 1;
 `;
-const SelectFormType = styled(Select)`
+const SelectFormType = styled(SelectClearDefault)`
     width: 100%;
-    height: 40px;
     margin-bottom: 20px;
     font-size: 18px;
+    background: #dadce0;
 `;

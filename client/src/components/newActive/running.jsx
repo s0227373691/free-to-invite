@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Select from '../commom/baseTag/select';
 import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveRunning } from '../../lib/api/addActive/sport/running';
+import { postNewActiveRunning } from '../../lib/api/newActive/running';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -15,7 +15,7 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveRunning({
+        await postNewActiveRunning({
             activeType: props.activeType,
             date,
             people: population,

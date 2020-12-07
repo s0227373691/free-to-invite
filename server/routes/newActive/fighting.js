@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const _ = require('lodash');
 
-const { Fighting } = require('../../../../modules/activeForm/sport/fighting');
+const { Fighting } = require('../../modules/newActive/fighting');
 
 router.post('/', (req, res) => {
-    console.log(req.body);
     const {
         activeType,
         date,

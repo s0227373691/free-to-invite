@@ -1,4 +1,4 @@
-import { apiPostActiveFreeBoardGame } from '../api.js';
+import { apiPostNewActiveBoardGame } from '../api.js';
 
 export const postNewActiveBoardGame = ({
     activeType,
@@ -9,7 +9,7 @@ export const postNewActiveBoardGame = ({
     title,
     content,
 }) => {
-    return apiPostActiveFreeBoardGame({
+    return apiPostNewActiveBoardGame({
         activeType,
         date,
         people,
@@ -18,7 +18,7 @@ export const postNewActiveBoardGame = ({
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

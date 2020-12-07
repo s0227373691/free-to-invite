@@ -3,31 +3,34 @@ const baseURL = 'http://localhost:3000/api';
 
 Axios.defaults.withCredentials = true;
 
-// User 相關的 api
+// API: user
 const userRequest = Axios.create({
     baseURL: `${baseURL}/users`,
 });
 
-// User 相關的 api
 export const apiPostUserRegister = (data) =>
     userRequest.post('/register', data);
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
 export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
-// 新增文章相關 api
-export const apiPostActiveFreeBoardGame = (data) =>
-    userRequest.post('/addactive/free/boardgame', data);
 
-export const apiPostMovieForm = (data) =>
-    userRequest.post('/addactive/free/movie', data);
+// API: new active
+const newActiveRequest = Axios.create({
+    baseURL: `${baseURL}/newactive`,
+});
+export const apiPostNewActiveBoardGame = (data) =>
+    newActiveRequest.post('/boardgame', data);
 
-export const apiPostConcertForm = (data) =>
-    userRequest.post('/addactive/free/concert', data);
+export const apiPostNewActiveMovie = (data) =>
+    newActiveRequest.post('/movie', data);
 
-export const apiPostBasketballForm = (data) =>
-    userRequest.post('/addactive/sport/basketball', data);
+export const apiPostNewActiveConcert = (data) =>
+    newActiveRequest.post('/concert', data);
 
-export const apiPostActiveRunning = (data) =>
-    userRequest.post('/addactive/sport/running', data);
+export const apiPostNewActiveBasketball = (data) =>
+    newActiveRequest.post('/basketball', data);
 
-export const apiPostActiveFighting = (data) =>
-    userRequest.post('/addactive/sport/fighting', data);
+export const apiPostNewActiveRunning = (data) =>
+    newActiveRequest.post('/running', data);
+
+export const apiPostNewActiveFighting = (data) =>
+    newActiveRequest.post('/fighting', data);

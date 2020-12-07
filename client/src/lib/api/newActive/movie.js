@@ -1,6 +1,6 @@
-import { apiPostMovieForm } from '../../api.js';
+import { apiPostNewActiveMovie } from '../api.js';
 
-export const postMovieForm = ({
+export const postNewActiveMovie = ({
     primaryType,
     activeType,
     people,
@@ -9,16 +9,7 @@ export const postMovieForm = ({
     title,
     content,
 }) => {
-    console.log(
-        primaryType,
-        activeType,
-        people,
-        precautions,
-        movieType,
-        title,
-        content
-    );
-    return apiPostMovieForm({
+    return apiPostNewActiveMovie({
         primaryType,
         activeType,
         people,
@@ -27,7 +18,7 @@ export const postMovieForm = ({
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

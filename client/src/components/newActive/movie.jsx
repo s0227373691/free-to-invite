@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Select from '../commom/baseTag/select';
 import BaseInput from '../commom/baseTag/Input';
 
-import { postMovieForm } from '../../lib/api/addActive/free/movie';
+import { postNewActiveMovie } from '../../lib/api/newActive/movie';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -15,7 +15,7 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postMovieForm({
+        await postNewActiveMovie({
             activeType: props.activeType,
             date,
             people: population,

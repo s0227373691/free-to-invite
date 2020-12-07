@@ -75,7 +75,7 @@ const Header = (props) => {
                                     <Link to="/newactive">新增活動</Link>
                                 </ItemUser>
                                 <ItemUser>
-                                    <Link to="/myarticle">我的文章</Link>
+                                    <Link to="/myactive">我的活動</Link>
                                 </ItemUser>
                                 <ItemUser>登出</ItemUser>
                             </DropUser>

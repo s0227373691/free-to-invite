@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Select from '../commom/baseTag/select';
 import BaseInput from '../commom/baseTag/Input';
 
-import { postConcertForm } from '../../lib/api/addActive/free/concert';
+import { postNewActiveConcert } from '../../lib/api/newActive/concert';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -15,7 +15,7 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postConcertForm({
+        await postNewActiveConcert({
             activeType: props.activeType,
             date,
             people: population,

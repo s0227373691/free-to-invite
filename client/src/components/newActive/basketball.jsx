@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Select from '../commom/baseTag/select';
 import BaseInput from '../commom/baseTag/Input';
 
-import { postBasketballForm } from '../../lib/api/addActive/sport/basketball';
+import { postNewActiveBasketball } from '../../lib/api/newActive/basketball';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
@@ -16,7 +16,7 @@ const Boardgame = (props) => {
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postBasketballForm({
+        await postNewActiveBasketball({
             activeType: props.activeType,
             date,
             people: population,

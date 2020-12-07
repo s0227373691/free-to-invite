@@ -1,33 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const _ = require('lodash');
 
-const {
-    Basketball,
-} = require('../../../../modules/activeForm/sport/basketball');
+const { BoardGame } = require('../../modules/newActive/boardGame');
 
 router.post('/', (req, res) => {
-    console.log(req.body);
     const {
         activeType,
         date,
         people,
         precautions,
-        movieTypee,
+        boardgameType,
         title,
         content,
     } = req.body;
 
-    const basketball = new Basketball({
+    const boardGame = new BoardGame({
         activeType,
         date,
         people,
         precautions,
-        movieTypee,
+        boardgameType,
         title,
         content,
     });
-    basketball.save();
+    boardGame.save();
 });
 
 module.exports = router;

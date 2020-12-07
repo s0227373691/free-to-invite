@@ -1,24 +1,24 @@
-import { apiPostActiveRunning } from '../../api.js';
+import { apiPostNewActiveConcert } from '../api.js';
 
-export const postActiveRunning = ({
+export const postNewActiveConcert = ({
     activeType,
     date,
     people,
     precautions,
-    runningType,
+    musicType,
     title,
     content,
 }) => {
-    return apiPostActiveRunning({
+    return apiPostNewActiveConcert({
         activeType,
         date,
         people,
         precautions,
-        runningType,
+        musicType,
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

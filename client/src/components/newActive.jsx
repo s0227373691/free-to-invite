@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { SelectClearDefault } from './styles/selects';
 import activeList from '../lib/activeList.js';
 
-import BoardGame from './newActive/boardgame';
+import BoardGame from './newActive/boardGame';
 import Movie from './newActive/movie';
 import Concert from './newActive/concert';
 import Basketball from './newActive/basketball';

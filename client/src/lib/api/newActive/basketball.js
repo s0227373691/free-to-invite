@@ -1,25 +1,26 @@
-import { apiPostConcertForm } from '../../api.js';
+import { apiPostNewActiveBasketball } from '../api.js';
 
-export const postConcertForm = ({
+export const postNewActiveBasketball = ({
     activeType,
+    difficulty,
     date,
     people,
     precautions,
-    musicType,
+    basketballType,
     title,
     content,
 }) => {
-    console.log(date, people, precautions, musicType, title, content);
-    return apiPostConcertForm({
+    return apiPostNewActiveBasketball({
         activeType,
+        difficulty,
         date,
         people,
         precautions,
-        musicType,
+        basketballType,
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

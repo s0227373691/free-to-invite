@@ -10,7 +10,7 @@ import Login from './components/login';
 import Member from './components/member';
 import Article from './components/article';
 import NewActive from './components/newActive';
-import MyArticle from './components/myArticle';
+import myActive from './components/myActive';
 // 內部函式
 import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';
@@ -34,7 +34,7 @@ const App = (props) => {
                     <Route path="/member" component={Member} />
                     <Route path="/article" component={Article} />
                     <Route path="/newactive" component={NewActive} />
-                    <Route path="/myarticle" component={MyArticle} />
+                    <Route path="/myactive" component={myActive} />
                     <Route path="/:board" component={Board} />
                     <Route path="/:board/:subboard" component={Board} />
                     <Route path="/:board/:subboard/:id" component={Board} />

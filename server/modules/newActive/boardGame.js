@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const NewArticle = mongoose.model(
-    'NewArticle',
+const BoardGame = mongoose.model(
+    'BoardGame',
     new mongoose.Schema({
         primaryType: {
             type: String,
         },
-        minorType: {
+        activeType: {
             type: String,
         },
         date: {
@@ -15,13 +15,16 @@ const NewArticle = mongoose.model(
         people: {
             type: Number,
         },
-        title: {
+        boardGameType: {
             type: String,
         },
-        content: {
+        Precautions: {
+            type: String,
+        },
+        boardGameType: {
             type: String,
         },
     })
 );
 
-exports.NewArticle = NewArticle;
+exports.BoardGame = BoardGame;

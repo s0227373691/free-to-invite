@@ -1,6 +1,6 @@
-import { apiPostActiveFighting } from '../../api.js';
+import { apiPostNewActiveFighting } from '../api.js';
 
-export const postActiveFighting = ({
+export const postNewActiveFighting = ({
     activeType,
     date,
     population,
@@ -8,7 +8,7 @@ export const postActiveFighting = ({
     title,
     content,
 }) => {
-    return apiPostActiveFighting({
+    return apiPostNewActiveFighting({
         activeType,
         date,
         population,
@@ -16,7 +16,7 @@ export const postActiveFighting = ({
         title,
         content,
     })
-        .then((res) => console.log(res))
+        .then((res) => res)
         .catch((err) => {
             console.error(err.message);
         });

@@ -4,15 +4,15 @@ const activeList = [
         path: '/free',
         subActiveList: [
             {
-                minorType: '桌游',
+                activeType: '桌游',
                 path: '/free/boardgame',
             },
             {
-                minorType: '電影',
+                activeType: '電影',
                 path: '/free/movie',
             },
             {
-                minorType: '演唱會',
+                activeType: '演唱會',
                 path: '/free/concert',
             },
         ],
@@ -22,15 +22,15 @@ const activeList = [
         path: '/sport',
         subActiveList: [
             {
-                minorType: '慢跑',
+                activeType: '慢跑',
                 path: '/sport/running',
             },
             {
-                minorType: '籃球',
+                activeType: '籃球',
                 path: '/sport/basketball',
             },
             {
-                minorType: '格鬥',
+                activeType: '格鬥',
                 path: '/sport/fighting',
             },
         ],
@@ -40,15 +40,15 @@ const activeList = [
         path: '/travel',
         subActiveList: [
             {
-                minorType: '台北',
+                activeType: '台北',
                 path: '/travel/taipei',
             },
             {
-                minorType: '台中',
+                activeType: '台中',
                 path: '/travel/taichung',
             },
             {
-                minorType: '新北',
+                activeType: '新北',
                 path: '/travel/newtaipei',
             },
         ],

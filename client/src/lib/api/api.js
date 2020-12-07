@@ -8,18 +8,26 @@ const userRequest = Axios.create({
     baseURL: `${baseURL}/users`,
 });
 
+// User 相關的 api
 export const apiPostUserRegister = (data) =>
     userRequest.post('/register', data);
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
 export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
+// 新增文章相關 api
+export const apiPostActiveFreeBoardGame = (data) =>
+    userRequest.post('/addactive/free/boardgame', data);
 
-// New Active 相關的 api
-const newActiveRequest = Axios.create({
-    baseURL: `${baseURL}/newactive`,
-});
+export const apiPostMovieForm = (data) =>
+    userRequest.post('/addactive/free/movie', data);
 
-export const apiPostNewActiveBoardGame = (data) =>
-    newActiveRequest.post('/boardgame', data);
+export const apiPostConcertForm = (data) =>
+    userRequest.post('/addactive/free/concert', data);
 
-export const apiPostNewActiveMovie = (data) =>
-    newActiveRequest.post('/movie', data);
+export const apiPostBasketballForm = (data) =>
+    userRequest.post('/addactive/sport/basketball', data);
+
+export const apiPostActiveRunning = (data) =>
+    userRequest.post('/addactive/sport/running', data);
+
+export const apiPostActiveFighting = (data) =>
+    userRequest.post('/addactive/sport/fighting', data);

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveFighting } from '../../../lib/api/addActive/sport/fighting';
+import { postActiveFighting } from '../../lib/api/addActive/sport/fighting';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');

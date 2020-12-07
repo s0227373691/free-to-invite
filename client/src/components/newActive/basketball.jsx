@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postMovieForm } from '../../../lib/api/addActive/free/movie';
+import { postBasketballForm } from '../../lib/api/addActive/sport/basketball';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [movieType, setMovieType] = useState('');
+    const [basketballType, setBasketballType] = useState('');
+    const [difficulty, setDifficulty] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postMovieForm({
+        await postBasketballForm({
             activeType: props.activeType,
             date,
             people: population,
+            difficulty,
             precautions,
-            movieType,
+            basketballType,
             title,
             content,
         });
@@ -56,23 +58,17 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <Select onChange={(e) => setMovieType(e.target.value)}>
-                    <option hidden>請選擇電影類型</option>
-                    <option value="動作片">動作片</option>
-                    <option value="冒險片">冒險片</option>
-                    <option value="喜劇片">喜劇片</option>
-                    <option value="角色扮演">角色扮演</option>
-                    <option value="劇情片">劇情片</option>
-                    <option value="恐怖片">恐怖片</option>
-                    <option value="奇幻片"> 奇幻片</option>
-                    <option value="愛情片">愛情片</option>
-                    <option value="愛情片">動畫片</option>
-                    <option value="愛情片">驚悚片</option>
-                    <option value="愛情片">懸疑片</option>
-                    <option value="愛情片">科幻片</option>
-                    <option value="愛情片">歌舞劇、音樂片</option>
-                    <option value="愛情片">戰爭片</option>
-                    <option value="愛情片">歷史電影</option>
+                <Select onChange={(e) => setBasketballType(e.target.value)}>
+                    <option hidden>請選擇籃球類型</option>
+                    <option value="3 v 3">3 v 3</option>
+                    <option value="5 v 5">5 v 5</option>
+                    <option value="街頭籃球">街頭籃球</option>
+                </Select>
+                <Select onChange={(e) => setDifficulty(e.target.value)}>
+                    <option hidden>對手難易度</option>
+                    <option value="高">高</option>
+                    <option value="中">中</option>
+                    <option value="低">低</option>
                 </Select>
             </Upperlock>
 

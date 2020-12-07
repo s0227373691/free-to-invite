@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// customize modules
-import Select from './commom/baseTag/select';
+
 import { SelectClearDefault } from './styles/selects';
 import activeList from '../lib/activeList.js';
-// 分類
-import BoardGame from './subMenuList/boardgame';
-import Movie from './subMenuList/free/movie';
-import Concert from './subMenuList/free/concert';
-import Basketball from './subMenuList/sport/basketball';
-import Fighting from './subMenuList/sport/fighting';
-import Running from './subMenuList/sport/running';
-import Newtaipei from './subMenuList/travel/newtaipei';
-import Taichung from './subMenuList/travel/taichung';
-import Taipei from './subMenuList/travel/taipei';
 
-// TODO primaryType  activeType 共用 其他動態
+import BoardGame from './newActive/boardgame';
+import Movie from './newActive/movie';
+import Concert from './newActive/concert';
+import Basketball from './newActive/basketball';
+import Fighting from './newActive/fighting';
+import Running from './newActive/running';
+import Newtaipei from './newActive/newtaipei';
+import Taichung from './newActive/taichung';
+import Taipei from './newActive/taipei';
 
 const NewArticle = () => {
     const [formTypeComponent, setFormTypeComponent] = useState(null);

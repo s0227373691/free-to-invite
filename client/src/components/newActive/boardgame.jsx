@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// import BaseInput from '../commom/baseTag/Input';
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
@@ -12,6 +11,7 @@ import { InputClearDefault } from '../styles/inputs';
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
+    const [boardGameType, setBoardGameType] = useState('');
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
@@ -64,7 +64,7 @@ const Boardgame = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveFreeBoardGame({
+        await postNewActiveBoardGame({
             activeType: props.activeType,
             date,
             population,

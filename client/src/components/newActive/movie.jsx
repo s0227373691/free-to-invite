@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postActiveRunning } from '../../../lib/api/addActive/sport/running';
+import { postMovieForm } from '../../lib/api/addActive/free/movie';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [runningType, setRunningType] = useState('');
+    const [movieType, setMovieType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postActiveRunning({
+        await postMovieForm({
             activeType: props.activeType,
             date,
             people: population,
             precautions,
-            runningType,
+            movieType,
             title,
             content,
         });
@@ -56,12 +56,23 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <Select onChange={(e) => setRunningType(e.target.value)}>
-                    <option hidden>請選擇跑步類型</option>
-                    <option value="長跑">長跑</option>
-                    <option value="短跑">短跑</option>
-                    <option value="馬拉松">馬拉松</option>
-                    <option value="放鬆跑">放鬆跑</option>
+                <Select onChange={(e) => setMovieType(e.target.value)}>
+                    <option hidden>請選擇電影類型</option>
+                    <option value="動作片">動作片</option>
+                    <option value="冒險片">冒險片</option>
+                    <option value="喜劇片">喜劇片</option>
+                    <option value="角色扮演">角色扮演</option>
+                    <option value="劇情片">劇情片</option>
+                    <option value="恐怖片">恐怖片</option>
+                    <option value="奇幻片"> 奇幻片</option>
+                    <option value="愛情片">愛情片</option>
+                    <option value="愛情片">動畫片</option>
+                    <option value="愛情片">驚悚片</option>
+                    <option value="愛情片">懸疑片</option>
+                    <option value="愛情片">科幻片</option>
+                    <option value="愛情片">歌舞劇、音樂片</option>
+                    <option value="愛情片">戰爭片</option>
+                    <option value="愛情片">歷史電影</option>
                 </Select>
             </Upperlock>
 
@@ -92,6 +103,7 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
+
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;

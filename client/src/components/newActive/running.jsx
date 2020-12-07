@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Select from '../../commom/baseTag/select';
-import BaseInput from '../../commom/baseTag/Input';
+import Select from '../commom/baseTag/select';
+import BaseInput from '../commom/baseTag/Input';
 
-import { postBasketballForm } from '../../../lib/api/addActive/sport/basketball';
+import { postActiveRunning } from '../../lib/api/addActive/sport/running';
 
 const Boardgame = (props) => {
     const [date, setDate] = useState('');
     const [population, setPopulation] = useState('');
     const [precautions, setPrecautions] = useState('');
-    const [basketballType, setBasketballType] = useState('');
-    const [difficulty, setDifficulty] = useState('');
+    const [runningType, setRunningType] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await postBasketballForm({
+        await postActiveRunning({
             activeType: props.activeType,
             date,
             people: population,
-            difficulty,
             precautions,
-            basketballType,
+            runningType,
             title,
             content,
         });
@@ -58,17 +56,12 @@ const Boardgame = (props) => {
                         onChange={(e) => setPrecautions(e.target.value)}
                     />
                 </Label>
-                <Select onChange={(e) => setBasketballType(e.target.value)}>
-                    <option hidden>請選擇籃球類型</option>
-                    <option value="3 v 3">3 v 3</option>
-                    <option value="5 v 5">5 v 5</option>
-                    <option value="街頭籃球">街頭籃球</option>
-                </Select>
-                <Select onChange={(e) => setDifficulty(e.target.value)}>
-                    <option hidden>對手難易度</option>
-                    <option value="高">高</option>
-                    <option value="中">中</option>
-                    <option value="低">低</option>
+                <Select onChange={(e) => setRunningType(e.target.value)}>
+                    <option hidden>請選擇跑步類型</option>
+                    <option value="長跑">長跑</option>
+                    <option value="短跑">短跑</option>
+                    <option value="馬拉松">馬拉松</option>
+                    <option value="放鬆跑">放鬆跑</option>
                 </Select>
             </Upperlock>
 
@@ -99,7 +92,6 @@ const From = styled.form`
     flex-direction: column;
     flex-grow: 1;
 `;
-
 const Upperlock = styled.div`
     display: flex;
     justify-content: space-between;

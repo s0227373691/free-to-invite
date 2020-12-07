@@ -9,7 +9,6 @@ export const postNewActiveBoardGame = ({
     title,
     content,
 }) => {
-    console.log(date, people, precautions, boardgameType, title, content);
     return apiPostActiveFreeBoardGame({
         activeType,
         date,

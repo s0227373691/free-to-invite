@@ -6,7 +6,7 @@ import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 
-import { postNewActiveBoardGame } from '../../lib/api/newActive/boardgame';
+import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
 import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
@@ -19,7 +19,7 @@ const Boardgame = (props) => {
     const [backgroundColor, setBackgroundColor] = useState('#9b9b9b');
     const [newBoardGameType, setNewBoardGameType] = useState('');
     const [newBoardGameName, setNewBoardGameName] = useState('');
-    const [addedBoardGameList, setAddedBoardGameList] = useState();
+    const [addedBoardGameList, setAddedBoardGameList] = useState([]);
     const boardGameTypeList = [
         { type: '派對', color: '#efd100d6' },
         { type: '策略', color: '#00efe3' },

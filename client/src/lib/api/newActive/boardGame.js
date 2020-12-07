@@ -1,6 +1,6 @@
-import { apiPostActiveFreeBoardGame } from '../../api.js';
+import { apiPostActiveFreeBoardGame } from '../api.js';
 
-export const postActiveFreeBoardGame = ({
+export const postNewActiveBoardGame = ({
     activeType,
     date,
     people,

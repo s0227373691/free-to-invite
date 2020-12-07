@@ -5,7 +5,7 @@ import Select from './commom/baseTag/select';
 import { SelectClearDefault } from './styles/selects';
 import activeList from '../lib/activeList.js';
 // 分類
-import BoardGame from './subMenuList/free/boardgame';
+import BoardGame from './subMenuList/boardgame';
 import Movie from './subMenuList/free/movie';
 import Concert from './subMenuList/free/concert';
 import Basketball from './subMenuList/sport/basketball';

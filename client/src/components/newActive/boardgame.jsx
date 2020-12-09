@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import dateFormat from 'dateformat';
 
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
@@ -9,7 +10,8 @@ import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
 import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
-    const [date, setDate] = useState('');
+    const now = dateFormat(new Date(), 'isoDate');
+    const [date, setDate] = useState(now);
     const [population, setPopulation] = useState('');
     const [boardGameType, setBoardGameType] = useState('');
     const [cost, setCost] = useState('');
@@ -78,6 +80,7 @@ const Boardgame = (props) => {
             <Input
                 type="date"
                 placeholder="日期"
+                min={now}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 required

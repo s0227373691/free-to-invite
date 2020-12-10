@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import dateFormat from 'dateformat';
+// import dateFormat from 'dateformat';
 
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
@@ -10,8 +10,11 @@ import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
 import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
-    const now = dateFormat(new Date(), 'isoDate');
-    const [date, setDate] = useState(now);
+    // const now = dateFormat(new Date(), 'isoDate');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [registerDeadline, setRegisterDeadline] = useState('');
+
     const [population, setPopulation] = useState('');
     const [boardGameType, setBoardGameType] = useState('');
     const [cost, setCost] = useState('');
@@ -75,16 +78,34 @@ const Boardgame = (props) => {
             content,
         });
     };
+
     return (
         <Form onSubmit={handleSubmit}>
             <Input
-                type="date"
-                placeholder="日期"
-                min={now}
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                type="datetime-local"
+                placeholder="開始時間"
+                // min={now}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
                 required
             />
+            <Input
+                type="datetime-local"
+                placeholder="結束時間"
+                // min={now}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                required
+            />
+            <Input
+                type="datetime-local"
+                placeholder="報名截止時間"
+                // min={now}
+                value={registerDeadline}
+                onChange={(e) => setRegisterDeadline(e.target.value)}
+                required
+            />
+
             <Input
                 type="text"
                 placeholder="標題"
@@ -103,12 +124,17 @@ const Boardgame = (props) => {
                 value={population}
                 onChange={(e) => setPopulation(e.target.value)}
             />
-            <Input
-                placeholder="參加費用..."
+            <SelectClearDefault
+                placeholder="參加費用"
                 type="number"
                 value={cost}
                 onChange={(e) => setCost(e.target.value)}
-            />
+            >
+                <option hidden>參加費用</option>
+                <option value="免費">免費</option>
+                <option value="各自付費">各自付費</option>
+                <option value="平均分攤">平均分攤</option>
+            </SelectClearDefault>
             <NewBoardGame>
                 <SelectBoardGameType
                     style={{ background: backgroundColor }}
@@ -149,7 +175,19 @@ const Boardgame = (props) => {
                                 {type}
                                 {name}
                             </span>
-                            <BtnDeleteTag>X</BtnDeleteTag>
+                            <BtnDeleteTag
+                                onClick={() => {
+                                    const newAddedBoardGameList = [
+                                        ...addedBoardGameList,
+                                    ];
+                                    newAddedBoardGameList.splice(i, 1);
+                                    setAddedBoardGameList(
+                                        newAddedBoardGameList
+                                    );
+                                }}
+                            >
+                                X
+                            </BtnDeleteTag>
                         </AddedBoardGameItem>
                     );
                 })}

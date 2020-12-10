@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Button from './commom/baseTag/button';
 import Login from './login';
 import Register from './register';
 import { userCheckedLoginStatus } from '../store/slices/users';
@@ -12,11 +11,12 @@ import logo from '../assets/img/logo';
 import { ButtonClearDefault } from './styles/buttons';
 
 const Header = (props) => {
-    const [search, setSearch] = useState('');
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
-    const { loggedIn, user } = props.users;
+    const {
+        users: { loggedIn, user },
+    } = props;
     return (
         <Contener>
             <Head>
@@ -34,7 +34,7 @@ const Header = (props) => {
                                     {list.primaryType}
                                 </Link>
                                 <ClassMenu className="classMenu">
-                                    <Diamond></Diamond>
+                                    <Diamond />
                                     {list.subActiveList.map((activeType) => {
                                         return (
                                             <ClassItem
@@ -51,9 +51,9 @@ const Header = (props) => {
                         );
                     })}
                     {loggedIn ? (
-                        <BtnUser>
+                        <User>
                             {user.name}
-                            <DropUser className="userDrop">
+                            <UserDropdown className="userdropdown">
                                 {user.type === 'admin' ? (
                                     <a
                                         href="http://localhost:1000/"
@@ -63,23 +63,23 @@ const Header = (props) => {
                                     </a>
                                 ) : null}
 
-                                <ItemUser>
+                                <UserItem>
                                     <Link to="/personalinformation">
                                         個人資料
                                     </Link>
-                                </ItemUser>
-                                <ItemUser>
+                                </UserItem>
+                                <UserItem>
                                     <Link to="/member">個人檔案</Link>
-                                </ItemUser>
-                                <ItemUser>
+                                </UserItem>
+                                <UserItem>
                                     <Link to="/newactive">新增活動</Link>
-                                </ItemUser>
-                                <ItemUser>
+                                </UserItem>
+                                <UserItem>
                                     <Link to="/myactive">我的活動</Link>
-                                </ItemUser>
-                                <ItemUser>登出</ItemUser>
-                            </DropUser>
-                        </BtnUser>
+                                </UserItem>
+                                <UserItem>登出</UserItem>
+                            </UserDropdown>
+                        </User>
                     ) : (
                         <>
                             <Item onClick={() => setLogin(true)}>
@@ -156,9 +156,6 @@ const Logo = styled.h1`
 `;
 const NavMeun = styled.ul`
     display: flex;
-    li {
-        margin: 0 10px;
-    }
     a {
         display: block;
         padding: 10px;
@@ -173,6 +170,7 @@ const Item = styled.li``;
 
 const DropItem = styled.li`
     position: relative;
+    margin: 0 10px;
     &:hover .classMenu {
         display: block;
     }
@@ -202,7 +200,7 @@ const Diamond = styled.div`
 
 const ClassItem = styled.li``;
 
-const BtnUser = styled(ButtonClearDefault)`
+const User = styled(ButtonClearDefault)`
     width: 150px;
     padding: 10px;
     color: #2d3436;
@@ -211,20 +209,20 @@ const BtnUser = styled(ButtonClearDefault)`
         color: #0984e3;
     }
 
-    &:hover .userDrop {
+    &:hover .userdropdown {
         color: black;
         display: block;
     }
 `;
 
-const DropUser = styled.ul`
+const UserDropdown = styled.ul`
     padding: 0 10px;
     display: none;
     position: absolute;
     box-sizing: border-box;
     background-color: #c4c4c4;
 `;
-const ItemUser = styled.li`
+const UserItem = styled.li`
     &:hover {
         color: #0984e3;
     }

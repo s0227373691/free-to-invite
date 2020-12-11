@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 // import dateFormat from 'dateformat';
+import GoogleMapReact from 'google-map-react';
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const handleApiLoaded = (map, maps) => {
+    // use map and maps objects
+    console.log('載入完成!'); // 印出「載入完成」
+};
 
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
@@ -10,7 +17,33 @@ import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
 import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
-    // const now = dateFormat(new Date(), 'isoDate');
+    // 當地圖載入完成，將地圖實體與地圖 API 傳入 state 供之後使用
+    const mapHasLoaded = (map, maps) => {
+        setMapInstance(map);
+        setMapApi(maps);
+        setMapApiLoaded(true);
+    };
+    // 用來處理移動事件發生時重新更新 myPosition 的值，而這個更新值就是我地圖視角正中心點的值，需要從 mapInstance 中去取
+    const handleMapCenterChange = () => {
+        if (mapApiLoaded) {
+            setMyPosition({
+                //TODO  center 底下的 lat() 與 lng() 方法可以回傳現下地圖正中心點的經緯度
+                lat: mapInstance.center.lat(),
+                lng: mapInstance.center.lng(),
+            });
+        }
+    };
+    //TODO  預設位置
+    const [myPosition, setMyPosition] = useState({
+        lat: 25.04,
+        lng: 121.5,
+    });
+
+    const [mapInstance, setMapInstance] = useState(null);
+    const [mapApi, setMapApi] = useState(null);
+    const [mapApiLoaded, setMapApiLoaded] = useState(false);
+
+    //TODO  const now = dateFormat(new Date(), 'isoDate');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [registerDeadline, setRegisterDeadline] = useState('');
@@ -81,6 +114,29 @@ const Boardgame = (props) => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <div style={{ height: '400px', width: '400px' }}>
+                <GoogleMapReact
+                    yesIWantToUseGoogleMapApiInternals={true} //TODO  設定為 true
+                    bootstrapURLKeys={{
+                        key: 'AIzaSyDbatx1g_dDPpQIz6mTPgECwjhXgqUjlrU', // API Key
+                    }}
+                    defaultCenter={{
+                        lat: 25.04, //TODO 預設地圖視角，也就是一打開會先看到哪個地區
+                        lng: 121.5, //TODO  預設地圖視角，也就是一打開會先看到哪個地區
+                    }}
+                    defaultZoom={17} //TODO  預設縮放視角
+                    onGoogleApiLoaded={(
+                        { map, maps } //TODO  onGoogleApiLoaded 載入完成後執行
+                    ) => mapHasLoaded(map, maps)} // map 是個物件，指的就是現在看到的這張地圖，如果要取得這張地圖的資訊，就需要取得這個物件的資訊或方法來使用， maps 也是物件，指的是 Google Maps API，裡面有許多我們可以調用的方法，可以利用它來使用搜尋附近的地標資訊等等
+                    onChange={handleMapCenterChange} //TODO  移動地圖邊界時觸發 handleMapCenterChange
+                >
+                    <AnyReactComponent
+                        lat={myPosition.lat} //TODO 　緯度
+                        lng={myPosition.lng} //TODO  經度
+                        text="My Marker"
+                    />
+                </GoogleMapReact>
+            </div>
             <Input
                 type="datetime-local"
                 placeholder="開始時間"

@@ -4,10 +4,12 @@ import styled from 'styled-components';
 // import dateFormat from 'dateformat';
 import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-const handleApiLoaded = (map, maps) => {
-    // use map and maps objects
-    console.log('載入完成!'); // 印出「載入完成」
-};
+const Landmark = ({ icon, text }) => (
+    <div>
+        <img style={{ height: '30px', width: '30px' }} src={icon} />
+        <div>{text}</div>
+    </div>
+);
 
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
@@ -39,9 +41,33 @@ const Boardgame = (props) => {
         lng: 121.5,
     });
 
+    const findLocation = () => {
+        if (mapApiLoaded) {
+            //  new 一個 service 時將 mapInstance 當作參數放入 mapApi.places.PlacesService，代表我們以這個地圖當作參考
+            const service = new mapApi.places.PlacesService(mapInstance);
+            const request = {
+                location: myPosition, // 搜尋時以何者為中心
+                radius: 5000, // 搜尋半徑，以公尺為單位
+                type: ['新北市五股區水碓路16巷36號2樓'], // 要搜尋的地標
+                // 其他參數文件 https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceSearchRequest。
+            };
+            // nearbySearch 是 places.PlacesService 底下提供的一個方法，第一個參數是一個 Request，第二個參數是一個 Callback Function，在回傳 Response 後執行，
+            service.nearbySearch(request, (results, status) => {
+                // status 是搜尋狀況，如果成功搜尋值會是 "OK"
+                if (status === mapApi.places.PlacesServiceStatus.OK) {
+                    console.log(results); // 地標或商家的資訊20筆 (result 詳細介紹 https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceResult )
+                    setPlaces(results);
+                }
+            });
+        }
+    };
+
     const [mapInstance, setMapInstance] = useState(null);
     const [mapApi, setMapApi] = useState(null);
     const [mapApiLoaded, setMapApiLoaded] = useState(false);
+
+    // 附近地標或店家的資訊
+    const [places, setPlaces] = useState([]);
 
     //TODO  const now = dateFormat(new Date(), 'isoDate');
     const [startDate, setStartDate] = useState('');
@@ -52,7 +78,6 @@ const Boardgame = (props) => {
     const [boardGameType, setBoardGameType] = useState('');
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
-    const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('#9b9b9b');
     const [newBoardGameType, setNewBoardGameType] = useState('');
@@ -119,6 +144,7 @@ const Boardgame = (props) => {
                     yesIWantToUseGoogleMapApiInternals={true} //TODO  設定為 true
                     bootstrapURLKeys={{
                         key: 'AIzaSyDbatx1g_dDPpQIz6mTPgECwjhXgqUjlrU', // API Key
+                        libraries: ['places'], // 如果我們要啟用 API 功能需要再 bootstrapURLKeys 屬性增加 libraries 陣列，陣列裡面的值可以讓我們啟用要使用的 API
                     }}
                     defaultCenter={{
                         lat: 25.04, //TODO 預設地圖視角，也就是一打開會先看到哪個地區
@@ -135,8 +161,21 @@ const Boardgame = (props) => {
                         lng={myPosition.lng} //TODO  經度
                         text="My Marker"
                     />
+
+                    {places.map((item, index) => (
+                        <Landmark
+                            icon={item.icon}
+                            key={index}
+                            lat={item.geometry.location.lat()}
+                            lng={item.geometry.location.lng()}
+                            text={item.name}
+                            placeId={item.place_id}
+                        />
+                    ))}
                 </GoogleMapReact>
             </div>
+            <input type="button" value="找咖啡廳" onClick={findLocation} />
+
             <Input
                 type="datetime-local"
                 placeholder="開始時間"
@@ -168,12 +207,7 @@ const Boardgame = (props) => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
-            <Input
-                type="text"
-                placeholder="地點"
-                value={place}
-                onChange={(e) => setPlace(e.target.value)}
-            />
+
             <Input
                 placeholder="人數"
                 type="number"

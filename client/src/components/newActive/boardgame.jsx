@@ -124,17 +124,12 @@ const Boardgame = (props) => {
                 value={population}
                 onChange={(e) => setPopulation(e.target.value)}
             />
-            <SelectClearDefault
+            <Input
                 placeholder="參加費用"
                 type="number"
                 value={cost}
                 onChange={(e) => setCost(e.target.value)}
-            >
-                <option hidden>參加費用</option>
-                <option value="免費">免費</option>
-                <option value="各自付費">各自付費</option>
-                <option value="平均分攤">平均分攤</option>
-            </SelectClearDefault>
+            ></Input>
             <NewBoardGame>
                 <SelectBoardGameType
                     style={{ background: backgroundColor }}

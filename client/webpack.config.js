@@ -22,7 +22,22 @@ module.exports = {
                 },
             },
             {
-                test: /\.(png|jpg|gif|jpe?g|svg)$/,
+                test: /\.(svg)$/,
+                exclude: [/node_modules/],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            publicPath: './src/assets/svg',
+                            emitFile: false,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(png|jpg|gif|jpe?g)$/,
+                exclude: [/node_modules/],
                 use: [
                     {
                         loader: 'file-loader',
@@ -34,16 +49,6 @@ module.exports = {
                     },
                 ],
             },
-            // {
-            //     test: /\.(png|jpg|svg)$/,
-            //     use: {
-            //         // loader: 'url-loader',
-            //         loader: 'file-loader',
-            //         options: {
-            //             limit: 8192,
-            //         },
-            //     },
-            // },
         ],
     },
     devtool: 'source-map',

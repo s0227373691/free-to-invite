@@ -1,107 +1,89 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Login from './login';
 import Register from './register';
-import { userCheckedLoginStatus } from '../store/slices/users';
-import activeList from '../lib/activeList.js';
-import logo from '../assets/img/logo';
 import { ButtonClearDefault } from './styles/buttons';
+
+import { userCheckedLoginStatus } from '../store/slices/users';
+import activeTypeList from '../lib/activeTypeList.js';
+import IconLogo from '../assets/img/logo';
 
 const Header = (props) => {
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
-    const {
-        users: { loggedIn, user },
-    } = props;
+    const { loggedIn } = props.users;
+    if (loggedIn)
+        var { name: accountName, type: accountType } = props.users.user;
     return (
         <Contener>
             <Head>
                 <Logo>
-                    <Link className="logoLink" to="/">
-                        <img src={logo} alt="image load fail..." />
+                    <Link to="/">
+                        <img src={IconLogo} alt="image load fail..." />
                     </Link>
                 </Logo>
-
-                <NavMeun>
-                    {activeList.map((list) => {
+                <ActiveTypeList>
+                    {activeTypeList.map(({ type, activeList }) => {
                         return (
-                            <DropItem key={list.primaryType}>
-                                <Link className="navLink" to={list.path}>
-                                    {list.primaryType}
-                                </Link>
-                                <ClassMenu className="classMenu">
+                            <ActiveType key={type}>
+                                <span>{type}</span>
+                                <ActiveList className="show-active-list">
                                     <Diamond />
-                                    {list.subActiveList.map((activeType) => {
+                                    {activeList.map(({ name, icon, path }) => {
                                         return (
-                                            <ClassItem
-                                                key={activeType.activeType}
-                                            >
-                                                <Link to={activeType.path}>
-                                                    {activeType.activeType}
-                                                </Link>
-                                            </ClassItem>
+                                            <Active key={name}>
+                                                <Icon
+                                                    src={icon}
+                                                    alt="Not found..."
+                                                />
+                                                <Link to={path}>{name}</Link>
+                                            </Active>
                                         );
                                     })}
-                                </ClassMenu>
-                            </DropItem>
+                                </ActiveList>
+                            </ActiveType>
                         );
                     })}
-                    {loggedIn ? (
-                        <User>
-                            {user.name}
-                            <UserDropdown className="userdropdown">
-                                {user.type === 'admin' ? (
+                </ActiveTypeList>
+                {loggedIn ? (
+                    <Account>
+                        {accountName}
+                        <AccountActionList className="show-user-dropdown">
+                            {accountType === 'admin' ? (
+                                <AccountAction>
                                     <a
                                         href="http://localhost:1000/"
                                         target="_blank"
                                     >
                                         後台管理
                                     </a>
-                                ) : null}
-
-                                <UserItem>
-                                    <Link to="/personalinformation">
-                                        個人資料
-                                    </Link>
-                                </UserItem>
-                                <UserItem>
-                                    <Link to="/member">個人檔案</Link>
-                                </UserItem>
-                                <UserItem>
-                                    <Link to="/newactive">新增活動</Link>
-                                </UserItem>
-                                <UserItem>
-                                    <Link to="/myactive">我的活動</Link>
-                                </UserItem>
-                                <UserItem>登出</UserItem>
-                            </UserDropdown>
-                        </User>
-                    ) : (
-                        <>
-                            <Item onClick={() => setLogin(true)}>
-                                <Link to="#">登入</Link>
-                            </Item>
-                            <Item onClick={() => setRegister(true)}>
-                                <Link to="#">註冊</Link>
-                            </Item>
-                        </>
-                    )}
-                </NavMeun>
-
-                {/* <div>
-                        Logo通過
-                        <a
-                            href="https://www.designevo.com/tw/logo-maker/"
-                            title="免費線上logo製作軟體"
-                        >
-                            DesignEvo
-                        </a>
-                        設計製作
-                    </div> */}
+                                </AccountAction>
+                            ) : null}
+                            <AccountAction>
+                                <Link to="/personalinformation">個人資料</Link>
+                            </AccountAction>
+                            <AccountAction>
+                                <Link to="/member">個人檔案</Link>
+                            </AccountAction>
+                            <AccountAction>
+                                <Link to="/newactive">新增活動</Link>
+                            </AccountAction>
+                            <AccountAction>
+                                <Link to="/myactive">我的活動</Link>
+                            </AccountAction>
+                            <AccountAction>登出</AccountAction>
+                        </AccountActionList>
+                    </Account>
+                ) : (
+                    <ButtonGroup>
+                        <Button onClick={() => setLogin(true)}>登入</Button>
+                        <Button onClick={() => setRegister(true)}>註冊</Button>
+                    </ButtonGroup>
+                )}
             </Head>
             {loggedIn ? null : (
                 <>
@@ -147,45 +129,69 @@ const Head = styled.header`
 
 const Logo = styled.h1`
     display: flex;
-    .logoLink {
+    a {
         display: block;
         img {
             height: 110px;
         }
     }
 `;
-const NavMeun = styled.ul`
+const ActiveTypeList = styled.ul`
     display: flex;
-    a {
+`;
+
+const ActiveType = styled.li`
+    position: relative;
+
+    span {
         display: block;
         padding: 10px;
         color: #2d3436;
         transition: 0.3s;
+        padding: 15px 25px;
+
+        &:hover {
+            cursor: pointer;
+            color: #0984e3;
+        }
+    }
+    .show-active-list {
+        visibility: hidden;
+        opacity: 0;
+    }
+    &:hover .show-active-list {
+        visibility: visible;
+        opacity: 1;
+        transition: 0.5s;
+    }
+`;
+
+const ActiveList = styled.ul`
+    width: 180px;
+    padding: 15px;
+    position: absolute;
+    left: calc(-90px + 50%);
+    background: #fff;
+    filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
+    border-radius: 10px;
+`;
+
+const Active = styled.li`
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+
+    a {
+        width: 100%;
+        display: block;
+        color: #2d3436;
+        transition: 0.3s;
+        padding: 15px 25px;
+
         &:hover {
             color: #0984e3;
         }
     }
-`;
-const Item = styled.li``;
-
-const DropItem = styled.li`
-    position: relative;
-    margin: 0 10px;
-    &:hover .classMenu {
-        display: block;
-    }
-`;
-
-const ClassMenu = styled.ul`
-    width: 150px;
-    display: none;
-    padding: 10px;
-    position: absolute;
-    left: calc(-75px + 50%);
-    top: 40px;
-    background: #fff;
-    filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
-    border-radius: 10px;
 `;
 
 const Diamond = styled.div`
@@ -198,9 +204,7 @@ const Diamond = styled.div`
     transform: rotate(45deg);
 `;
 
-const ClassItem = styled.li``;
-
-const User = styled(ButtonClearDefault)`
+const Account = styled(ButtonClearDefault)`
     width: 150px;
     padding: 10px;
     color: #2d3436;
@@ -208,22 +212,45 @@ const User = styled(ButtonClearDefault)`
     &:hover {
         color: #0984e3;
     }
-
-    &:hover .userdropdown {
-        color: black;
-        display: block;
+    .show-user-dropdown {
+        visibility: hidden;
+    }
+    &:hover .show-user-dropdown {
+        visibility: visible;
     }
 `;
 
-const UserDropdown = styled.ul`
+const AccountActionList = styled.ul`
     padding: 0 10px;
-    display: none;
     position: absolute;
     box-sizing: border-box;
     background-color: #c4c4c4;
 `;
-const UserItem = styled.li`
+
+const AccountAction = styled.li`
     &:hover {
+        color: #0984e3;
+    }
+`;
+
+const Icon = styled.img`
+    width: 30px;
+    height: 30px;
+`;
+
+const ButtonGroup = styled.div`
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const Button = styled(ButtonClearDefault)`
+    padding: 0 15px;
+    font-size: 16px;
+
+    &:hover {
+        transition: 0.3s;
         color: #0984e3;
     }
 `;

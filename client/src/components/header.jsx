@@ -23,6 +23,7 @@ const Header = (props) => {
     const handleClickLogout = async () => {
         const { data } = await getUserLogout();
         props.userCheckedLoginStatus(data);
+        setLogin(false);
     };
     return (
         <Contener>

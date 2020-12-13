@@ -8,6 +8,7 @@ import Register from './register';
 import { ButtonClearDefault } from './styles/buttons';
 
 import { userCheckedLoginStatus } from '../store/slices/users';
+import { getUserLogout } from '../lib/api/users/logout';
 import activeTypeList from '../lib/activeTypeList.js';
 import IconLogo from '../assets/img/logo';
 
@@ -18,6 +19,11 @@ const Header = (props) => {
     const { loggedIn } = props.users;
     if (loggedIn)
         var { name: accountName, type: accountType } = props.users.user;
+
+    const handleClickLogout = async () => {
+        const { data } = await getUserLogout();
+        props.userCheckedLoginStatus(data);
+    };
     return (
         <Contener>
             <Head>
@@ -75,7 +81,9 @@ const Header = (props) => {
                             <AccountAction>
                                 <Link to="/myactive">我的活動</Link>
                             </AccountAction>
-                            <AccountAction>登出</AccountAction>
+                            <AccountAction onClick={handleClickLogout}>
+                                登出
+                            </AccountAction>
                         </AccountActionList>
                     </Account>
                 ) : (

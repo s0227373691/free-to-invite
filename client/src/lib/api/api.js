@@ -12,6 +12,7 @@ export const apiPostUserRegister = (data) =>
     userRequest.post('/register', data);
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
 export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
+export const apiGetUserLogout = (data) => userRequest.get('/logout', data);
 
 // API: new active
 const newActiveRequest = Axios.create({

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+// -------------------------------------------------------------------------------------------------
 
 // import dateFormat from 'dateformat';
 import GoogleMapReact from 'google-map-react';
@@ -20,54 +22,97 @@ import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
     // 當地圖載入完成，將地圖實體與地圖 API 傳入 state 供之後使用
+    const [mapInstance, setMapInstance] = useState(null);
+    const [mapApi, setMapApi] = useState(null);
+    const [mapApiLoaded, setMapApiLoaded] = useState(false);
     const mapHasLoaded = (map, maps) => {
         setMapInstance(map);
         setMapApi(maps);
         setMapApiLoaded(true);
     };
-    // 用來處理移動事件發生時重新更新 myPosition 的值，而這個更新值就是我地圖視角正中心點的值，需要從 mapInstance 中去取
+
+    // 用來處理移動事件發生時重新更新 centerPoint 的值，而這個更新值就是我地圖視角正中心點的值，需要從 mapInstance 中去取
+    const [currentCenter, setCurrentCenter] = useState({
+        lat: 25.0727686,
+        lng: 121.4338821,
+    });
+    const [centerPoint, setCenterPoint] = useState({
+        lat: 25.0727686,
+        lng: 121.4338821,
+    });
     const handleMapCenterChange = () => {
         if (mapApiLoaded) {
-            setMyPosition({
-                //TODO  center 底下的 lat() 與 lng() 方法可以回傳現下地圖正中心點的經緯度
+            setCenterPoint({
                 lat: mapInstance.center.lat(),
                 lng: mapInstance.center.lng(),
             });
         }
     };
-    //TODO  預設位置
-    const [myPosition, setMyPosition] = useState({
-        lat: 25.04,
-        lng: 121.5,
-    });
 
+    //TODO 當中心點改變時抓取附近店家資訊
+    const [landMark, setLandMark] = useState([]);
+    useEffect(() => {
+        findLocation();
+    }, [centerPoint]);
     const findLocation = () => {
         if (mapApiLoaded) {
-            //  new 一個 service 時將 mapInstance 當作參數放入 mapApi.places.PlacesService，代表我們以這個地圖當作參考
+            //TODO  new 一個 service 時將 mapInstance 當作參數放入 mapApi.places.PlacesService，代表以這個地圖當作參考
             const service = new mapApi.places.PlacesService(mapInstance);
             const request = {
-                location: myPosition, // 搜尋時以何者為中心
-                radius: 5000, // 搜尋半徑，以公尺為單位
-                type: ['新北市五股區水碓路16巷36號2樓'], // 要搜尋的地標
-                // 其他參數文件 https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceSearchRequest。
+                location: centerPoint, //TODO 搜尋時以何者為中心
+                radius: 1000, //TODO 搜尋半徑，以公尺為單位
+                type: ['cafe', 'food'], //TODO 要搜尋的地標
+                //TODO 其他參數文件 https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceSearchRequest。
             };
-            // nearbySearch 是 places.PlacesService 底下提供的一個方法，第一個參數是一個 Request，第二個參數是一個 Callback Function，在回傳 Response 後執行，
             service.nearbySearch(request, (results, status) => {
-                // status 是搜尋狀況，如果成功搜尋值會是 "OK"
+                //TODO status 是搜尋狀況，如果成功搜尋值會是 "OK"
                 if (status === mapApi.places.PlacesServiceStatus.OK) {
-                    console.log(results); // 地標或商家的資訊20筆 (result 詳細介紹 https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceResult )
-                    setPlaces(results);
+                    setLandMark(results);
                 }
             });
         }
     };
 
-    const [mapInstance, setMapInstance] = useState(null);
-    const [mapApi, setMapApi] = useState(null);
-    const [mapApiLoaded, setMapApiLoaded] = useState(false);
+    // 處理預先顯示搜尋條件(資料長度為5) 這些返回的 資料沒有經緯度需要靠 place_id 來找出經緯度以建立標記
+    const [searchMapText, setSearchMapText] = useState('');
+    const [preSearchResult, setPreSearchResult] = useState([]);
+    useEffect(() => {
+        handleAutocomplete();
+    }, [searchMapText]);
+    const handleAutocomplete = () => {
+        if (mapApiLoaded) {
+            const service = new mapApi.places.AutocompleteService();
+            const request = { input: searchMapText };
+            service.getPlacePredictions(request, (results, status) => {
+                setPreSearchResult(results);
+            });
+        }
+    };
 
-    // 附近地標或店家的資訊
-    const [places, setPlaces] = useState([]);
+    // 地圖位置
+    const searchLocation = () => {
+        const geocoder = new mapApi.Geocoder();
+        geocoder.geocode(
+            {
+                address: searchMapText,
+                componentRestrictions: {
+                    country: 'TW',
+                },
+            },
+            (results, status) => {
+                if (status === 'OK') {
+                    setCenterPoint({
+                        lat: results[0].geometry.location.lat(),
+                        lng: results[0].geometry.location.lng(),
+                    });
+                    setCurrentCenter(centerPoint);
+                    console.log(results[0].geometry.location.lat());
+                    console.log(results[0].geometry.location.lng());
+                }
+            }
+        );
+    };
+    // ---------------------------------------------------------------------------------------
 
     //TODO  const now = dateFormat(new Date(), 'isoDate');
     const [startDate, setStartDate] = useState('');
@@ -140,29 +185,45 @@ const Boardgame = (props) => {
     return (
         <Form onSubmit={handleSubmit}>
             <div style={{ height: '400px', width: '400px' }}>
+                <div></div>
+                <input
+                    type="text"
+                    onChange={(e) => setSearchMapText(e.target.value)}
+                />
+                {preSearchResult && searchMapText
+                    ? preSearchResult.map((item, index) => (
+                        <div key={index} dataid={item.place_id}>
+                            {item.description}
+                        </div>
+                    ))
+                    : null}
+                <input
+                    type="button"
+                    value="搜尋"
+                    onClick={searchLocation}
+                    onChange={handleAutocomplete}
+                />
                 <GoogleMapReact
                     yesIWantToUseGoogleMapApiInternals={true} //TODO  設定為 true
+                    // options={{ mapTypeId: 'roadmap' }} // roadmap 路線圖 ， hybrid : 衛星圖
                     bootstrapURLKeys={{
                         key: 'AIzaSyDbatx1g_dDPpQIz6mTPgECwjhXgqUjlrU', // API Key
-                        libraries: ['places'], // 如果我們要啟用 API 功能需要再 bootstrapURLKeys 屬性增加 libraries 陣列，陣列裡面的值可以讓我們啟用要使用的 API
+                        libraries: ['places'], // 如果要啟用 API 功能需要再 bootstrapURLKeys 屬性增加 libraries 陣列，陣列裡面的值可以讓我們啟用要使用的 API
                     }}
-                    defaultCenter={{
-                        lat: 25.04, //TODO 預設地圖視角，也就是一打開會先看到哪個地區
-                        lng: 121.5, //TODO  預設地圖視角，也就是一打開會先看到哪個地區
-                    }}
-                    defaultZoom={17} //TODO  預設縮放視角
+                    defaultZoom={15} //TODO  預設縮放視角
                     onGoogleApiLoaded={(
-                        { map, maps } //TODO  onGoogleApiLoaded 載入完成後執行
-                    ) => mapHasLoaded(map, maps)} // map 是個物件，指的就是現在看到的這張地圖，如果要取得這張地圖的資訊，就需要取得這個物件的資訊或方法來使用， maps 也是物件，指的是 Google Maps API，裡面有許多我們可以調用的方法，可以利用它來使用搜尋附近的地標資訊等等
+                        { map, maps } //TODO  onGoogleApiLoaded 載入完成後調用 google map 核心方法
+                    ) => mapHasLoaded(map, maps)} //TODO map 是個物件，指的是現在看到的這張地圖，如果要取得這張地圖的資訊，就需要取得這個物件的資訊或方法來使用，maps 也是物件，指的是 Google Maps API，裡面有許多可調用的方法，可以利用它來使用搜尋附近的地標資訊等等
                     onChange={handleMapCenterChange} //TODO  移動地圖邊界時觸發 handleMapCenterChange
+                    center={currentCenter} // 目前地圖整體位置
                 >
                     <AnyReactComponent
-                        lat={myPosition.lat} //TODO 　緯度
-                        lng={myPosition.lng} //TODO  經度
+                        lat={centerPoint.lat} //TODO 　緯度
+                        lng={centerPoint.lng} //TODO  經度
                         text="My Marker"
-                    />
+                    ></AnyReactComponent>
 
-                    {places.map((item, index) => (
+                    {landMark.map((item, index) => (
                         <Landmark
                             icon={item.icon}
                             key={index}
@@ -174,7 +235,6 @@ const Boardgame = (props) => {
                     ))}
                 </GoogleMapReact>
             </div>
-            <input type="button" value="找咖啡廳" onClick={findLocation} />
 
             <Input
                 type="datetime-local"

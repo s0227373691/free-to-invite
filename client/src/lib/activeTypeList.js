@@ -5,6 +5,7 @@ import Movie from '../components/newActive/movie';
 import Concert from '../components/newActive/concert';
 import Basketball from '../components/newActive/basketball';
 import Fighting from '../components/newActive/fighting';
+import Badminton from '../components/newActive/badminton';
 import Running from '../components/newActive/running';
 import Newtaipei from '../components/newActive/newtaipei';
 import Taichung from '../components/newActive/taichung';
@@ -68,6 +69,14 @@ const activeTypeList = [
                 path: '/sport/fighting',
                 formComponent: (activeType) => (
                     <Fighting activeType={activeType} />
+                ),
+            },
+            {
+                name: '羽球',
+                icon: `${svgUrl}shuttlecock.svg`,
+                path: '/sport/badminton',
+                formComponent: (activeType) => (
+                    <Badminton activeType={activeType} />
                 ),
             },
         ],

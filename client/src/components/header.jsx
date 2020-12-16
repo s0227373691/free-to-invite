@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Login from './login';
 import Register from './register';
+
 import { ButtonClearDefault } from './styles/buttons';
 
 import { userCheckedLoginStatus } from '../store/slices/users';
@@ -67,11 +68,9 @@ const Header = (props) => {
                     </Account>
                 ) : (
                     <ButtonGroup>
-                        <BtnRegister onClick={() => setLogin(true)}>
-                            立即登入
-                        </BtnRegister>
+                        <BtnLogin onClick={() => setLogin(true)}>登入</BtnLogin>
                         <BtnRegister onClick={() => setRegister(true)}>
-                            立即加入
+                            加入
                         </BtnRegister>
                     </ButtonGroup>
                 )}
@@ -154,25 +153,17 @@ const ButtonGroup = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-`;
-
-const Button = styled(ButtonClearDefault)`
-    padding: 0 15px;
-    font-size: 16px;
-
-    &:hover {
-        transition: 0.3s;
-        color: #0984e3;
+    button {
+        color: white;
+        padding: 10px;
+        background-color: #629dd1;
+        border-radius: 10px;
+        margin-left: 15px;
+        &:hover {
+            background-color: #76a9d7;
+        }
     }
 `;
-const BtnRegister = styled(ButtonClearDefault)`
-    color: white;
-    padding: 10px 40px;
-    font-size: 23px;
-    background-color: #629dd1;
-    border-radius: 10px;
 
-    &:hover {
-        background-color: #76a9d7;
-    }
-`;
+const BtnRegister = styled(ButtonClearDefault)``;
+const BtnLogin = styled(ButtonClearDefault)``;

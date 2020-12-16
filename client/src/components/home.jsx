@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import titlePage from '../assets/img/title-page';
 
 import activeTypeList from '../lib/activeTypeList.js';
-import { ButtonClearDefault } from './styles/buttons';
 
 const Home = () => {
     return (

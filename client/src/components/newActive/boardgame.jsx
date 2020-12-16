@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-// -------------------------------------------------------------------------------------------------
+import { SelectClearDefault } from '../styles/selects';
+import { ButtonClearDefault } from '../styles/buttons';
+import { TextareaClearDefault } from '../styles/textarea';
+
+import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
+import { InputClearDefault } from '../styles/inputs';
 
 // import dateFormat from 'dateformat';
+// -------------------------------------------------------------------------------------------------
+
 import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const Landmark = ({ icon, text }) => (
@@ -12,13 +19,6 @@ const Landmark = ({ icon, text }) => (
         <div>{text}</div>
     </div>
 );
-
-import { SelectClearDefault } from '../styles/selects';
-import { ButtonClearDefault } from '../styles/buttons';
-import { TextareaClearDefault } from '../styles/textarea';
-
-import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
-import { InputClearDefault } from '../styles/inputs';
 
 const Boardgame = (props) => {
     // 當地圖載入完成，將地圖實體與地圖 API 傳入 state 供之後使用
@@ -204,13 +204,13 @@ const Boardgame = (props) => {
                     onChange={handleAutocomplete}
                 />
                 <GoogleMapReact
-                    yesIWantToUseGoogleMapApiInternals={true} //TODO  設定為 true
+                    yesIWantToUseGoogleMapApiInternals={true} //TODO  使用google map api 設定為 true
                     // options={{ mapTypeId: 'roadmap' }} // roadmap 路線圖 ， hybrid : 衛星圖
                     bootstrapURLKeys={{
                         key: 'AIzaSyDbatx1g_dDPpQIz6mTPgECwjhXgqUjlrU', // API Key
                         libraries: ['places'], // 如果要啟用 API 功能需要再 bootstrapURLKeys 屬性增加 libraries 陣列，陣列裡面的值可以讓我們啟用要使用的 API
                     }}
-                    defaultZoom={15} //TODO  預設縮放視角
+                    defaultZoom={17} //TODO  預設縮放視角
                     onGoogleApiLoaded={(
                         { map, maps } //TODO  onGoogleApiLoaded 載入完成後調用 google map 核心方法
                     ) => mapHasLoaded(map, maps)} //TODO map 是個物件，指的是現在看到的這張地圖，如果要取得這張地圖的資訊，就需要取得這個物件的資訊或方法來使用，maps 也是物件，指的是 Google Maps API，裡面有許多可調用的方法，可以利用它來使用搜尋附近的地標資訊等等

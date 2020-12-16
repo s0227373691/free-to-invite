@@ -9,7 +9,7 @@ import { ButtonClearDefault } from './styles/buttons';
 
 import { userCheckedLoginStatus } from '../store/slices/users';
 import { getUserLogout } from '../lib/api/users/logout';
-import activeTypeList from '../lib/activeTypeList.js';
+
 import IconLogo from '../assets/img/logo';
 
 const Header = (props) => {
@@ -33,29 +33,7 @@ const Header = (props) => {
                         <img src={IconLogo} alt="image load fail..." />
                     </Link>
                 </Logo>
-                <ActiveTypeList>
-                    {activeTypeList.map(({ type, activeList }) => {
-                        return (
-                            <ActiveType key={type}>
-                                <span>{type}</span>
-                                <ActiveList className="show-active-list">
-                                    <Diamond />
-                                    {activeList.map(({ name, icon, path }) => {
-                                        return (
-                                            <Active key={name}>
-                                                <Icon
-                                                    src={icon}
-                                                    alt="Not found..."
-                                                />
-                                                <Link to={path}>{name}</Link>
-                                            </Active>
-                                        );
-                                    })}
-                                </ActiveList>
-                            </ActiveType>
-                        );
-                    })}
-                </ActiveTypeList>
+
                 {loggedIn ? (
                     <Account>
                         {accountName}
@@ -89,8 +67,12 @@ const Header = (props) => {
                     </Account>
                 ) : (
                     <ButtonGroup>
-                        <Button onClick={() => setLogin(true)}>登入</Button>
-                        <Button onClick={() => setRegister(true)}>註冊</Button>
+                        <BtnRegister onClick={() => setLogin(true)}>
+                            立即登入
+                        </BtnRegister>
+                        <BtnRegister onClick={() => setRegister(true)}>
+                            立即加入
+                        </BtnRegister>
                     </ButtonGroup>
                 )}
             </Head>
@@ -123,17 +105,9 @@ const Head = styled.header`
     left: 0;
     right: 0;
     z-index: 1000;
-    background: #e6e6e6;
-    opacity: 0.6;
+    background: #fff;
     padding: 0 15px;
     transition: 0.5s;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px;
-
-    &:hover {
-        opacity: 1;
-        transition: 0.3s;
-    }
 `;
 
 const Logo = styled.h1`
@@ -144,73 +118,6 @@ const Logo = styled.h1`
             height: 110px;
         }
     }
-`;
-const ActiveTypeList = styled.ul`
-    display: flex;
-`;
-
-const ActiveType = styled.li`
-    position: relative;
-
-    span {
-        display: block;
-        padding: 10px;
-        color: #2d3436;
-        transition: 0.3s;
-        padding: 15px 25px;
-
-        &:hover {
-            cursor: pointer;
-            color: #0984e3;
-        }
-    }
-    .show-active-list {
-        visibility: hidden;
-        opacity: 0;
-    }
-    &:hover .show-active-list {
-        visibility: visible;
-        opacity: 1;
-        transition: 0.5s;
-    }
-`;
-
-const ActiveList = styled.ul`
-    width: 180px;
-    padding: 15px;
-    position: absolute;
-    left: calc(-90px + 50%);
-    background: #fff;
-    filter: drop-shadow(rgba(0, 0, 0, 1) 0px 3px 12px);
-    border-radius: 10px;
-`;
-
-const Active = styled.li`
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-
-    a {
-        width: 100%;
-        display: block;
-        color: #2d3436;
-        transition: 0.3s;
-        padding: 15px 25px;
-
-        &:hover {
-            color: #0984e3;
-        }
-    }
-`;
-
-const Diamond = styled.div`
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    position: absolute;
-    top: -5px;
-    left: calc(-10px + 50%);
-    transform: rotate(45deg);
 `;
 
 const Account = styled(ButtonClearDefault)`
@@ -242,11 +149,6 @@ const AccountAction = styled.li`
     }
 `;
 
-const Icon = styled.img`
-    width: 30px;
-    height: 30px;
-`;
-
 const ButtonGroup = styled.div`
     height: 100%;
     display: flex;
@@ -261,5 +163,16 @@ const Button = styled(ButtonClearDefault)`
     &:hover {
         transition: 0.3s;
         color: #0984e3;
+    }
+`;
+const BtnRegister = styled(ButtonClearDefault)`
+    color: white;
+    padding: 10px 40px;
+    font-size: 23px;
+    background-color: #629dd1;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #76a9d7;
     }
 `;

@@ -21,7 +21,6 @@ const Badminton = (props) => {
     const [startDate, setStartDate] = useState(now);
     const [badmintonType, setBadmintonType] = useState('');
     const [site, setSite] = useState('');
-
     const [population, setPopulation] = useState('');
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');

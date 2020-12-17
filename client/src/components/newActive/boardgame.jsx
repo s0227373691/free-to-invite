@@ -192,10 +192,10 @@ const Boardgame = (props) => {
                 />
                 {preSearchResult && searchMapText
                     ? preSearchResult.map((item, index) => (
-                        <div key={index} dataid={item.place_id}>
-                            {item.description}
-                        </div>
-                    ))
+                          <div key={index} dataid={item.place_id}>
+                              {item.description}
+                          </div>
+                      ))
                     : null}
                 <input
                     type="button"

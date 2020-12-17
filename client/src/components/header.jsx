@@ -68,10 +68,10 @@ const Header = (props) => {
                 ) : (
                     <ButtonGroup>
                         <BtnRegister onClick={() => setLogin(true)}>
-                            立即登入
+                            登入
                         </BtnRegister>
                         <BtnRegister onClick={() => setRegister(true)}>
-                            立即加入
+                            註冊
                         </BtnRegister>
                     </ButtonGroup>
                 )}
@@ -167,11 +167,10 @@ const Button = styled(ButtonClearDefault)`
 `;
 const BtnRegister = styled(ButtonClearDefault)`
     color: white;
-    padding: 10px 40px;
-    font-size: 23px;
+    padding: 10px;
     background-color: #629dd1;
     border-radius: 10px;
-
+    margin-left: 10px;
     &:hover {
         background-color: #76a9d7;
     }

@@ -12,6 +12,11 @@ import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
 const Basketball = () => {
+    // TODO 新增欄位：參加費用(單兵) <input tpye='number'>
+    // TODO 新增欄位：參加費用(隊) <input tpye='number'>
+    // TODO 新增欄位：規則 <TextArea>
+    // TODO 新增欄位：輪打隊數 <Input type: 'number'>
+    // TODO 新增欄位：球友程度 <Input type: 'text'>
     return (
         <Form>
             <Label>

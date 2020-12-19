@@ -7,16 +7,18 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
-import IconPrice from '../../assets/svg/price';
-import IconCalendar from '../../assets/svg/calendar';
-import IconTitle from '../../assets/svg/title';
-import IconPlace from '../../assets/svg/place';
-import IconPopulation from '../../assets/svg/population';
-import IconBadminton from '../../assets/svg/shuttlecock';
-import IconNet from '../../assets/svg/net';
-import IconStrength from '../../assets/svg/strength';
+import {
+    IconBadminton,
+    IconCalendar,
+    IconNet,
+    IconPlace,
+    IconPopulation,
+    IconPrice,
+    IconStrength,
+    IconTitle,
+} from '../../assets/config/imageUrl';
 
-const Badminton = (props) => {
+const Badminton = () => {
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);

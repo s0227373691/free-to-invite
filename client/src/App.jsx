@@ -11,6 +11,7 @@ import Member from './components/member';
 import Article from './components/article';
 import NewActive from './components/newActive';
 import myActive from './components/myActive';
+import googelMap from './components/googlemap';
 // 內部函式
 import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';
@@ -35,6 +36,7 @@ const App = (props) => {
                     <Route path="/article" component={Article} />
                     <Route path="/newactive" component={NewActive} />
                     <Route path="/myactive" component={myActive} />
+                    <Route path="/googlemap/test" component={googelMap} />
                     <Route path="/:board" component={Board} />
                     <Route path="/:board/:subboard" component={Board} />
                     <Route path="/:board/:subboard/:id" component={Board} />

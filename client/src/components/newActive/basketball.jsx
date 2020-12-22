@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
+import { SelectClearDefault } from '../styles/selects';
 
 import IconPrice from '../../assets/svg/price';
 import IconCalendar from '../../assets/svg/calendar';
@@ -17,11 +18,21 @@ const Basketball = () => {
     // TODO 新增欄位：規則 <TextArea>
     // TODO 新增欄位：輪打隊數 <Input type: 'number'>
     // TODO 新增欄位：球友程度 <Input type: 'text'>
+
     return (
         <Form>
             <Label>
                 <Icon src={IconCalendar} />
-                <Input type="datetime-local" required />
+                <DateRange>
+                    <div>
+                        <span>開始</span>
+                        <InputDate type="datetime-local" />
+                    </div>
+                    <div>
+                        <span>結束</span>
+                        <InputDate type="datetime-local" />
+                    </div>
+                </DateRange>
             </Label>
             <Label htmlFor="title">
                 <Icon src={IconTitle} />
@@ -34,13 +45,15 @@ const Basketball = () => {
 
             <Label htmlFor="population">
                 <Icon src={IconPopulation} />
-                <Input id="population" placeholder="人數" type="number" />
+
+                <Input id="population" placeholder="單兵" type="number" />
+                <Input id="population" placeholder="隊" type="number" />
             </Label>
+
             <Label htmlFor="price">
                 <Icon src={IconPrice} />
                 <Input id="price" placeholder="參加費用" type="number" />
             </Label>
-
             <TextArea placeholder="補充說明..."></TextArea>
             <Button type="submit">新增</Button>
         </Form>
@@ -91,6 +104,18 @@ const Label = styled.label`
 
 const Icon = styled.img`
     width: 40px;
+`;
+
+const InputDate = styled(InputClearDefault)`
+    width: auto;
+    margin: 0 30px;
+    padding: 10px 0;
+    border: 0px solid #dadce0;
+    font-size: 23px;
+`;
+
+const DateRange = styled.div`
+    margin: 0 30px;
 `;
 
 export default Basketball;

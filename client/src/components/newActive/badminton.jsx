@@ -121,7 +121,7 @@ const Badminton = () => {
                 <Input
                     id="badminton_type"
                     type="text"
-                    placeholder="用球"
+                    placeholder="使用球種"
                     value={badmintonType}
                     onChange={(e) => setBadmintonType(e.target.value)}
                 />
@@ -247,9 +247,21 @@ const SelectStrength = styled(SelectClearDefault)`
 `;
 
 const AddedStrengthList = styled.div`
+    display: flex;
     margin-bottom: 20px;
 `;
-const AddedStrength = styled.div``;
+const AddedStrength = styled.div`
+    width: fit-content;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    color: #ffffff;
+    background-color: grey;
+    border-radius: 5px;
+    margin-right: 5px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
 
 const BtnDeleteTag = styled.span`
     &:hover {

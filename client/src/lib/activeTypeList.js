@@ -81,36 +81,36 @@ const activeTypeList = [
             },
         ],
     },
-    {
-        type: '旅遊',
-        path: '/travel',
-        activeList: [
-            {
-                name: '台北',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/taipei',
-                formComponent: (activeType) => (
-                    <Newtaipei activeType={activeType} />
-                ),
-            },
-            {
-                name: '台中',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/taichung',
-                formComponent: (activeType) => (
-                    <Taichung activeType={activeType} />
-                ),
-            },
-            {
-                name: '新北',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/newtaipei',
-                formComponent: (activeType) => (
-                    <Taipei activeType={activeType} />
-                ),
-            },
-        ],
-    },
+    // {
+    //     type: '旅遊',
+    //     path: '/travel',
+    //     activeList: [
+    //         {
+    //             name: '台北',
+    //             icon: `${svgUrl}basketball-ball.svg`,
+    //             path: '/travel/taipei',
+    //             formComponent: (activeType) => (
+    //                 <Newtaipei activeType={activeType} />
+    //             ),
+    //         },
+    //         {
+    //             name: '台中',
+    //             icon: `${svgUrl}basketball-ball.svg`,
+    //             path: '/travel/taichung',
+    //             formComponent: (activeType) => (
+    //                 <Taichung activeType={activeType} />
+    //             ),
+    //         },
+    //         {
+    //             name: '新北',
+    //             icon: `${svgUrl}basketball-ball.svg`,
+    //             path: '/travel/newtaipei',
+    //             formComponent: (activeType) => (
+    //                 <Taipei activeType={activeType} />
+    //             ),
+    //         },
+    //     ],
+    // },
 ];
 
 export default activeTypeList;

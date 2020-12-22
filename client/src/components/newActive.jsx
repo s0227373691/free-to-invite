@@ -13,7 +13,7 @@ const NewArticle = () => {
         const activeList = [
             ...activeTypeList[0].activeList,
             ...activeTypeList[1].activeList,
-            ...activeTypeList[2].activeList,
+            // ...activeTypeList[2].activeList,
         ];
 
         const findedActive = activeList.find(({ name }) => name === activeType);

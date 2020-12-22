@@ -7,18 +7,21 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
-import IconPrice from '../../assets/svg/price';
-import IconCalendar from '../../assets/svg/calendar';
-import IconTitle from '../../assets/svg/title';
-import IconPlace from '../../assets/svg/place';
-import IconPopulation from '../../assets/svg/population';
-import IconBadminton from '../../assets/svg/shuttlecock';
-import IconNet from '../../assets/svg/net';
-import IconStrength from '../../assets/svg/strength';
+import {
+    IconBadminton,
+    IconCalendar,
+    IconNet,
+    IconPlace,
+    IconPopulation,
+    IconPrice,
+    IconStrength,
+    IconTitle,
+} from '../../assets/config/imageUrl';
 
-const Badminton = (props) => {
+const Badminton = () => {
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
+    const [endDate, setEndDate] = useState(now);
     const [badmintonType, setBadmintonType] = useState('');
     const [site, setSite] = useState('');
     const [population, setPopulation] = useState('');
@@ -29,21 +32,59 @@ const Badminton = (props) => {
     const [selectedStrength, setSelectedStrength] = useState('');
     const [addedStrengthList, setAddedStrengthList] = useState([]);
 
+    const handleChangeStartDate = (e) => {
+        const inputValue = e.target.value;
+        setStartDate(inputValue);
+        if (inputValue > endDate) setEndDate(inputValue);
+    };
+    const handleChangeEndDate = (e) => {
+        const inputValue = e.target.value;
+        setEndDate(inputValue);
+        if (inputValue < startDate) setStartDate(inputValue);
+    };
+
+    const handleClickAddStrength = () => {
+        if (selectedStrength === '') return;
+        const newStrengthList = [...addedStrengthList];
+        newStrengthList.push(selectedStrength);
+        setAddedStrengthList(newStrengthList);
+        setSelectedStrength('');
+    };
+
+    const handleClickDeleteTag = (i) => {
+        const newAddedStrengthList = [...addedStrengthList];
+        newAddedStrengthList.splice(i, 1);
+        setAddedStrengthList(newAddedStrengthList);
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
     };
-
     return (
         <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
-                <Input
-                    type="datetime-local"
-                    min={now}
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    required
-                />
+                <DateRange>
+                    <div>
+                        <span>開始</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={startDate}
+                            onChange={handleChangeStartDate}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <span>結束</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={endDate}
+                            onChange={handleChangeEndDate}
+                            required
+                        />
+                    </div>
+                </DateRange>
             </Label>
             <Label htmlFor="title">
                 <Icon src={IconTitle} />
@@ -128,15 +169,7 @@ const Badminton = (props) => {
                         <option value="初階下">下</option>
                     </optgroup>
                 </SelectStrength>
-                <BtnAddStrength
-                    onClick={() => {
-                        if (selectedStrength === '') return;
-                        const newStrengthList = [...addedStrengthList];
-                        newStrengthList.push(selectedStrength);
-                        setAddedStrengthList(newStrengthList);
-                        setSelectedStrength('');
-                    }}
-                >
+                <BtnAddStrength onClick={handleClickAddStrength}>
                     新增
                 </BtnAddStrength>
             </Label>
@@ -144,15 +177,7 @@ const Badminton = (props) => {
                 {addedStrengthList.map((strength, i) => (
                     <AddedStrength key={i}>
                         <span style={{ marginRight: '10px' }}>{strength}</span>
-                        <BtnDeleteTag
-                            onClick={() => {
-                                const newAddedStrengthList = [
-                                    ...addedStrengthList,
-                                ];
-                                newAddedStrengthList.splice(i, 1);
-                                setAddedStrengthList(newAddedStrengthList);
-                            }}
-                        >
+                        <BtnDeleteTag onClick={(i) => handleClickDeleteTag(i)}>
                             X
                         </BtnDeleteTag>
                     </AddedStrength>
@@ -219,13 +244,11 @@ const Icon = styled.img`
 const SelectStrength = styled(SelectClearDefault)`
     min-width: 300px;
     margin: 0 30px;
-    background: -webkit-linear-gradient(90deg, yellow, red);
-    background: -o-linear-gradient(90deg, yellow, red);
-    background: -moz-linear-gradient(90deg, yellow, red);
-    background: linear-gradient(90deg, yellow, red);
 `;
 
-const AddedStrengthList = styled.div``;
+const AddedStrengthList = styled.div`
+    margin-bottom: 20px;
+`;
 const AddedStrength = styled.div``;
 
 const BtnDeleteTag = styled.span`
@@ -237,4 +260,16 @@ const BtnDeleteTag = styled.span`
 
 const BtnAddStrength = styled(ButtonClearDefault)`
     padding: 15px;
+`;
+
+const InputDate = styled(InputClearDefault)`
+    width: auto;
+    margin: 0 30px;
+    padding: 10px 0;
+    border: 0px solid #dadce0;
+    font-size: 23px;
+`;
+
+const DateRange = styled.div`
+    margin: 0 30px;
 `;

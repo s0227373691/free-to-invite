@@ -37,6 +37,7 @@ const Boardgame = (props) => {
         setMapApiLoaded(true);
     };
     const searchLocation = () => {
+        console.log(searchMapText);
         const geocoder = new mapApi.Geocoder();
         geocoder.geocode(
             {
@@ -51,9 +52,10 @@ const Boardgame = (props) => {
                         lat: results[0].geometry.location.lat(),
                         lng: results[0].geometry.location.lng(),
                     });
-                    setCurrentCenter(centerPoint);
-                    console.log(results[0].geometry.location.lat());
-                    console.log(results[0].geometry.location.lng());
+                    setCurrentCenter({
+                        lat: results[0].geometry.location.lat(),
+                        lng: results[0].geometry.location.lng(),
+                    });
                 }
             }
         );

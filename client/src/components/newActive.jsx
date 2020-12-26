@@ -10,13 +10,15 @@ const NewArticle = () => {
     const handleOnChangeSelectFormType = (e) => {
         let activeFormComponent = null;
         const activeType = e.target.value;
-        const activeList = [
-            ...activeTypeList[0].activeList,
-            ...activeTypeList[1].activeList,
-            // ...activeTypeList[2].activeList,
-        ];
 
-        const findedActive = activeList.find(({ name }) => name === activeType);
+        let newActiveList = [];
+        for (const { activeList } of activeTypeList) {
+            newActiveList = newActiveList.concat(activeList);
+        }
+
+        const findedActive = newActiveList.find(
+            ({ name }) => name === activeType
+        );
         activeFormComponent = findedActive.formComponent(activeType);
         setFormTypeComponent(activeFormComponent);
     };

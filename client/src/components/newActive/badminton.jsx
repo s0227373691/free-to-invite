@@ -29,6 +29,7 @@ const Badminton = () => {
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
+    const [addedStrengthList, setAddedStrengthList] = useState([]);
     const [strengthOptions, setStrengthOptions] = useState([
         {
             optgroupLabel: '高階',
@@ -36,14 +37,17 @@ const Badminton = () => {
                 {
                     text: '上',
                     value: '高階上',
+                    borderLeftColor: ' #ffffff',
                 },
                 {
                     text: '中',
                     value: '高階中',
+                    borderLeftColor: ' #850000',
                 },
                 {
                     text: '下',
                     value: '高階下',
+                    borderLeftColor: ' #0097ce',
                 },
             ],
         },
@@ -53,14 +57,17 @@ const Badminton = () => {
                 {
                     text: '上',
                     value: '中階上',
+                    borderLeftColor: ' #3700ff',
                 },
                 {
                     text: '中',
                     value: '中階中',
+                    borderLeftColor: ' #73ff00',
                 },
                 {
                     text: '下',
                     value: '中階下',
+                    borderLeftColor: ' #fc7303',
                 },
             ],
         },
@@ -70,19 +77,21 @@ const Badminton = () => {
                 {
                     text: '上',
                     value: '初階上',
+                    borderLeftColor: ' #de0097',
                 },
                 {
                     text: '中',
                     value: '初階中',
+                    borderLeftColor: ' #00a976',
                 },
                 {
                     text: '下',
                     value: '初階下',
+                    borderLeftColor: ' #eaff00',
                 },
             ],
         },
     ]);
-    const [addedStrengthList, setAddedStrengthList] = useState([]);
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -200,11 +209,13 @@ const Badminton = () => {
             <Label>
                 <Icon src={IconStrength} />
                 <SelectStrength value="" onChange={handleChangeSelectStrength}>
-                    <option hidden>請選擇程度</option>
+                    <option hidden>新增程度</option>
                     {strengthOptions.map(({ optgroupLabel, options }) => (
-                        <optgroup label={optgroupLabel}>
+                        <optgroup key={optgroupLabel} label={optgroupLabel}>
                             {options.map(({ text, value }) => (
-                                <option value={value}>{text}</option>
+                                <option key={value} value={value}>
+                                    {text}
+                                </option>
                             ))}
                         </optgroup>
                     ))}
@@ -212,12 +223,13 @@ const Badminton = () => {
             </Label>
             <AddedStrengthList>
                 {addedStrengthList.map((strength, i) => (
-                    <AddedStrength key={i}>
-                        <span style={{ marginRight: '10px' }}>{strength}</span>
-                        <BtnDeleteTag onClick={(i) => handleClickDeleteTag(i)}>
-                            X
-                        </BtnDeleteTag>
-                    </AddedStrength>
+                    <StrengthTag
+                        key={i}
+                        onClick={(i) => handleClickDeleteTag(i)}
+                    >
+                        <TagName>{strength}</TagName>
+                        <TagDelete className="show-tag-delete">X</TagDelete>
+                    </StrengthTag>
                 ))}
             </AddedStrengthList>
             <TextArea
@@ -286,25 +298,40 @@ const SelectStrength = styled(SelectClearDefault)`
 
 const AddedStrengthList = styled.div`
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
+    padding-left: 70px;
 `;
-const AddedStrength = styled.div`
+const StrengthTag = styled.div`
     width: fit-content;
+    margin-right: 10px;
     margin-bottom: 20px;
-    padding: 8px 12px;
+    padding: 18px 20px 18px 15px;
+    display: flex;
     color: #ffffff;
-    background-color: grey;
+    border-left: 6px solid red;
     border-radius: 5px;
-    margin-right: 5px;
+    background-color: grey;
+
+    .show-tag-delete {
+        visibility: hidden;
+    }
     &:hover {
         cursor: pointer;
+
+        .show-tag-delete {
+            visibility: visible;
+        }
     }
 `;
 
-const BtnDeleteTag = styled.span`
+const TagName = styled.span`
+    margin-right: 10px;
+`;
+
+const TagDelete = styled.span`
     &:hover {
-        color: grey;
-        cursor: pointer;
+        font-weight: bold;
     }
 `;
 

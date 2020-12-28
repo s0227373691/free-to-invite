@@ -29,8 +29,69 @@ const Badminton = () => {
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
-    const [selectedStrength, setSelectedStrength] = useState('');
     const [addedStrengthList, setAddedStrengthList] = useState([]);
+    const [strengthOptions, setStrengthOptions] = useState([
+        {
+            optgroupLabel: '高階',
+            options: [
+                {
+                    text: '上',
+                    value: '高階上',
+                    borderLeftColor: ' #ffffff',
+                },
+                {
+                    text: '中',
+                    value: '高階中',
+                    borderLeftColor: ' #850000',
+                },
+                {
+                    text: '下',
+                    value: '高階下',
+                    borderLeftColor: ' #0097ce',
+                },
+            ],
+        },
+        {
+            optgroupLabel: '中階',
+            options: [
+                {
+                    text: '上',
+                    value: '中階上',
+                    borderLeftColor: ' #3700ff',
+                },
+                {
+                    text: '中',
+                    value: '中階中',
+                    borderLeftColor: ' #73ff00',
+                },
+                {
+                    text: '下',
+                    value: '中階下',
+                    borderLeftColor: ' #fc7303',
+                },
+            ],
+        },
+        {
+            optgroupLabel: '初階',
+            options: [
+                {
+                    text: '上',
+                    value: '初階上',
+                    borderLeftColor: ' #de0097',
+                },
+                {
+                    text: '中',
+                    value: '初階中',
+                    borderLeftColor: ' #00a976',
+                },
+                {
+                    text: '下',
+                    value: '初階下',
+                    borderLeftColor: ' #eaff00',
+                },
+            ],
+        },
+    ]);
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -43,12 +104,11 @@ const Badminton = () => {
         if (inputValue < startDate) setStartDate(inputValue);
     };
 
-    const handleClickAddStrength = () => {
-        if (selectedStrength === '') return;
+    const handleChangeSelectStrength = (e) => {
+        const selectedValue = e.target.value;
         const newStrengthList = [...addedStrengthList];
-        newStrengthList.push(selectedStrength);
+        newStrengthList.push(selectedValue);
         setAddedStrengthList(newStrengthList);
-        setSelectedStrength('');
     };
 
     const handleClickDeleteTag = (i) => {
@@ -121,7 +181,7 @@ const Badminton = () => {
                 <Input
                     id="badminton_type"
                     type="text"
-                    placeholder="用球"
+                    placeholder="使用球種"
                     value={badmintonType}
                     onChange={(e) => setBadmintonType(e.target.value)}
                 />
@@ -148,39 +208,28 @@ const Badminton = () => {
             </Label>
             <Label>
                 <Icon src={IconStrength} />
-                <SelectStrength
-                    value={selectedStrength}
-                    onChange={(e) => setSelectedStrength(e.target.value)}
-                >
-                    <option hidden>請選擇程度</option>
-                    <optgroup label="高階">
-                        <option value="高階上">上</option>
-                        <option value="高階中">中</option>
-                        <option value="高階下">下</option>
-                    </optgroup>
-                    <optgroup label="中階">
-                        <option value="中階上">上</option>
-                        <option value="中階中">中</option>
-                        <option value="中階下">下</option>
-                    </optgroup>
-                    <optgroup label="初階">
-                        <option value="初階上">上</option>
-                        <option value="初階中">中</option>
-                        <option value="初階下">下</option>
-                    </optgroup>
+                <SelectStrength value="" onChange={handleChangeSelectStrength}>
+                    <option hidden>新增程度</option>
+                    {strengthOptions.map(({ optgroupLabel, options }) => (
+                        <optgroup key={optgroupLabel} label={optgroupLabel}>
+                            {options.map(({ text, value }) => (
+                                <option key={value} value={value}>
+                                    {text}
+                                </option>
+                            ))}
+                        </optgroup>
+                    ))}
                 </SelectStrength>
-                <BtnAddStrength onClick={handleClickAddStrength}>
-                    新增
-                </BtnAddStrength>
             </Label>
             <AddedStrengthList>
                 {addedStrengthList.map((strength, i) => (
-                    <AddedStrength key={i}>
-                        <span style={{ marginRight: '10px' }}>{strength}</span>
-                        <BtnDeleteTag onClick={(i) => handleClickDeleteTag(i)}>
-                            X
-                        </BtnDeleteTag>
-                    </AddedStrength>
+                    <StrengthTag
+                        key={i}
+                        onClick={(i) => handleClickDeleteTag(i)}
+                    >
+                        <TagName>{strength}</TagName>
+                        <TagDelete className="show-tag-delete">X</TagDelete>
+                    </StrengthTag>
                 ))}
             </AddedStrengthList>
             <TextArea
@@ -244,22 +293,46 @@ const Icon = styled.img`
 const SelectStrength = styled(SelectClearDefault)`
     min-width: 300px;
     margin: 0 30px;
+    background-color: #dadce0;
 `;
 
 const AddedStrengthList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
+    padding-left: 70px;
 `;
-const AddedStrength = styled.div``;
+const StrengthTag = styled.div`
+    width: fit-content;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 18px 20px 18px 15px;
+    display: flex;
+    color: #ffffff;
+    border-left: 6px solid red;
+    border-radius: 5px;
+    background-color: grey;
 
-const BtnDeleteTag = styled.span`
+    .show-tag-delete {
+        visibility: hidden;
+    }
     &:hover {
-        color: grey;
         cursor: pointer;
+
+        .show-tag-delete {
+            visibility: visible;
+        }
     }
 `;
 
-const BtnAddStrength = styled(ButtonClearDefault)`
-    padding: 15px;
+const TagName = styled.span`
+    margin-right: 10px;
+`;
+
+const TagDelete = styled.span`
+    &:hover {
+        font-weight: bold;
+    }
 `;
 
 const InputDate = styled(InputClearDefault)`

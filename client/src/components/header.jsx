@@ -64,6 +64,9 @@ const Header = (props) => {
                             <AccountAction>
                                 <Link to="/myactive">我的活動</Link>
                             </AccountAction>
+                            <AccountAction>
+                                <Link to="/googlemap/test">googlemap</Link>
+                            </AccountAction>
                             <AccountAction onClick={handleClickLogout}>
                                 登出
                             </AccountAction>

@@ -59,6 +59,11 @@ const Movie = () => {
                     <option value="" hidden>
                         請選擇桌遊類型
                     </option>
+                    {movieTypeList.map(({ type }) => (
+                        <option key={type} value={type}>
+                            {type}
+                        </option>
+                    ))}
                 </SelectMovieType>
                 <InputMovieName placeholder="電影名稱..." type="text" />
                 <ButtonNewMovie>新增</ButtonNewMovie>
@@ -147,7 +152,6 @@ const NewMovie = styled.div`
 const SelectMovieType = styled(SelectClearDefault)`
     margin-bottom: 20px;
     font-size: 18px;
-    color: #ffffff;
 `;
 
 const InputMovieName = styled(Input)`

@@ -19,35 +19,27 @@ import {
 } from '../../assets/config/imageUrl';
 
 const Badminton = () => {
-    const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
-    const [startDate, setStartDate] = useState(now);
-    const [endDate, setEndDate] = useState(now);
-    const [badmintonType, setBadmintonType] = useState('');
-    const [site, setSite] = useState('');
-    const [population, setPopulation] = useState('');
-    const [cost, setCost] = useState('');
-    const [title, setTitle] = useState('');
-    const [place, setPlace] = useState('');
-    const [content, setContent] = useState('');
-    const [addedStrengthList, setAddedStrengthList] = useState([]);
-    const [strengthOptions, setStrengthOptions] = useState([
+    let strength = [
         {
             optgroupLabel: '高階',
             options: [
                 {
                     text: '上',
                     value: '高階上',
-                    borderLeftColor: ' #ffffff',
+                    borderLeftColor: ' #00ffea',
+                    isAdded: false,
                 },
                 {
                     text: '中',
                     value: '高階中',
                     borderLeftColor: ' #850000',
+                    isAdded: false,
                 },
                 {
                     text: '下',
                     value: '高階下',
                     borderLeftColor: ' #0097ce',
+                    isAdded: false,
                 },
             ],
         },
@@ -58,16 +50,19 @@ const Badminton = () => {
                     text: '上',
                     value: '中階上',
                     borderLeftColor: ' #3700ff',
+                    isAdded: false,
                 },
                 {
                     text: '中',
                     value: '中階中',
                     borderLeftColor: ' #73ff00',
+                    isAdded: false,
                 },
                 {
                     text: '下',
                     value: '中階下',
                     borderLeftColor: ' #fc7303',
+                    isAdded: false,
                 },
             ],
         },
@@ -78,20 +73,35 @@ const Badminton = () => {
                     text: '上',
                     value: '初階上',
                     borderLeftColor: ' #de0097',
+                    isAdded: false,
                 },
                 {
                     text: '中',
                     value: '初階中',
                     borderLeftColor: ' #00a976',
+                    isAdded: false,
                 },
                 {
                     text: '下',
                     value: '初階下',
                     borderLeftColor: ' #eaff00',
+                    isAdded: false,
                 },
             ],
         },
-    ]);
+    ];
+    const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
+    const [startDate, setStartDate] = useState(now);
+    const [endDate, setEndDate] = useState(now);
+    const [badmintonType, setBadmintonType] = useState('');
+    const [site, setSite] = useState('');
+    const [population, setPopulation] = useState('');
+    const [cost, setCost] = useState('');
+    const [title, setTitle] = useState('');
+    const [place, setPlace] = useState('');
+    const [content, setContent] = useState('');
+    const [addedStrengthList, setAddedStrengthList] = useState(strength);
+    const [strengthOptions, setStrengthOptions] = useState(strength);
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -107,25 +117,37 @@ const Badminton = () => {
     const handleChangeSelectStrength = (e) => {
         const selectedValue = e.target.value;
         const newStrengthList = [...addedStrengthList];
-        newStrengthList.push(selectedValue);
-        setAddedStrengthList(newStrengthList);
+        newStrengthList.map((item) => {
+            item.options.map((x) => {
+                if (x.value === selectedValue) return (x.isAdded = !x.isAdded);
+            });
+        });
+
+        setStrengthOptions(newStrengthList);
     };
 
-    const handleClickDeleteTag = (i) => {
+    const handleClickDeleteTag = (optionValue) => {
         const newAddedStrengthList = [...addedStrengthList];
-        newAddedStrengthList.splice(i, 1);
+        newAddedStrengthList.map(({ options }) =>
+            options.map((item) => {
+                if (item.value === optionValue)
+                    return (item.isAdded = !item.isAdded);
+            })
+        );
         setAddedStrengthList(newAddedStrengthList);
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
     };
+
     return (
         <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
                 <DateRange>
                     <div>
-                        <span>開始</span>
+                        <span>活動開始</span>
                         <InputDate
                             type="datetime-local"
                             min={now}
@@ -135,7 +157,7 @@ const Badminton = () => {
                         />
                     </div>
                     <div>
-                        <span>結束</span>
+                        <span>活動結束</span>
                         <InputDate
                             type="datetime-local"
                             min={now}
@@ -212,25 +234,38 @@ const Badminton = () => {
                     <option hidden>新增程度</option>
                     {strengthOptions.map(({ optgroupLabel, options }) => (
                         <optgroup key={optgroupLabel} label={optgroupLabel}>
-                            {options.map(({ text, value }) => (
-                                <option key={value} value={value}>
-                                    {text}
-                                </option>
-                            ))}
+                            {options.map(({ text, value, isAdded }) => {
+                                if (isAdded) return;
+                                return (
+                                    <option key={value} value={value}>
+                                        {text}
+                                    </option>
+                                );
+                            })}
                         </optgroup>
                     ))}
                 </SelectStrength>
             </Label>
             <AddedStrengthList>
-                {addedStrengthList.map((strength, i) => (
-                    <StrengthTag
-                        key={i}
-                        onClick={(i) => handleClickDeleteTag(i)}
-                    >
-                        <TagName>{strength}</TagName>
-                        <TagDelete className="show-tag-delete">X</TagDelete>
-                    </StrengthTag>
-                ))}
+                {addedStrengthList.map((strengthType) =>
+                    strengthType.options.map(
+                        ({ isAdded, value, borderLeftColor }) => {
+                            if (!isAdded) return;
+                            return (
+                                <StrengthTag
+                                    key={value}
+                                    borderLeftColor={borderLeftColor}
+                                    onClick={() => handleClickDeleteTag(value)}
+                                >
+                                    <span>{value}</span>
+                                    <TagDelete className="show-tag-delete">
+                                        X
+                                    </TagDelete>
+                                </StrengthTag>
+                            );
+                        }
+                    )
+                )}
             </AddedStrengthList>
             <TextArea
                 placeholder="補充說明..."
@@ -306,30 +341,27 @@ const StrengthTag = styled.div`
     width: fit-content;
     margin-right: 10px;
     margin-bottom: 20px;
-    padding: 18px 20px 18px 15px;
+    padding: 12px 0 12px 10px;
     display: flex;
     color: #ffffff;
-    border-left: 6px solid red;
+    border-left: 6px solid ${({ borderLeftColor }) => borderLeftColor};
     border-radius: 5px;
-    background-color: grey;
+    background-color: #a0a0a0;
 
     .show-tag-delete {
         visibility: hidden;
     }
     &:hover {
         cursor: pointer;
-
+        background-color: #929292;
         .show-tag-delete {
             visibility: visible;
         }
     }
 `;
 
-const TagName = styled.span`
-    margin-right: 10px;
-`;
-
 const TagDelete = styled.span`
+    padding: 0 10px;
     &:hover {
         font-weight: bold;
     }

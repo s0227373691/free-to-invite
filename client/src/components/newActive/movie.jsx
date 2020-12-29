@@ -11,9 +11,12 @@ import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
+import IconLandmark from '../../assets/svg/Landmark';
 
 const Movie = () => {
     const [addedMovieList, setAddedMovieList] = useState([]);
+    const [newMovieType, setNewMovieType] = useState('');
+    const [newMovieName, setNewMovieName] = useState('');
     const movieTypeList = [
         { type: '動作' },
         { type: '警匪' },
@@ -31,6 +34,25 @@ const Movie = () => {
         { type: '恐怖' },
         { type: '卡通' },
     ];
+
+    const handleChangeMovieType = (e) => {
+        const { value } = e.target;
+        setNewMovieType(value);
+    };
+    const handleClickButtonNewMovie = () => {
+        if (!newMovieType) return alert('請選擇桌遊類型');
+        if (!newMovieName) return alert('請輸入桌遊名稱');
+        const newAddedBoardGameList = [
+            ...addedMovieList,
+            {
+                type: newMovieType,
+                name: newMovieName,
+            },
+        ];
+        setAddedMovieList(newAddedBoardGameList);
+        setNewMovieType('');
+        setNewMovieName('');
+    };
     return (
         <Form>
             <Label>
@@ -55,9 +77,12 @@ const Movie = () => {
                 <Input id="price" placeholder="參加費用" type="number" />
             </Label>
             <NewMovie>
-                <SelectMovieType>
+                <SelectMovieType
+                    onChange={handleChangeMovieType}
+                    value={newMovieType}
+                >
                     <option value="" hidden>
-                        請選擇桌遊類型
+                        請選擇電影類型
                     </option>
                     {movieTypeList.map(({ type }) => (
                         <option key={type} value={type}>
@@ -65,27 +90,32 @@ const Movie = () => {
                         </option>
                     ))}
                 </SelectMovieType>
-                <InputMovieName placeholder="電影名稱..." type="text" />
-                <ButtonNewMovie>新增</ButtonNewMovie>
+                <InputMovieName
+                    onChange={(e) => setNewMovieName(e.target.value)}
+                    placeholder="電影名稱..."
+                    type="text"
+                />
+                <ButtonNewMovie onClick={handleClickButtonNewMovie}>
+                    新增
+                </ButtonNewMovie>
             </NewMovie>
             <AddedMovie>
                 {addedMovieList.map((movie, i) => {
+                    const { type, name } = movie;
                     return (
                         <AddedMovieItem key={i}>
                             <span style={{ marginRight: '10px' }}>
-                                {'類型'}
-                                {'name'}
+                                {type}
+                                {name}
                             </span>
                             <BtnDeleteTag
-                            // onClick={() => {
-                            //     const newAddedBoardGameList = [
-                            //         ...addedBoardGameList,
-                            //     ];
-                            //     newAddedBoardGameList.splice(i, 1);
-                            //     setAddedBoardGameList(
-                            //         newAddedBoardGameList
-                            //     );
-                            // }}
+                                onClick={() => {
+                                    const newAddedMovieList = [
+                                        ...addedMovieList,
+                                    ];
+                                    newAddedMovieList.splice(i, 1);
+                                    setAddedMovieList(newAddedMovieList);
+                                }}
                             >
                                 X
                             </BtnDeleteTag>
@@ -109,8 +139,10 @@ const Form = styled.form`
 const Input = styled(InputClearDefault)`
     margin: 0 30px;
     padding: 15px 0;
-    border: 0px solid #dadce0;
     font-size: 25px;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px black solid;
 `;
 
 const TextArea = styled(TextareaClearDefault)`
@@ -148,14 +180,16 @@ const Icon = styled.img`
 
 const NewMovie = styled.div`
     display: flex;
+    align-items: center;
 `;
 const SelectMovieType = styled(SelectClearDefault)`
-    margin-bottom: 20px;
     font-size: 18px;
 `;
 
 const InputMovieName = styled(Input)`
     font-size: 20px;
+    height: 100%;
+    border: none;
 `;
 
 const AddedMovie = styled.div`
@@ -169,19 +203,19 @@ const AddedMovieItem = styled.div`
     padding: 8px 12px;
     border-radius: 5px;
     font-size: 18px;
-    color: white;
 `;
 
 const ButtonNewMovie = styled.div`
     width: 90px;
     padding: 10px 15px;
-    margin-bottom: 20px;
+
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
     font-size: 18px;
-    color: #ffffff;
+    background-color: rgb(155, 155, 155);
+
     box-sizing: border-box;
 
     &:hover {
@@ -190,6 +224,13 @@ const ButtonNewMovie = styled.div`
     }
     &:active {
         opacity: 1;
+    }
+`;
+
+const BtnDeleteTag = styled.span`
+    &:hover {
+        color: grey;
+        cursor: pointer;
     }
 `;
 export default Movie;

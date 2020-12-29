@@ -8,6 +8,7 @@ import Badminton from '../svg/shuttlecock';
 import Net from '../svg/net';
 import Strength from '../svg/strength';
 import User from '../svg/user';
+import Landmark from '../svg/landmark';
 
 export const IconLogo = Logo;
 export const IconPrice = Price;
@@ -19,3 +20,4 @@ export const IconBadminton = Badminton;
 export const IconNet = Net;
 export const IconStrength = Strength;
 export const IconUser = User;
+export const IconLandmark = Landmark;

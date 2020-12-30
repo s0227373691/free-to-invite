@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import dateFormat from 'dateformat';
 
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
@@ -11,9 +12,17 @@ import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
-import IconLandmark from '../../assets/svg/Landmark';
 
 const Movie = () => {
+    const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
+    const [startDate, setStartDate] = useState(now);
+    const [endDate, setEndDate] = useState(now);
+    const [title, setTitle] = useState('');
+    const [place, setPlace] = useState('');
+    const [population, setPopulation] = useState('');
+    const [cost, setCost] = useState('');
+    const [content, setContent] = useState('');
+
     const [addedMovieList, setAddedMovieList] = useState([]);
     const [newMovieType, setNewMovieType] = useState('');
     const [newMovieName, setNewMovieName] = useState('');
@@ -34,7 +43,16 @@ const Movie = () => {
         { type: '恐怖' },
         { type: '卡通' },
     ];
-
+    const handleChangeStartDate = (e) => {
+        const inputValue = e.target.value;
+        setStartDate(inputValue);
+        if (inputValue > endDate) setEndDate(inputValue);
+    };
+    const handleChangeEndDate = (e) => {
+        const inputValue = e.target.value;
+        setEndDate(inputValue);
+        if (inputValue < startDate) setStartDate(inputValue);
+    };
     const handleChangeMovieType = (e) => {
         const { value } = e.target;
         setNewMovieType(value);
@@ -53,28 +71,94 @@ const Movie = () => {
         setNewMovieType('');
         setNewMovieName('');
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(
+            '開始時間',
+            startDate,
+            '結束時間',
+            endDate,
+            '標題',
+            title,
+            '地點',
+            place,
+            '人數',
+            population,
+            '花費',
+            cost,
+            '內容',
+            content,
+            '增加電影',
+            addedMovieList
+        );
+    };
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
-                <Input type="datetime-local" required />
+                <DateRange>
+                    <div>
+                        <span>活動開始</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={startDate}
+                            onChange={handleChangeStartDate}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <span>活動結束</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={endDate}
+                            onChange={handleChangeEndDate}
+                            required
+                        />
+                    </div>
+                </DateRange>
             </Label>
             <Label htmlFor="title">
                 <Icon src={IconTitle} />
-                <Input id="title" type="text" placeholder="標題" />
+                <Input
+                    id="title"
+                    type="text"
+                    placeholder="標題"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
             </Label>
             <Label htmlFor="place">
                 <Icon src={IconPlace} />
-                <Input id="place" type="text" placeholder="地點" />
+                <Input
+                    id="place"
+                    type="text"
+                    placeholder="地點"
+                    value={place}
+                    onChange={(e) => setPlace(e.target.value)}
+                />
             </Label>
 
             <Label htmlFor="population">
                 <Icon src={IconPopulation} />
-                <Input id="population" placeholder="人數" type="number" />
+                <Input
+                    id="population"
+                    placeholder="人數"
+                    type="number"
+                    value={population}
+                    onChange={(e) => setPopulation(e.target.value)}
+                />
             </Label>
             <Label htmlFor="price">
                 <Icon src={IconPrice} />
-                <Input id="price" placeholder="參加費用" type="number" />
+                <Input
+                    id="price"
+                    placeholder="參加費用"
+                    type="number"
+                    value={cost}
+                    onChange={(e) => setCost(e.target.value)}
+                />
             </Label>
             <NewMovie>
                 <SelectMovieType
@@ -123,8 +207,11 @@ const Movie = () => {
                     );
                 })}
             </AddedMovie>
-
-            <TextArea placeholder="補充說明..."></TextArea>
+            <TextArea
+                placeholder="補充說明..."
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
+            ></TextArea>
             <Button type="submit">新增</Button>
         </Form>
     );
@@ -232,5 +319,17 @@ const BtnDeleteTag = styled.span`
         color: grey;
         cursor: pointer;
     }
+`;
+
+const InputDate = styled(InputClearDefault)`
+    width: auto;
+    margin: 0 30px;
+    padding: 10px 0;
+    border: 0px solid #dadce0;
+    font-size: 23px;
+`;
+
+const DateRange = styled.div`
+    margin: 0 30px;
 `;
 export default Movie;

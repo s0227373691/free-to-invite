@@ -83,6 +83,24 @@ const Googlemap = (props) => {
         }
     };
 
+    // const findCafeLocation = () => {
+    //     if (mapApiLoaded) {
+    //         const service = new mapApi.places.PlacesService(mapInstance)
+
+    //         const request = {
+    //             location: myPosition,
+    //             radius: 1000,
+    //             type: ['cafe']
+    //         };
+
+    //         service.nearbySearch(request, (results, status) => {
+    //             if (status === mapApi.places.PlacesServiceStatus.OK) {
+    //                 console.log(results)
+    //             }
+    //         })
+    //     }
+    // }
+
     return (
         <Wrap>
             <Label>
@@ -142,7 +160,9 @@ const GoogleMap = styled.div`
     width: 768px;
     height: 400px;
 `;
-const Mark = styled.div``;
+const Mark = styled.div`
+    width: 0;
+`;
 
 const ButtonSearchMap = styled.div`
     width: 90px;

@@ -6,7 +6,7 @@ import GoogleMapReact from 'google-map-react';
 import { InputClearDefault } from './styles/inputs';
 
 import IconPlace from '../assets/svg/place';
-import IconLandmark from '../assets/svg/Landmark';
+// import IconLandmark from '../assets/svg/Landmark';
 
 const Googlemap = (props) => {
     const [mapInstance, setMapInstance] = useState(null);
@@ -127,7 +127,7 @@ const Googlemap = (props) => {
                     onClick={handleClickMap}
                 >
                     <Mark lat={centerPoint.lat} lng={centerPoint.lng}>
-                        <Icon src={IconLandmark} />
+                        {/* <Icon src={IconLandmark} /> */}mark
                     </Mark>
                 </GoogleMapReact>
             </GoogleMap>

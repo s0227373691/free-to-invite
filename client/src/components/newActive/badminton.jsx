@@ -378,3 +378,10 @@ const InputDate = styled(InputClearDefault)`
 const DateRange = styled.div`
     margin: 0 30px;
 `;
+
+const BtnDeleteTag = styled.span`
+    &:hover {
+        color: grey;
+        cursor: pointer;
+    }
+`;

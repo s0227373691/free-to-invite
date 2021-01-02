@@ -3,27 +3,43 @@ const mongoose = require('mongoose');
 const BoardGame = mongoose.model(
     'BoardGame',
     new mongoose.Schema({
-        primaryType: {
-            type: String,
-        },
         activeType: {
             type: String,
         },
-        date: {
+        startDate: {
             type: String,
         },
-        people: {
+        endDate: {
+            type: String,
+        },
+        title: {
+            type: String,
+        },
+        population: {
+            type: String,
+        },
+        cost: {
             type: Number,
         },
-        boardGameType: {
+        place: {
             type: String,
         },
-        Precautions: {
+        content: {
             type: String,
         },
-        boardGameType: {
-            type: String,
-        },
+        addedBoardGameList: [
+            {
+                name: {
+                    type: String,
+                },
+                type: {
+                    type: String,
+                },
+                background: {
+                    type: String,
+                },
+            },
+        ],
     })
 );
 

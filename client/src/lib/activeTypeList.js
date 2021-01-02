@@ -2,25 +2,22 @@ import React from 'react';
 
 import BoardGame from '../components/newActive/boardGame';
 import Movie from '../components/newActive/movie';
-import Concert from '../components/newActive/concert';
+import Mahjong from '../components/newActive/mahjong';
 import Basketball from '../components/newActive/basketball';
 import Fighting from '../components/newActive/fighting';
 import Badminton from '../components/newActive/badminton';
 import Running from '../components/newActive/running';
-import Newtaipei from '../components/newActive/newtaipei';
-import Taichung from '../components/newActive/taichung';
-import Taipei from '../components/newActive/taipei';
 
 const svgUrl = '/src/assets/svg/';
 const activeTypeList = [
     {
-        type: '休閒',
-        path: '/free',
+        type: '娛樂',
+        path: '/entertainment',
         activeList: [
             {
                 name: '桌游',
                 icon: `${svgUrl}board-games.svg`,
-                path: '/free/boardgame',
+                path: '/entertainment/boardgame',
                 formComponent: (activeType) => (
                     <BoardGame activeType={activeType} />
                 ),
@@ -28,17 +25,17 @@ const activeTypeList = [
             {
                 name: '電影',
                 icon: `${svgUrl}video-player.svg`,
-                path: '/free/movie',
+                path: '/entertainment/movie',
                 formComponent: (activeType) => (
                     <Movie activeType={activeType} />
                 ),
             },
             {
-                name: '演唱會',
-                icon: `${svgUrl}music.svg`,
-                path: '/free/concert',
+                name: '麻將',
+                icon: `${svgUrl}board-games.svg`,
+                path: '/entertainment/mahjong',
                 formComponent: (activeType) => (
-                    <Concert activeType={activeType} />
+                    <Mahjong activeType={activeType} />
                 ),
             },
         ],
@@ -82,32 +79,20 @@ const activeTypeList = [
         ],
     },
     {
-        type: '旅遊',
+        type: '休閒',
         path: '/travel',
         activeList: [
             {
-                name: '台北',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/taipei',
-                formComponent: (activeType) => (
-                    <Newtaipei activeType={activeType} />
-                ),
+                name: '休閒1',
+                icon: `${svgUrl}board-games.svg`,
             },
             {
-                name: '台中',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/taichung',
-                formComponent: (activeType) => (
-                    <Taichung activeType={activeType} />
-                ),
+                name: '休閒2',
+                icon: `${svgUrl}board-games.svg`,
             },
             {
-                name: '新北',
-                icon: `${svgUrl}basketball-ball.svg`,
-                path: '/travel/newtaipei',
-                formComponent: (activeType) => (
-                    <Taipei activeType={activeType} />
-                ),
+                name: '休閒3',
+                icon: `${svgUrl}board-games.svg`,
             },
         ],
     },

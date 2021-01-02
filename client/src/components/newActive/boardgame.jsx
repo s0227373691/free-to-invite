@@ -16,49 +16,7 @@ import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
-import GoogleMapReact from 'google-map-react';
-
 const Boardgame = (props) => {
-    const [mapInstance, setMapInstance] = useState(null);
-    const [mapApi, setMapApi] = useState(null);
-    const [mapApiLoaded, setMapApiLoaded] = useState(false);
-    const [currentCenter, setCurrentCenter] = useState({
-        lat: 25.0727686,
-        lng: 121.4338821,
-    });
-    const [centerPoint, setCenterPoint] = useState({
-        lat: 25.0727686,
-        lng: 121.4338821,
-    });
-    const [searchMapText, setSearchMapText] = useState('');
-    const mapHasLoaded = (map, maps) => {
-        setMapInstance(map);
-        setMapApi(maps);
-        setMapApiLoaded(true);
-    };
-    const searchLocation = () => {
-        const geocoder = new mapApi.Geocoder();
-        geocoder.geocode(
-            {
-                address: searchMapText,
-                componentRestrictions: {
-                    country: 'TW',
-                },
-            },
-            (results, status) => {
-                if (status === 'OK') {
-                    setCenterPoint({
-                        lat: results[0].geometry.location.lat(),
-                        lng: results[0].geometry.location.lng(),
-                    });
-                    setCurrentCenter(centerPoint);
-                    console.log(results[0].geometry.location.lat());
-                    console.log(results[0].geometry.location.lng());
-                }
-            }
-        );
-    };
-
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -66,6 +24,7 @@ const Boardgame = (props) => {
     const [population, setPopulation] = useState('');
     const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
+    const [place, setPlace] = useState('');
 
     const [backgroundColor, setBackgroundColor] = useState('#9b9b9b');
     const [newBoardGameType, setNewBoardGameType] = useState('');
@@ -97,8 +56,8 @@ const Boardgame = (props) => {
     };
 
     const handleClickButtonNewBoardGame = () => {
-        if (!newBoardGameType) return alert('請選擇桌遊類型');
-        if (!newBoardGameName) return alert('請輸入桌遊名稱');
+        if (!newBoardGameType) return alert('請選擇電影類型');
+        if (!newBoardGameName) return alert('請輸入電影名稱');
         const newAddedBoardGameList = [
             ...addedBoardGameList,
             {
@@ -115,15 +74,7 @@ const Boardgame = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(
-            startDate,
-            endDate,
-            title,
-            population,
-            cost,
-            content,
-            addedBoardGameList
-        );
+
         await postNewActiveBoardGame({
             activeType: props.activeType,
             startDate,
@@ -131,34 +82,47 @@ const Boardgame = (props) => {
             title,
             population,
             cost,
+            place,
             content,
             addedBoardGameList,
         });
     };
-
+    const handleChangeStartDate = (e) => {
+        const inputValue = e.target.value;
+        setStartDate(inputValue);
+        if (inputValue > endDate) setEndDate(inputValue);
+    };
+    const handleChangeEndDate = (e) => {
+        const inputValue = e.target.value;
+        setEndDate(inputValue);
+        if (inputValue < startDate) setStartDate(inputValue);
+    };
     return (
         <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
-                <Input
-                    type="datetime-local"
-                    onChange={(e) => setStartDate(e.target.value)}
-                    min={now}
-                    value={startDate}
-                    placeholder="開始時間"
-                    required
-                />
-            </Label>
-            <Label>
-                <Icon src={IconCalendar} />
-                <Input
-                    type="datetime-local"
-                    onChange={(e) => setEndDate(e.target.value)}
-                    min={now}
-                    value={endDate}
-                    placeholder="結束時間"
-                    required
-                />
+                <DateRange>
+                    <div>
+                        <span>活動開始</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={startDate}
+                            onChange={handleChangeStartDate}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <span>活動結束</span>
+                        <InputDate
+                            type="datetime-local"
+                            min={now}
+                            value={endDate}
+                            onChange={handleChangeEndDate}
+                            required
+                        />
+                    </div>
+                </DateRange>
             </Label>
             <Label>
                 <Icon src={IconTitle} />
@@ -188,6 +152,16 @@ const Boardgame = (props) => {
                     value={cost}
                     placeholder="花費"
                     required
+                />
+            </Label>
+            <Label htmlFor="place">
+                <Icon src={IconPlace} />
+                <Input
+                    id="place"
+                    type="text"
+                    placeholder="地點"
+                    value={place}
+                    onChange={(e) => setPlace(e.target.value)}
                 />
             </Label>
 
@@ -248,36 +222,11 @@ const Boardgame = (props) => {
                     );
                 })}
             </AddedBoardGame>
-            <Label>
-                <Icon src={IconPlace} />
-                <Input
-                    type="text"
-                    onChange={(e) => setSearchMapText(e.target.value)}
-                />
-                <ButtonSearchMap onClick={searchLocation}>搜尋</ButtonSearchMap>
-            </Label>
-            <GoogleMap>
-                <GoogleMapReact
-                    yesIWantToUseGoogleMapApiInternals={true}
-                    bootstrapURLKeys={{
-                        key: 'AIzaSyDbatx1g_dDPpQIz6mTPgECwjhXgqUjlrU',
-                        libraries: ['places'],
-                    }}
-                    defaultZoom={17}
-                    onGoogleApiLoaded={({ map, maps }) =>
-                        mapHasLoaded(map, maps)
-                    }
-                    center={currentCenter}
-                >
-                    <Mark lat={centerPoint.lat} lng={centerPoint.lng}>
-                        My Marker
-                    </Mark>
-                </GoogleMapReact>
-            </GoogleMap>
+
             <TextArea
                 placeholder="補充說明..."
-                onChange={(e) => setContent(e.target.value)}
                 placeholder="補充說明"
+                onChange={(e) => setContent(e.target.value)}
                 value={content}
             ></TextArea>
             <Button type="submit">新增</Button>
@@ -312,9 +261,9 @@ const TextArea = styled(TextareaClearDefault)`
 `;
 const NewBoardGame = styled.div`
     display: flex;
+    align-items: center;
 `;
 const SelectBoardGameType = styled(SelectClearDefault)`
-    margin-bottom: 20px;
     font-size: 18px;
     color: #ffffff;
 `;
@@ -360,38 +309,9 @@ const BtnDeleteTag = styled.span`
     }
 `;
 
-const GoogleMap = styled.div`
-    width: 100%;
-    height: 400px;
-`;
-const Mark = styled.div``;
-
-const ButtonSearchMap = styled.div`
-    width: 90px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 18px;
-    color: #fff;
-    background-color: rgb(155, 155, 155);
-    box-sizing: border-box;
-
-    &:hover {
-        opacity: 0.7;
-        cursor: pointer;
-    }
-    &:active {
-        opacity: 1;
-    }
-`;
-
 const ButtonNewBoardGame = styled.div`
     width: 90px;
     padding: 10px 15px;
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -407,6 +327,17 @@ const ButtonNewBoardGame = styled.div`
     &:active {
         opacity: 1;
     }
+`;
+const InputDate = styled(InputClearDefault)`
+    width: auto;
+    margin: 0 30px;
+    padding: 10px 0;
+    border: 0px solid #dadce0;
+    font-size: 23px;
+`;
+
+const DateRange = styled.div`
+    margin: 0 30px;
 `;
 
 export default Boardgame;

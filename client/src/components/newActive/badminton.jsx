@@ -19,6 +19,77 @@ import {
 } from '../../assets/config/imageUrl';
 
 const Badminton = () => {
+    let strength = [
+        {
+            optgroupLabel: '高階',
+            options: [
+                {
+                    text: '上',
+                    value: '高階上',
+                    borderLeftColor: ' #00ffea',
+                    isAdded: false,
+                },
+                {
+                    text: '中',
+                    value: '高階中',
+                    borderLeftColor: ' #850000',
+                    isAdded: false,
+                },
+                {
+                    text: '下',
+                    value: '高階下',
+                    borderLeftColor: ' #0097ce',
+                    isAdded: false,
+                },
+            ],
+        },
+        {
+            optgroupLabel: '中階',
+            options: [
+                {
+                    text: '上',
+                    value: '中階上',
+                    borderLeftColor: ' #3700ff',
+                    isAdded: false,
+                },
+                {
+                    text: '中',
+                    value: '中階中',
+                    borderLeftColor: ' #73ff00',
+                    isAdded: false,
+                },
+                {
+                    text: '下',
+                    value: '中階下',
+                    borderLeftColor: ' #fc7303',
+                    isAdded: false,
+                },
+            ],
+        },
+        {
+            optgroupLabel: '初階',
+            options: [
+                {
+                    text: '上',
+                    value: '初階上',
+                    borderLeftColor: ' #de0097',
+                    isAdded: false,
+                },
+                {
+                    text: '中',
+                    value: '初階中',
+                    borderLeftColor: ' #00a976',
+                    isAdded: false,
+                },
+                {
+                    text: '下',
+                    value: '初階下',
+                    borderLeftColor: ' #eaff00',
+                    isAdded: false,
+                },
+            ],
+        },
+    ];
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -29,8 +100,8 @@ const Badminton = () => {
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
-    const [selectedStrength, setSelectedStrength] = useState('');
-    const [addedStrengthList, setAddedStrengthList] = useState([]);
+    const [addedStrengthList, setAddedStrengthList] = useState(strength);
+    const [strengthOptions, setStrengthOptions] = useState(strength);
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -43,29 +114,40 @@ const Badminton = () => {
         if (inputValue < startDate) setStartDate(inputValue);
     };
 
-    const handleClickAddStrength = () => {
-        if (selectedStrength === '') return;
+    const handleChangeSelectStrength = (e) => {
+        const selectedValue = e.target.value;
         const newStrengthList = [...addedStrengthList];
-        newStrengthList.push(selectedStrength);
-        setAddedStrengthList(newStrengthList);
-        setSelectedStrength('');
+        newStrengthList.map((item) => {
+            item.options.map((x) => {
+                if (x.value === selectedValue) return (x.isAdded = !x.isAdded);
+            });
+        });
+
+        setStrengthOptions(newStrengthList);
     };
 
-    const handleClickDeleteTag = (i) => {
+    const handleClickDeleteTag = (optionValue) => {
         const newAddedStrengthList = [...addedStrengthList];
-        newAddedStrengthList.splice(i, 1);
+        newAddedStrengthList.map(({ options }) =>
+            options.map((item) => {
+                if (item.value === optionValue)
+                    return (item.isAdded = !item.isAdded);
+            })
+        );
         setAddedStrengthList(newAddedStrengthList);
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
     };
+
     return (
         <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
                 <DateRange>
                     <div>
-                        <span>開始</span>
+                        <span>活動開始</span>
                         <InputDate
                             type="datetime-local"
                             min={now}
@@ -75,7 +157,7 @@ const Badminton = () => {
                         />
                     </div>
                     <div>
-                        <span>結束</span>
+                        <span>活動結束</span>
                         <InputDate
                             type="datetime-local"
                             min={now}
@@ -121,7 +203,7 @@ const Badminton = () => {
                 <Input
                     id="badminton_type"
                     type="text"
-                    placeholder="用球"
+                    placeholder="使用球種"
                     value={badmintonType}
                     onChange={(e) => setBadmintonType(e.target.value)}
                 />
@@ -148,40 +230,42 @@ const Badminton = () => {
             </Label>
             <Label>
                 <Icon src={IconStrength} />
-                <SelectStrength
-                    value={selectedStrength}
-                    onChange={(e) => setSelectedStrength(e.target.value)}
-                >
-                    <option hidden>請選擇程度</option>
-                    <optgroup label="高階">
-                        <option value="高階上">上</option>
-                        <option value="高階中">中</option>
-                        <option value="高階下">下</option>
-                    </optgroup>
-                    <optgroup label="中階">
-                        <option value="中階上">上</option>
-                        <option value="中階中">中</option>
-                        <option value="中階下">下</option>
-                    </optgroup>
-                    <optgroup label="初階">
-                        <option value="初階上">上</option>
-                        <option value="初階中">中</option>
-                        <option value="初階下">下</option>
-                    </optgroup>
+                <SelectStrength value="" onChange={handleChangeSelectStrength}>
+                    <option hidden>新增程度</option>
+                    {strengthOptions.map(({ optgroupLabel, options }) => (
+                        <optgroup key={optgroupLabel} label={optgroupLabel}>
+                            {options.map(({ text, value, isAdded }) => {
+                                if (isAdded) return;
+                                return (
+                                    <option key={value} value={value}>
+                                        {text}
+                                    </option>
+                                );
+                            })}
+                        </optgroup>
+                    ))}
                 </SelectStrength>
-                <BtnAddStrength onClick={handleClickAddStrength}>
-                    新增
-                </BtnAddStrength>
             </Label>
             <AddedStrengthList>
-                {addedStrengthList.map((strength, i) => (
-                    <AddedStrength key={i}>
-                        <span style={{ marginRight: '10px' }}>{strength}</span>
-                        <BtnDeleteTag onClick={(i) => handleClickDeleteTag(i)}>
-                            X
-                        </BtnDeleteTag>
-                    </AddedStrength>
-                ))}
+                {addedStrengthList.map((strengthType) =>
+                    strengthType.options.map(
+                        ({ isAdded, value, borderLeftColor }) => {
+                            if (!isAdded) return;
+                            return (
+                                <StrengthTag
+                                    key={value}
+                                    borderLeftColor={borderLeftColor}
+                                    onClick={() => handleClickDeleteTag(value)}
+                                >
+                                    <span>{value}</span>
+                                    <TagDelete className="show-tag-delete">
+                                        X
+                                    </TagDelete>
+                                </StrengthTag>
+                            );
+                        }
+                    )
+                )}
             </AddedStrengthList>
             <TextArea
                 placeholder="補充說明..."
@@ -244,22 +328,43 @@ const Icon = styled.img`
 const SelectStrength = styled(SelectClearDefault)`
     min-width: 300px;
     margin: 0 30px;
+    background-color: #dadce0;
 `;
 
 const AddedStrengthList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
+    padding-left: 70px;
 `;
-const AddedStrength = styled.div``;
+const StrengthTag = styled.div`
+    width: fit-content;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 12px 0 12px 10px;
+    display: flex;
+    color: #ffffff;
+    border-left: 6px solid ${({ borderLeftColor }) => borderLeftColor};
+    border-radius: 5px;
+    background-color: #a0a0a0;
 
-const BtnDeleteTag = styled.span`
+    .show-tag-delete {
+        visibility: hidden;
+    }
     &:hover {
-        color: grey;
         cursor: pointer;
+        background-color: #929292;
+        .show-tag-delete {
+            visibility: visible;
+        }
     }
 `;
 
-const BtnAddStrength = styled(ButtonClearDefault)`
-    padding: 15px;
+const TagDelete = styled.span`
+    padding: 0 10px;
+    &:hover {
+        font-weight: bold;
+    }
 `;
 
 const InputDate = styled(InputClearDefault)`
@@ -272,4 +377,11 @@ const InputDate = styled(InputClearDefault)`
 
 const DateRange = styled.div`
     margin: 0 30px;
+`;
+
+const BtnDeleteTag = styled.span`
+    &:hover {
+        color: grey;
+        cursor: pointer;
+    }
 `;

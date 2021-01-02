@@ -11,7 +11,7 @@ import { ButtonClearDefault } from './styles/buttons';
 import { userCheckedLoginStatus } from '../store/slices/users';
 import { getUserLogout } from '../lib/api/users/logout';
 
-import IconLogo from '../assets/img/logo';
+import { IconLogo, IconUser } from '../assets/config/imageUrl';
 
 const Header = (props) => {
     const [login, setLogin] = useState(false);
@@ -37,7 +37,10 @@ const Header = (props) => {
 
                 {loggedIn ? (
                     <Account>
-                        {accountName}
+                        <BtnAccount>
+                            <Icon src={IconUser} />
+                            <AccountName>{accountName}</AccountName>
+                        </BtnAccount>
                         <AccountActionList className="show-user-dropdown">
                             {accountType === 'admin' ? (
                                 <AccountAction>
@@ -60,6 +63,9 @@ const Header = (props) => {
                             </AccountAction>
                             <AccountAction>
                                 <Link to="/myactive">我的活動</Link>
+                            </AccountAction>
+                            <AccountAction>
+                                <Link to="/googlemap/test">googlemap</Link>
                             </AccountAction>
                             <AccountAction onClick={handleClickLogout}>
                                 登出
@@ -135,6 +141,19 @@ const Account = styled(ButtonClearDefault)`
     }
 `;
 
+const BtnAccount = styled.div`
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+`;
+
+const Icon = styled.img`
+    width: 30px;
+    margin: 0 10px;
+`;
+
+const AccountName = styled.div``;
+
 const AccountActionList = styled.ul`
     padding: 0 10px;
     position: absolute;
@@ -154,11 +173,12 @@ const ButtonGroup = styled.div`
     justify-content: space-between;
     align-items: center;
     button {
-        color: white;
-        padding: 10px;
-        background-color: #629dd1;
-        border-radius: 10px;
+        color: #ffffff;
+        padding: 8px 15px;
         margin-left: 15px;
+        font-size: 18px;
+        background-color: #99c5eb;
+        border-radius: 5px;
         &:hover {
             background-color: #76a9d7;
         }

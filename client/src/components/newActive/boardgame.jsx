@@ -75,13 +75,15 @@ const Boardgame = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(
+            props.activeType,
             startDate,
             endDate,
             title,
             population,
             cost,
             content,
-            addedBoardGameList
+            addedBoardGameList,
+            place
         );
         await postNewActiveBoardGame({
             activeType: props.activeType,
@@ -90,6 +92,7 @@ const Boardgame = (props) => {
             title,
             population,
             cost,
+            place,
             content,
             addedBoardGameList,
         });
@@ -161,6 +164,16 @@ const Boardgame = (props) => {
                     required
                 />
             </Label>
+            <Label htmlFor="place">
+                <Icon src={IconPlace} />
+                <Input
+                    id="place"
+                    type="text"
+                    placeholder="地點"
+                    value={place}
+                    onChange={(e) => setPlace(e.target.value)}
+                />
+            </Label>
 
             <NewBoardGame>
                 <SelectBoardGameType
@@ -219,16 +232,7 @@ const Boardgame = (props) => {
                     );
                 })}
             </AddedBoardGame>
-            <Label htmlFor="place">
-                <Icon src={IconPlace} />
-                <Input
-                    id="place"
-                    type="text"
-                    placeholder="地點"
-                    value={place}
-                    onChange={(e) => setPlace(e.target.value)}
-                />
-            </Label>
+
             <TextArea
                 placeholder="補充說明..."
                 placeholder="補充說明"
@@ -267,9 +271,9 @@ const TextArea = styled(TextareaClearDefault)`
 `;
 const NewBoardGame = styled.div`
     display: flex;
+    align-items: center;
 `;
 const SelectBoardGameType = styled(SelectClearDefault)`
-    margin-bottom: 20px;
     font-size: 18px;
     color: #ffffff;
 `;
@@ -315,38 +319,9 @@ const BtnDeleteTag = styled.span`
     }
 `;
 
-const GoogleMap = styled.div`
-    width: 100%;
-    height: 400px;
-`;
-const Mark = styled.div``;
-
-const ButtonSearchMap = styled.div`
-    width: 90px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 18px;
-    color: #fff;
-    background-color: rgb(155, 155, 155);
-    box-sizing: border-box;
-
-    &:hover {
-        opacity: 0.7;
-        cursor: pointer;
-    }
-    &:active {
-        opacity: 1;
-    }
-`;
-
 const ButtonNewBoardGame = styled.div`
     width: 90px;
     padding: 10px 15px;
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

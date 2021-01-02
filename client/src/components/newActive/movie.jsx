@@ -234,9 +234,8 @@ const Input = styled(InputClearDefault)`
     margin: 0 30px;
     padding: 15px 0;
     font-size: 25px;
-    border-radius: 0px;
+
     border: none;
-    border-bottom: 1px black solid;
 `;
 
 const TextArea = styled(TextareaClearDefault)`

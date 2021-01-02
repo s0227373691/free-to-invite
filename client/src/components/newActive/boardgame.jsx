@@ -74,17 +74,7 @@ const Boardgame = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(
-            props.activeType,
-            startDate,
-            endDate,
-            title,
-            population,
-            cost,
-            content,
-            addedBoardGameList,
-            place
-        );
+
         await postNewActiveBoardGame({
             activeType: props.activeType,
             startDate,

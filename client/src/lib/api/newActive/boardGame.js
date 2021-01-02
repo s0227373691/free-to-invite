@@ -2,21 +2,25 @@ import { apiPostNewActiveBoardGame } from '../api.js';
 
 export const postNewActiveBoardGame = ({
     activeType,
-    date,
-    people,
-    precautions,
-    boardgameType,
+    startDate,
+    endDate,
     title,
+    population,
+    cost,
     content,
+    addedBoardGameList,
+    place,
 }) => {
     return apiPostNewActiveBoardGame({
         activeType,
-        date,
-        people,
-        precautions,
-        boardgameType,
+        startDate,
+        endDate,
         title,
+        population,
+        cost,
         content,
+        addedBoardGameList,
+        place,
     })
         .then((res) => res)
         .catch((err) => {

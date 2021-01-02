@@ -32,7 +32,7 @@ const activeTypeList = [
             },
             {
                 name: '麻將',
-
+                icon: `${svgUrl}board-games.svg`,
                 path: '/entertainment/mahjong',
                 formComponent: (activeType) => (
                     <Mahjong activeType={activeType} />
@@ -84,12 +84,15 @@ const activeTypeList = [
         activeList: [
             {
                 name: '休閒1',
+                icon: `${svgUrl}board-games.svg`,
             },
             {
                 name: '休閒2',
+                icon: `${svgUrl}board-games.svg`,
             },
             {
                 name: '休閒3',
+                icon: `${svgUrl}board-games.svg`,
             },
         ],
     },

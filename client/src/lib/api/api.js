@@ -7,7 +7,6 @@ Axios.defaults.withCredentials = true;
 const userRequest = Axios.create({
     baseURL: `${baseURL}/users`,
 });
-
 export const apiPostUserRegister = (data) =>
     userRequest.post('/register', data);
 export const apiGetUserAuth = (data) => userRequest.get('/auth', data);
@@ -35,3 +34,6 @@ export const apiPostNewActiveRunning = (data) =>
 
 export const apiPostNewActiveFighting = (data) =>
     newActiveRequest.post('/fighting', data);
+
+export const apiPostNewActiveBadminton = (data) =>
+    newActiveRequest.post('/badminton', data);

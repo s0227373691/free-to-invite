@@ -7,6 +7,8 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
+import { postNewActiveBadminton } from '../../lib/api/newActive/badminton';
+
 import {
     IconBadminton,
     IconCalendar,
@@ -18,7 +20,7 @@ import {
     IconTitle,
 } from '../../assets/config/imageUrl';
 
-const Badminton = () => {
+const Badminton = (props) => {
     let strength = [
         {
             optgroupLabel: '高階',
@@ -94,7 +96,7 @@ const Badminton = () => {
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
     const [badmintonType, setBadmintonType] = useState('');
-    const [site, setSite] = useState('');
+    const [nets, setNets] = useState('');
     const [population, setPopulation] = useState('');
     const [cost, setCost] = useState('');
     const [title, setTitle] = useState('');
@@ -137,8 +139,21 @@ const Badminton = () => {
         setAddedStrengthList(newAddedStrengthList);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(addedStrengthList)
+        // await postNewActiveBadminton({
+        //     activeType: props.activeType,
+        //     startDate,
+        //     endDate,
+        //     title,
+        //     place,
+        //     nets,
+        //     badmintonType,
+        //     population,
+        //     cost,
+        //     content,
+        // });
     };
 
     return (
@@ -188,14 +203,14 @@ const Badminton = () => {
                     onChange={(e) => setPlace(e.target.value)}
                 />
             </Label>
-            <Label htmlFor="site">
+            <Label htmlFor="nets">
                 <Icon src={IconNet} />
                 <Input
-                    id="site"
+                    id="nets"
                     type="number"
                     placeholder="球網面數"
-                    value={site}
-                    onChange={(e) => setSite(e.target.value)}
+                    value={nets}
+                    onChange={(e) => setNets(e.target.value)}
                 />
             </Label>
             <Label htmlFor="badminton_type">

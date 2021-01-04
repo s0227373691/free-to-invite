@@ -7,6 +7,7 @@ import Basketball from '../components/newActive/basketball';
 import Fighting from '../components/newActive/fighting';
 import Badminton from '../components/newActive/badminton';
 import Running from '../components/newActive/running';
+import Workout from '../components/newActive/workout';
 
 const svgUrl = '/src/assets/svg/';
 const activeTypeList = [
@@ -68,12 +69,21 @@ const activeTypeList = [
                     <Fighting activeType={activeType} />
                 ),
             },
+
             {
                 name: '羽球',
                 icon: `${svgUrl}shuttlecock.svg`,
                 path: '/sport/badminton',
                 formComponent: (activeType) => (
                     <Badminton activeType={activeType} />
+                ),
+            },
+            {
+                name: '健身',
+                icon: `${svgUrl}shuttlecock.svg`,
+                path: '/sport/workout',
+                formComponent: (activeType) => (
+                    <Workout activeType={activeType} />
                 ),
             },
         ],

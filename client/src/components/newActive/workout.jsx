@@ -215,9 +215,9 @@ const Workout = (props) => {
                 <BodyText>部位</BodyText>
                 <BodyText>手部</BodyText>
                 <InputCheck type="checkbox" required />
-                <BodyText>背部</BodyText>
-                <InputCheck type="checkbox" required />
                 <BodyText>胸部</BodyText>
+                <InputCheck type="checkbox" required />
+                <BodyText>背部</BodyText>
                 <InputCheck type="checkbox" required />
                 <BodyText>腹部</BodyText>
                 <InputCheck type="checkbox" required />

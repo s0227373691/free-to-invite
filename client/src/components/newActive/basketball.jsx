@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
-import { SelectClearDefault } from '../styles/selects';
 
 import { postNewActiveBasketball } from '../../lib/api/newActive/basketball';
 import dateFormat from 'dateformat';
@@ -22,9 +21,6 @@ const Basketball = (props) => {
     // TODO 新增欄位：規則 <TextArea>
     // TODO 新增欄位：輪打隊數 <Input type: 'number'>
     // TODO 新增欄位：球友程度 <Input type: 'text'>
-<<<<<<< HEAD
-
-=======
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -67,21 +63,12 @@ const Basketball = (props) => {
             rule,
         });
     };
->>>>>>> origin
     return (
         <Form onSubmit={handleSubmit}>
             <Label>
                 <Icon src={IconCalendar} />
                 <DateRange>
                     <div>
-<<<<<<< HEAD
-                        <span>開始</span>
-                        <InputDate type="datetime-local" />
-                    </div>
-                    <div>
-                        <span>結束</span>
-                        <InputDate type="datetime-local" />
-=======
                         <span>活動開始</span>
                         <InputDate
                             type="datetime-local"
@@ -100,7 +87,6 @@ const Basketball = (props) => {
                             onChange={handleChangeEndDate}
                             required
                         />
->>>>>>> origin
                     </div>
                 </DateRange>
             </Label>
@@ -128,14 +114,6 @@ const Basketball = (props) => {
 
             <Label htmlFor="population">
                 <Icon src={IconPopulation} />
-<<<<<<< HEAD
-
-                <Input id="population" placeholder="單兵" type="number" />
-                <Input id="population" placeholder="隊" type="number" />
-            </Label>
-
-            <Label htmlFor="price">
-=======
                 <Input
                     onChange={(e) => setPopulation(e.target.value)}
                     value={population}
@@ -145,7 +123,6 @@ const Basketball = (props) => {
                 />
             </Label>
             <Label htmlFor="individualCost">
->>>>>>> origin
                 <Icon src={IconPrice} />
                 <Input
                     onChange={(e) => setIndividualCost(e.target.value)}
@@ -155,9 +132,6 @@ const Basketball = (props) => {
                     placeholder="單兵費用"
                 />
             </Label>
-<<<<<<< HEAD
-            <TextArea placeholder="補充說明..."></TextArea>
-=======
             <Label htmlFor="teamCost">
                 <Icon src={IconPrice} />
                 <Input
@@ -198,7 +172,6 @@ const Basketball = (props) => {
                 value={content}
                 placeholder="補充說明..."
             ></TextArea>
->>>>>>> origin
             <Button type="submit">新增</Button>
         </Form>
     );

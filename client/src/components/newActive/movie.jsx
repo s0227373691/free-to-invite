@@ -7,13 +7,15 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
+import { postNewActiveMovie } from '../../lib/api/newActive/movie';
+
 import IconPrice from '../../assets/svg/price';
 import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
-const Movie = () => {
+const Movie = (props) => {
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -22,8 +24,8 @@ const Movie = () => {
     const [population, setPopulation] = useState('');
     const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
+
     const [movieName, setMovieName] = useState('');
-    const [movieType, setMovieType] = useState('');
     const [addedMovieTypeList, setAddedMovieTypeList] = useState([]);
     const movieTypeList = [
         { type: '動作' },
@@ -36,7 +38,6 @@ const Movie = () => {
         { type: '災難' },
         { type: '喜劇' },
         { type: '愛情' },
-        { type: '色情' },
         { type: '驚悚' },
         { type: '懸疑' },
         { type: '恐怖' },
@@ -52,31 +53,21 @@ const Movie = () => {
         setEndDate(inputValue);
         if (inputValue < startDate) setStartDate(inputValue);
     };
-    const addNewMovieType = () => {
-        console.log(movieType);
-        const newAddedMovieList = [...addedMovieTypeList, movieType];
-        setAddedMovieTypeList(newAddedMovieList);
-    };
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(
-        //     '開始時間',
-        //     startDate,
-        //     '結束時間',
-        //     endDate,
-        //     '標題',
-        //     title,
-        //     '地點',
-        //     place,
-        //     '人數',
-        //     population,
-        //     '花費',
-        //     cost,
-        //     '內容',
-        //     content,
-        //     '增加電影',
-        //     addedMovieList
-        // );
+        await postNewActiveMovie({
+            activeType: props.activeType,
+            startDate,
+            endDate,
+            title,
+            place,
+            population,
+            cost,
+            content,
+            movieName,
+            addedMovieTypeList,
+        });
     };
     return (
         <Form onSubmit={handleSubmit}>
@@ -155,47 +146,41 @@ const Movie = () => {
                     value={movieName}
                     onChange={(e) => setMovieName(e.target.value)}
                 />
-                <SelectMovieType
-                    onChange={(e) => {
-                        setMovieType(e.target.value);
-                    }}
-                    value={movieType}
-                >
-                    <option value="" hidden>
-                        請選擇電影類型
-                    </option>
-                    {movieTypeList.map(({ type }) => (
-                        <option key={type} value={type}>
-                            {type}
-                        </option>
-                    ))}
-                </SelectMovieType>
-                <ButtonNewMovieType onClick={addNewMovieType}>
-                    新增
-                </ButtonNewMovieType>
             </Label>
-            <AddedMovieType>
-                {addedMovieTypeList.map((x, i) => {
+            <CheckBoxGroup>
+                {movieTypeList.map((movieType, i) => {
+                    const { type } = movieType;
                     return (
-                        <MovieType key={i}>
-                            <span>{x}</span>
-                            <BtnDeleteTag
-                                onClick={() => {
-                                    const newAddedMovieTypeList = [
-                                        ...addedMovieTypeList,
-                                    ];
-                                    newAddedMovieTypeList.splice(i, 1);
-                                    setAddedMovieTypeList(
-                                        newAddedMovieTypeList
-                                    );
+                        <LabelCheckBox htmlFor={type} key={i}>
+                            <span>{type}</span>
+                            <CheckBox
+                                type="checkbox"
+                                id={type}
+                                name={type}
+                                value={type}
+                                onChange={(e) => {
+                                    if (
+                                        addedMovieTypeList.includes(
+                                            e.target.value
+                                        )
+                                    ) {
+                                        addedMovieTypeList.splice(
+                                            addedMovieTypeList.indexOf(
+                                                e.target.value
+                                            ),
+                                            1
+                                        );
+                                    } else {
+                                        addedMovieTypeList.push(e.target.value);
+                                    }
+
+                                    console.log(addedMovieTypeList);
                                 }}
-                            >
-                                x
-                            </BtnDeleteTag>
-                        </MovieType>
+                            />
+                        </LabelCheckBox>
                     );
                 })}
-            </AddedMovieType>
+            </CheckBoxGroup>
             <TextArea
                 placeholder="補充說明..."
                 onChange={(e) => setContent(e.target.value)}
@@ -205,7 +190,15 @@ const Movie = () => {
         </Form>
     );
 };
-
+const CheckBoxGroup = styled.div`
+    display: flex;
+`;
+const LabelCheckBox = styled.label`
+    display: flex;
+`;
+const CheckBox = styled.input`
+    display: flex;
+`;
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -261,21 +254,32 @@ const Button = styled(ButtonClearDefault)`
         background: rgb(14, 145, 210);
     }
 `;
+const NewMovie = styled.div`
+    display: flex;
+    align-items: center;
+`;
 
 const SelectMovieType = styled(SelectClearDefault)`
     font-size: 18px;
+    color: #ffffff;
+    background: rgb(155, 155, 155);
+    margin: 0 15px;
+`;
+const InputMovieName = styled(Input)`
+    font-size: 20px;
 `;
 
 const ButtonNewMovieType = styled.div`
-    width: 160px;
+    width: 100px;
     padding: 10px 15px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border-radius: 5px;
     font-size: 18px;
-    background-color: rgb(155, 155, 155);
-    margin: 0 30px;
+    color: #ffffff;
+    background: rgb(155, 155, 155);
+
     &:hover {
         opacity: 0.7;
         cursor: pointer;

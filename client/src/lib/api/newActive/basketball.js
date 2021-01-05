@@ -2,23 +2,31 @@ import { apiPostNewActiveBasketball } from '../api.js';
 
 export const postNewActiveBasketball = ({
     activeType,
-    difficulty,
-    date,
-    people,
-    precautions,
-    basketballType,
+    startDate,
+    endDate,
     title,
+    population,
     content,
+    place,
+    individualCost,
+    teamCost,
+    roundNumber,
+    ballfriendLevel,
+    rule,
 }) => {
     return apiPostNewActiveBasketball({
         activeType,
-        difficulty,
-        date,
-        people,
-        precautions,
-        basketballType,
+        startDate,
+        endDate,
         title,
+        population,
         content,
+        place,
+        individualCost,
+        teamCost,
+        roundNumber,
+        ballfriendLevel,
+        rule,
     })
         .then((res) => res)
         .catch((err) => {

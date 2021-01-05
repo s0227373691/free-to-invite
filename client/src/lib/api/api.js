@@ -23,8 +23,8 @@ export const apiPostNewActiveBoardGame = (data) =>
 export const apiPostNewActiveMovie = (data) =>
     newActiveRequest.post('/movie', data);
 
-export const apiPostNewActiveConcert = (data) =>
-    newActiveRequest.post('/concert', data);
+export const apiPostNewActiveFighting = (data) =>
+    newActiveRequest.post('/fighting', data);
 
 export const apiPostNewActiveBasketball = (data) =>
     newActiveRequest.post('/basketball', data);
@@ -37,3 +37,6 @@ export const apiPostNewActiveFighting = (data) =>
 
 export const apiPostNewActiveBadminton = (data) =>
     newActiveRequest.post('/badminton', data);
+
+export const apiPostNewActiveMahjong = (data) =>
+    newActiveRequest.post('/mahjong', data);

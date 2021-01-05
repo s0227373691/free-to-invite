@@ -7,6 +7,8 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
+import { postNewActiveMahjong } from '../../lib/api/newActive/mahjong';
+
 import IconPrice from '../../assets/svg/price';
 import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
@@ -49,8 +51,9 @@ const Mahjong = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(
-            props.activeType,
+
+        await postNewActiveMahjong({
+            activeType: props.activeType,
             startDate,
             endDate,
             title,
@@ -62,8 +65,8 @@ const Mahjong = (props) => {
             smoking,
             offerFood,
             offerDrink,
-            electricTable
-        );
+            electricTable,
+        });
     };
     return (
         <Form onSubmit={handleSubmit}>

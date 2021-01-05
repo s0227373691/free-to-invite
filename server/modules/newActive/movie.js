@@ -6,23 +6,32 @@ const Movie = mongoose.model(
         activeType: {
             type: String,
         },
-        movieType: {
+        startDate: {
             type: String,
         },
-        date: {
+        endDate: {
             type: String,
-        },
-        precautions: {
-            type: String,
-        },
-        people: {
-            type: Number,
         },
         title: {
             type: String,
         },
+        place: {
+            type: String,
+        },
+        population: {
+            type: Number,
+        },
+        cost: {
+            type: Number,
+        },
         content: {
             type: String,
+        },
+        movieName: {
+            type: String,
+        },
+        addedMovieTypeList: {
+            type: Array,
         },
     })
 );

@@ -304,7 +304,6 @@ const Button = styled(ButtonClearDefault)`
 
 const BtnDeleteTag = styled.span`
     &:hover {
-        color: grey;
         cursor: pointer;
     }
 `;
@@ -318,7 +317,6 @@ const ButtonNewBoardGame = styled.div`
     border-radius: 5px;
     font-size: 18px;
     color: #ffffff;
-    box-sizing: border-box;
 
     &:hover {
         opacity: 0.7;

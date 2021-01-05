@@ -8,11 +8,7 @@ const Member = () => {
             <Backgroundicture>
                 <Profilepicture />
             </Backgroundicture>
-            <List>
-                pigone efkfkf @Pigone55 x_x
-                {/* <Bio type="text"></Bio> */}
-            </List>
-            userData.map(x => {<p>x.userName</p>})
+            <List></List>
             <List2>
                 <About href="/user/about/:userId">About</About>
                 <About href="">About</About>
@@ -29,7 +25,6 @@ const Container = styled.div`
     width: 100%;
     background-color: #ffffff;
 `;
-
 const Backgroundicture = styled.div`
     max-width: 1140px;
     background-color: rgba(130, 119, 119, 0.1);

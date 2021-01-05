@@ -304,7 +304,7 @@ const LabelText = styled.div`
 
 const BodyText = styled.div`
     margin: 0 25px;
-    padding: 15px 0;
+    padding: 15px;
     border: 0px solid #dadce0;
     font-size: 25px;
 `;

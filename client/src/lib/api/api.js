@@ -32,9 +32,6 @@ export const apiPostNewActiveBasketball = (data) =>
 export const apiPostNewActiveRunning = (data) =>
     newActiveRequest.post('/running', data);
 
-export const apiPostNewActiveFighting = (data) =>
-    newActiveRequest.post('/fighting', data);
-
 export const apiPostNewActiveBadminton = (data) =>
     newActiveRequest.post('/badminton', data);
 

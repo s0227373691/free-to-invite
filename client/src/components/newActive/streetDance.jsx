@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import dateFormat from 'dateformat';
+import { postNewActiveStreetDance } from '../../lib/api/newActive/streetDance';
 
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
@@ -22,6 +23,16 @@ const Mahjong = (props) => {
     const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
     const [place, setPlace] = useState('');
+
+    const [site, setSite] = useState('');
+    const [addedLevelTypeList, setAddedLevelTypeList] = useState([]);
+    const streetDanceLevel = [
+        { type: '初學' },
+        { type: '基礎' },
+        { type: '休閒' },
+        { type: '老手' },
+        { type: '新手' },
+    ];
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -45,8 +56,22 @@ const Mahjong = (props) => {
             population,
             cost,
             place,
-            content
+            content,
+            site,
+            addedLevelTypeList
         );
+        await postNewActiveStreetDance({
+            activeType: props.activeType,
+            startDate,
+            endDate,
+            title,
+            population,
+            cost,
+            place,
+            content,
+            site,
+            addedLevelTypeList,
+        });
     };
     return (
         <Form onSubmit={handleSubmit}>
@@ -116,6 +141,62 @@ const Mahjong = (props) => {
                     onChange={(e) => setPlace(e.target.value)}
                 />
             </Label>
+            <CheckBoxGroup>
+                <CheckBoxText>程度 </CheckBoxText>
+                {streetDanceLevel.map((levelType, i) => {
+                    const { type } = levelType;
+                    return (
+                        <LabelCheckBox htmlFor={type} key={i}>
+                            <span>{type}</span>
+                            <CheckBox
+                                type="checkbox"
+                                id={type}
+                                name={type}
+                                value={type}
+                                onChange={(e) => {
+                                    if (
+                                        addedLevelTypeList.includes(
+                                            e.target.value
+                                        )
+                                    ) {
+                                        addedLevelTypeList.splice(
+                                            addedLevelTypeList.indexOf(
+                                                e.target.value
+                                            ),
+                                            1
+                                        );
+                                    } else {
+                                        addedLevelTypeList.push(e.target.value);
+                                    }
+                                }}
+                            />
+                        </LabelCheckBox>
+                    );
+                })}
+            </CheckBoxGroup>
+            <RadioGroup>
+                <Label>
+                    <LabelText>場地</LabelText>
+                    <RadioWrap>
+                        <span>室內</span>
+                        <Radio
+                            type="radio"
+                            name="site"
+                            value="室內"
+                            onChange={(e) => setSite(e.target.value)}
+                        />
+                    </RadioWrap>
+                    <RadioWrap>
+                        <span>室外</span>
+                        <Radio
+                            type="radio"
+                            name="site"
+                            value="室外"
+                            onChange={(e) => setSite(e.target.value)}
+                        />
+                    </RadioWrap>
+                </Label>
+            </RadioGroup>
             <TextArea
                 placeholder="補充說明..."
                 onChange={(e) => setContent(e.target.value)}
@@ -181,6 +262,34 @@ const Button = styled(ButtonClearDefault)`
         background: rgb(14, 145, 210);
     }
 `;
+const CheckBoxGroup = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+`;
+const LabelCheckBox = styled.label`
+    display: flex;
+    padding: 0 10px;
+`;
+const CheckBox = styled.input`
+    display: flex;
+`;
+const CheckBoxText = styled.label`
+    font-size: 28px;
+`;
 
+const RadioGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+`;
+const LabelText = styled.div`
+    font-size: 30px;
+`;
+const Radio = styled.input``;
+const RadioWrap = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+`;
 export default Mahjong;
-xzsd2wd;

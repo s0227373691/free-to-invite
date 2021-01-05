@@ -1,34 +1,30 @@
-import { apiPostNewActiveMahjong } from '../api.js';
+import { apiPostNewActiveDrink } from '../api.js';
 
-export const postNewActiveMahjong = ({
+export const postNewActiveDrink = ({
     activeType,
     startDate,
     endDate,
     title,
     population,
-    minCost,
-    maxCost,
+    cost,
     place,
     content,
-    smoking,
-    offerFood,
-    offerDrink,
-    electricTable,
+    liqueurPrice,
+    age,
+    acceptSex,
 }) => {
-    return apiPostNewActiveMahjong({
+    return apiPostNewActiveDrink({
         activeType,
         startDate,
         endDate,
         title,
         population,
-        minCost,
-        maxCost,
+        cost,
         place,
         content,
-        smoking,
-        offerFood,
-        offerDrink,
-        electricTable,
+        liqueurPrice,
+        age,
+        acceptSex,
     })
         .then((res) => res)
         .catch((err) => {

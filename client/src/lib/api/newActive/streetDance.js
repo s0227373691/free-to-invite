@@ -1,6 +1,6 @@
-import { apiPostNewActiveMahjong } from '../api.js';
+import { apiPostNewActiveStreetDance } from '../api.js';
 
-export const postNewActiveMahjong = ({
+export const postNewActiveStreetDance = ({
     activeType,
     startDate,
     endDate,
@@ -15,7 +15,7 @@ export const postNewActiveMahjong = ({
     offerDrink,
     electricTable,
 }) => {
-    return apiPostNewActiveMahjong({
+    return apiPostNewActiveStreetDance({
         activeType,
         startDate,
         endDate,

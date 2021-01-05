@@ -254,57 +254,5 @@ const Button = styled(ButtonClearDefault)`
         background: rgb(14, 145, 210);
     }
 `;
-const NewMovie = styled.div`
-    display: flex;
-    align-items: center;
-`;
 
-const SelectMovieType = styled(SelectClearDefault)`
-    font-size: 18px;
-    color: #ffffff;
-    background: rgb(155, 155, 155);
-    margin: 0 15px;
-`;
-const InputMovieName = styled(Input)`
-    font-size: 20px;
-`;
-
-const ButtonNewMovieType = styled.div`
-    width: 100px;
-    padding: 10px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 18px;
-    color: #ffffff;
-    background: rgb(155, 155, 155);
-
-    &:hover {
-        opacity: 0.7;
-        cursor: pointer;
-    }
-    &:active {
-        opacity: 1;
-    }
-`;
-
-const BtnDeleteTag = styled.span`
-    &:hover {
-        color: grey;
-        cursor: pointer;
-    }
-`;
-
-const MovieType = styled.div`
-    display: inline-block;
-    border: 1px solid black;
-    padding: 5px;
-    border-radius: 5px;
-`;
-const AddedMovieType = styled.div`
-    display: flex;
-    margin-bottom: 20px;
-    padding: 8px;
-`;
 export default Movie;

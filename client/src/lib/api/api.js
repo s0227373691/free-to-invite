@@ -37,3 +37,9 @@ export const apiPostNewActiveBadminton = (data) =>
 
 export const apiPostNewActiveMahjong = (data) =>
     newActiveRequest.post('/mahjong', data);
+
+export const apiPostNewActiveDrink = (data) =>
+    newActiveRequest.post('/drink', data);
+
+export const apiPostNewActiveStreetDance = (data) =>
+    newActiveRequest.post('/streetdance', data);

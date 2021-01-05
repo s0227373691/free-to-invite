@@ -7,13 +7,17 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
+import { postNewActiveDrink } from '../../lib/api/newActive/drink';
+
 import IconPrice from '../../assets/svg/price';
 import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
+import IconEeighteenPlus from '../../assets/svg/eighteenPlus.svg';
+import IconAlcohol from '../../assets/svg/alcohol.svg';
 
-const Mahjong = (props) => {
+const Drink = (props) => {
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -22,6 +26,10 @@ const Mahjong = (props) => {
     const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
     const [place, setPlace] = useState('');
+
+    const [liqueurPrice, setLiqueurPrice] = useState('');
+    const [age, setAge] = useState('');
+    const [acceptSex, setAcceptSex] = useState('');
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -37,16 +45,19 @@ const Mahjong = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(
-            props.activeType,
+        await postNewActiveDrink({
+            activeType: props.activeType,
             startDate,
             endDate,
             title,
             population,
             cost,
             place,
-            content
-        );
+            content,
+            liqueurPrice,
+            age,
+            acceptSex,
+        });
     };
     return (
         <Form onSubmit={handleSubmit}>
@@ -85,7 +96,6 @@ const Mahjong = (props) => {
                     value={title}
                 />
             </Label>
-
             <Label htmlFor="population">
                 <Icon src={IconPopulation} />
                 <Input
@@ -116,6 +126,59 @@ const Mahjong = (props) => {
                     onChange={(e) => setPlace(e.target.value)}
                 />
             </Label>
+            <Label htmlFor="liqueurPrice">
+                <Icon src={IconAlcohol} />
+                <Input
+                    id="liqueurPrice"
+                    type="text"
+                    placeholder="酒類金額"
+                    onChange={(e) => setLiqueurPrice(e.target.value)}
+                    value={liqueurPrice}
+                />
+            </Label>
+
+            <Label htmlFor="age">
+                <Icon src={IconEeighteenPlus} />
+                <Input
+                    id="age"
+                    type="text"
+                    placeholder="最低年齡"
+                    onChange={(e) => setAge(e.target.value)}
+                    value={age}
+                />
+            </Label>
+            <RadioGroup>
+                <Label>
+                    <LabelText>接受性別</LabelText>
+                    <RadioWrap>
+                        <span>男</span>
+                        <Radio
+                            type="radio"
+                            name="acceptSex"
+                            value="男"
+                            onChange={(e) => setAcceptSex(e.target.value)}
+                        />
+                    </RadioWrap>
+                    <RadioWrap>
+                        <span>女</span>
+                        <Radio
+                            type="radio"
+                            name="acceptSex"
+                            value="女"
+                            onChange={(e) => setAcceptSex(e.target.value)}
+                        />
+                    </RadioWrap>
+                    <RadioWrap>
+                        <span>男女皆可</span>
+                        <Radio
+                            type="radio"
+                            name="acceptSex"
+                            value="男女皆可"
+                            onChange={(e) => setAcceptSex(e.target.value)}
+                        />
+                    </RadioWrap>
+                </Label>
+            </RadioGroup>
             <TextArea
                 placeholder="補充說明..."
                 onChange={(e) => setContent(e.target.value)}
@@ -133,6 +196,7 @@ const Form = styled.form`
 `;
 const Label = styled.label`
     display: flex;
+    align-items: center;
     margin-bottom: 20px;
 `;
 
@@ -181,6 +245,16 @@ const Button = styled(ButtonClearDefault)`
         background: rgb(14, 145, 210);
     }
 `;
-
-export default Mahjong;
-xzsd2wd;
+const RadioGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+`;
+const LabelText = styled.div`
+    font-size: 25px;
+`;
+const Radio = styled.input``;
+const RadioWrap = styled.div`
+    margin: 0 5px;
+`;
+export default Drink;

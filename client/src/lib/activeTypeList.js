@@ -8,6 +8,8 @@ import Fighting from '../components/newActive/fighting';
 import Badminton from '../components/newActive/badminton';
 import Running from '../components/newActive/running';
 import Workout from '../components/newActive/workout';
+import StreetDance from '../components/newActive/streetDance';
+import Drink from '../components/newActive/drink';
 
 const svgUrl = '/src/assets/svg/';
 const activeTypeList = [
@@ -37,6 +39,14 @@ const activeTypeList = [
                 path: '/entertainment/mahjong',
                 formComponent: (activeType) => (
                     <Mahjong activeType={activeType} />
+                ),
+            },
+            {
+                name: '街舞',
+                icon: `${svgUrl}board-games.svg`,
+                path: '/entertainment/streetdance',
+                formComponent: (activeType) => (
+                    <StreetDance activeType={activeType} />
                 ),
             },
         ],
@@ -90,19 +100,15 @@ const activeTypeList = [
     },
     {
         type: '休閒',
-        path: '/travel',
+        path: '/free',
         activeList: [
             {
-                name: '休閒1',
+                name: '喝酒',
                 icon: `${svgUrl}board-games.svg`,
-            },
-            {
-                name: '休閒2',
-                icon: `${svgUrl}board-games.svg`,
-            },
-            {
-                name: '休閒3',
-                icon: `${svgUrl}board-games.svg`,
+                path: '/entertainment/drink',
+                formComponent: (activeType) => (
+                    <Drink activeType={activeType} />
+                ),
             },
         ],
     },

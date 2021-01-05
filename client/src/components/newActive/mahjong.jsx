@@ -311,5 +311,13 @@ const Button = styled(ButtonClearDefault)`
         background: rgb(14, 145, 210);
     }
 `;
-
+const CheckBoxGroup = styled.div`
+    display: flex;
+`;
+const LabelCheckBox = styled.label`
+    display: flex;
+`;
+const CheckBox = styled.input`
+    display: flex;
+`;
 export default Mahjong;

@@ -6,20 +6,28 @@ const { Movie } = require('../../modules/newActive/movie');
 router.post('/', (req, res) => {
     const {
         activeType,
-        date,
-        population,
-        boardGameType,
+        startDate,
+        endDate,
         title,
+        place,
+        population,
+        cost,
         content,
+        movieName,
+        addedMovieTypeList,
     } = req.body;
 
     const movie = new Movie({
         activeType,
-        date,
-        population,
-        boardGameType,
+        startDate,
+        endDate,
         title,
+        place,
+        population,
+        cost,
         content,
+        movieName,
+        addedMovieTypeList,
     });
     movie.save();
 });

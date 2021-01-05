@@ -5,8 +5,10 @@ export const SelectClearDefault = styled.select`
     text-align-last: center;
     border-radius: 5px;
     border: 1px solid #dadce0;
-
     &:focus {
         outline: none;
+    }
+    &:hover {
+        cursor: pointer;
     }
 `;

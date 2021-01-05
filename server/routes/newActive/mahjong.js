@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { Basketball } = require('../../modules/newActive/basketball');
+const { Mahjong } = require('../../modules/newActive/mahjong');
 
 router.post('/', (req, res) => {
     const {
@@ -10,30 +10,32 @@ router.post('/', (req, res) => {
         endDate,
         title,
         population,
-        content,
+        minCost,
+        maxCost,
         place,
-        individualCost,
-        teamCost,
-        roundNumber,
-        ballfriendLevel,
-        rule,
+        content,
+        smoking,
+        offerFood,
+        offerDrink,
+        electricTable,
     } = req.body;
 
-    const basketball = new Basketball({
+    const mahjong = new Mahjong({
         activeType,
         startDate,
         endDate,
         title,
         population,
-        content,
+        minCost,
+        maxCost,
         place,
-        individualCost,
-        teamCost,
-        roundNumber,
-        ballfriendLevel,
-        rule,
+        content,
+        smoking,
+        offerFood,
+        offerDrink,
+        electricTable,
     });
-    basketball.save();
+    mahjong.save();
 });
 
 module.exports = router;

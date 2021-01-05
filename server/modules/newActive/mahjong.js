@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const Basketball = mongoose.model(
-    'Basketball',
+
+const Mahjong = mongoose.model(
+    'Mahjong',
     new mongoose.Schema({
         activeType: {
             type: String,
@@ -14,31 +15,33 @@ const Basketball = mongoose.model(
         title: {
             type: String,
         },
-        place: {
-            type: String,
-        },
         population: {
             type: Number,
         },
-        individualCost: {
+        place: {
+            type: String,
+        },
+        minCost: {
             type: Number,
         },
-        teamCost: {
+        maxCost: {
             type: Number,
-        },
-        roundNumber: {
-            type: String,
-        },
-        ballfriendLevel: {
-            type: String,
-        },
-        rule: {
-            type: String,
         },
         content: {
             type: String,
         },
+        smoking: {
+            type: String,
+        },
+        offerFood: {
+            type: String,
+        },
+        offerDrink: {
+            type: String,
+        },
+        electricTable: {
+            type: String,
+        },
     })
 );
-
-exports.Basketball = Basketball;
+exports.Mahjong = Mahjong;

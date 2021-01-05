@@ -7,19 +7,11 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
-import { postNewActiveMahjong } from '../../lib/api/newActive/mahjong';
-
 import IconPrice from '../../assets/svg/price';
 import IconCalendar from '../../assets/svg/calendar';
 import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
-
-//TODO 抽菸不抽菸
-//TODO 最低最高金額
-//TODO 供餐 飲料
-//TODO 電動桌
-//TODO  將數 (考慮)
 
 const Mahjong = (props) => {
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
@@ -27,15 +19,9 @@ const Mahjong = (props) => {
     const [endDate, setEndDate] = useState(now);
     const [title, setTitle] = useState('');
     const [population, setPopulation] = useState('');
-    const [minCost, setMinCost] = useState('');
-    const [maxCost, setMaxCost] = useState('');
+    const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
     const [place, setPlace] = useState('');
-
-    const [smoking, setSmoking] = useState('');
-    const [offerFood, setOfferFood] = useState('');
-    const [offerDrink, setOfferDrink] = useState('');
-    const [electricTable, setElectricTable] = useState('');
 
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;
@@ -51,22 +37,16 @@ const Mahjong = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        await postNewActiveMahjong({
-            activeType: props.activeType,
+        console.log(
+            props.activeType,
             startDate,
             endDate,
             title,
             population,
-            minCost,
-            maxCost,
+            cost,
             place,
-            content,
-            smoking,
-            offerFood,
-            offerDrink,
-            electricTable,
-        });
+            content
+        );
     };
     return (
         <Form onSubmit={handleSubmit}>
@@ -116,25 +96,14 @@ const Mahjong = (props) => {
                     value={population}
                 />
             </Label>
-            <Label htmlFor="minCost">
+            <Label htmlFor="price">
                 <Icon src={IconPrice} />
                 <Input
-                    id="minCost"
-                    placeholder="最低賭注"
+                    id="price"
+                    placeholder="參加費用"
                     type="number"
-                    onChange={(e) => setMinCost(e.target.value)}
-                    value={minCost}
-                />
-            </Label>
-
-            <Label htmlFor="maxCost">
-                <Icon src={IconPrice} />
-                <Input
-                    id="maxCost"
-                    placeholder="最高賭注"
-                    type="number"
-                    onChange={(e) => setMaxCost(e.target.value)}
-                    value={maxCost}
+                    onChange={(e) => setCost(e.target.value)}
+                    value={cost}
                 />
             </Label>
             <Label htmlFor="place">
@@ -147,93 +116,6 @@ const Mahjong = (props) => {
                     onChange={(e) => setPlace(e.target.value)}
                 />
             </Label>
-            <RadioGroup>
-                <Label>
-                    <LabelText>抽菸</LabelText>
-                    <RadioWrap>
-                        <span>是</span>
-                        <Radio
-                            type="radio"
-                            name="smoking"
-                            value="是"
-                            onChange={(e) => setSmoking(e.target.value)}
-                        />
-                    </RadioWrap>
-                    <RadioWrap>
-                        <span>否</span>
-                        <Radio
-                            type="radio"
-                            name="smoking"
-                            value="否"
-                            onChange={(e) => setSmoking(e.target.value)}
-                        />
-                    </RadioWrap>
-                </Label>
-                <Label>
-                    <LabelText>供餐</LabelText>
-                    <RadioWrap>
-                        <span>是</span>
-                        <Radio
-                            type="radio"
-                            name="offerFood"
-                            value="是"
-                            onChange={(e) => setOfferFood(e.target.value)}
-                        />
-                    </RadioWrap>
-                    <RadioWrap>
-                        <span>否</span>
-                        <Radio
-                            type="radio"
-                            name="offerFood"
-                            value="否"
-                            onChange={(e) => setOfferFood(e.target.value)}
-                        />
-                    </RadioWrap>
-                </Label>
-                <Label>
-                    <LabelText>飲料</LabelText>
-                    <RadioWrap>
-                        <span>是</span>
-                        <Radio
-                            type="radio"
-                            name="offerDrink"
-                            value="是"
-                            onChange={(e) => setOfferDrink(e.target.value)}
-                        />
-                    </RadioWrap>
-                    <RadioWrap>
-                        <span>否</span>
-                        <Radio
-                            type="radio"
-                            name="offerDrink"
-                            value="否"
-                            onChange={(e) => setOfferDrink(e.target.value)}
-                        />
-                    </RadioWrap>
-                </Label>
-                <Label>
-                    <LabelText>電動桌</LabelText>
-                    <RadioWrap>
-                        <span>是</span>
-                        <Radio
-                            type="radio"
-                            name="electricTable"
-                            value="是"
-                            onChange={(e) => setElectricTable(e.target.value)}
-                        />
-                    </RadioWrap>
-                    <RadioWrap>
-                        <span>否</span>
-                        <Radio
-                            type="radio"
-                            name="electricTable"
-                            value="否"
-                            onChange={(e) => setElectricTable(e.target.value)}
-                        />
-                    </RadioWrap>
-                </Label>
-            </RadioGroup>
-
             <TextArea
                 placeholder="補充說明..."
                 onChange={(e) => setContent(e.target.value)}
@@ -243,18 +125,7 @@ const Mahjong = (props) => {
         </Form>
     );
 };
-const RadioGroup = styled.div`
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-`;
-const LabelText = styled.div`
-    font-size: 30px;
-`;
-const Radio = styled.input``;
-const RadioWrap = styled.div`
-    margin: 0 5px;
-`;
+
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -262,7 +133,6 @@ const Form = styled.form`
 `;
 const Label = styled.label`
     display: flex;
-    align-items: center;
     margin-bottom: 20px;
 `;
 
@@ -313,3 +183,4 @@ const Button = styled(ButtonClearDefault)`
 `;
 
 export default Mahjong;
+xzsd2wd;

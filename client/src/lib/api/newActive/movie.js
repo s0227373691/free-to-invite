@@ -1,22 +1,28 @@
 import { apiPostNewActiveMovie } from '../api.js';
 
 export const postNewActiveMovie = ({
-    primaryType,
     activeType,
-    people,
-    precautions,
-    movieType,
+    startDate,
+    endDate,
     title,
+    place,
+    population,
+    cost,
     content,
+    movieName,
+    addedMovieTypeList,
 }) => {
     return apiPostNewActiveMovie({
-        primaryType,
         activeType,
-        people,
-        precautions,
-        movieType,
+        startDate,
+        endDate,
         title,
+        place,
+        population,
+        cost,
         content,
+        movieName,
+        addedMovieTypeList,
     })
         .then((res) => res)
         .catch((err) => {

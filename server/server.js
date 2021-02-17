@@ -9,7 +9,7 @@ const verifyJWT = require('./middleware/verifyJWT');
 
 const users = require('./routes/users/users');
 const newActive = require('./routes/newActive/newActive');
-
+const getActive = require('./routes/getActive/getActive');
 const connectDB = require('./config/db');
 
 connectDB();
@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', users);
 app.use('/api/newactive', newActive);
+app.use('/api/list', getActive);
 app.get('/api/test', verifyJWT, (req, res) => {
     res.send('API test!!');
 });

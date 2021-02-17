@@ -43,3 +43,10 @@ export const apiPostNewActiveDrink = (data) =>
 
 export const apiPostNewActiveStreetDance = (data) =>
     newActiveRequest.post('/streetdance', data);
+
+// API: get activeList
+const getActiveListRequest = Axios.create({
+    baseURL: `${baseURL}/list`,
+});
+export const apiGetBoardGameList = (data) =>
+    getActiveListRequest.get('/boardgame', data);

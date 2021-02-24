@@ -48,5 +48,5 @@ export const apiPostNewActiveStreetDance = (data) =>
 const getActiveListRequest = Axios.create({
     baseURL: `${baseURL}/list`,
 });
-export const apiGetBoardGameList = (data) =>
-    getActiveListRequest.get('/boardgame', data);
+export const apiGetBoardGameList = (num) =>
+    getActiveListRequest.get(`/boardgame/${num}`);

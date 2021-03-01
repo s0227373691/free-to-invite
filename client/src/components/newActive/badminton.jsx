@@ -141,7 +141,15 @@ const Badminton = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(addedStrengthList)
+        console.log(addedStrengthList);
+        const res = addedStrengthList.filter((item) => {
+            const cc = item.options.filter((option) => {
+                if (option.isAdded === true) return option.value;
+            });
+            return cc;
+            console.log(cc);
+        });
+        console.log(addedStrengthList);
         // await postNewActiveBadminton({
         //     activeType: props.activeType,
         //     startDate,

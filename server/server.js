@@ -9,12 +9,9 @@ const verifyJWT = require('./middleware/verifyJWT');
 
 const users = require('./routes/users/users');
 const newActive = require('./routes/newActive/newActive');
-<<<<<<< HEAD
 const board = require('./routes/board');
 
-=======
 const getActive = require('./routes/getActive/getActive');
->>>>>>> 4eb52a9b85d8d948228087c9b648de0ecaf9b8b0
 const connectDB = require('./config/db');
 
 connectDB();

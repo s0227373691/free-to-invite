@@ -32,29 +32,29 @@ const boardgameList = () => {
             <List>
                 {boardgameList
                     ? boardgameList.map((item) => {
-                          const {
-                              _id,
-                              title,
-                              content,
-                              startDate,
-                              endDate,
-                              cost,
-                              place,
-                              population,
-                              //   addedBoardGameList,
-                          } = item;
-                          return (
-                              <Item key={_id}>
-                                  <Title>{title}</Title>
-                                  <Content>{content}</Content>
-                                  <StartDate>{startDate}</StartDate>
-                                  <EndDate>{endDate}</EndDate>
-                                  <Cost>{cost}</Cost>
-                                  <Place>{place}</Place>
-                                  <Population>{[population]}</Population>
-                              </Item>
-                          );
-                      })
+                        const {
+                            _id,
+                            title,
+                            content,
+                            startDate,
+                            endDate,
+                            cost,
+                            place,
+                            population,
+                            //   addedBoardGameList,
+                        } = item;
+                        return (
+                            <Item key={_id}>
+                                <Title>{title}</Title>
+                                <Content>{content}</Content>
+                                <StartDate>{startDate}</StartDate>
+                                <EndDate>{endDate}</EndDate>
+                                <Cost>{cost}</Cost>
+                                <Place>{place}</Place>
+                                <Population>{[population]}</Population>
+                            </Item>
+                        );
+                    })
                     : null}
             </List>
         </BoardgameListRoot>
@@ -76,3 +76,10 @@ const Item = styled.li`
     border: 1px solid rgba(128, 134, 139, 0.2);
     border-radius: 10px;
 `;
+const Title = styled.div``
+const Content = styled.div``
+const StartDate = styled.div``
+const EndDate = styled.div``
+const Cost = styled.div``
+const Place = styled.div``
+const Population = styled.div``

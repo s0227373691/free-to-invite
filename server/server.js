@@ -7,6 +7,7 @@ const app = express();
 
 const verifyJWT = require('./middleware/verifyJWT');
 
+const active = require('./routes/active');
 const users = require('./routes/users/users');
 const newActive = require('./routes/newActive/newActive');
 const getActive = require('./routes/getActive/getActive');
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', users);
 app.use('/api/newactive', newActive);
+app.use('/api/active', active);
 app.use('/api/list', getActive);
 app.get('/api/test', verifyJWT, (req, res) => {
     res.send('API test!!');

@@ -14,6 +14,13 @@ export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
 export const apiGetUserLogout = (data) => userRequest.get('/logout', data);
 
 // API: new active
+const createActiveRequest = Axios.create({
+    baseURL: `${baseURL}/active/create`,
+});
+export const apiPostCreateActiveBadminton = (data) =>
+    createActiveRequest.post('/badminton', data);
+
+// API: new active
 const newActiveRequest = Axios.create({
     baseURL: `${baseURL}/newactive`,
 });

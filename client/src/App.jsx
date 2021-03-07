@@ -66,9 +66,6 @@ const App = (props) => {
                     />
                     <Route path="/sport/badminton" component={BadmintonList} />
                     <Route path="/free/drink" component={DrinkList} />
-                    {/* <Route path="/:board" component={Board} />
-                    <Route path="/:board/:subboard" component={Board} />
-                    <Route path="/:board/:subboard/:id" component={Board} />
                 </Switch>
             </Main>
         </Router>

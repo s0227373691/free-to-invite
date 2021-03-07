@@ -12,15 +12,7 @@ import Article from './components/article';
 import NewActive from './components/newActive';
 import myActive from './components/myActive';
 import googelMap from './components/googlemap';
-// 活動清單
 import BoardgameList from './components/listActive/boardgameList';
-import MovieList from './components/listActive/movieList';
-import MahjongList from './components/listActive/mahjongList';
-import StreetDanceLst from './components/listActive/streetDanceLst';
-import RunningList from './components/listActive/runningList';
-import BasketballList from './components/listActive/basketballList';
-import BadmintonList from './components/listActive/badmintonList';
-import DrinkList from './components/listActive/drinkList';
 // 內部函式
 import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';

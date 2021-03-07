@@ -14,13 +14,6 @@ export const apiPostUserAuth = (data) => userRequest.post('/auth', data);
 export const apiGetUserLogout = (data) => userRequest.get('/logout', data);
 
 // API: new active
-const createActiveRequest = Axios.create({
-    baseURL: `${baseURL}/active/create`,
-});
-export const apiPostCreateActiveBadminton = (data) =>
-    createActiveRequest.post('/badminton', data);
-
-// API: new active
 const newActiveRequest = Axios.create({
     baseURL: `${baseURL}/newactive`,
 });
@@ -57,17 +50,3 @@ const getActiveListRequest = Axios.create({
 });
 export const apiGetBoardGameList = (num) =>
     getActiveListRequest.get(`/boardgame/${num}`);
-export const apiGetMovieList = (num) =>
-    getActiveListRequest.get(`/movie/${num}`);
-export const apiGetMahjongList = (num) =>
-    getActiveListRequest.get(`/mahjong/${num}`);
-export const apiGetStreetDanceList = (num) =>
-    getActiveListRequest.get(`/streetdance/${num}`);
-export const apiGetRunningList = (num) =>
-    getActiveListRequest.get(`/running/${num}`);
-export const apiGetBasketballList = (num) =>
-    getActiveListRequest.get(`/basketballList/${num}`);
-export const apiGetBadmintonList = (num) =>
-    getActiveListRequest.get(`/badminton/${num}`);
-export const apiGetDrinkList = (num) =>
-    getActiveListRequest.get(`/drink/${num}`);

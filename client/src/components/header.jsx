@@ -121,7 +121,7 @@ const Logo = styled.h1`
     a {
         display: block;
         img {
-            height: 80px;
+            height: 110px;
         }
     }
 `;

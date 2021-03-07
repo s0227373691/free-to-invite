@@ -28,29 +28,33 @@ const boardgameList = () => {
     }, []);
     return (
         <BoardgameListRoot>
-            <Title
-                onClick={() => {
-                    console.log(boardgameList.length);
-                }}
-            >
-                桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由桌由
-            </Title>
+            <TypeName>桌遊</TypeName>
             <List>
                 {boardgameList
-                    ? boardgameList.map((item, index) => {
-                          const {
-                              _id,
-                              title,
-                              content,
-                              startDate,
-                              endDate,
-                              cost,
-                              place,
-                              population,
-                              //   addedBoardGameList,
-                          } = item;
-                          return <Item key={index}>{title}</Item>;
-                      })
+                    ? boardgameList.map((item) => {
+                        const {
+                            _id,
+                            title,
+                            content,
+                            startDate,
+                            endDate,
+                            cost,
+                            place,
+                            population,
+                            //   addedBoardGameList,
+                        } = item;
+                        return (
+                            <Item key={_id}>
+                                <Title>{title}</Title>
+                                <Content>{content}</Content>
+                                <StartDate>{startDate}</StartDate>
+                                <EndDate>{endDate}</EndDate>
+                                <Cost>{cost}</Cost>
+                                <Place>{place}</Place>
+                                <Population>{[population]}</Population>
+                            </Item>
+                        );
+                    })
                     : null}
             </List>
         </BoardgameListRoot>
@@ -62,7 +66,7 @@ export default boardgameList;
 const BoardgameListRoot = styled.div`
     max-width: 720px;
 `;
-const Title = styled.div`
+const TypeName = styled.div`
     height: 300px;
 `;
 const List = styled.ul``;
@@ -72,3 +76,10 @@ const Item = styled.li`
     border: 1px solid rgba(128, 134, 139, 0.2);
     border-radius: 10px;
 `;
+const Title = styled.div``
+const Content = styled.div``
+const StartDate = styled.div``
+const EndDate = styled.div``
+const Cost = styled.div``
+const Place = styled.div``
+const Population = styled.div``

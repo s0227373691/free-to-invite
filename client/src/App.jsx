@@ -12,7 +12,15 @@ import Article from './components/article';
 import NewActive from './components/newActive';
 import myActive from './components/myActive';
 import googelMap from './components/googlemap';
+// 活動清單
 import BoardgameList from './components/listActive/boardgameList';
+import MovieList from './components/listActive/movieList';
+import MahjongList from './components/listActive/mahjongList';
+import StreetDanceLst from './components/listActive/streetDanceLst';
+import RunningList from './components/listActive/runningList';
+import BasketballList from './components/listActive/basketballList';
+import BadmintonList from './components/listActive/badmintonList';
+import DrinkList from './components/listActive/drinkList';
 // 內部函式
 import { getUserAuth } from './lib/api/auth';
 import { userCheckedLoginStatus } from './store/slices/users';
@@ -42,9 +50,22 @@ const App = (props) => {
                         path="/entertainment/boardgame"
                         component={BoardgameList}
                     />
-                    <Route path="/:board" component={Board} />
-                    <Route path="/:board/:subboard" component={Board} />
-                    <Route path="/:board/:subboard/:id" component={Board} />
+                    <Route path="/entertainment/movie" component={MovieList} />
+                    <Route
+                        path="/entertainment/mahjong"
+                        component={MahjongList}
+                    />
+                    <Route
+                        path="/entertainment/streetDance"
+                        component={StreetDanceLst}
+                    />
+                    <Route path="/sport/running" component={RunningList} />
+                    <Route
+                        path="/sport/basketball"
+                        component={BasketballList}
+                    />
+                    <Route path="/sport/badminton" component={BadmintonList} />
+                    <Route path="/free/drink" component={DrinkList} />
                 </Switch>
             </Main>
         </Router>

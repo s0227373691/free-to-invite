@@ -86,7 +86,22 @@ const Boardgame = (props) => {
             content,
             addedBoardGameList,
         })
-            .then((res) => console.log(res))
+        .then((res) => res.data)
+        .then((res) => {
+            switch (res.stat) {
+                case 'OK':
+                    alert('新增活動成功!!');
+                    history.push('/');
+                    break;
+                case 'fail':
+                    alert('新增活動失敗!!');
+                    console.log(res.message);
+                    break;
+
+                default:
+                    break;
+            }
+        })
             .catch((err) => console.error(err));
     };
     const handleChangeStartDate = (e) => {

@@ -18,7 +18,7 @@ const activeTypeList = [
         path: '/entertainment',
         activeList: [
             {
-                name: '桌游',
+                name: '桌遊',
                 icon: `${svgUrl}board-games.svg`,
                 path: '/entertainment/boardgame',
                 formComponent: (activeType) => (

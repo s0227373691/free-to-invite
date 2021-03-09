@@ -56,7 +56,7 @@ module.exports = {
             cost,
             place,
             content,
-            badmintonStrength: addedBoardGameList,
+            boardGameList: addedBoardGameList,
         });
         activeModel.save((err, result) => {
             if (err) res.json({ stat: 'fail', message: err });

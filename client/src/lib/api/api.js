@@ -20,6 +20,9 @@ const createActiveRequest = Axios.create({
 export const apiPostCreateActiveBadminton = (data) =>
     createActiveRequest.post('/badminton', data);
 
+export const postCreateActiveBoardgame = (data) =>
+    createActiveRequest.post('/boardgame', data);
+
 // API: new active
 const newActiveRequest = Axios.create({
     baseURL: `${baseURL}/newactive`,

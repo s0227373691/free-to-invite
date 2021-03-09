@@ -44,6 +44,15 @@ const Active = new Schema({
     },
     // 羽球實力程度
     badmintonStrength: [],
+    // 桌遊遊系列表
+    badmintonStrength: [
+        {
+            type: {
+                type: String,
+            },
+            name: { type: String },
+        },
+    ],
 });
 
 exports.Active = mongoose.model('active', Active);

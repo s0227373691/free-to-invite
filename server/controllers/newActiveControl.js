@@ -35,4 +35,32 @@ module.exports = {
             else res.json({ stat: 'OK' });
         });
     },
+    boardgame: (req, res) => {
+        const {
+            activeType,
+            startDate,
+            endDate,
+            title,
+            population,
+            cost,
+            place,
+            content,
+            addedBoardGameList,
+        } = req.body;
+        const activeModel = new ActiveModel({
+            activeType,
+            startDate,
+            endDate,
+            title,
+            population,
+            cost,
+            place,
+            content,
+            badmintonStrength: addedBoardGameList,
+        });
+        activeModel.save((err, result) => {
+            if (err) res.json({ stat: 'fail', message: err });
+            else res.json({ stat: 'OK' });
+        });
+    },
 };

@@ -5,7 +5,8 @@ import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 
-import { postNewActiveBoardGame } from '../../lib/api/newActive/boardGame';
+import { postCreateActiveBoardgame } from '../../lib/api/api';
+
 import { InputClearDefault } from '../styles/inputs';
 
 import dateFormat from 'dateformat';
@@ -72,10 +73,9 @@ const Boardgame = (props) => {
         setBackgroundColor('#9b9b9b');
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        await postNewActiveBoardGame({
+        postCreateActiveBoardgame({
             activeType: props.activeType,
             startDate,
             endDate,
@@ -85,7 +85,9 @@ const Boardgame = (props) => {
             place,
             content,
             addedBoardGameList,
-        });
+        })
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err));
     };
     const handleChangeStartDate = (e) => {
         const inputValue = e.target.value;

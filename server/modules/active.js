@@ -43,9 +43,9 @@ const Active = new Schema({
         type: String,
     },
     // 羽球實力程度
-    badmintonStrength: [],
+    badmintonStrength: [String],
     // 桌遊遊系列表
-    badmintonStrength: [
+    boardGameList: [
         {
             type: {
                 type: String,

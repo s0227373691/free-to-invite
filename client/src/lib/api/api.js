@@ -17,7 +17,7 @@ export const apiGetUserLogout = (data) => userRequest.get('/logout', data);
 const createActiveRequest = Axios.create({
     baseURL: `${baseURL}/active/create`,
 });
-export const apiPostCreateActiveBadminton = (data) =>
+export const postCreateActiveBadminton = (data) =>
     createActiveRequest.post('/badminton', data);
 
 export const postCreateActiveBoardgame = (data) =>

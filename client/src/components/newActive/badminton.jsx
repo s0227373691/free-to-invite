@@ -8,8 +8,7 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
-import { postNewActiveBadminton } from '../../lib/api/newActive/badminton';
-import { apiPostCreateActiveBadminton } from '../../lib/api/api';
+import { postCreateActiveBadminton } from '../../lib/api/api';
 
 import {
     IconBadminton,
@@ -148,9 +147,9 @@ const Badminton = (props) => {
         setAddedStrengthList(newAddedStrengthList);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await apiPostCreateActiveBadminton({
+        postCreateActiveBadminton({
             activeType: props.activeType,
             startDate,
             endDate,

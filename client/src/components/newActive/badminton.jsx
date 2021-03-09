@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import dateFormat from 'dateformat';
 
 import { SelectClearDefault } from '../styles/selects';
@@ -93,6 +94,7 @@ const Badminton = (props) => {
             ],
         },
     ];
+    let history = useHistory();
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -103,6 +105,7 @@ const Badminton = (props) => {
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
+    const [selectedStrengthList, setSelectedStrengthList] = useState([]);
     const [addedStrengthList, setAddedStrengthList] = useState(strength);
     const [strengthOptions, setStrengthOptions] = useState(strength);
 
@@ -119,6 +122,11 @@ const Badminton = (props) => {
 
     const handleChangeSelectStrength = (e) => {
         const selectedValue = e.target.value;
+        const newSelectedStrengthList = [
+            ...selectedStrengthList,
+            selectedValue,
+        ];
+        setSelectedStrengthList(newSelectedStrengthList);
         const newStrengthList = [...addedStrengthList];
         newStrengthList.map((item) => {
             item.options.map((x) => {
@@ -142,7 +150,6 @@ const Badminton = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(addedStrengthList);
         await apiPostCreateActiveBadminton({
             activeType: props.activeType,
             startDate,
@@ -154,9 +161,24 @@ const Badminton = (props) => {
             population,
             cost,
             content,
+            selectedStrengthList,
         })
             .then((res) => res.data)
-            .then((res) => console.log(res));
+            .then((res) => {
+                switch (res.stat) {
+                    case 'OK':
+                        alert('新增活動成功!!');
+                        history.push('/');
+                        break;
+                    case 'fail':
+                        alert('新增活動失敗!!');
+                        console.log(res.message);
+                        break;
+
+                    default:
+                        break;
+                }
+            });
     };
 
     return (

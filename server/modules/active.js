@@ -43,9 +43,7 @@ const Active = new Schema({
         type: String,
     },
     // 羽球實力程度
-    badmintonStrength: {
-        type: Array,
-    },
+    badmintonStrength: [],
 });
 
 exports.Active = mongoose.model('active', Active);

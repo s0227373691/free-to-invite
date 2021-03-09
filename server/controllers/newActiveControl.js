@@ -13,6 +13,7 @@ module.exports = {
             population,
             cost,
             content,
+            selectedStrengthList,
         } = req.body;
 
         const activeModel = new ActiveModel({
@@ -21,11 +22,12 @@ module.exports = {
             endDate,
             title,
             place,
-            badmintonNets: nets,
-            badmintonBrand: badmintonType,
             population,
             cost,
             content,
+            badmintonNets: nets,
+            badmintonBrand: badmintonType,
+            badmintonStrength: selectedStrengthList,
         });
 
         activeModel.save(function (err, result) {

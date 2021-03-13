@@ -18,7 +18,7 @@ const activeTypeList = [
         path: '/entertainment',
         activeList: [
             {
-                name: '桌游',
+                name: '桌遊',
                 icon: `${svgUrl}board-games.svg`,
                 path: '/entertainment/boardgame',
                 formComponent: (activeType) => (
@@ -71,14 +71,14 @@ const activeTypeList = [
                     <Basketball activeType={activeType} />
                 ),
             },
-            {
-                name: '格鬥',
-                icon: `${svgUrl}boxing-glove.svg`,
-                path: '/sport/fighting',
-                formComponent: (activeType) => (
-                    <Fighting activeType={activeType} />
-                ),
-            },
+            // {
+            //     name: '格鬥',
+            //     icon: `${svgUrl}boxing-glove.svg`,
+            //     path: '/sport/fighting',
+            //     formComponent: (activeType) => (
+            //         <Fighting activeType={activeType} />
+            //     ),
+            // },
 
             {
                 name: '羽球',
@@ -88,14 +88,14 @@ const activeTypeList = [
                     <Badminton activeType={activeType} />
                 ),
             },
-            {
-                name: '健身',
-                icon: `${svgUrl}shuttlecock.svg`,
-                path: '/sport/workout',
-                formComponent: (activeType) => (
-                    <Workout activeType={activeType} />
-                ),
-            },
+            // {
+            //     name: '健身',
+            //     icon: `${svgUrl}shuttlecock.svg`,
+            //     path: '/sport/workout',
+            //     formComponent: (activeType) => (
+            //         <Workout activeType={activeType} />
+            //     ),
+            // },
         ],
     },
     {
@@ -105,7 +105,7 @@ const activeTypeList = [
             {
                 name: '喝酒',
                 icon: `${svgUrl}board-games.svg`,
-                path: '/entertainment/drink',
+                path: '/free/drink',
                 formComponent: (activeType) => (
                     <Drink activeType={activeType} />
                 ),

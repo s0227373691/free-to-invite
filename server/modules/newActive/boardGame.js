@@ -35,9 +35,6 @@ const BoardGame = mongoose.model(
                 type: {
                     type: String,
                 },
-                background: {
-                    type: String,
-                },
             },
         ],
     })

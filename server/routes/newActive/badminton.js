@@ -16,6 +16,7 @@ router.post('/', (req, res) => {
         population,
         cost,
         content,
+        nets,
     } = req.body;
 
     const badminton = new Badminton({
@@ -29,6 +30,7 @@ router.post('/', (req, res) => {
         population,
         cost,
         content,
+        nets,
     });
     badminton.save();
 });

@@ -1,7 +1,7 @@
-import { apiGetBoardGameList } from '../api.js';
+import { apiGetMahjongList } from '../api.js';
 
-export const getBoardGameListData = (num) => {
-    return apiGetBoardGameList(num)
+export const getMahjongListData = (num) => {
+    return apiGetMahjongList(num)
         .then((res) => {
             return res.data;
         })

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { BoardGame } = require('../../modules/newActive/boardGame');
+const { Basketball } = require('../../modules/newActive/basketball');
 router.get('/:num', (req, res) => {
     console.log(req.params.num);
-    BoardGame.find({})
+    Basketball.find({})
         .skip(Number(req.params.num))
         .limit(Number(10))
         .then((data) => {
-            res.json({ boardgameList: data });
+            res.json({ BasketballList: data });
         })
         .catch((err) => console.log(err));
 });

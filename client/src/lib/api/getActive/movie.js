@@ -1,7 +1,7 @@
-import { apiGetBoardGameList } from '../api.js';
+import { apiGetMovieList } from '../api.js';
 
-export const getBoardGameListData = (num) => {
-    return apiGetBoardGameList(num)
+export const getMovieListData = (num) => {
+    return apiGetMovieList(num)
         .then((res) => {
             return res.data;
         })

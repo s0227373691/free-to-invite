@@ -1,88 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ReactDOM from 'react-dom';
 
-const Member = () => {
+function Member() {
+    const [active, setActive] = useState(0);
+    const handleClick = (e) => {
+        const index = parseInt(e.target.id, 0);
+        if (index !== active) {
+            setActive(index);
+        }
+    };
     return (
-        //TODO 名字,自介,常見揪團類別,
         <Container>
             <Backgroundicture>
-                <Profilepicture />
+                <img src="http://fakeimg.pl/250x150/282828/EAE0D0/"></img>
             </Backgroundicture>
             <List>
-                <img src="https://fakeimg.pl/350x200/?text=Hello"></img>
+                <About href="#">新增個人簡介</About>
             </List>
-            <List2>
+            <Tabs>
+                <Tab onClick={handleClick} active={active === 0} id={0}>
+                    關於
+                </Tab>
+                <Tab onClick={handleClick} active={active === 1} id={1}>
+                    發起活動
+                </Tab>
+                <Tab onClick={handleClick} active={active === 2} id={2}>
+                    參與活動
+                </Tab>
+            </Tabs>
+
+            <Content active={active === 0}>
                 <ul>
-                    <li>
-                        <About href="#">關於</About>
-                    </li>
-                    <li>
-                        <About href="#">發起活動</About>
-                    </li>
-                    <li>
-                        <About href="#">參與活動</About>
-                    </li>
+                    <h1>興趣</h1>
+                    <h1>所在地</h1>
+                    <h1>社群連結</h1>
                 </ul>
-            </List2>
-            <List3>
-                <div>
-                    <ul>
-                        <li>興趣</li>
-                        <li>所在地</li>
-                        <li>社群連結</li>
-                    </ul>
-                </div>
-                <div></div>
-                <div></div>
-            </List3>
+            </Content>
+            <Content active={active === 1}>
+                <h1>Content 2</h1>
+            </Content>
+            <Content active={active === 2}>
+                <h1>Content 3</h1>
+            </Content>
         </Container>
     );
-};
-
+}
 export default Member;
 
 const Container = styled.div`
     width: 100%;
     background-color: #ffffff;
 `;
+
 const Backgroundicture = styled.div`
     background-color: rgba(130, 119, 119, 0.1);
     padding-top: 45px;
     padding-bottom: 10px;
-`;
-
-const Profilepicture = styled.div`
-    width: 134px;
-    height: 134px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.08);
-    margin-left: 25px;
     display: flex;
+    justify-content: center;
 `;
 
 const List = styled.div`
-    background-color: #ffffff;
-
-    border-top: solid rgba(0, 0, 0, 0.2) 1px;
+    /* background-color: #ffffff; */
+    border-bottom: 1px solid black;
+    padding: 20px 0px 20px 0px;
     font-size: inherit;
+    text-align: center;
+    margin: 0px 100px 0px 100px;
 `;
 
-const List2 = styled.div`
-    height: 85px;
-    background-color: #ffffff;
-    border-top: solid rgba(0, 0, 0, 0.2) 1px;
-    font-size: inherit;
-    ul {
-        display: flex;
-        padding-top: 10px;
+const Tabs = styled.div`
+    overflow: hidden;
+    background: #fff;
+    font-family: Open Sans;
+    height: 3em;
+    text-align: center;
+`;
+
+const About = styled.button`
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    font-size: 1em;
+`;
+const Tab = styled.button`
+    border: 1px solid #ccc;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    margin-right: 2px;
+    font-size: 1em;
+    :hover {
+        background-color: white;
     }
 `;
-
-const About = styled.div`
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    margin-right: 3px;
-    cursor: pointer;
+export const Content = styled.div`
+    ${(props) => (props.active ? '' : 'display:none')}
 `;
-
-const List3 = styled.div``;

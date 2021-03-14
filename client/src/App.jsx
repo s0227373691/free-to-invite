@@ -7,6 +7,7 @@ import Header from './components/header';
 import Home from './components/home';
 import Login from './components/login';
 import Member from './components/member';
+import Board from './components/board';
 import Article from './components/article';
 import NewActive from './components/newActive';
 import myActive from './components/myActive';
@@ -65,9 +66,6 @@ const App = (props) => {
                     />
                     <Route path="/sport/badminton" component={BadmintonList} />
                     <Route path="/free/drink" component={DrinkList} />
-                    {/* <Route path="/:board" component={Board} />
-                    <Route path="/:board/:subboard" component={Board} />
-                    <Route path="/:board/:subboard/:id" component={Board} /> */}
                 </Switch>
             </Main>
         </Router>

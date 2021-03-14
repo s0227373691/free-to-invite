@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import dateFormat from 'dateformat';
 
 import { SelectClearDefault } from '../styles/selects';
@@ -7,7 +8,7 @@ import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
 import { InputClearDefault } from '../styles/inputs';
 
-import { postNewActiveBadminton } from '../../lib/api/newActive/badminton';
+import { postCreateActiveBadminton } from '../../lib/api/api';
 
 import {
     IconBadminton,
@@ -27,19 +28,19 @@ const Badminton = (props) => {
             options: [
                 {
                     text: '上',
-                    value: '高階上',
+                    value: '高階-上',
                     borderLeftColor: ' #00ffea',
                     isAdded: false,
                 },
                 {
                     text: '中',
-                    value: '高階中',
+                    value: '高階-中',
                     borderLeftColor: ' #850000',
                     isAdded: false,
                 },
                 {
                     text: '下',
-                    value: '高階下',
+                    value: '高階-下',
                     borderLeftColor: ' #0097ce',
                     isAdded: false,
                 },
@@ -50,19 +51,19 @@ const Badminton = (props) => {
             options: [
                 {
                     text: '上',
-                    value: '中階上',
+                    value: '中階-上',
                     borderLeftColor: ' #3700ff',
                     isAdded: false,
                 },
                 {
                     text: '中',
-                    value: '中階中',
+                    value: '中階-中',
                     borderLeftColor: ' #73ff00',
                     isAdded: false,
                 },
                 {
                     text: '下',
-                    value: '中階下',
+                    value: '中階-下',
                     borderLeftColor: ' #fc7303',
                     isAdded: false,
                 },
@@ -73,25 +74,26 @@ const Badminton = (props) => {
             options: [
                 {
                     text: '上',
-                    value: '初階上',
+                    value: '初階-上',
                     borderLeftColor: ' #de0097',
                     isAdded: false,
                 },
                 {
                     text: '中',
-                    value: '初階中',
+                    value: '初階-中',
                     borderLeftColor: ' #00a976',
                     isAdded: false,
                 },
                 {
                     text: '下',
-                    value: '初階下',
+                    value: '初階-下',
                     borderLeftColor: ' #eaff00',
                     isAdded: false,
                 },
             ],
         },
     ];
+    let history = useHistory();
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -102,6 +104,7 @@ const Badminton = (props) => {
     const [title, setTitle] = useState('');
     const [place, setPlace] = useState('');
     const [content, setContent] = useState('');
+    const [selectedStrengthList, setSelectedStrengthList] = useState([]);
     const [addedStrengthList, setAddedStrengthList] = useState(strength);
     const [strengthOptions, setStrengthOptions] = useState(strength);
 
@@ -118,6 +121,11 @@ const Badminton = (props) => {
 
     const handleChangeSelectStrength = (e) => {
         const selectedValue = e.target.value;
+        const newSelectedStrengthList = [
+            ...selectedStrengthList,
+            selectedValue,
+        ];
+        setSelectedStrengthList(newSelectedStrengthList);
         const newStrengthList = [...addedStrengthList];
         newStrengthList.map((item) => {
             item.options.map((x) => {
@@ -139,21 +147,37 @@ const Badminton = (props) => {
         setAddedStrengthList(newAddedStrengthList);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(addedStrengthList)
-        // await postNewActiveBadminton({
-        //     activeType: props.activeType,
-        //     startDate,
-        //     endDate,
-        //     title,
-        //     place,
-        //     nets,
-        //     badmintonType,
-        //     population,
-        //     cost,
-        //     content,
-        // });
+        postCreateActiveBadminton({
+            activeType: props.activeType,
+            startDate,
+            endDate,
+            title,
+            place,
+            nets,
+            badmintonType,
+            population,
+            cost,
+            content,
+            selectedStrengthList,
+        })
+            .then((res) => res.data)
+            .then((res) => {
+                switch (res.stat) {
+                    case 'OK':
+                        alert('新增活動成功!!');
+                        history.push('/');
+                        break;
+                    case 'fail':
+                        alert('新增活動失敗!!');
+                        console.log(res.message);
+                        break;
+
+                    default:
+                        break;
+                }
+            });
     };
 
     return (

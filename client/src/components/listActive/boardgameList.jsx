@@ -76,3 +76,10 @@ const Item = styled.li`
     border: 1px solid rgba(128, 134, 139, 0.2);
     border-radius: 10px;
 `;
+const Title = styled.div``;
+const Content = styled.div``;
+const StartDate = styled.div``;
+const EndDate = styled.div``;
+const Cost = styled.div``;
+const Place = styled.div``;
+const Population = styled.div``;

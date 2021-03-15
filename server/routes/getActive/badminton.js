@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { Badminton } = require('../../modules/newActive/badminton');
+const { Active } = require('../../modules/active');
 router.get('/:num', (req, res) => {
     console.log(req.params.num);
-    Badminton.find({})
+    Active.find({ activeType: '羽球' })
         .skip(Number(req.params.num))
         .limit(Number(10))
         .then((data) => {

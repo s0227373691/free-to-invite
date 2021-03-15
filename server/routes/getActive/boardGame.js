@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { BoardGame } = require('../../modules/newActive/boardGame');
+const { Active } = require('../../modules/active');
 router.get('/:num', (req, res) => {
-    console.log(req.params.num);
-    BoardGame.find({})
+    Active.find({ activeType: '桌遊' })
         .skip(Number(req.params.num))
         .limit(Number(10))
         .then((data) => {

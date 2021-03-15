@@ -10,7 +10,6 @@ const verifyJWT = require('./middleware/verifyJWT');
 const active = require('./routes/active');
 const users = require('./routes/users/users');
 const newActive = require('./routes/newActive/newActive');
-const board = require('./routes/board');
 
 const getActive = require('./routes/getActive/getActive');
 const connectDB = require('./config/db');

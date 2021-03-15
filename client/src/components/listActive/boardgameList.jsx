@@ -40,18 +40,22 @@ const boardgameList = () => {
                               endDate,
                               cost,
                               place,
-                              population,
                               //   addedBoardGameList,
                           } = item;
                           return (
                               <Item key={_id}>
                                   <Title>{title}</Title>
                                   <Content>{content}</Content>
-                                  <StartDate>{startDate}</StartDate>
-                                  <EndDate>{endDate}</EndDate>
-                                  <Cost>{cost}</Cost>
-                                  <Place>{place}</Place>
-                                  <Population>{[population]}</Population>
+
+                                  <StartDate>
+                                      開始時間 : {startDate.replace('T', ' ')}
+                                  </StartDate>
+                                  <EndDate>
+                                      結束時間 : {endDate.replace('T', ' ')}
+                                  </EndDate>
+
+                                  <Cost>花費 : {cost}</Cost>
+                                  <Place>地點 : {place}</Place>
                               </Item>
                           );
                       })
@@ -65,21 +69,39 @@ export default boardgameList;
 
 const BoardgameListRoot = styled.div`
     max-width: 720px;
+    margin: 0 auto;
 `;
-const TypeName = styled.div`
-    height: 300px;
+const TypeName = styled.h2`
+    font-size: 24px;
+    text-align: center;
+    padding: 20px 0;
 `;
 const List = styled.ul``;
 const Item = styled.li`
     width: 100%;
-    height: 200px;
     border: 1px solid rgba(128, 134, 139, 0.2);
     border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
 `;
-const Title = styled.div``;
-const Content = styled.div``;
-const StartDate = styled.div``;
-const EndDate = styled.div``;
-const Cost = styled.div``;
-const Place = styled.div``;
-const Population = styled.div``;
+const Title = styled.h2`
+    font-size: 20px;
+    padding-bottom: 10px;
+`;
+const Content = styled.div`
+    padding-bottom: 10px;
+    line-height: 1.2rem;
+`;
+
+const StartDate = styled.div`
+    padding-bottom: 10px;
+`;
+const EndDate = styled.div`
+    padding-bottom: 10px;
+`;
+const Cost = styled.div`
+    padding-bottom: 10px;
+`;
+const Place = styled.div`
+    padding-bottom: 10px;
+`;

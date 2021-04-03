@@ -24,9 +24,7 @@ const Movie = (props) => {
     const [population, setPopulation] = useState('');
     const [cost, setCost] = useState('');
     const [content, setContent] = useState('');
-
     const [movieName, setMovieName] = useState('');
-    const [addedMovieTypeList, setAddedMovieTypeList] = useState([]);
     const movieTypeList = [
         { type: '動作' },
         { type: '警匪' },
@@ -66,7 +64,6 @@ const Movie = (props) => {
             cost,
             content,
             movieName,
-            addedMovieTypeList,
         });
     };
     return (
@@ -147,40 +144,10 @@ const Movie = (props) => {
                     onChange={(e) => setMovieName(e.target.value)}
                 />
             </Label>
-            <CheckBoxGroup>
-                {movieTypeList.map((movieType, i) => {
-                    const { type } = movieType;
-                    return (
-                        <LabelCheckBox htmlFor={type} key={i}>
-                            <span>{type}</span>
-                            <CheckBox
-                                type="checkbox"
-                                id={type}
-                                name={type}
-                                value={type}
-                                onChange={(e) => {
-                                    if (
-                                        addedMovieTypeList.includes(
-                                            e.target.value
-                                        )
-                                    ) {
-                                        addedMovieTypeList.splice(
-                                            addedMovieTypeList.indexOf(
-                                                e.target.value
-                                            ),
-                                            1
-                                        );
-                                    } else {
-                                        addedMovieTypeList.push(e.target.value);
-                                    }
-
-                                    console.log(addedMovieTypeList);
-                                }}
-                            />
-                        </LabelCheckBox>
-                    );
-                })}
-            </CheckBoxGroup>
+            <Label>
+                <Icon src={IconPrice} />
+                <button>電影類型</button>
+            </Label>
             <TextArea
                 placeholder="補充說明..."
                 onChange={(e) => setContent(e.target.value)}
@@ -190,15 +157,6 @@ const Movie = (props) => {
         </Form>
     );
 };
-const CheckBoxGroup = styled.div`
-    display: flex;
-`;
-const LabelCheckBox = styled.label`
-    display: flex;
-`;
-const CheckBox = styled.input`
-    display: flex;
-`;
 const Form = styled.form`
     display: flex;
     flex-direction: column;

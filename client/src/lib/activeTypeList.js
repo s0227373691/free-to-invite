@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BoardGame from '../components/newActive/boardGame';
+import BoardGame from '../components/newActive/boardgame';
 import Movie from '../components/newActive/movie';
 import Mahjong from '../components/newActive/mahjong';
 import Basketball from '../components/newActive/basketball';

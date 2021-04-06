@@ -239,13 +239,11 @@ const Boardgame = (props) => {
                     );
                 })}
             </AddedBoardGame>
-
             <TextArea
                 placeholder="補充說明..."
-                placeholder="補充說明"
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
-            ></TextArea>
+            />
             <Button type="submit">新增</Button>
         </Form>
     );

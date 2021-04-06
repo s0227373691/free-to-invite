@@ -162,16 +162,16 @@ const Basketball = (props) => {
                     placeholder="球友程度"
                 />
             </Label>
-            <TextArea
+            <Rule
                 onChange={(e) => setRule(e.target.value)}
                 value={rule}
                 placeholder="規則"
-            ></TextArea>
+            />
             <TextArea
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
                 placeholder="補充說明..."
-            ></TextArea>
+            />
             <Button type="submit">新增</Button>
         </Form>
     );
@@ -196,6 +196,10 @@ const TextArea = styled(TextareaClearDefault)`
     margin-bottom: 20px;
     font-size: 20px;
     border: 0px;
+`;
+
+const Rule = styled(TextArea)`
+    height: 150px;
 `;
 const Button = styled(ButtonClearDefault)`
     width: 80px;

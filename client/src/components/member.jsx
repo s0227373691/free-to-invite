@@ -27,58 +27,76 @@ function Member() {
             <List>
                 <About href="#">新增個人簡介</About>
             </List>
-            <Tabs>
-                <Tab onClick={handleClick} active={active === 0} id={0}>
-                    關於
-                </Tab>
-                <Tab onClick={handleClick} active={active === 1} id={1}>
-                    發起活動
-                </Tab>
-                <Tab onClick={handleClick} active={active === 2} id={2}>
-                    參與活動
-                </Tab>
-            </Tabs>
-            <Tabs2>
-                <Content active={active === 0}>
-                    <ul>
-                        <Tab2
-                            onClick={handleClick1}
-                            active={active === 0}
-                            id={0}
-                        >
-                            興趣
-                        </Tab2>
-                        <Tab2
-                            onClick={handleClick1}
-                            active={active === 1}
-                            id={1}
-                        >
-                            所在地
-                        </Tab2>
-                        <Tab2>社群連結</Tab2>
-                    </ul>
-                </Content>
-                <Content active={active === 1}>
-                    <ul>
-                        <h1>Content 2</h1>
-                    </ul>
-                </Content>
-                <Content active={active === 2}>
-                    <ul>
-                        <h1>Content 3</h1>
-                    </ul>
-                </Content>
-                <Content2 active1={active1 === 0}>
-                    <ul>
-                        <h1>Content 1</h1>
-                    </ul>
-                </Content2>
-                <Content2 active1={active1 === 1}>
-                    <ul>
-                        <h1>Content 2</h1>
-                    </ul>
-                </Content2>
-            </Tabs2>
+            <List2>
+                <Tabs>
+                    <Tab onClick={handleClick} active={active === 0} id={0}>
+                        關於
+                    </Tab>
+                    <Tab onClick={handleClick} active={active === 1} id={1}>
+                        興趣
+                    </Tab>
+                    <Tab onClick={handleClick} active={active === 2} id={2}>
+                        社群連結
+                    </Tab>
+                </Tabs>
+                <Tabs2>
+                    <Content active={active === 0}>
+                        <ul>
+                            <li>
+                                <form>
+                                    來自:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                            <li>
+                                <form>
+                                    經常出沒:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                            <li>
+                                <form>
+                                    工作領與(職業):
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                        </ul>
+                    </Content>
+                    <Content active={active === 1}>
+                        <ul>
+                            <li>
+                                <form>
+                                    喜歡的運動:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+
+                            <li>
+                                <form>
+                                    喜歡的桌遊:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                        </ul>
+                    </Content>
+                    <Content active={active === 2}>
+                        <ul>
+                            <li>
+                                <form>
+                                    社群連結:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                            <li>
+                                <form>
+                                    E-mail:
+                                    <input type="text" name="欄位名稱" />
+                                </form>
+                            </li>
+                        </ul>
+                    </Content>
+                </Tabs2>
+            </List2>
         </Container>
     );
 }
@@ -107,18 +125,31 @@ const List = styled.div`
     margin: 0px 200px 0px 200px;
 `;
 
+const List2 = styled.div`
+    /* background-color: #ffffff; */
+    border-bottom: 1px solid black;
+    padding: 20px 0px 20px 0px;
+    font-size: inherit;
+    text-align: center;
+    margin: 0px 200px 0px 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Tabs = styled.div`
-    background: #fff;
+    background: #ffffff;
     font-family: Open Sans;
     overflow: hidden;
-    height: 3em;
-    margin-left: 200px;
+
+    align-items: center;
+    justify-content: center;
 `;
 
 const Tabs2 = styled.div`
     background: #fff;
     font-family: Open Sans;
-    overflow: hidden;
+    margin-left: 50px;
     display: flex;
 `;
 const About = styled.button`
@@ -129,7 +160,8 @@ const About = styled.button`
     font-size: 1em;
 `;
 const Tab = styled.button`
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
+    display: flex;
     border: none;
     outline: none;
     cursor: pointer;
@@ -142,36 +174,21 @@ const Tab = styled.button`
     }
 `;
 
-const Tab2 = styled.button`
-    border: 1px solid #ccc;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    width: 100px;
-    padding: 10px;
-    margin-bottom: 5px;
-    font-size: 1em;
-    :hover {
-        background-color: white;
-    }
-`;
-
 const Content = styled.div`
-    width: 230px;
-    height: 200px;
-    margin-left: 200px;
-    border: 2px solid black;
-    border-radius: 0.3rem;
-    ul {
+    background-color: #ffffff;
+    margin: 0px;
+    li {
         display: flex;
         flex-direction: column;
+        padding-top: 10px;
+    }
+    input {
+        border-style: 1px;
+        border-bottom-style: solid;
+        border-top-style: none;
+        border-left-style: none;
+        border-right-style: none;
     }
 
     ${(props) => (props.active ? '' : 'display:none')}
-`;
-
-const Content2 = styled.div`
-    width: 400px;
-    background-color: #afa1a1;
-    ${(props) => (props.active1 ? '' : 'display:none')}
 `;

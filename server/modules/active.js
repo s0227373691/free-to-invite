@@ -34,6 +34,11 @@ const Active = new Schema({
     content: {
         type: String,
     },
+    // 資料新增時間
+    insertTime: {
+        type: Date,
+        default: Date.now,
+    },
     // 羽球球網數量
     badmintonNets: {
         type: Number,

@@ -16,11 +16,6 @@ import IconPrice from '../../assets/svg/price';
 import basketballTeam from '../../assets/svg/basketball-team';
 
 const Basketball = (props) => {
-    // TODO 新增欄位：參加費用(單兵) <input tpye='number'>
-    // TODO 新增欄位：參加費用(隊) <input tpye='number'>
-    // TODO 新增欄位：規則 <TextArea>
-    // TODO 新增欄位：輪打隊數 <Input type: 'number'>
-    // TODO 新增欄位：球友程度 <Input type: 'text'>
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);

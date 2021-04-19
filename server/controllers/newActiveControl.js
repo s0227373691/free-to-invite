@@ -3,11 +3,6 @@ const { Active: ActiveModel } = require('../modules/active');
 module.exports = {
     badminton: (req, res) => {
         const {
-<<<<<<< HEAD
-=======
-            userName,
-            activeType,
->>>>>>> js0731
             startDate,
             endDate,
             title,
@@ -21,12 +16,7 @@ module.exports = {
         } = req.body;
 
         const activeModel = new ActiveModel({
-<<<<<<< HEAD
             activeType: '羽球',
-=======
-            userName,
-            activeType,
->>>>>>> js0731
             startDate,
             endDate,
             title,
@@ -46,11 +36,6 @@ module.exports = {
     },
     boardgame: (req, res) => {
         const {
-<<<<<<< HEAD
-=======
-            userName,
-            activeType,
->>>>>>> js0731
             startDate,
             endDate,
             title,
@@ -61,12 +46,7 @@ module.exports = {
             addedBoardGameList,
         } = req.body;
         const activeModel = new ActiveModel({
-<<<<<<< HEAD
             activeType: '籃球',
-=======
-            userName,
-            activeType,
->>>>>>> js0731
             startDate,
             endDate,
             title,

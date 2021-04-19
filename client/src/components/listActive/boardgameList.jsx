@@ -28,7 +28,13 @@ const boardgameList = () => {
     }, []);
     return (
         <BoardgameListRoot>
-            <TypeName>桌遊</TypeName>
+            <TypeName>
+                桌遊
+                {/* {states.todolist.map((i) => (
+                    <li key={i.id}>{i.name}</li>
+                ))} */}
+            </TypeName>
+
             <List>
                 {boardgameList
                     ? boardgameList.map((item) => {
@@ -38,6 +44,7 @@ const boardgameList = () => {
                               content,
                               startDate,
                               endDate,
+                              population,
                               cost,
                               place,
                               //   addedBoardGameList,
@@ -53,8 +60,10 @@ const boardgameList = () => {
                                   <EndDate>
                                       結束時間 : {endDate.replace('T', ' ')}
                                   </EndDate>
-
                                   <Cost>花費 : {cost}</Cost>
+                                  <Population>
+                                      人數上限 : {population}
+                                  </Population>
                                   <Place>地點 : {place}</Place>
                               </Item>
                           );
@@ -100,6 +109,9 @@ const EndDate = styled.div`
     padding-bottom: 10px;
 `;
 const Cost = styled.div`
+    padding-bottom: 10px;
+`;
+const Population = styled.div`
     padding-bottom: 10px;
 `;
 const Place = styled.div`

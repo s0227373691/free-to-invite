@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Active = new Schema({
+    userName: {
+        type: String,
+    },
     // 活動類型
     activeType: {
         type: String,

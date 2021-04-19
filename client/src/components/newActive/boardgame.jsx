@@ -17,7 +17,12 @@ import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
+import { useSelector } from 'react-redux';
+import { userCheckedLoginStatus } from '../../store/slices/users';
+
 const Boardgame = (props) => {
+    const userData = useSelector(userCheckedLoginStatus);
+
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -75,7 +80,10 @@ const Boardgame = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(userData.payload.users.user.name);
+        console.log(props.activeType);
         postCreateActiveBoardgame({
+            userName: userData.payload.users.user.name,
             activeType: props.activeType,
             startDate,
             endDate,
@@ -88,7 +96,7 @@ const Boardgame = (props) => {
         })
             .then((res) => res.data)
             .then((res) => {
-                switch (res.stat) {
+                switch (res.state) {
                     case 'OK':
                         alert('新增活動成功!!');
                         history.push('/');
@@ -97,7 +105,6 @@ const Boardgame = (props) => {
                         alert('新增活動失敗!!');
                         console.log(res.message);
                         break;
-
                     default:
                         break;
                 }

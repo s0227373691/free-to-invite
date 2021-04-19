@@ -3,6 +3,7 @@ const { Active: ActiveModel } = require('../modules/active');
 module.exports = {
     badminton: (req, res) => {
         const {
+            userName,
             activeType,
             startDate,
             endDate,
@@ -17,6 +18,7 @@ module.exports = {
         } = req.body;
 
         const activeModel = new ActiveModel({
+            userName,
             activeType,
             startDate,
             endDate,
@@ -37,6 +39,7 @@ module.exports = {
     },
     boardgame: (req, res) => {
         const {
+            userName,
             activeType,
             startDate,
             endDate,
@@ -48,6 +51,7 @@ module.exports = {
             addedBoardGameList,
         } = req.body;
         const activeModel = new ActiveModel({
+            userName,
             activeType,
             startDate,
             endDate,

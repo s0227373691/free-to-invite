@@ -20,15 +20,8 @@ import IconTitle from '../../assets/svg/title';
 import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
-import { useSelector } from 'react-redux';
-import { userCheckedLoginStatus } from '../../store/slices/users';
-
 const Boardgame = (props) => {
     const userData = useSelector(userCheckedLoginStatus);
-<<<<<<< HEAD
-=======
-
->>>>>>> fd5e9a7a1c88632aa288d4a074336264d83bcf1c
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -90,10 +83,6 @@ const Boardgame = (props) => {
         console.log(props.activeType);
         postCreateActiveBoardgame({
             userName: userData.payload.users.user.name,
-<<<<<<< HEAD
-=======
-            activeType: props.activeType,
->>>>>>> fd5e9a7a1c88632aa288d4a074336264d83bcf1c
             startDate,
             endDate,
             title,

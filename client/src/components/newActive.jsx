@@ -13,7 +13,7 @@ import Running from './newActive/running';
 import StreetDance from './newActive/streetDance';
 import Drink from './newActive/drink';
 
-const NewArticle = () => {
+const NewArticle = (props) => {
     const { url } = useRouteMatch();
     const handleOnChangeFormType = (e) => {
         const setUrl = `/#${url}/${e.target.value}`;

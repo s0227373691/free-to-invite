@@ -36,10 +36,7 @@ module.exports = {
     },
     boardgame: (req, res) => {
         const {
-<<<<<<< HEAD
             userName,
-=======
->>>>>>> fd5e9a7a1c88632aa288d4a074336264d83bcf1c
             startDate,
             endDate,
             title,
@@ -50,12 +47,8 @@ module.exports = {
             addedBoardGameList,
         } = req.body;
         const activeModel = new ActiveModel({
-<<<<<<< HEAD
             userName,
             activeType: '桌遊',
-=======
-            activeType: '籃球',
->>>>>>> fd5e9a7a1c88632aa288d4a074336264d83bcf1c
             startDate,
             endDate,
             title,

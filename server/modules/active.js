@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Active = new Schema({
-<<<<<<< HEAD
     // 使用者名稱
-=======
->>>>>>> fd5e9a7a1c88632aa288d4a074336264d83bcf1c
     userName: {
         type: String,
     },

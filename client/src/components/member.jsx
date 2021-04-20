@@ -192,3 +192,20 @@ const Content = styled.div`
 
     ${(props) => (props.active ? '' : 'display:none')}
 `;
+
+// import React, { useState } from 'react';
+// import styled from 'styled-components';
+// import ReactDOM from 'react-dom';
+
+// const Member = (props) => {
+//     return <Container></Container>;
+// };
+// export default Member;
+
+// const Container = styled.div`
+//     width: 100%;
+
+//     position: absolute;
+
+//     background-color: #ffffff;
+// `;

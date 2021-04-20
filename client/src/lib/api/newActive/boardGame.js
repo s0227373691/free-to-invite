@@ -1,6 +1,7 @@
 import { apiPostNewActiveBoardGame } from '../api.js';
 
 export const postNewActiveBoardGame = ({
+    userName,
     activeType,
     startDate,
     endDate,
@@ -12,6 +13,7 @@ export const postNewActiveBoardGame = ({
     place,
 }) => {
     return apiPostNewActiveBoardGame({
+        userName,
         activeType,
         startDate,
         endDate,

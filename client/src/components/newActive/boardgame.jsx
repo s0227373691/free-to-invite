@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { useSelector } from 'react-redux';
+import { userCheckedLoginStatus } from '../../store/slices/users';
+
 import { SelectClearDefault } from '../styles/selects';
 import { ButtonClearDefault } from '../styles/buttons';
 import { TextareaClearDefault } from '../styles/textarea';
@@ -18,6 +21,7 @@ import IconPlace from '../../assets/svg/place';
 import IconPopulation from '../../assets/svg/population';
 
 const Boardgame = (props) => {
+    const userData = useSelector(userCheckedLoginStatus);
     const now = dateFormat(new Date(), `yyyy-mm-dd'T'HH:MM`);
     const [startDate, setStartDate] = useState(now);
     const [endDate, setEndDate] = useState(now);
@@ -76,7 +80,7 @@ const Boardgame = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         postCreateActiveBoardgame({
-            activeType: props.activeType,
+            userName: userData.payload.users.user.name,
             startDate,
             endDate,
             title,

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const uuid = require('uuid');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const { User, validate } = require('../../modules/user');
@@ -12,8 +12,9 @@ router.post('/', async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('User already registered');
 
+    const uid = uuid.v1();
     const { name, email, password } = req.body;
-    user = new User({ type: 'user', name, email, password });
+    user = new User({ type: 'user', uid, name, email, password });
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);

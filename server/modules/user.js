@@ -8,6 +8,10 @@ const User = mongoose.model(
             type: String,
             required: true,
         },
+        uid: {
+            type: String,
+            required: true,
+        },
         name: {
             type: String,
             required: true,

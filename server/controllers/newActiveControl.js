@@ -3,6 +3,7 @@ const { Active: ActiveModel } = require('../modules/active');
 module.exports = {
     badminton: (req, res) => {
         const {
+            uid,
             startDate,
             endDate,
             title,
@@ -16,6 +17,7 @@ module.exports = {
         } = req.body;
 
         const activeModel = new ActiveModel({
+            uid,
             activeType: '羽球',
             startDate,
             endDate,

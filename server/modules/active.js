@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Active = new Schema({
-    // 使用者名稱
-    userName: {
+    // 使用者ID
+    uid: {
         type: String,
     },
     // 活動類型

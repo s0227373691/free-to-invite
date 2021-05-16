@@ -25,7 +25,7 @@ import { useSelector } from 'react-redux';
 import { userCheckedLoginStatus } from '../../store/slices/users';
 
 const Badminton = (props) => {
-    const userData = useSelector(userCheckedLoginStatus);
+    const userInfo = useSelector(userCheckedLoginStatus);
     let strength = [
         {
             optgroupLabel: '高階',
@@ -153,8 +153,12 @@ const Badminton = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const { loggedIn } = userInfo.payload.users;
+        if (!loggedIn) return alert('請先登入');
+        const { id } = userInfo.payload.users.user;
+
         postCreateActiveBadminton({
-            userName: userData.payload.users.user.name,
+            uid: id,
             activeType: props.activeType,
             startDate,
             endDate,
@@ -166,21 +170,20 @@ const Badminton = (props) => {
             cost,
             content,
             selectedStrengthList,
-        }).then((res) => res.data);
-        // .then((res) => {
-        //     switch (res.stat) {
-        //         case 'OK':
-        //             alert('新增活動成功!!');
-        //             history.push('/');
-        //             break;
-        //         case 'fail':
-        //             alert('新增活動失敗!!');
-        //             console.log(res.message);
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        // });
+        }).then((res) => {
+            switch (res.stat) {
+                case 'OK':
+                    alert('新增活動成功!!');
+                    history.push('/');
+                    break;
+                case 'fail':
+                    alert('新增活動失敗!!');
+                    console.log(res.message);
+                    break;
+                default:
+                    break;
+            }
+        });
     };
 
     return (

@@ -18,7 +18,6 @@ const Header = (props) => {
     const [register, setRegister] = useState(false);
 
     const { loggedIn } = props.users;
-    console.log(props.users.user);
     if (loggedIn)
         var { name: accountName, type: accountType } = props.users.user;
 

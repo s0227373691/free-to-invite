@@ -1,5 +1,7 @@
 # 隨意揪
 
+https://free-to-invite-server.herokuapp.com/#/
+
 下載 <br/>
 npm install <br/>
 cd client <br/>

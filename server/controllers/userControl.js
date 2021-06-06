@@ -5,6 +5,13 @@ const Joi = require('joi');
 const { User } = require('../modules/user');
 
 module.exports = {
+    getUserAuth: (req, res) => {
+        if (req.session.user) {
+            res.send({ loggedIn: true, user: req.session.user });
+        } else {
+            res.send({ loggedIn: false });
+        }
+    },
     postUserAuth:async (req, res) => {
         const { error } = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);

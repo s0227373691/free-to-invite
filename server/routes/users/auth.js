@@ -8,13 +8,14 @@ const express = require('express');
 const router = express.Router();
 const userControl = require('../../controllers/userControl')
 
-router.get('/', (req, res) => {
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user });
-    } else {
-        res.send({ loggedIn: false });
-    }
-});
+router.get('/', userControl.getUserAuth)
+// router.get('/', (req, res) => {
+//     if (req.session.user) {
+//         res.send({ loggedIn: true, user: req.session.user });
+//     } else {
+//         res.send({ loggedIn: false });
+//     }
+// });
 // user login 處理
 router.post('/', userControl.postUserAuth)
 

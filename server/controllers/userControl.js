@@ -2,7 +2,7 @@ const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
-const { User } = require('../../modules/user');
+const { User } = require('../modules/user');
 
 module.exports = {
     postUserAuth:async (req, res) => {

@@ -38,13 +38,13 @@ const compiler = webpack(clientWebpackConfig);
 app.use(webpackMiddleware(compiler, {}));
 
 app.use(express.json());
-app.use(
-    cors({
-        origin: 'http://localhost:9000',
-        methods: ['GET', 'POST'],
-        credentials: true,
-    })
-);
+// app.use(
+//     cors({
+//         origin: 'http://localhost:9000',
+//         methods: ['GET', 'POST'],
+//         credentials: true,
+//     })
+// );
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(

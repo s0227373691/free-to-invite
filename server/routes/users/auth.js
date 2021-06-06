@@ -6,6 +6,7 @@ const { User } = require('../../modules/user');
 
 const express = require('express');
 const router = express.Router();
+const userControl = require('../../controllers/userControl')
 
 router.get('/', (req, res) => {
     if (req.session.user) {
@@ -15,36 +16,38 @@ router.get('/', (req, res) => {
     }
 });
 // user login 處理
-router.post('/', async (req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+router.post('/', userControl.postUserAuth)
 
-    let user = await User.findOne({ email: req.body.email }); // 獲取user資料，找不到為 null
+// router.post('/', async (req, res) => {
+//     const { error } = validate(req.body);
+//     if (error) return res.status(400).send(error.details[0].message);
 
-    if (!user) return res.status(400).send('Invalid email or password.');
+//     let user = await User.findOne({ email: req.body.email }); // 獲取user資料，找不到為 null
 
-    const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-    );
-    if (!validPassword) {
-        return res.status(400).send('Invalid email or password.');
-    } else {
-        //TODO 私鑰應改至環境變量
-        const token = jwt.sign({ _id: user._id }, 'jwt');
+//     if (!user) return res.status(400).send('Invalid email or password.');
 
-        user = {
-            type: user.type,
-            id: user.uid,
-            name: user.name,
-            email: user.email,
-        };
+//     const validPassword = await bcrypt.compare(
+//         req.body.password,
+//         user.password
+//     );
+//     if (!validPassword) {
+//         return res.status(400).send('Invalid email or password.');
+//     } else {
+//         //TODO 私鑰應改至環境變量
+//         const token = jwt.sign({ _id: user._id }, 'jwt');
 
-        req.session.user = user;
+//         user = {
+//             type: user.type,
+//             id: user.uid,
+//             name: user.name,
+//             email: user.email,
+//         };
 
-        res.json({ auth: true, token, user });
-    }
-});
+//         req.session.user = user;
+
+//         res.json({ auth: true, token, user });
+//     }
+// });
 
 function validate(req) {
     const schema = Joi.object({

@@ -1,10 +1,11 @@
 const path = require('path');
 
 module.exports = {
-    entry: ['@babel/polyfill', './index.js'],
+    mode: 'development',
+    entry: ['@babel/polyfill', path.join(__dirname, 'index')],
     output: {
+        path: path.resolve(__dirname, '../server/dist'),
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
     },
     resolve: {
         extensions: ['.js', '.jsx', '.svg', '.jpg', '.png', '.json'],
@@ -17,7 +18,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env'],
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
                     },
                 },
             },
@@ -29,8 +30,9 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            publicPath: './src/assets/svg',
-                            emitFile: false,
+                            publicPath: './assets/img',
+                            outputPath: './assets/img',
+                            emitFile: true,
                         },
                     },
                 ],
@@ -43,8 +45,9 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            publicPath: './src/assets/img',
-                            emitFile: false,
+                            publicPath: './assets/img',
+                            outputPath: './assets/img',
+                            emitFile: true,
                         },
                     },
                 ],

@@ -4,6 +4,7 @@
   "description": "",
   "main": "./server/server.js",
   "scripts": {
+    "start": "npm start --prefix server",
     "client": "npm start --prefix client",
     "server": "npm start --prefix server",
     "prettier": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",

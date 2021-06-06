@@ -5,6 +5,10 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const clientWebpackConfig = require('../client/webpack.config');
+
 const verifyJWT = require('./middleware/verifyJWT');
 
 const active = require('./routes/active');
@@ -15,6 +19,23 @@ const getActive = require('./routes/getActive/getActive');
 const connectDB = require('./config/db');
 
 connectDB();
+
+const compiler = webpack(clientWebpackConfig);
+
+// const compiler = webpack({
+//     entry: [
+//         'webpack/hot/dev-server',
+//         'webpack-hot-middleware/client',
+//         '../client/index.js',
+//     ],
+//     output: {
+//         path: '/',
+//         publicPath: 'http://localhost:8080/scripts/',
+//         filename: 'bundle.js',
+//     },
+// });
+
+app.use(webpackMiddleware(compiler, {}));
 
 app.use(express.json());
 app.use(
@@ -39,12 +60,13 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-    // app.use('/', express.static('./dist'));
-    // app.use('/node_modules', express.static('./node_modules'));
-    // res.sendFile(`${__dirname}/dist/index.html`, (err) => {
-    //     if (err) res.sendStatus(404);
-    // });
-    res.send('hellow world');
+    app.use('/', express.static('./dist'));
+    app.use('/', express.static('../client/src/assets'));
+    app.use('/node_modules', express.static('./node_modules'));
+    res.sendFile(`${__dirname}/dist/index.html`, (err) => {
+        if (err) res.sendStatus(404);
+    });
+    // res.send('hellow world');
 });
 
 app.use('/api/users', users);
